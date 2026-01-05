@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Interaktif Bab 1 | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* =========================================
+           1. CORE STYLING & VARIABLES (15-100)
+           ========================================= */
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* =========================================
+           2. QUIZ CONTAINER (101-250)
+           ========================================= */
+        .quiz-container {
+            background: var(--white);
+            width: 100%;
+            max-width: 800px;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        .timer-box {
+            background: var(--gray-100);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .progress-bar-wrap {
+            width: 100%;
+            height: 10px;
+            background: var(--gray-100);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        /* =========================================
+           3. QUESTION STYLING (251-400)
+           ========================================= */
+        .question-area h2 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .option {
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            padding: 18px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 500;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            background: var(--gray-100);
+            transform: translateX(10px);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        .option-letter {
+            width: 30px;
+            height: 30px;
+            background: var(--gray-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .selected .option-letter {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        /* =========================================
+           4. RESULT & REVIEW (401-550)
+           ========================================= */
+        .result-screen {
+            text-align: center;
+            display: none;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 10px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+        }
+
+        .score-val { font-size: 3rem; font-weight: 800; color: var(--dark); }
+
+        .review-section {
+            margin-top: 40px;
+            text-align: left;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .review-card {
+            background: var(--gray-100);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--primary);
+        }
+
+        /* Scrollbar */
+        .review-section::-webkit-scrollbar { width: 5px; }
+        .review-section::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 10px; }
+
+        /* =========================================
+           5. BUTTONS (551-650)
+           ========================================= */
+        .quiz-footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-next { background: var(--primary); color: white; }
+        .btn-next:hover { background: var(--secondary); transform: scale(1.05); }
+        .btn-next:disabled { background: var(--gray-200); cursor: not-allowed; }
+
+        .btn-restart { background: var(--dark); color: white; margin-top: 20px; width: 100%; }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate { animation: fadeIn 0.5s ease forwards; }
+
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <div id="start-screen" style="text-align: center;">
+            <i class="fas fa-brain" style="font-size: 4rem; color: var(--primary); margin-bottom: 20px;"></i>
+            <h1>Kuis Super Bab 1</h1>
+            <p style="color: var(--dark); margin-bottom: 30px; opacity: 0.7;">
+                Uji kemampuanmu dalam Eksponen, Akar, dan Notasi Ilmiah.<br>
+                10 Soal • 10 Menit • Standar Kurikulum Merdeka
+            </p>
+            <button class="btn btn-next" onclick="startQuiz()">Mulai Sekarang</button>
+        </div>
+
+        <div id="quiz-screen" style="display: none;">
+            <div class="quiz-header">
+                <div class="timer-box">
+                    <i class="fas fa-clock"></i> <span id="time-left">10:00</span>
+                </div>
+                <div style="font-weight: 700; color: var(--dark);">
+                    Soal <span id="current-q-num">1</span>/10
+                </div>
+            </div>
+
+            <div class="progress-bar-wrap">
+                <div class="progress-fill" id="prog-fill"></div>
+            </div>
+
+            <div class="question-area animate">
+                <h2 id="question-text">Memuat pertanyaan...</h2>
+                <div class="options-grid" id="options-container">
+                    </div>
+            </div>
+
+            <div class="quiz-footer">
+                <div id="feedback" style="font-weight: 600;"></div>
+                <button class="btn btn-next" id="next-btn" onclick="nextQuestion()" disabled>Lanjut</button>
+            </div>
+        </div>
+
+        <div id="result-screen" class="result-screen">
+            <h1 id="congrats-msg">Luar Biasa!</h1>
+            <p style="margin-bottom: 20px;">Kamu telah menyelesaikan Kuis Bab 1</p>
+            
+            <div class="score-circle">
+                <div class="score-val" id="final-score">0</div>
+                <div style="font-size: 0.8rem; font-weight: 700;">DARI 100</div>
+            </div>
+
+            <div id="stat-info" style="margin-bottom: 20px; font-weight: 600;"></div>
+
+            <h3 style="text-align: left;">Tinjauan Jawaban:</h3>
+            <div class="review-section" id="review-area">
+                </div>
+
+            <button class="btn btn-restart" onclick="location.reload()">Ulangi Kuis</button>
+            <button class="btn btn-next" onclick="location.href='index.html'" style="margin-top: 10px; width: 100%;">Kembali ke Beranda</button>
+        </div>
+    </div>
+
+    <script>
+        // Bank Soal (10 Soal Acak)
+        const questionsBank = [
+            {
+                q: "Hasil dari $2^3 \\times 2^4$ adalah...",
+                o: ["$2^{12}$", "$2^7$", "$4^7$", "$2^1$"],
+                a: 1,
+                exp: "Sifat perkalian eksponen: $a^m \\times a^n = a^{m+n}$. Jadi $2^{3+4} = 2^7$."
+            },
+            {
+                q: "Bentuk sederhana dari $\\sqrt{48}$ adalah...",
+                o: ["$4\\sqrt{3}$", "$3\\sqrt{4}$", "$16\\sqrt{3}$", "$2\\sqrt{12}$"],
+                a: 0,
+                exp: "$\\sqrt{48} = \\sqrt{16 \\times 3} = 4\\sqrt{3}$."
+            },
+            {
+                q: "Bentuk baku dari $0,000025$ adalah...",
+                o: ["$2,5 \\times 10^{-4}$", "$2,5 \\times 10^{-5}$", "$25 \\times 10^{-6}$", "$0,25 \\times 10^{-4}$"],
+                a: 1,
+                exp: "Koma geser ke kanan 5 kali, maka pangkat negatif 5: $2,5 \\times 10^{-5}$."
+            },
+            {
+                q: "Hasil dari $(3^2)^3$ adalah...",
+                o: ["$3^5$", "$3^6$", "$3^8$", "$9^2$"],
+                a: 1,
+                exp: "Sifat pangkat: $(a^m)^n = a^{m \\times n}$. Jadi $3^{2 \\times 3} = 3^6$."
+            },
+            {
+                q: "Nilai dari $\\sqrt{12} + \\sqrt{27}$ adalah...",
+                o: ["$\\sqrt{39}$", "$5\\sqrt{3}$", "$6\\sqrt{3}$", "$13\\sqrt{3}$"],
+                a: 1,
+                exp: "$2\\sqrt{3} + 3\\sqrt{3} = 5\\sqrt{3}$."
+            },
+            {
+                q: "Hasil dari $5^0 + 2^0 - 3^0$ adalah...",
+                o: ["0", "1", "4", "3"],
+                a: 1,
+                exp: "Semua angka pangkat 0 adalah 1. Jadi $1 + 1 - 1 = 1$."
+            },
+            {
+                q: "Notasi ilmiah untuk $150.000.000$ adalah...",
+                o: ["$1,5 \\times 10^8$", "$1,5 \\times 10^7$", "$15 \\times 10^7$", "$1,5 \\times 10^{-8}$"],
+                a: 0,
+                exp: "Koma geser kiri 8 kali: $1,5 \\times 10^8$."
+            },
+            {
+                q: "Hasil dari $10^5 \\div 10^2$ adalah...",
+                o: ["$10^7$", "$10^{10}$", "$10^3$", "$100$"],
+                a: 2,
+                exp: "Sifat pembagian: $a^m \\div a^n = a^{m-n}$. Jadi $10^{5-2} = 10^3$."
+            },
+            {
+                q: "$\\sqrt{125}$ jika disederhanakan menjadi...",
+                o: ["$5\\sqrt{5}$", "$25\\sqrt{5}$", "$5\\sqrt{25}$", "$15\\sqrt{5}$"],
+                a: 0,
+                exp: "$\\sqrt{125} = \\sqrt{25 \\times 5} = 5\\sqrt{5}$."
+            },
+            {
+                q: "Hasil dari $2\\sqrt{3} \\times \\sqrt{2}$ adalah...",
+                o: ["$2\\sqrt{5}$", "$2\\sqrt{6}$", "$6\\sqrt{2}$", "$\\sqrt{12}$"],
+                a: 1,
+                exp: "Perkalian akar: $a\\sqrt{b} \\times \\sqrt{c} = a\\sqrt{b \\times c} = 2\\sqrt{6}$."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = [];
+        let timer;
+        let timeLeft = 600; // 10 menit
+
+        function startQuiz() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
+            showQuestion();
+            startTimer();
+        }
+
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                let mins = Math.floor(timeLeft / 60);
+                let secs = timeLeft % 60;
+                document.getElementById('time-left').innerText = `${mins}:${secs < 10 ? '0'+secs : secs}`;
+                if(timeLeft <= 0) {
+                    clearInterval(timer);
+                    finishQuiz();
+                }
+            }, 1000);
+        }
+
+        function showQuestion() {
+            const qData = questionsBank[currentQuestion];
+            document.getElementById('question-text').innerText = (currentQuestion + 1) + ". " + qData.q;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            qData.o.forEach((opt, index) => {
+                const div = document.createElement('div');
+                div.className = 'option animate';
+                div.style.animationDelay = (index * 0.1) + 's';
+                div.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + index)}</span> <span>${opt}</span>`;
+                div.onclick = () => selectOption(index);
+                optionsContainer.appendChild(div);
+            });
+
+            // Re-render MathJax
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+
+            // Update Progress
+            document.getElementById('prog-fill').style.width = ((currentQuestion + 1) / 10 * 100) + '%';
+            document.getElementById('current-q-num').innerText = currentQuestion + 1;
+            document.getElementById('next-btn').disabled = true;
+        }
+
+        function selectOption(index) {
+            const options = document.querySelectorAll('.option');
+            options.forEach(o => o.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            userAnswers[currentQuestion] = index;
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if(currentQuestion < questionsBank.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            clearInterval(timer);
+            document.getElementById('quiz-screen').style.display = 'none';
+            document.getElementById('result-screen').style.display = 'block';
+
+            // Calculate Score
+            score = 0;
+            questionsBank.forEach((q, i) => {
+                if(userAnswers[i] === q.a) score += 10;
+            });
+
+            document.getElementById('final-score').innerText = score;
+            
+            // Stats & Message
+            let msg = score >= 75 ? "Selamat! Kamu Lulus!" : "Ayo belajar lagi!";
+            document.getElementById('congrats-msg').innerText = msg;
+            document.getElementById('stat-info').innerText = `Benar: ${score/10} | Salah: ${10 - (score/10)}`;
+
+            // Build Review
+            const reviewArea = document.getElementById('review-area');
+            reviewArea.innerHTML = '';
+            questionsBank.forEach((q, i) => {
+                const isCorrect = userAnswers[i] === q.a;
+                const div = document.createElement('div');
+                div.className = 'review-card';
+                div.style.borderColor = isCorrect ? 'var(--success)' : 'var(--danger)';
+                div.innerHTML = `
+                    <p><strong>Soal ${i+1}:</strong> ${q.q}</p>
+                    <p style="color: ${isCorrect ? 'green' : 'red'}">Jawaban Kamu: ${q.o[userAnswers[i]] || 'Tidak dijawab'}</p>
+                    <p style="font-size: 0.85rem; margin-top: 10px; background: white; padding: 10px; border-radius: 8px;">
+                        <strong>Pembahasan:</strong> ${q.exp}
+                    </p>
+                `;
+                reviewArea.appendChild(div);
+            });
+
+            if (window.MathJax) { MathJax.typeset(); }
+        }
+    </script>
+</body>
+</html>

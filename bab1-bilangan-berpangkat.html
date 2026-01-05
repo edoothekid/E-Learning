@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bab 1: Bilangan Berpangkat | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           1. CORE STYLING & VARIABLES (Line 15-80)
+           =========================================
+        */
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #3f37c9;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --dark: #1e293b;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           2. NAVIGATION & HEADER (Line 81-150)
+           =========================================
+        */
+        .top-bar {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 80px 5% 120px;
+            text-align: center;
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+
+        .chapter-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .chapter-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           3. MAIN CONTENT LAYOUT (Line 151-300)
+           =========================================
+        */
+        .container {
+            max-width: 1100px;
+            margin: -60px auto 50px;
+            padding: 0 20px;
+        }
+
+        .learning-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .sub-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            align-items: center;
+            gap: 30px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255,255,255,0.8);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sub-card:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-light);
+            box-shadow: 0 20px 25px -5px rgba(67, 97, 238, 0.1);
+        }
+
+        .icon-box {
+            width: 100px;
+            height: 100px;
+            background: var(--bg-page);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .sub-card:hover .icon-box {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .sub-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .sub-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .status-tags {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-video { background: #fee2e2; color: #ef4444; }
+        .tag-quiz { background: #dcfce7; color: #16a34a; }
+        .tag-doc { background: #e0e7ff; color: #4338ca; }
+
+        .btn-enter {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-page);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .sub-card:hover .btn-enter {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* =========================================
+           4. SIDEBAR/INFO PANEL (Line 301-450)
+           =========================================
+        */
+        .curriculum-box {
+            background: #1e293b;
+            color: white;
+            padding: 40px;
+            border-radius: 24px;
+            margin-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .cp-text { flex: 2; min-width: 300px; }
+        .cp-text h2 { color: var(--success); margin-bottom: 15px; }
+        .cp-text p { font-size: 0.9rem; opacity: 0.8; }
+
+        .cp-stats {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            min-width: 250px;
+        }
+
+        .stat-circle {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-circle i { font-size: 24px; color: var(--success); margin-bottom: 10px; }
+        .stat-circle span { display: block; font-size: 1.2rem; font-weight: 700; }
+        .stat-circle label { font-size: 11px; opacity: 0.6; text-transform: uppercase; }
+
+        /* =========================================
+           5. FOOTER & MISC (Line 451-550)
+           =========================================
+        */
+        footer {
+            text-align: center;
+            padding: 50px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .sub-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+                justify-items: center;
+            }
+            .chapter-header h1 { font-size: 2rem; }
+            .btn-enter { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+        </a>
+        <div class="user-info" style="font-weight: 600; font-size: 0.9rem;">
+            Bab 1: Eksponen & Akar
+        </div>
+    </div>
+
+    <header class="chapter-header">
+        <div class="animate">
+            <p>UNIT PEMBELAJARAN 01</p>
+            <h1>Bilangan Berpangkat</h1>
+            <p>Mengeksplorasi dunia angka besar dan kecil melalui konsep perpangkatan, penarikan akar, dan notasi ilmiah yang efisien.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="learning-grid">
+            
+            <div class="sub-card animate" style="animation-delay: 0.1s;" onclick="location.href='sub1-eksponen.html'">
+                <div class="icon-box">
+                    <i class="fas fa-superscript"></i>
+                </div>
+                <div class="sub-info">
+                    <div class="status-tags">
+                        <span class="tag tag-video">Video</span>
+                        <span class="tag tag-doc">Materi</span>
+                    </div>
+                    <h3>Sifat-sifat Eksponen</h3>
+                    <p>Pelajari perkalian, pembagian, dan perpangkatan pada bilangan berpangkat bulat positif dan negatif.</p>
+                </div>
+                <div class="btn-enter">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+
+            <div class="sub-card animate" style="animation-delay: 0.2s;" onclick="location.href='sub2-akar.html'">
+                <div class="icon-box">
+                    <i class="fas fa-square-root-variable"></i>
+                </div>
+                <div class="sub-info">
+                    <div class="status-tags">
+                        <span class="tag tag-video">Video</span>
+                        <span class="tag tag-quiz">Interaktif</span>
+                    </div>
+                    <h3>Bilangan Akar</h3>
+                    <p>Menyederhanakan bentuk akar dan memahami hubungan antara pangkat pecahan dengan bentuk akar.</p>
+                </div>
+                <div class="btn-enter">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+
+            <div class="sub-card animate" style="animation-delay: 0.3s;" onclick="location.href='sub3-notasi.html'">
+                <div class="icon-box">
+                    <i class="fas fa-microscope"></i>
+                </div>
+                <div class="sub-info">
+                    <div class="status-tags">
+                        <span class="tag tag-doc">Latihan Soal</span>
+                    </div>
+                    <h3>Notasi Ilmiah (Bentuk Baku)</h3>
+                    <p>Cara menuliskan angka yang sangat besar atau sangat kecil secara ringkas menggunakan pangkat sepuluh.</p>
+                </div>
+                <div class="btn-enter">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+
+            <div class="sub-card animate" style="animation-delay: 0.4s; background: var(--dark); color: white;" onclick="location.href='quiz-bab1.html'">
+                <div class="icon-box" style="background: var(--accent); color: white;">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="sub-info">
+                    <div class="status-tags">
+                        <span class="tag" style="background: var(--accent); color: white;">Final Test</span>
+                    </div>
+                    <h3 style="color: white;">Uji Kompetensi Bab 1</h3>
+                    <p style="color: rgba(255,255,255,0.7);">Evaluasi pemahamanmu tentang eksponen, akar, dan notasi ilmiah dalam satu tes terpadu.</p>
+                </div>
+                <div class="btn-enter" style="background: rgba(255,255,255,0.1); color: white;">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="curriculum-box animate" style="animation-delay: 0.5s;">
+            <div class="cp-text">
+                <h2>Capaian Pembelajaran (CP)</h2>
+                <p>Di akhir fase ini, murid dapat membaca, menulis, dan membandingkan bilangan bulat, bilangan rasional dan irasional, bilangan desimal, bilangan berpangkat bulat dan akar, bilangan dalam notasi ilmiah.</p>
+            </div>
+            <div class="cp-stats">
+                <div class="stat-circle">
+                    <i class="fas fa-clock"></i>
+                    <span>12 JP</span>
+                    <label>Alokasi Waktu</label>
+                </div>
+                <div class="stat-circle">
+                    <i class="fas fa-brain"></i>
+                    <span>4 Fokus</span>
+                    <label>Kompetensi</label>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MathMaster.id - Belajar Matematika Jadi Lebih Mudah</p>
+    </footer>
+
+    <script>
+        // Simple Interaction: Click effect for cards
+        document.querySelectorAll('.sub-card').forEach(card => {
+            card.addEventListener('mousedown', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('mouseup', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+        });
+
+        // Hover effect to show Tooltip logic (Optional)
+        console.log("Bab 1 Navigation Ready - Curiculum Merdeka Standards.");
+    </script>
+
+</body>
+</html>
