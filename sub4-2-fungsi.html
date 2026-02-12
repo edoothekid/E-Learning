@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memahami Fungsi | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* =========================================
+           1. VARIABLES & CORE STYLING (KONSISTEN)
+           ========================================= */
+        :root {
+            --primary: #0d9488;
+            --primary-light: #14b8a6;
+            --primary-soft: #ccfbf1;
+            --primary-dark: #0f766e;
+            --secondary: #6366f1;
+            --secondary-light: #818cf8;
+            --secondary-soft: #e0e7ff;
+            --secondary-dark: #4f46e5;
+            --accent: #f59e0b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(99,102,241,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 24px;
+            --border-radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           2. NAVIGATION (KONSISTEN)
+           ========================================= */
+        .top-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-6px);
+            color: var(--secondary-dark);
+        }
+
+        .chapter-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--secondary);
+            background: var(--secondary-soft);
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+
+        /* =========================================
+           3. PROGRESS BAR
+           ========================================= */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        .hero-section {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            color: white;
+            padding: 60px 5% 80px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "ƒ(x)";
+            position: absolute;
+            font-size: 180px;
+            top: -40px;
+            right: 5%;
+            opacity: 0.08;
+            transform: rotate(15deg);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           5. MAIN CONTAINER
+           ========================================= */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* =========================================
+           6. CONTENT CARD
+           ========================================= */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .section-title i {
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--secondary-soft);
+            color: var(--secondary-dark);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           7. VIDEO CONTAINER
+           ========================================= */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================================
+           8. FUNCTION CARDS
+           ========================================= */
+        .function-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .function-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            border-top: 6px solid var(--secondary);
+            transition: var(--transition);
+        }
+
+        .function-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .function-icon {
+            background: var(--secondary-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-dark);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .function-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .comparison-item {
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        /* =========================================
+           9. FUNCTION MACHINE
+           ========================================= */
+        .function-machine {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 40px;
+            padding: 50px;
+            margin-top: 20px;
+        }
+
+        .machine-title {
+            color: var(--secondary-light);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .machine-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .input-box, .output-box {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 30px;
+            min-width: 150px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .function-rule {
+            background: var(--secondary);
+            padding: 20px 40px;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .input-field {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-field label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--gray-300);
+            margin-bottom: 8px;
+        }
+
+        .input-field input {
+            padding: 15px 20px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            width: 120px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .btn-calc {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-calc:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(99,102,241,0.3);
+        }
+
+        /* =========================================
+           10. LATIHAN SOAL
+           ========================================= */
+        .quiz-mini {
+            background: var(--secondary-soft);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .quiz-btn {
+            background: var(--white);
+            border: 2px solid var(--secondary);
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: var(--secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 5px;
+        }
+
+        .quiz-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* =========================================
+           11. PAGINATION FOOTER
+           ========================================= */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .content-card { padding: 30px; }
+            .function-grid { grid-template-columns: 1fr; }
+            .function-machine { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="top-bar">
+        <a href="bab4-relasi-fungsi.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Bab 4
+        </a>
+        <span class="chapter-badge"><i class="fas fa-function"></i> Sub B: Memahami Fungsi</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>ƒ(x) Memahami Fungsi</h1>
+        <p>Relasi khusus yang memasangkan setiap anggota domain tepat satu dengan anggota kodomain</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Card: Video Pembelajaran -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-play"></i> VIDEO PEMBELAJARAN</span>
+            <div class="section-title">
+                <i class="fas fa-film"></i>
+                <h2>Apa itu Fungsi?</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Tonton video berikut untuk memahami konsep fungsi, perbedaannya dengan relasi, dan cara menentukan nilai fungsi.</p>
+            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/qLxGZhQNpjU" title="Konsep Fungsi" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top: 25px; padding: 20px; background: var(--secondary-soft); border-radius: 20px;">
+                <p style="font-weight: 700; color: var(--secondary-dark);"><i class="fas fa-lightbulb"></i> Poin Penting:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Fungsi (pemetaan)</strong> adalah relasi khusus yang memasangkan <strong>setiap</strong> anggota domain <strong>tepat satu</strong> dengan anggota kodomain.</li>
+                    <li>Notasi fungsi: \(f: x \to y\) atau \(f(x) = y\)</li>
+                    <li><strong>Domain</strong> = himpunan asal, <strong>Kodomain</strong> = himpunan lawan, <strong>Range</strong> = himpunan hasil (subset dari kodomain)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card: Definisi Fungsi -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-info-circle"></i> DEFINISI</span>
+            <div class="section-title">
+                <i class="fas fa-check-double"></i>
+                <h2>Apa itu Fungsi?</h2>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <div style="font-size: 2rem; font-weight: 800; color: var(--secondary-dark); background: var(--secondary-soft); padding: 30px; border-radius: 30px; display: inline-block;">
+                    \(f: A \to B\)
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                <div style="background: #dcfce7; padding: 25px; border-radius: 20px;">
+                    <h4 style="color: #166534; margin-bottom: 15px;"><i class="fas fa-check-circle"></i> Syarat Fungsi:</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;">✓ <strong>Setiap</strong> anggota domain memiliki pasangan</li>
+                        <li style="margin-bottom: 10px;">✓ <strong>Tepat satu</strong> pasangan (tidak boleh lebih dari satu)</li>
+                        <li style="margin-bottom: 10px;">✓ Boleh ada anggota kodomain yang tidak memiliki pasangan</li>
+                        <li style="margin-bottom: 10px;">✓ Boleh ada anggota kodomain yang memiliki pasangan lebih dari satu</li>
+                    </ul>
+                </div>
+                <div style="background: #fee2e2; padding: 25px; border-radius: 20px;">
+                    <h4 style="color: #b91c1c; margin-bottom: 15px;"><i class="fas fa-times-circle"></i> Bukan Fungsi jika:</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;">✗ Ada anggota domain <strong>tidak memiliki</strong> pasangan</li>
+                        <li style="margin-bottom: 10px;">✗ Ada anggota domain memiliki <strong>lebih dari satu</strong> pasangan</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; display: flex; justify-content: center;">
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px; max-width: 600px;">
+                    <p style="font-weight: 700; color: var(--secondary-dark); margin-bottom: 10px;">📌 Notasi Fungsi:</p>
+                    <p style="font-size: 1.2rem; margin-bottom: 5px;">\(f(x) = ax + b\) (fungsi linear)</p>
+                    <p style="font-size: 1.2rem; margin-bottom: 5px;">\(f(x) = ax^2 + bx + c\) (fungsi kuadrat)</p>
+                    <p style="font-size: 1.2rem;">\(f: x \to 2x + 3\) (dibaca: fungsi f memetakan x ke 2x + 3)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Fungsi vs Bukan Fungsi -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-code-branch"></i> PERBANDINGAN</span>
+            <div class="section-title">
+                <i class="fas fa-balance-scale"></i>
+                <h2>Fungsi vs Bukan Fungsi</h2>
+            </div>
+            
+            <div class="function-comparison">
+                <div class="comparison-item" style="background: var(--secondary-soft);">
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-check-circle"></i> CONTOH FUNGSI
+                    </h4>
+                    
+                    <!-- Diagram Panah Fungsi -->
+                    <div style="display: flex; justify-content: center; margin-bottom: 30px;">
+                        <svg width="250" height="150" viewBox="0 0 250 150">
+                            <!-- Himpunan A -->
+                            <rect x="20" y="20" width="70" height="110" rx="10" fill="rgba(99,102,241,0.1)" stroke="var(--secondary)" stroke-width="2"/>
+                            <text x="55" y="15" fill="var(--secondary-dark)" font-weight="bold">A</text>
+                            <text x="40" y="50" fill="var(--dark)">1</text>
+                            <text x="40" y="80" fill="var(--dark)">2</text>
+                            <text x="40" y="110" fill="var(--dark)">3</text>
+                            
+                            <!-- Himpunan B -->
+                            <rect x="160" y="20" width="70" height="110" rx="10" fill="rgba(99,102,241,0.1)" stroke="var(--secondary)" stroke-width="2"/>
+                            <text x="195" y="15" fill="var(--secondary-dark)" font-weight="bold">B</text>
+                            <text x="180" y="50" fill="var(--dark)">2</text>
+                            <text x="180" y="80" fill="var(--dark)">4</text>
+                            <text x="180" y="110" fill="var(--dark)">6</text>
+                            
+                            <!-- Panah -->
+                            <line x1="90" y1="45" x2="160" y2="45" stroke="var(--success)" stroke-width="2" marker-end="url(#arrowhead-success)"/>
+                            <line x1="90" y1="75" x2="160" y2="75" stroke="var(--success)" stroke-width="2" marker-end="url(#arrowhead-success)"/>
+                            <line x1="90" y1="105" x2="160" y2="105" stroke="var(--success)" stroke-width="2" marker-end="url(#arrowhead-success)"/>
+                            
+                            <defs>
+                                <marker id="arrowhead-success" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                                    <polygon points="0 0, 10 5, 0 10" fill="var(--success)"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                    </div>
+                    <p style="font-weight: 700;">Relasi: "setengah dari"</p>
+                    <p style="margin-top: 10px;">A = {1,2,3}, B = {2,4,6}</p>
+                    <p>1 → 2, 2 → 4, 3 → 6</p>
+                    <p style="margin-top: 15px; color: var(--success);">✓ Setiap anggota A memiliki tepat satu pasangan di B</p>
+                </div>
+                
+                <div class="comparison-item" style="background: #fee2e2;">
+                    <h4 style="color: #b91c1c; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-times-circle"></i> BUKAN FUNGSI
+                    </h4>
+                    
+                    <!-- Diagram Panah Bukan Fungsi -->
+                    <div style="display: flex; justify-content: center; margin-bottom: 30px;">
+                        <svg width="250" height="150" viewBox="0 0 250 150">
+                            <!-- Himpunan A -->
+                            <rect x="20" y="20" width="70" height="110" rx="10" fill="rgba(239,68,68,0.1)" stroke="var(--danger)" stroke-width="2"/>
+                            <text x="55" y="15" fill="#b91c1c" font-weight="bold">A</text>
+                            <text x="40" y="50" fill="var(--dark)">1</text>
+                            <text x="40" y="80" fill="var(--dark)">2</text>
+                            <text x="40" y="110" fill="var(--dark)">3</text>
+                            
+                            <!-- Himpunan B -->
+                            <rect x="160" y="20" width="70" height="110" rx="10" fill="rgba(239,68,68,0.1)" stroke="var(--danger)" stroke-width="2"/>
+                            <text x="195" y="15" fill="#b91c1c" font-weight="bold">B</text>
+                            <text x="180" y="50" fill="var(--dark)">2</text>
+                            <text x="180" y="80" fill="var(--dark)">4</text>
+                            <text x="180" y="110" fill="var(--dark)">6</text>
+                            
+                            <!-- Panah (2 memiliki 2 panah) -->
+                            <line x1="90" y1="45" x2="160" y2="45" stroke="var(--danger)" stroke-width="2" marker-end="url(#arrowhead-danger)"/>
+                            <line x1="90" y1="75" x2="160" y2="45" stroke="var(--danger)" stroke-width="2" marker-end="url(#arrowhead-danger)"/>
+                            <line x1="90" y1="75" x2="160" y2="75" stroke="var(--danger)" stroke-width="2" marker-end="url(#arrowhead-danger)"/>
+                            <line x1="90" y1="105" x2="160" y2="105" stroke="var(--danger)" stroke-width="2" marker-end="url(#arrowhead-danger)"/>
+                            
+                            <defs>
+                                <marker id="arrowhead-danger" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                                    <polygon points="0 0, 10 5, 0 10" fill="var(--danger)"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                    </div>
+                    <p style="font-weight: 700;">Relasi: "faktor dari"</p>
+                    <p style="margin-top: 10px;">A = {1,2,3}, B = {2,4,6}</p>
+                    <p>1 → 2, 2 → 2, 2 → 4, 3 → 6</p>
+                    <p style="margin-top: 15px; color: var(--danger);">✗ Anggota 2 memiliki dua pasangan (2 dan 4)</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 25px; background: var(--gray-100); border-radius: 20px;">
+                <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Cara Cek Fungsi dari Diagram Cartesius:</h4>
+                <p>Jika dibuat garis vertikal (sejajar sumbu Y), garis tersebut hanya boleh memotong grafik di <strong>SATU titik</strong> untuk setiap nilai x.</p>
+            </div>
+        </div>
+
+        <!-- Card: Domain, Kodomain, Range -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-tag"></i> ISTILAH</span>
+            <div class="section-title">
+                <i class="fas fa-sitemap"></i>
+                <h2>Domain, Kodomain, dan Range</h2>
+            </div>
+            
+            <div style="display: flex; justify-content: center; margin-bottom: 30px;">
+                <svg width="350" height="180" viewBox="0 0 350 180">
+                    <!-- Himpunan A -->
+                    <rect x="30" y="30" width="100" height="120" rx="10" fill="var(--secondary-soft)" stroke="var(--secondary)" stroke-width="2"/>
+                    <text x="80" y="20" fill="var(--secondary-dark)" font-weight="bold">Domain (A)</text>
+                    <text x="60" y="70" fill="var(--dark)">1</text>
+                    <text x="60" y="100" fill="var(--dark)">2</text>
+                    <text x="60" y="130" fill="var(--dark)">3</text>
+                    
+                    <!-- Himpunan B -->
+                    <rect x="200" y="30" width="120" height="120" rx="10" fill="var(--secondary-soft)" stroke="var(--secondary)" stroke-width="2"/>
+                    <text x="250" y="20" fill="var(--secondary-dark)" font-weight="bold">Kodomain (B)</text>
+                    <text x="220" y="70" fill="var(--dark)">2</text>
+                    <text x="220" y="100" fill="var(--dark)">4</text>
+                    <text x="220" y="130" fill="var(--dark)">6</text>
+                    <text x="280" y="70" fill="var(--dark)">8</text>
+                    <text x="280" y="100" fill="var(--dark)">10</text>
+                    
+                    <!-- Panah -->
+                    <line x1="130" y1="65" x2="200" y2="65" stroke="var(--secondary)" stroke-width="2" marker-end="url(#arrowhead-domain)"/>
+                    <line x1="130" y1="95" x2="200" y2="95" stroke="var(--secondary)" stroke-width="2" marker-end="url(#arrowhead-domain)"/>
+                    <line x1="130" y1="125" x2="200" y2="125" stroke="var(--secondary)" stroke-width="2" marker-end="url(#arrowhead-domain)"/>
+                    
+                    <!-- Range (lingkaran) -->
+                    <rect x="200" y="30" width="60" height="100" rx="10" fill="rgba(245,158,11,0.2)" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5"/>
+                    <text x="210" y="160" fill="var(--accent)" font-weight="bold">Range</text>
+                    
+                    <defs>
+                        <marker id="arrowhead-domain" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                            <polygon points="0 0, 10 5, 0 10" fill="var(--secondary)"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-arrow-right" style="font-size: 2rem; color: var(--secondary-dark); margin-bottom: 15px;"></i>
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 10px;">Domain</h4>
+                    <p>Himpunan asal (anggota yang dipetakan).</p>
+                    <p style="margin-top: 10px; font-weight: 700;">Contoh: {1, 2, 3}</p>
+                </div>
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-arrow-left" style="font-size: 2rem; color: var(--secondary-dark); margin-bottom: 15px;"></i>
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 10px;">Kodomain</h4>
+                    <p>Himpunan lawan (semua anggota yang mungkin menjadi pasangan).</p>
+                    <p style="margin-top: 10px; font-weight: 700;">Contoh: {2, 4, 6, 8, 10}</p>
+                </div>
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-bullseye" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
+                    <h4 style="color: #b45309; margin-bottom: 10px;">Range</h4>
+                    <p>Himpunan hasil (anggota kodomain yang memiliki pasangan).</p>
+                    <p style="margin-top: 10px; font-weight: 700;">Contoh: {2, 4, 6}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Mesin Fungsi Interaktif -->
+        <div class="function-machine">
+            <div class="machine-title">
+                <i class="fas fa-cogs"></i>
+                <h2 style="color: white; margin: 0;">Mesin Fungsi Interaktif</h2>
+            </div>
+            <p style="margin-bottom: 25px; opacity: 0.9;">Masukkan nilai x, lihat bagaimana fungsi memetakannya ke f(x).</p>
+            
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 30px; width: 100%;">
+                    <div class="input-field">
+                        <label>Pilih Fungsi</label>
+                        <select id="functionSelect" style="padding: 15px 25px; border-radius: 60px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); font-size: 1rem;">
+                            <option value="linear" style="background: #1e293b;">f(x) = 2x + 1</option>
+                            <option value="quadratic" style="background: #1e293b;">f(x) = x²</option>
+                            <option value="absolute" style="background: #1e293b;">f(x) = |x|</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="machine-visual">
+                    <div class="input-box">
+                        <i class="fas fa-arrow-circle-right" style="font-size: 2rem; color: var(--secondary-light); margin-bottom: 15px;"></i>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Input (x)</p>
+                        <p id="inputValue" style="font-size: 2.5rem; font-weight: 800; color: var(--secondary-light);">5</p>
+                    </div>
+                    
+                    <div class="function-rule" id="functionRule">
+                        f(x) = 2x + 1
+                    </div>
+                    
+                    <div class="output-box">
+                        <i class="fas fa-arrow-circle-left" style="font-size: 2rem; color: var(--secondary-light); margin-bottom: 15px;"></i>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Output (f(x))</p>
+                        <p id="outputValue" style="font-size: 2.5rem; font-weight: 800; color: var(--secondary-light);">11</p>
+                    </div>
+                </div>
+                
+                <div style="width: 100%; margin: 20px 0;">
+                    <label style="display: block; text-align: center; margin-bottom: 15px; color: var(--gray-300);">
+                        Geser slider untuk mengubah nilai x
+                    </label>
+                    <input type="range" id="xSlider" min="-10" max="10" step="1" value="5" style="width: 100%; height: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; -webkit-appearance: none;">
+                    <style>
+                        input[type=range]::-webkit-slider-thumb {
+                            -webkit-appearance: none;
+                            width: 25px;
+                            height: 25px;
+                            background: var(--secondary);
+                            border-radius: 50%;
+                            cursor: pointer;
+                            border: 2px solid white;
+                        }
+                    </style>
+                </div>
+                
+                <div style="display: flex; gap: 20px; margin-top: 20px;">
+                    <button onclick="calculateFunction()" class="btn-calc">
+                        <i class="fas fa-calculator"></i> Hitung
+                    </button>
+                    <button onclick="resetFunction()" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 15px 35px; border-radius: 60px; font-weight: 700; cursor: pointer;">
+                        <i class="fas fa-redo-alt"></i> Reset
+                    </button>
+                </div>
+                
+                <div id="functionNotation" style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 60px; width: 100%; text-align: center;">
+                    f(5) = 2(5) + 1 = 10 + 1 = 11
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Menentukan Nilai Fungsi -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-calculator"></i> RUMUS</span>
+            <div class="section-title">
+                <i class="fas fa-formula"></i>
+                <h2>Menentukan Nilai Fungsi</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 20px;">📘 Contoh 1</h4>
+                    <p style="margin-bottom: 15px;">Diketahui fungsi \(f(x) = 3x - 2\). Tentukan nilai f(4)!</p>
+                    <div style="background: white; padding: 20px; border-radius: 16px;">
+                        <p><strong>Penyelesaian:</strong></p>
+                        <p>f(4) = 3(4) - 2</p>
+                        <p>= 12 - 2 = <strong>10</strong></p>
+                    </div>
+                </div>
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 20px;">📘 Contoh 2</h4>
+                    <p style="margin-bottom: 15px;">Diketahui fungsi \(f(x) = x^2 + 1\). Tentukan nilai f(-3)!</p>
+                    <div style="background: white; padding: 20px; border-radius: 16px;">
+                        <p><strong>Penyelesaian:</strong></p>
+                        <p>f(-3) = (-3)² + 1</p>
+                        <p>= 9 + 1 = <strong>10</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 25px; background: var(--secondary-soft); border-radius: 20px;">
+                <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Menentukan Rumus Fungsi jika Diketahui Nilai</h4>
+                <p style="margin-bottom: 15px;">Jika f(x) = ax + b, dan diketahui f(1) = 3, f(2) = 5, maka:</p>
+                <div style="background: white; padding: 20px; border-radius: 16px;">
+                    <p>f(1) = a(1) + b = a + b = 3 ...(1)</p>
+                    <p>f(2) = a(2) + b = 2a + b = 5 ...(2)</p>
+                    <p>Eliminasi: (2) - (1) → a = 2</p>
+                    <p>Substitusi: 2 + b = 3 → b = 1</p>
+                    <p>Jadi f(x) = <strong>2x + 1</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Latihan Soal -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-pencil-alt"></i> LATIHAN</span>
+            <div class="section-title">
+                <i class="fas fa-question-circle"></i>
+                <h2>Uji Pemahaman Fungsi</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 1</p>
+                    <p style="margin-bottom: 20px;">Diketahui fungsi \(f(x) = 4x - 3\). Nilai dari \(f(5)\) adalah...</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button onclick="checkFungsiQuiz(1,1)" class="quiz-btn">A. 17</button>
+                        <button onclick="checkFungsiQuiz(1,2)" class="quiz-btn">B. 20</button>
+                        <button onclick="checkFungsiQuiz(1,3)" class="quiz-btn">C. 23</button>
+                        <button onclick="checkFungsiQuiz(1,4)" class="quiz-btn">D. 25</button>
+                    </div>
+                    <div id="fungsiQuiz1" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+                
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 2</p>
+                    <p style="margin-bottom: 20px;">Fungsi f dinyatakan dengan f(x) = ax + b. Jika f(2) = 7 dan f(4) = 13, maka nilai a + b adalah...</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button onclick="checkFungsiQuiz(2,1)" class="quiz-btn">A. 3</button>
+                        <button onclick="checkFungsiQuiz(2,2)" class="quiz-btn">B. 4</button>
+                        <button onclick="checkFungsiQuiz(2,3)" class="quiz-btn">C. 5</button>
+                        <button onclick="checkFungsiQuiz(2,4)" class="quiz-btn">D. 6</button>
+                    </div>
+                    <div id="fungsiQuiz2" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Rangkuman -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-clipboard-check"></i> RANGKUMAN</span>
+            <div class="section-title">
+                <i class="fas fa-book"></i>
+                <h2>Intisari Fungsi</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Definisi</h4>
+                    <p>Fungsi adalah relasi khusus yang memasangkan setiap anggota domain tepat satu dengan anggota kodomain.</p>
+                </div>
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Notasi</h4>
+                    <p>f: A → B<br>f(x) = y<br>f : x → ax + b</p>
+                </div>
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Istilah</h4>
+                    <p>Domain: daerah asal<br>Kodomain: daerah kawan<br>Range: daerah hasil</p>
+                </div>
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Nilai Fungsi</h4>
+                    <p>f(a) = ...<br>Substitusi x = a ke rumus fungsi</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="page-footer">
+            <a href="sub4-1-relasi.html" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Sebelumnya: Relasi
+            </a>
+            <a href="sub4-3-korespondensi.html" class="nav-btn right">
+                Selanjutnya: Korespondensi Satu-satu <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MathMaster8 - Memahami Fungsi | Kurikulum Merdeka</p>
+        <p style="margin-top: 8px; opacity: 0.6;">"Fungsi adalah mesin matematika yang mengubah input menjadi output." - N.A.</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+        };
+
+        // Mesin Fungsi Interaktif
+        let functionSelect = document.getElementById('functionSelect');
+        let xSlider = document.getElementById('xSlider');
+        let inputValue = document.getElementById('inputValue');
+        let outputValue = document.getElementById('outputValue');
+        let functionRule = document.getElementById('functionRule');
+        let functionNotation = document.getElementById('functionNotation');
+
+        function calculateFunction() {
+            let x = parseFloat(xSlider.value);
+            let func = functionSelect.value;
+            let result = 0;
+            let ruleText = '';
+            let notationText = '';
+            
+            inputValue.innerText = x;
+            
+            if (func === 'linear') {
+                result = 2 * x + 1;
+                ruleText = 'f(x) = 2x + 1';
+                notationText = `f(${x}) = 2(${x}) + 1 = ${2*x} + 1 = ${result}`;
+            } else if (func === 'quadratic') {
+                result = x * x;
+                ruleText = 'f(x) = x²';
+                notationText = `f(${x}) = ${x}² = ${result}`;
+            } else if (func === 'absolute') {
+                result = Math.abs(x);
+                ruleText = 'f(x) = |x|';
+                notationText = `f(${x}) = |${x}| = ${result}`;
+            }
+            
+            outputValue.innerText = result;
+            functionRule.innerText = ruleText;
+            functionNotation.innerText = notationText;
+        }
+
+        functionSelect.addEventListener('change', calculateFunction);
+        xSlider.addEventListener('input', function() {
+            inputValue.innerText = this.value;
+            calculateFunction();
+        });
+
+        function resetFunction() {
+            xSlider.value = 5;
+            functionSelect.value = 'linear';
+            calculateFunction();
+        }
+
+        // Fungsi kuis
+        function checkFungsiQuiz(quizNum, answer) {
+            if (quizNum === 1) {
+                let fb = document.getElementById('fungsiQuiz1');
+                fb.style.display = 'block';
+                if (answer === 1) {
+                    fb.innerHTML = '✅ Benar! f(5) = 4(5) - 3 = 20 - 3 = 17.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Coba lagi! f(x) = 4x - 3, substitusi x = 5.';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            } else if (quizNum === 2) {
+                let fb = document.getElementById('fungsiQuiz2');
+                fb.style.display = 'block';
+                if (answer === 3) {
+                    fb.innerHTML = '✅ Benar! a = 3, b = 1, maka a + b = 4.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Coba lagi! Eliminasi persamaan f(2) dan f(4).';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            }
+        }
+
+        // Inisialisasi
+        window.onload = function() {
+            calculateFunction();
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        };
+    </script>
+</body>
+</html>

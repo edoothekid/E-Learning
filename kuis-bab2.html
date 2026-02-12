@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Bab 1: Bilangan Berpangkat | MathMaster8</title>
+    <title>Kuis Bab 2: Teorema Pythagoras | MathMaster8</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,7 +12,8 @@
     
     <style>
         /* =========================================
-           1. VARIABLES & CORE STYLING 
+           CSS SAMA PERSIS DENGAN KUIS BAB 1
+           (WARNA PRIMARY UNTUK BAB 2)
            ========================================= */
         :root {
             --primary: #0d9488;
@@ -54,9 +55,6 @@
             padding: 20px;
         }
 
-        /* =========================================
-           2. QUIZ CONTAINER
-           ========================================= */
         .quiz-container {
             background: var(--white);
             width: 100%;
@@ -69,7 +67,7 @@
         }
 
         .quiz-container::before {
-            content: "🔢";
+            content: "📐";
             position: absolute;
             font-size: 180px;
             bottom: -40px;
@@ -78,9 +76,7 @@
             transform: rotate(15deg);
         }
 
-        /* =========================================
-           3. START SCREEN
-           ========================================= */
+        /* START SCREEN */
         #start-screen {
             text-align: center;
             position: relative;
@@ -169,9 +165,7 @@
             transform: translateY(-3px);
         }
 
-        /* =========================================
-           4. QUIZ SCREEN
-           ========================================= */
+        /* QUIZ SCREEN */
         #quiz-screen {
             display: none;
         }
@@ -343,9 +337,7 @@
             opacity: 0.6;
         }
 
-        /* =========================================
-           5. RESULT SCREEN
-           ========================================= */
+        /* RESULT SCREEN */
         #result-screen {
             display: none;
             text-align: center;
@@ -532,11 +524,11 @@
         <!-- START SCREEN -->
         <div id="start-screen">
             <div class="quiz-icon animate">
-                <i class="fas fa-superscript"></i>
+                <i class="fas fa-draw-polygon"></i>
             </div>
-            <h1 class="animate">Kuis Bilangan Berpangkat</h1>
+            <h1 class="animate">Kuis Teorema Pythagoras</h1>
             <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;" class="animate">
-                Uji pemahamanmu tentang eksponen, akar, dan notasi ilmiah!
+                Uji pemahamanmu tentang Teorema Pythagoras, Tripel, dan Penerapannya!
             </p>
             
             <div class="quiz-info animate" style="animation-delay: 0.1s;">
@@ -640,68 +632,68 @@
     
     <script>
         // =========================================
-        // BANK SOAL BAB 1: BILANGAN BERPANGKAT
+        // BANK SOAL BAB 2: TEOREMA PYTHAGORAS
         // =========================================
         const questionsBank = [
             {
-                question: "Hasil dari 2³ × 2⁴ adalah...",
-                options: ["2¹²", "2⁷", "4⁷", "2¹"],
+                question: "Teorema Pythagoras berlaku pada segitiga...",
+                options: ["Sembarang", "Siku-siku", "Sama sisi", "Sama kaki"],
                 answer: 1,
-                explanation: "Sifat perkalian eksponen: aᵐ × aⁿ = aᵐ⁺ⁿ. Jadi 2³⁺⁴ = 2⁷."
+                explanation: "Teorema Pythagoras hanya berlaku untuk segitiga siku-siku, yaitu segitiga yang salah satu sudutnya 90°."
             },
             {
-                question: "Bentuk sederhana dari √48 adalah...",
-                options: ["4√3", "3√4", "16√3", "2√12"],
-                answer: 0,
-                explanation: "√48 = √(16 × 3) = 4√3."
-            },
-            {
-                question: "Bentuk baku dari 0,000025 adalah...",
-                options: ["2,5 × 10⁻⁴", "2,5 × 10⁻⁵", "25 × 10⁻⁶", "0,25 × 10⁻⁴"],
-                answer: 1,
-                explanation: "Koma digeser ke kanan 5 kali, maka pangkat negatif 5: 2,5 × 10⁻⁵."
-            },
-            {
-                question: "Hasil dari (3²)³ adalah...",
-                options: ["3⁵", "3⁶", "3⁸", "9²"],
-                answer: 1,
-                explanation: "Sifat pangkat: (aᵐ)ⁿ = aᵐ×ⁿ. Jadi 3²×³ = 3⁶."
-            },
-            {
-                question: "Nilai dari √12 + √27 adalah...",
-                options: ["√39", "5√3", "6√3", "13√3"],
-                answer: 1,
-                explanation: "√12 = 2√3, √27 = 3√3, maka 2√3 + 3√3 = 5√3."
-            },
-            {
-                question: "Hasil dari 5⁰ + 2⁰ - 3⁰ adalah...",
-                options: ["0", "1", "4", "3"],
-                answer: 1,
-                explanation: "Semua bilangan (kecuali 0) pangkat 0 = 1. Jadi 1 + 1 - 1 = 1."
-            },
-            {
-                question: "Notasi ilmiah untuk 150.000.000 adalah...",
-                options: ["1,5 × 10⁸", "1,5 × 10⁷", "15 × 10⁷", "1,5 × 10⁻⁸"],
-                answer: 0,
-                explanation: "Koma digeser ke kiri 8 kali: 1,5 × 10⁸."
-            },
-            {
-                question: "Hasil dari 10⁵ ÷ 10² adalah...",
-                options: ["10⁷", "10¹⁰", "10³", "100"],
+                question: "Pada segitiga siku-siku, sisi terpanjang disebut...",
+                options: ["Alas", "Tinggi", "Hipotenusa", "Diagonal"],
                 answer: 2,
-                explanation: "Sifat pembagian: aᵐ ÷ aⁿ = aᵐ⁻ⁿ. Jadi 10⁵⁻² = 10³."
+                explanation: "Sisi terpanjang pada segitiga siku-siku disebut hipotenusa atau sisi miring."
             },
             {
-                question: "√125 jika disederhanakan menjadi...",
-                options: ["5√5", "25√5", "5√25", "15√5"],
-                answer: 0,
-                explanation: "√125 = √(25 × 5) = 5√5."
-            },
-            {
-                question: "Hasil dari 2√3 × √2 adalah...",
-                options: ["2√5", "2√6", "6√2", "√12"],
+                question: "Berikut ini yang merupakan tripel Pythagoras adalah...",
+                options: ["(3, 4, 6)", "(5, 12, 13)", "(7, 8, 10)", "(9, 12, 14)"],
                 answer: 1,
-                explanation: "2√3 × √2 = 2√(3 × 2) = 2√6."
+                explanation: "5² + 12² = 25 + 144 = 169 = 13², sehingga (5, 12, 13) adalah tripel Pythagoras."
+            },
+            {
+                question: "Panjang diagonal persegi dengan sisi 6 cm adalah...",
+                options: ["6√2 cm", "12 cm", "6√3 cm", "8 cm"],
+                answer: 0,
+                explanation: "Diagonal persegi = s√2 = 6√2 cm."
+            },
+            {
+                question: "Sebuah segitiga siku-siku memiliki panjang sisi tegak 8 cm dan 15 cm. Panjang sisi miringnya adalah...",
+                options: ["17 cm", "18 cm", "19 cm", "20 cm"],
+                answer: 0,
+                explanation: "c² = 8² + 15² = 64 + 225 = 289, maka c = √289 = 17 cm."
+            },
+            {
+                question: "Manakah dari berikut ini yang BUKAN tripel Pythagoras?",
+                options: ["(6, 8, 10)", "(9, 12, 15)", "(8, 15, 17)", "(12, 16, 18)"],
+                answer: 3,
+                explanation: "12² + 16² = 144 + 256 = 400, sedangkan 18² = 324. Tidak sama, jadi bukan tripel Pythagoras."
+            },
+            {
+                question: "Tinggi segitiga sama sisi dengan panjang sisi 10 cm adalah...",
+                options: ["5√3 cm", "10√3 cm", "5 cm", "8 cm"],
+                answer: 0,
+                explanation: "Tinggi segitiga sama sisi = ½ × s × √3 = ½ × 10 × √3 = 5√3 cm."
+            },
+            {
+                question: "Panjang sisi belah ketupat yang memiliki diagonal 16 cm dan 12 cm adalah...",
+                options: ["10 cm", "12 cm", "14 cm", "20 cm"],
+                answer: 0,
+                explanation: "Sisi = √[(½d₁)² + (½d₂)²] = √(8² + 6²) = √100 = 10 cm."
+            },
+            {
+                question: "Sebuah tangga sepanjang 5 m bersandar pada tembok. Jarak kaki tangga ke tembok 3 m. Tinggi tembok yang dicapai tangga adalah...",
+                options: ["4 m", "5 m", "6 m", "7 m"],
+                answer: 0,
+                explanation: "Tinggi = √(5² - 3²) = √(25 - 9) = √16 = 4 m."
+            },
+            {
+                question: "Panjang diagonal sebuah persegi panjang 25 cm. Jika lebarnya 7 cm, maka panjangnya adalah...",
+                options: ["24 cm", "20 cm", "18 cm", "15 cm"],
+                answer: 0,
+                explanation: "Panjang = √(d² - l²) = √(25² - 7²) = √(625 - 49) = √576 = 24 cm."
             }
         ];
 
@@ -711,64 +703,43 @@
         let currentQuestionIndex = 0;
         let userAnswers = [];
         let timer;
-        let timeLeft = 900; // 15 menit = 900 detik
+        let timeLeft = 900;
 
         // =========================================
         // INISIALISASI EVENT LISTENER
         // =========================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Setup tombol start
             document.getElementById('startQuizBtn').addEventListener('click', startQuiz);
-            
-            // Setup tombol next
             document.getElementById('next-btn').addEventListener('click', nextQuestion);
-            
-            // Setup tombol restart
             document.getElementById('restartBtn').addEventListener('click', restartQuiz);
-            
-            // Setup tombol kembali ke bab
             document.getElementById('backToBabBtn').addEventListener('click', goToBab);
             
-            // Inisialisasi
             userAnswers = new Array(questionsBank.length).fill(null);
             document.getElementById('start-screen').style.display = 'block';
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'none';
         });
 
-        // =========================================
-        // FUNGSI-FUNGSI QUIZ
-        // =========================================
-        
         function startQuiz() {
-            // Reset semua variabel
             currentQuestionIndex = 0;
             userAnswers = new Array(questionsBank.length).fill(null);
             timeLeft = 900;
             
-            // Update tampilan timer
             updateTimerDisplay();
             
-            // Tampilkan layar quiz
             document.getElementById('start-screen').style.display = 'none';
             document.getElementById('quiz-screen').style.display = 'block';
             document.getElementById('result-screen').style.display = 'none';
             
-            // Tampilkan soal pertama
             showQuestion();
-            
-            // Mulai timer
             startTimer();
         }
 
         function showQuestion() {
             const q = questionsBank[currentQuestionIndex];
-            
-            // Tampilkan teks soal - sudah dalam bentuk teks biasa, bukan LaTeX
             document.getElementById('question-text').innerHTML = 
                 (currentQuestionIndex + 1) + ". " + q.question;
             
-            // Render opsi jawaban
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
             
@@ -776,7 +747,6 @@
                 const optionDiv = document.createElement('div');
                 optionDiv.className = 'option';
                 
-                // Jika sudah pernah menjawab, tampilkan jawaban yang dipilih
                 if (userAnswers[currentQuestionIndex] === index) {
                     optionDiv.classList.add('selected');
                 }
@@ -786,7 +756,6 @@
                     <span>${opt}</span>
                 `;
                 
-                // Gunakan closure untuk menyimpan index dengan benar
                 optionDiv.addEventListener('click', (function(idx) {
                     return function() {
                         selectOption(idx);
@@ -796,35 +765,22 @@
                 optionsContainer.appendChild(optionDiv);
             });
             
-            // Update nomor soal
             document.getElementById('current-q-num').innerText = currentQuestionIndex + 1;
-            
-            // Update progress bar
             const progress = (currentQuestionIndex / questionsBank.length) * 100;
             document.getElementById('progress-fill').style.width = progress + '%';
             
-            // Update tombol next
             updateNextButton();
-            
-            // Hapus feedback
             document.getElementById('feedback').innerHTML = '';
         }
 
         function selectOption(index) {
-            // Hapus class selected dari semua opsi
             const options = document.querySelectorAll('.option');
             options.forEach(opt => opt.classList.remove('selected'));
-            
-            // Tambah class selected ke opsi yang dipilih
             options[index].classList.add('selected');
             
-            // Simpan jawaban user
             userAnswers[currentQuestionIndex] = index;
-            
-            // Update tombol next
             updateNextButton();
             
-            // Beri feedback langsung
             const q = questionsBank[currentQuestionIndex];
             if (index === q.answer) {
                 document.getElementById('feedback').innerHTML = '✅ Jawaban benar!';
@@ -837,11 +793,7 @@
 
         function updateNextButton() {
             const nextBtn = document.getElementById('next-btn');
-            if (userAnswers[currentQuestionIndex] !== null && userAnswers[currentQuestionIndex] !== undefined) {
-                nextBtn.disabled = false;
-            } else {
-                nextBtn.disabled = true;
-            }
+            nextBtn.disabled = (userAnswers[currentQuestionIndex] === null || userAnswers[currentQuestionIndex] === undefined);
         }
 
         function nextQuestion() {
@@ -860,7 +812,6 @@
                     timeLeft--;
                     updateTimerDisplay();
                 } else {
-                    // Waktu habis
                     clearInterval(timer);
                     finishQuiz();
                 }
@@ -875,36 +826,28 @@
         }
 
         function finishQuiz() {
-            // Hentikan timer
             clearInterval(timer);
-            
-            // Sembunyikan quiz screen, tampilkan result screen
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'block';
             
-            // Hitung jumlah jawaban benar
             let correct = 0;
             for (let i = 0; i < questionsBank.length; i++) {
-                if (userAnswers[i] === questionsBank[i].answer) {
-                    correct++;
-                }
+                if (userAnswers[i] === questionsBank[i].answer) correct++;
             }
             
             let wrong = questionsBank.length - correct;
             let accuracy = Math.round((correct / questionsBank.length) * 100);
-            let score = correct * 10; // Maksimal 100
+            let score = correct * 10;
             
-            // Tampilkan skor
             document.getElementById('final-score').innerText = score;
             document.getElementById('correct-count').innerText = correct;
             document.getElementById('wrong-count').innerText = wrong;
             document.getElementById('accuracy').innerText = accuracy + '%';
             
-            // Tampilkan pesan berdasarkan skor
             let message, submessage;
             if (score >= 80) {
                 message = "🎉 Luar Biasa!";
-                submessage = "Kamu menguasai bilangan berpangkat dengan baik!";
+                submessage = "Kamu menguasai Teorema Pythagoras dengan baik!";
             } else if (score >= 60) {
                 message = "👍 Cukup Baik!";
                 submessage = "Tingkatkan lagi, kamu pasti bisa lebih baik!";
@@ -916,7 +859,6 @@
             document.getElementById('congrats-message').innerText = message;
             document.getElementById('result-submessage').innerText = submessage;
             
-            // Tampilkan review jawaban
             displayReview();
         }
 
@@ -927,14 +869,11 @@
             questionsBank.forEach((q, i) => {
                 const userAnswer = userAnswers[i];
                 const isCorrect = userAnswer === q.answer;
-                const userAnswerText = userAnswer !== null && userAnswer !== undefined 
-                    ? q.options[userAnswer] 
-                    : 'Tidak dijawab';
+                const userAnswerText = userAnswer !== null ? q.options[userAnswer] : 'Tidak dijawab';
                 const correctAnswerText = q.options[q.answer];
                 
                 const reviewCard = document.createElement('div');
                 reviewCard.className = `review-card ${isCorrect ? 'correct' : 'incorrect'}`;
-                
                 reviewCard.innerHTML = `
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                         <span style="font-weight: 800; background: var(--gray-200); padding: 5px 15px; border-radius: 60px; font-size: 0.8rem;">
@@ -964,28 +903,24 @@
                         <p style="margin-top: 8px;">${q.explanation}</p>
                     </div>
                 `;
-                
                 reviewContainer.appendChild(reviewCard);
             });
         }
 
         function restartQuiz() {
-            // Reset semua variabel
             currentQuestionIndex = 0;
             userAnswers = new Array(questionsBank.length).fill(null);
             timeLeft = 900;
             
-            // Tampilkan start screen
             document.getElementById('start-screen').style.display = 'block';
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'none';
             
-            // Hentikan timer
             clearInterval(timer);
         }
 
         function goToBab() {
-            window.location.href = 'bab1-bilangan-berpangkat.html';
+            window.location.href = 'bab2-teorema-pythagoras.html';
         }
     </script>
 </body>

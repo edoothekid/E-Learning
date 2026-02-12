@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penerapan Teorema Pythagoras | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* =========================================
+           CSS KONSISTEN
+           ========================================= */
+        :root {
+            --primary: #0d9488;
+            --primary-light: #14b8a6;
+            --primary-soft: #ccfbf1;
+            --primary-dark: #0f766e;
+            --accent: #f59e0b;
+            --accent-soft: #fff3cd;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 24px;
+            --border-radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        .top-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-6px);
+            color: var(--primary-dark);
+        }
+
+        .chapter-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            background: var(--primary-soft);
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 5% 80px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "🏛️";
+            position: absolute;
+            font-size: 180px;
+            top: -40px;
+            right: 5%;
+            opacity: 0.08;
+            transform: rotate(15deg);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* Content Card */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--primary-soft);
+            color: var(--primary-dark);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* Video Container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Application Grid */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .app-card {
+            background: var(--bg-page);
+            border-radius: 20px;
+            padding: 30px;
+            border-top: 6px solid var(--primary);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            border-top-width: 6px;
+        }
+
+        .app-card:hover {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .app-icon {
+            background: var(--primary-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .app-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .math-formula {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px 0;
+            border: 1px dashed var(--primary);
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* Simulator Box */
+        .simulator-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 40px;
+            padding: 50px;
+            margin-top: 20px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .input-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-col label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray-300);
+            margin-bottom: 8px;
+        }
+
+        .input-col input {
+            padding: 15px 20px;
+            border-radius: 60px;
+            border: none;
+            width: 140px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-calc {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 45px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 15px;
+        }
+
+        .btn-calc:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(13,148,136,0.3);
+        }
+
+        /* HOTS Box */
+        .hots-box {
+            background: var(--primary-soft);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+            border-left: 8px solid var(--primary);
+        }
+
+        .btn-solve {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+
+        .btn-solve:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Pagination Footer */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .content-card { padding: 30px; }
+            .app-grid { grid-template-columns: 1fr; }
+            .simulator-box { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="top-bar">
+        <a href="bab2-teorema-pythagoras.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Bab 2
+        </a>
+        <span class="chapter-badge"><i class="fas fa-shapes"></i> Sub D: Penerapan</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>🏛️ Penerapan Teorema Pythagoras</h1>
+        <p>Aplikasi dalam bangun datar, bangun ruang, dan masalah kontekstual sehari-hari</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Card: Video Pembelajaran -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-play"></i> VIDEO PEMBELAJARAN</span>
+            <div class="section-title">
+                <i class="fas fa-film"></i>
+                <h2>Aplikasi Pythagoras dalam Kehidupan</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Pelajari bagaimana teorema Pythagoras digunakan dalam berbagai bidang.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/eIqyG1oF6a0" title="Penerapan Pythagoras" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Card: Penerapan pada Bangun Datar -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-shapes"></i> BANGUN DATAR</span>
+            <div class="section-title">
+                <i class="fas fa-draw-polygon"></i>
+                <h2>Rumus Cepat Bangun Datar</h2>
+            </div>
+            
+            <div class="app-grid">
+                <!-- 1. Persegi -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-square"></i></div>
+                    <h4>Diagonal Persegi</h4>
+                    <p>Jika sisi persegi = s, maka diagonalnya:</p>
+                    <div class="math-formula">
+                        \(d = s\sqrt{2}\)
+                    </div>
+                    <p>Contoh: s = 7 cm → d = 7√2 ≈ 9,9 cm</p>
+                </div>
+                
+                <!-- 2. Persegi Panjang -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-rectangle"></i></div>
+                    <h4>Diagonal Persegi Panjang</h4>
+                    <p>Jika panjang = p, lebar = l, maka diagonal:</p>
+                    <div class="math-formula">
+                        \(d = \sqrt{p^2 + l^2}\)
+                    </div>
+                    <p>Contoh: p=6, l=8 → d=10</p>
+                </div>
+                
+                <!-- 3. Segitiga Sama Kaki -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-triangle"></i></div>
+                    <h4>Tinggi Segitiga Sama Kaki</h4>
+                    <p>Alas = a, kaki = r, maka tinggi:</p>
+                    <div class="math-formula">
+                        \(t = \sqrt{r^2 - (\frac{a}{2})^2}\)
+                    </div>
+                    <p>Contoh: a=6, r=5 → t=4</p>
+                </div>
+                
+                <!-- 4. Segitiga Sama Sisi -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-equals"></i></div>
+                    <h4>Tinggi Segitiga Sama Sisi</h4>
+                    <p>Sisi = a, maka tinggi:</p>
+                    <div class="math-formula">
+                        \(t = \frac{a}{2}\sqrt{3}\)
+                    </div>
+                    <p>Contoh: a=8 → t=4√3 ≈ 6,93</p>
+                </div>
+                
+                <!-- 5. Belah Ketupat -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-shield"></i></div>
+                    <h4>Sisi Belah Ketupat</h4>
+                    <p>Diagonal d₁ dan d₂, maka sisi:</p>
+                    <div class="math-formula">
+                        \(s = \sqrt{(\frac{d_1}{2})^2 + (\frac{d_2}{2})^2}\)
+                    </div>
+                    <p>Contoh: d₁=16, d₂=12 → s=10</p>
+                </div>
+                
+                <!-- 6. Layang-layang -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-kite"></i></div>
+                    <h4>Diagonal Layang-layang</h4>
+                    <p>Hubungan sisi dan diagonal menggunakan Pythagoras.</p>
+                    <div class="math-formula">
+                        \(s_1^2 = (\frac{d_1}{2})^2 + (\frac{d_2}{2})^2\)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Penerapan pada Bangun Ruang -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-cube"></i> BANGUN RUANG</span>
+            <div class="section-title">
+                <i class="fas fa-cubes"></i>
+                <h2>Diagonal Ruang dan Bidang</h2>
+            </div>
+            
+            <div class="app-grid">
+                <!-- 1. Kubus -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-cube"></i></div>
+                    <h4>Diagonal Bidang Kubus</h4>
+                    <p>Rusuk = s, diagonal bidang:</p>
+                    <div class="math-formula">
+                        \(d_b = s\sqrt{2}\)
+                    </div>
+                </div>
+                
+                <!-- 2. Diagonal Ruang Kubus -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-cubes"></i></div>
+                    <h4>Diagonal Ruang Kubus</h4>
+                    <p>Rusuk = s, diagonal ruang:</p>
+                    <div class="math-formula">
+                        \(d_r = s\sqrt{3}\)
+                    </div>
+                </div>
+                
+                <!-- 3. Balok -->
+                <div class="app-card">
+                    <div class="app-icon"><i class="fas fa-box"></i></div>
+                    <h4>Diagonal Ruang Balok</h4>
+                    <p>Panjang = p, lebar = l, tinggi = t</p>
+                    <div class="math-formula">
+                        \(d = \sqrt{p^2 + l^2 + t^2}\)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Simulator Diagonal Persegi Panjang -->
+        <div class="simulator-box">
+            <h3 style="font-size: 1.8rem; margin-bottom: 15px; color: var(--primary-light);">📐 Simulator Diagonal</h3>
+            <p style="margin-bottom: 30px; opacity: 0.9;">Hitung diagonal persegi panjang atau balok dengan memasukkan ukuran.</p>
+            
+            <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px;">
+                <button onclick="setDimension('2d')" id="btn2d" class="btn-calc" style="background: var(--primary);">Persegi Panjang (2D)</button>
+                <button onclick="setDimension('3d')" id="btn3d" class="btn-calc" style="background: rgba(255,255,255,0.1);">Balok (3D)</button>
+            </div>
+            
+            <div id="input2d" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 30px 0;">
+                <div class="input-col">
+                    <label>Panjang (p)</label>
+                    <input type="number" id="panjang" placeholder="Panjang" value="6">
+                </div>
+                <div class="input-col">
+                    <label>Lebar (l)</label>
+                    <input type="number" id="lebar" placeholder="Lebar" value="8">
+                </div>
+            </div>
+            
+            <div id="input3d" style="display: none; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 30px 0;">
+                <div class="input-col">
+                    <label>Panjang (p)</label>
+                    <input type="number" id="panjang3d" placeholder="Panjang" value="6">
+                </div>
+                <div class="input-col">
+                    <label>Lebar (l)</label>
+                    <input type="number" id="lebar3d" placeholder="Lebar" value="8">
+                </div>
+                <div class="input-col">
+                    <label>Tinggi (t)</label>
+                    <input type="number" id="tinggi3d" placeholder="Tinggi" value="10">
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <button onclick="hitungDiagonal()" class="btn-calc" style="background: var(--primary);">
+                    <i class="fas fa-calculator"></i> Hitung Diagonal
+                </button>
+            </div>
+            
+            <div id="diagonalResult" style="font-size: 1.8rem; margin-top: 35px; background: rgba(255,255,255,0.1); padding: 25px; border-radius: 60px; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+                Diagonal = 10 satuan
+            </div>
+        </div>
+
+        <!-- Card: Soal HOTS Penerapan -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-brain"></i> SOAL HOTS</span>
+            <div class="section-title">
+                <i class="fas fa-puzzle-piece"></i>
+                <h2>Masalah Kontekstual</h2>
+            </div>
+            
+            <div class="hots-box">
+                <p style="font-size: 1.3rem; font-weight: 700; margin-bottom: 20px;">📌 Soal 1:</p>
+                <p style="font-size: 1.1rem; margin-bottom: 25px;">Sebuah kapal berlayar ke utara sejauh 24 km, kemudian berbelok ke barat sejauh 10 km. Berapa jarak kapal dari titik awal?</p>
+                
+                <button onclick="tampilPembahasan1()" class="btn-solve">
+                    <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+                </button>
+                
+                <div id="pembahasan1" style="margin-top: 30px; padding: 25px; background: white; border-radius: 20px; display: none; border-left: 6px solid var(--primary);">
+                    <p style="font-weight: 700; margin-bottom: 15px;">📝 Pembahasan:</p>
+                    <p>Jarak = √(24² + 10²) = √(576 + 100) = √676 = <strong>26 km</strong></p>
+                </div>
+            </div>
+            
+            <div class="hots-box" style="margin-top: 30px;">
+                <p style="font-size: 1.3rem; font-weight: 700; margin-bottom: 20px;">📌 Soal 2:</p>
+                <p style="font-size: 1.1rem; margin-bottom: 25px;">Sebuah taman berbentuk belah ketupat memiliki panjang diagonal 16 m dan 12 m. Di sekeliling taman akan dipasang lampu dengan jarak 2 m antar lampu. Berapa banyak lampu yang dibutuhkan?</p>
+                
+                <button onclick="tampilPembahasan2()" class="btn-solve">
+                    <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+                </button>
+                
+                <div id="pembahasan2" style="margin-top: 30px; padding: 25px; background: white; border-radius: 20px; display: none; border-left: 6px solid var(--primary);">
+                    <p style="font-weight: 700; margin-bottom: 15px;">📝 Pembahasan:</p>
+                    <ol style="margin-left: 20px; list-style-type: decimal; line-height: 1.9;">
+                        <li>Sisi = √[(½d₁)² + (½d₂)²] = √(8² + 6²) = √100 = 10 m</li>
+                        <li>Keliling = 4 × sisi = 4 × 10 = 40 m</li>
+                        <li>Jumlah lampu = 40 ÷ 2 = <strong>20 lampu</strong></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="page-footer">
+            <a href="sub2-3-istimewa.html" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Sebelumnya: Segitiga Istimewa
+            </a>
+            <a href="sub2-5-jarak.html" class="nav-btn right">
+                Selanjutnya: Rumus Jarak <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MathMaster8 - Penerapan Teorema Pythagoras | Kurikulum Merdeka</p>
+        <p style="margin-top: 8px; opacity: 0.6;">"Matematika bukan hanya teori, tapi alat untuk memecahkan masalah." - N.A.</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+        };
+
+        // Simulator Dimensi
+        let currentDim = '2d';
+        
+        function setDimension(dim) {
+            currentDim = dim;
+            
+            if (dim === '2d') {
+                document.getElementById('input2d').style.display = 'flex';
+                document.getElementById('input3d').style.display = 'none';
+                document.getElementById('btn2d').style.background = 'var(--primary)';
+                document.getElementById('btn3d').style.background = 'rgba(255,255,255,0.1)';
+            } else {
+                document.getElementById('input2d').style.display = 'none';
+                document.getElementById('input3d').style.display = 'flex';
+                document.getElementById('btn2d').style.background = 'rgba(255,255,255,0.1)';
+                document.getElementById('btn3d').style.background = 'var(--primary)';
+            }
+            
+            hitungDiagonal();
+        }
+
+        // Fungsi hitung diagonal
+        function hitungDiagonal() {
+            let result = document.getElementById('diagonalResult');
+            
+            if (currentDim === '2d') {
+                let p = parseFloat(document.getElementById('panjang').value);
+                let l = parseFloat(document.getElementById('lebar').value);
+                
+                if (isNaN(p) || isNaN(l) || p <= 0 || l <= 0) {
+                    result.innerHTML = "⚠️ Masukkan angka positif yang valid!";
+                    return;
+                }
+                
+                let d = Math.sqrt(p*p + l*l).toFixed(2);
+                result.innerHTML = `Diagonal = ${d} satuan`;
+            } else {
+                let p = parseFloat(document.getElementById('panjang3d').value);
+                let l = parseFloat(document.getElementById('lebar3d').value);
+                let t = parseFloat(document.getElementById('tinggi3d').value);
+                
+                if (isNaN(p) || isNaN(l) || isNaN(t) || p <= 0 || l <= 0 || t <= 0) {
+                    result.innerHTML = "⚠️ Masukkan angka positif yang valid!";
+                    return;
+                }
+                
+                let d = Math.sqrt(p*p + l*l + t*t).toFixed(2);
+                result.innerHTML = `Diagonal ruang = ${d} satuan`;
+            }
+        }
+
+        // Fungsi tampil pembahasan
+        function tampilPembahasan1() {
+            let pembahasan = document.getElementById('pembahasan1');
+            pembahasan.style.display = pembahasan.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function tampilPembahasan2() {
+            let pembahasan = document.getElementById('pembahasan2');
+            pembahasan.style.display = pembahasan.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Inisialisasi
+        window.onload = function() {
+            hitungDiagonal();
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        };
+    </script>
+</body>
+</html>

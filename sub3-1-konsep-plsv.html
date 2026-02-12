@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konsep Persamaan Linier Satu Variabel | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* =========================================
+           1. VARIABLES & CORE STYLING (KONSISTEN)
+           ========================================= */
+        :root {
+            --primary: #0d9488;
+            --primary-light: #14b8a6;
+            --primary-soft: #ccfbf1;
+            --primary-dark: #0f766e;
+            --tertiary: #8b5cf6;
+            --tertiary-light: #a78bfa;
+            --tertiary-soft: #ede9fe;
+            --accent: #f59e0b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(139,92,246,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 24px;
+            --border-radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           2. NAVIGATION (KONSISTEN)
+           ========================================= */
+        .top-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--tertiary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-6px);
+            color: var(--tertiary);
+        }
+
+        .chapter-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--tertiary);
+            background: var(--tertiary-soft);
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+
+        /* =========================================
+           3. PROGRESS BAR
+           ========================================= */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--tertiary), var(--accent));
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        .hero-section {
+            background: linear-gradient(135deg, var(--tertiary) 0%, #6d28d9 100%);
+            color: white;
+            padding: 60px 5% 80px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "⚖️";
+            position: absolute;
+            font-size: 180px;
+            top: -40px;
+            right: 5%;
+            opacity: 0.08;
+            transform: rotate(15deg);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           5. MAIN CONTAINER
+           ========================================= */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* =========================================
+           6. CONTENT CARD
+           ========================================= */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .section-title i {
+            color: var(--tertiary);
+            font-size: 2rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--tertiary-soft);
+            color: var(--tertiary);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           7. VIDEO CONTAINER
+           ========================================= */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================================
+           8. KARTU KONSEP
+           ========================================= */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .concept-card {
+            background: var(--bg-page);
+            border-radius: 20px;
+            padding: 30px;
+            border-left: 6px solid var(--tertiary);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            border-left-width: 6px;
+        }
+
+        .concept-card:hover {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .concept-icon {
+            background: var(--tertiary-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--tertiary);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .math-definition {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 20px 0;
+            border: 2px dashed var(--tertiary);
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--tertiary);
+        }
+
+        .example-bubble {
+            background: var(--gray-100);
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 20px;
+            border-bottom: 4px solid var(--tertiary);
+        }
+
+        /* =========================================
+           9. TIMBANGAN VISUAL
+           ========================================= */
+        .scale-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .scale-item {
+            text-align: center;
+        }
+
+        .scale {
+            font-size: 5rem;
+            color: var(--tertiary);
+        }
+
+        .scale-label {
+            font-weight: 700;
+            margin-top: 10px;
+            color: var(--text-muted);
+        }
+
+        /* =========================================
+           10. KOMPONEN PLSV
+           ========================================= */
+        .component-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+            justify-content: center;
+        }
+
+        .component {
+            background: var(--tertiary-soft);
+            padding: 20px 30px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--tertiary);
+            border: 2px solid var(--tertiary);
+        }
+
+        /* =========================================
+           11. SIMULATOR INTERAKTIF
+           ========================================= */
+        .simulator-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 40px;
+            padding: 50px;
+            margin-top: 20px;
+        }
+
+        .simulator-title {
+            color: var(--tertiary-light);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .equation-display {
+            font-size: 2.5rem;
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 60px;
+            margin: 30px 0;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--tertiary-light);
+            font-weight: 800;
+        }
+
+        .btn-calc {
+            background: var(--tertiary);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-calc:hover {
+            background: #6d28d9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139,92,246,0.3);
+        }
+
+        /* =========================================
+           12. LATIHAN SOAL
+           ========================================= */
+        .quiz-mini {
+            background: var(--tertiary-soft);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .quiz-btn {
+            background: var(--white);
+            border: 2px solid var(--tertiary);
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: var(--tertiary);
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 5px;
+        }
+
+        .quiz-btn:hover {
+            background: var(--tertiary);
+            color: white;
+        }
+
+        /* =========================================
+           13. PAGINATION FOOTER
+           ========================================= */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            background: var(--tertiary);
+            color: white;
+            border-color: var(--tertiary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .content-card { padding: 30px; }
+            .concept-grid { grid-template-columns: 1fr; }
+            .simulator-box { padding: 30px; }
+            .equation-display { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="top-bar">
+        <a href="bab3-plsv-ptlsv.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Bab 3
+        </a>
+        <span class="chapter-badge"><i class="fas fa-balance-scale-left"></i> Sub A: Konsep PLSV</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>⚖️ Konsep Persamaan Linier Satu Variabel</h1>
+        <p>Memahami arti persamaan, variabel, koefisien, konstanta, dan prinsip keseimbangan</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Card: Video Pembelajaran Konsep -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-play"></i> VIDEO PEMBELAJARAN</span>
+            <div class="section-title">
+                <i class="fas fa-film"></i>
+                <h2>Apa Itu Persamaan Linier?</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Tonton video berikut untuk memahami pengertian PLSV dan prinsip dasarnya.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/l0n3xI3IY_M" title="Konsep Persamaan Linier Satu Variabel" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top: 25px; padding: 20px; background: var(--tertiary-soft); border-radius: 20px;">
+                <p style="font-weight: 700; color: var(--tertiary);"><i class="fas fa-lightbulb"></i> Poin Penting:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Persamaan adalah kalimat terbuka yang menggunakan tanda "="</li>
+                    <li>Variabel adalah lambang pengganti bilangan yang belum diketahui</li>
+                    <li>PLSV hanya memiliki SATU variabel berpangkat SATU</li>
+                    <li>Bentuk umum: ax + b = c, dengan a ≠ 0</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card: Definisi dan Bentuk Umum -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-info-circle"></i> DEFINISI</span>
+            <div class="section-title">
+                <i class="fas fa-balance-scale-left"></i>
+                <h2>Apa itu PLSV?</h2>
+            </div>
+            
+            <div class="math-definition">
+                <p style="font-size: 1.4rem; margin-bottom: 15px;">Persamaan Linier Satu Variabel (PLSV)</p>
+                <p>Kalimat terbuka yang dihubungkan oleh tanda sama dengan (=) dan hanya memiliki satu variabel berpangkat satu.</p>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <span style="font-size: 2.5rem; font-weight: 800; color: var(--tertiary); background: var(--tertiary-soft); padding: 20px 40px; border-radius: 60px; display: inline-block;">
+                    ax + b = c
+                </span>
+                <p style="margin-top: 15px; color: var(--text-muted);">dengan a ≠ 0, x adalah variabel, a koefisien, b dan c konstanta</p>
+            </div>
+            
+            <div class="component-box">
+                <div class="component">📌 Variabel: x</div>
+                <div class="component">📌 Koefisien: a</div>
+                <div class="component">📌 Konstanta: b, c</div>
+                <div class="component">📌 Pangkat: 1</div>
+            </div>
+        </div>
+
+        <!-- Card: Analogi Timbangan -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-balance-scale"></i> VISUALISASI</span>
+            <div class="section-title">
+                <i class="fas fa-weight-scale"></i>
+                <h2>Prinsip Keseimbangan</h2>
+            </div>
+            
+            <p style="margin-bottom: 25px;">Persamaan seperti timbangan yang seimbang. Jika kedua ruas diberi perlakuan yang sama, keseimbangan tetap terjaga.</p>
+            
+            <div class="scale-container">
+                <div class="scale-item">
+                    <div class="scale">⚖️</div>
+                    <div class="scale-label">Kiri = Kanan</div>
+                </div>
+                <div style="font-size: 2rem; color: var(--tertiary);">+</div>
+                <div class="scale-item">
+                    <div style="font-size: 3rem;">📦 + 2 = 5</div>
+                </div>
+                <div style="font-size: 2rem; color: var(--tertiary);">=</div>
+                <div class="scale-item">
+                    <div style="font-size: 3rem;">📦 = 3</div>
+                </div>
+            </div>
+            
+            <div style="background: var(--gray-100); padding: 30px; border-radius: 20px; margin-top: 20px;">
+                <h4 style="color: var(--tertiary); margin-bottom: 15px;">📌 Prinsip Dasar:</h4>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
+                        <span style="background: var(--tertiary); color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">1</span>
+                        <span>Jika kedua ruas ditambah bilangan yang sama, keseimbangan tetap.</span>
+                    </li>
+                    <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
+                        <span style="background: var(--tertiary); color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">2</span>
+                        <span>Jika kedua ruas dikurang bilangan yang sama, keseimbangan tetap.</span>
+                    </li>
+                    <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
+                        <span style="background: var(--tertiary); color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">3</span>
+                        <span>Jika kedua ruas dikali bilangan yang sama (bukan nol), keseimbangan tetap.</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 15px;">
+                        <span style="background: var(--tertiary); color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">4</span>
+                        <span>Jika kedua ruas dibagi bilangan yang sama (bukan nol), keseimbangan tetap.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card: Contoh dan Bukan Contoh -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-check-double"></i> IDENTIFIKASI</span>
+            <div class="section-title">
+                <i class="fas fa-search"></i>
+                <h2>Mana yang PLSV?</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div style="background: #dcfce7; padding: 25px; border-radius: 20px;">
+                    <h4 style="color: #166534; margin-bottom: 20px;"><i class="fas fa-check-circle"></i> Contoh PLSV</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 15px; padding: 10px; background: white; border-radius: 12px;">✓ 2x + 3 = 7</li>
+                        <li style="margin-bottom: 15px; padding: 10px; background: white; border-radius: 12px;">✓ 5y - 2 = 13</li>
+                        <li style="margin-bottom: 15px; padding: 10px; background: white; border-radius: 12px;">✓ 4a + 1 = 2a + 9</li>
+                        <li style="padding: 10px; background: white; border-radius: 12px;">✓ 3(x - 2) = 12</li>
+                    </ul>
+                </div>
+                <div style="background: #fee2e2; padding: 25px; border-radius: 20px;">
+                    <h4 style="color: #b91c1c; margin-bottom: 20px;"><i class="fas fa-times-circle"></i> Bukan PLSV</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 15px; padding: 10px; background: white; border-radius: 12px;">✗ 2x² + 3 = 7 (pangkat 2)</li>
+                        <li style="margin-bottom: 15px; padding: 10px; background: white; border-radius: 12px;">✗ 2x + 3y = 7 (2 variabel)</li>
+                        <li style="margin-bottom: 15px; padding: 10px; background: white; border-radius: 12px;">✗ 2/x + 3 = 7 (bukan linier)</li>
+                        <li style="padding: 10px; background: white; border-radius: 12px;">✗ 2x + 3 > 7 (pertidaksamaan)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 25px; background: var(--tertiary-soft); border-radius: 20px;">
+                <p style="font-weight: 700; color: var(--tertiary);">💡 Ciri-ciri PLSV:</p>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li>Hanya memiliki SATU variabel</li>
+                    <li>Variabelnya berpangkat SATU</li>
+                    <li>Menggunakan tanda sama dengan (=)</li>
+                    <li>Merupakan kalimat terbuka (nilai kebenarannya tergantung variabel)</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Card: Simulator Keseimbangan Interaktif -->
+        <div class="simulator-box">
+            <div class="simulator-title">
+                <i class="fas fa-balance-scale"></i>
+                <h2 style="color: white; margin: 0;">Simulator Keseimbangan</h2>
+            </div>
+            <p style="margin-bottom: 25px; opacity: 0.9;">Atur nilai variabel x sehingga persamaan menjadi seimbang.</p>
+            
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="font-size: 2rem; margin-bottom: 30px; background: rgba(255,255,255,0.1); padding: 25px; border-radius: 60px; width: 100%; text-align: center;">
+                    <span id="eqLeft" style="color: var(--tertiary-light); font-weight: 800;">2x + 3</span>
+                    <span style="color: white; margin: 0 20px;">=</span>
+                    <span id="eqRight" style="color: var(--tertiary-light); font-weight: 800;">7</span>
+                </div>
+                
+                <div style="width: 100%; max-width: 400px; margin-bottom: 30px;">
+                    <label style="display: block; text-align: center; margin-bottom: 15px; color: var(--gray-300);">Nilai x = <span id="xValueDisplay" style="font-size: 1.8rem; font-weight: 800; color: var(--tertiary-light);">2</span></label>
+                    <input type="range" id="xSlider" min="0" max="5" step="0.1" value="2" style="width: 100%; height: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; -webkit-appearance: none;">
+                    <style>
+                        input[type=range]::-webkit-slider-thumb {
+                            -webkit-appearance: none;
+                            width: 25px;
+                            height: 25px;
+                            background: var(--tertiary);
+                            border-radius: 50%;
+                            cursor: pointer;
+                            border: 2px solid white;
+                        }
+                    </style>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 20px; width: 100%; text-align: center;">
+                    <div style="font-size: 1.3rem; margin-bottom: 10px;">Status:</div>
+                    <div id="balanceStatus" style="font-size: 1.5rem; font-weight: 700; color: var(--tertiary-light);">⚖️ Kiri = Kanan (Seimbang)</div>
+                    <div id="balanceValue" style="margin-top: 10px; color: var(--gray-300);">2(2) + 3 = 7 → 4 + 3 = 7</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Contoh Soal dan Latihan -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-pencil-alt"></i> LATIHAN</span>
+            <div class="section-title">
+                <i class="fas fa-question-circle"></i>
+                <h2>Uji Pemahaman Konsep</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 1</p>
+                    <p>Manakah yang merupakan PLSV?</p>
+                    <div style="margin: 20px 0;">
+                        <button onclick="checkConceptQuiz(1,1)" class="quiz-btn">A. 2x + 5 = 9</button>
+                        <button onclick="checkConceptQuiz(1,2)" class="quiz-btn">B. x² + 2 = 6</button>
+                        <button onclick="checkConceptQuiz(1,3)" class="quiz-btn">C. 2x + y = 8</button>
+                        <button onclick="checkConceptQuiz(1,4)" class="quiz-btn">D. 3x > 12</button>
+                    </div>
+                    <div id="conceptQuiz1" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+                
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 2</p>
+                    <p>Pada persamaan 3x + 4 = 13, manakah yang disebut koefisien?</p>
+                    <div style="margin: 20px 0;">
+                        <button onclick="checkConceptQuiz(2,1)" class="quiz-btn">A. x</button>
+                        <button onclick="checkConceptQuiz(2,2)" class="quiz-btn">B. 3</button>
+                        <button onclick="checkConceptQuiz(2,3)" class="quiz-btn">C. 4</button>
+                        <button onclick="checkConceptQuiz(2,4)" class="quiz-btn">D. 13</button>
+                    </div>
+                    <div id="conceptQuiz2" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Rangkuman -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-clipboard-check"></i> RANGKUMAN</span>
+            <div class="section-title">
+                <i class="fas fa-book"></i>
+                <h2>Intisari Konsep PLSV</h2>
+            </div>
+            
+            <div style="background: var(--tertiary-soft); padding: 30px; border-radius: 20px;">
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 15px; display: flex; gap: 15px;">
+                        <span style="color: var(--tertiary); font-size: 1.3rem;">✓</span>
+                        <span><strong>Persamaan Linier Satu Variabel (PLSV)</strong> adalah kalimat terbuka yang memiliki satu variabel berpangkat satu dan dihubungkan dengan tanda sama dengan (=).</span>
+                    </li>
+                    <li style="margin-bottom: 15px; display: flex; gap: 15px;">
+                        <span style="color: var(--tertiary); font-size: 1.3rem;">✓</span>
+                        <span><strong>Bentuk umum:</strong> ax + b = c, dengan a ≠ 0, x adalah variabel, a adalah koefisien, b dan c adalah konstanta.</span>
+                    </li>
+                    <li style="margin-bottom: 15px; display: flex; gap: 15px;">
+                        <span style="color: var(--tertiary); font-size: 1.3rem;">✓</span>
+                        <span><strong>Prinsip keseimbangan:</strong> Kedua ruas harus diperlakukan sama agar persamaan tetap setara.</span>
+                    </li>
+                    <li style="display: flex; gap: 15px;">
+                        <span style="color: var(--tertiary); font-size: 1.3rem;">✓</span>
+                        <span><strong>Penyelesaian PLSV</strong> adalah nilai variabel yang membuat persamaan menjadi pernyataan benar.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="page-footer">
+            <a href="bab3-plsv-ptlsv.html" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Kembali ke Bab
+            </a>
+            <a href="sub3-2-menyelesaikan-plsv.html" class="nav-btn right">
+                Selanjutnya: Menyelesaikan PLSV <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MathMaster8 - Konsep Persamaan Linier Satu Variabel | Kurikulum Merdeka</p>
+        <p style="margin-top: 8px; opacity: 0.6;">"Keseimbangan adalah kunci dari persamaan." - N.A.</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+        };
+
+        // Simulator Keseimbangan
+        let xSlider = document.getElementById('xSlider');
+        let xValueDisplay = document.getElementById('xValueDisplay');
+        let eqLeft = document.getElementById('eqLeft');
+        let eqRight = document.getElementById('eqRight');
+        let balanceStatus = document.getElementById('balanceStatus');
+        let balanceValue = document.getElementById('balanceValue');
+
+        function updateBalance() {
+            let x = parseFloat(xSlider.value);
+            xValueDisplay.innerText = x.toFixed(1);
+            
+            let leftValue = 2 * x + 3;
+            let rightValue = 7;
+            
+            eqLeft.innerHTML = `2x + 3`;
+            eqRight.innerHTML = `7`;
+            
+            let leftExpr = `2(${x.toFixed(1)}) + 3 = ${leftValue.toFixed(1)}`;
+            
+            if (Math.abs(leftValue - rightValue) < 0.01) {
+                balanceStatus.innerHTML = '✅ Kiri = Kanan (Seimbang)';
+                balanceStatus.style.color = '#22c55e';
+                balanceValue.innerHTML = `${leftExpr} = ${rightValue}`;
+            } else if (leftValue < rightValue) {
+                balanceStatus.innerHTML = '⬅️ Kiri < Kanan (Berat sebelah kanan)';
+                balanceStatus.style.color = '#f59e0b';
+                balanceValue.innerHTML = `${leftExpr} < ${rightValue}`;
+            } else {
+                balanceStatus.innerHTML = '➡️ Kiri > Kanan (Berat sebelah kiri)';
+                balanceStatus.style.color = '#ef4444';
+                balanceValue.innerHTML = `${leftExpr} > ${rightValue}`;
+            }
+        }
+
+        xSlider.addEventListener('input', updateBalance);
+
+        // Fungsi kuis konsep
+        function checkConceptQuiz(quizNum, answer) {
+            if (quizNum === 1) {
+                let fb = document.getElementById('conceptQuiz1');
+                fb.style.display = 'block';
+                if (answer === 1) {
+                    fb.innerHTML = '✅ Benar! 2x + 5 = 9 adalah PLSV.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Salah. PLSV harus satu variabel, pangkat satu, dan tanda =.';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            } else if (quizNum === 2) {
+                let fb = document.getElementById('conceptQuiz2');
+                fb.style.display = 'block';
+                if (answer === 2) {
+                    fb.innerHTML = '✅ Benar! Koefisien adalah bilangan yang menempel pada variabel, yaitu 3.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Salah. Koefisien adalah angka di depan variabel (x).';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            }
+        }
+
+        // Inisialisasi
+        window.onload = function() {
+            updateBalance();
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        };
+    </script>
+</body>
+</html>

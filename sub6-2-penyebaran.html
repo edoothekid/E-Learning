@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penyebaran Data: Jangkauan, Kuartil, Simpangan | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* =========================================
+           1. VARIABLES & CORE STYLING (KONSISTEN)
+           ========================================= */
+        :root {
+            --primary: #0d9488;
+            --primary-light: #14b8a6;
+            --primary-soft: #ccfbf1;
+            --primary-dark: #0f766e;
+            --secondary: #6366f1;
+            --secondary-light: #818cf8;
+            --secondary-soft: #e0e7ff;
+            --accent: #f59e0b;
+            --accent-soft: #fff3cd;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(99,102,241,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 24px;
+            --border-radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           2. NAVIGATION (KONSISTEN)
+           ========================================= */
+        .top-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-6px);
+            color: var(--secondary);
+        }
+
+        .chapter-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--secondary);
+            background: var(--secondary-soft);
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+
+        /* =========================================
+           3. PROGRESS BAR
+           ========================================= */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        .hero-section {
+            background: linear-gradient(135deg, var(--accent) 0%, #b45309 100%);
+            color: white;
+            padding: 60px 5% 80px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "📉";
+            position: absolute;
+            font-size: 180px;
+            top: -40px;
+            right: 5%;
+            opacity: 0.08;
+            transform: rotate(15deg);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           5. MAIN CONTAINER
+           ========================================= */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* =========================================
+           6. CONTENT CARD
+           ========================================= */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--accent-soft);
+            color: #b45309;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           7. VIDEO CONTAINER
+           ========================================= */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================================
+           8. STATISTICS CARDS
+           ========================================= */
+        .spread-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .spread-card {
+            background: var(--bg-page);
+            border-radius: 20px;
+            padding: 30px;
+            border-top: 6px solid var(--accent);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            border-top-width: 6px;
+        }
+
+        .spread-card:hover {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .spread-icon {
+            background: var(--accent-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .spread-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .math-box {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px 0;
+            border: 1px dashed var(--accent);
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* =========================================
+           9. BOX PLOT VISUALIZATION
+           ========================================= */
+        .boxplot-container {
+            background: var(--gray-100);
+            padding: 40px;
+            border-radius: 30px;
+            margin: 30px 0;
+        }
+
+        .boxplot {
+            position: relative;
+            height: 100px;
+            background: linear-gradient(to right, var(--gray-200), var(--gray-300));
+            border-radius: 12px;
+            margin: 50px 0;
+        }
+
+        .box {
+            position: absolute;
+            height: 100px;
+            background: var(--secondary-soft);
+            border: 3px solid var(--secondary);
+            border-radius: 8px;
+            top: 0;
+        }
+
+        .whisker-left, .whisker-right {
+            position: absolute;
+            width: 3px;
+            height: 60px;
+            background: var(--accent);
+            top: 20px;
+        }
+
+        .whisker-left::before, .whisker-right::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 3px;
+            background: var(--accent);
+            top: 28px;
+            left: -10px;
+        }
+
+        .median-line {
+            position: absolute;
+            width: 3px;
+            height: 100px;
+            background: var(--danger);
+            top: 0;
+        }
+
+        .boxplot-label {
+            position: absolute;
+            bottom: -30px;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        /* =========================================
+           10. SIMULATOR INTERAKTIF
+           ========================================= */
+        .simulator-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 40px;
+            padding: 50px;
+            margin-top: 20px;
+        }
+
+        .simulator-title {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quartile-result {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .quartile-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .quartile-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        /* =========================================
+           11. JANGKAUAN INTERKUARTIL
+           ========================================= */
+        .iqr-box {
+            background: var(--accent-soft);
+            border-left: 6px solid var(--accent);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+        }
+
+        /* =========================================
+           12. PAGINATION FOOTER
+           ========================================= */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .content-card { padding: 30px; }
+            .spread-grid { grid-template-columns: 1fr; }
+            .simulator-box { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="top-bar">
+        <a href="bab6-statistika.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Bab 4
+        </a>
+        <span class="chapter-badge"><i class="fas fa-chart-bar"></i> Sub 2: Penyebaran Data</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>📉 Ukuran Penyebaran Data</h1>
+        <p>Jangkauan, Kuartil, Jangkauan Interkuartil, dan Simpangan</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Card: Video Pembelajaran -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-play"></i> VIDEO PEMBELAJARAN</span>
+            <div class="section-title">
+                <i class="fas fa-film"></i>
+                <h2>Konsep Penyebaran Data</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Pelajari bagaimana data tersebar dan cara mengukurnya dengan jangkauan, kuartil, dan box plot.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/wi4ZZb4XoU8" title="Ukuran Penyebaran Data" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top: 25px; padding: 20px; background: var(--accent-soft); border-radius: 20px;">
+                <p style="font-weight: 700; color: #b45309;"><i class="fas fa-lightbulb"></i> Ringkasan Video:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Jangkauan (Range)</strong> = Nilai max - Nilai min</li>
+                    <li><strong>Kuartil</strong> = Membagi data menjadi 4 bagian sama banyak</li>
+                    <li><strong>Jangkauan Interkuartil</strong> = Q3 - Q1</li>
+                    <li><strong>Simpangan Kuartil</strong> = (Q3 - Q1)/2</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card: Ukuran Penyebaran Utama -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-ruler"></i> 4 UKURAN PENTING</span>
+            <div class="section-title">
+                <i class="fas fa-chart-bar"></i>
+                <h2>Jangkauan, Kuartil, IQR</h2>
+            </div>
+            
+            <div class="spread-grid">
+                <!-- 1. Jangkauan -->
+                <div class="spread-card">
+                    <div class="spread-icon">
+                        <i class="fas fa-arrows-alt-h"></i>
+                    </div>
+                    <h3>Jangkauan (Range)</h3>
+                    <p>Selisih antara nilai terbesar dan terkecil.</p>
+                    <div class="math-box">
+                        $$R = X_{max} - X_{min}$$
+                    </div>
+                    <div style="background: var(--gray-100); padding: 15px; border-radius: 12px; margin-top: 15px;">
+                        <p><strong>Contoh:</strong> Data: 4,6,7,9,12</p>
+                        <p>R = 12 - 4 = <strong>8</strong></p>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 0.95rem; color: var(--text-muted);">
+                        <i class="fas fa-info-circle"></i> Mudah dihitung, tapi sensitif terhadap outlier.
+                    </p>
+                </div>
+                
+                <!-- 2. Kuartil -->
+                <div class="spread-card">
+                    <div class="spread-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Kuartil (Q1, Q2, Q3)</h3>
+                    <p>Membagi data menjadi 4 bagian sama besar.</p>
+                    <div class="math-box">
+                        $$Q1 = \text{Kuartil bawah}$$ 
+                        $$Q2 = \text{Median}$$ 
+                        $$Q3 = \text{Kuartil atas}$$
+                    </div>
+                    <div style="background: var(--gray-100); padding: 15px; border-radius: 12px; margin-top: 15px;">
+                        <p><strong>Contoh:</strong> Data: 4,6,7,8,9,10,12</p>
+                        <p>Q1 = 6, Q2 = 8, Q3 = 10</p>
+                    </div>
+                </div>
+                
+                <!-- 3. Jangkauan Interkuartil -->
+                <div class="spread-card">
+                    <div class="spread-icon">
+                        <i class="fas fa-arrows-alt-v"></i>
+                    </div>
+                    <h3>Jangkauan Interkuartil (IQR)</h3>
+                    <p>Selisih antara kuartil atas dan kuartil bawah.</p>
+                    <div class="math-box">
+                        $$IQR = Q3 - Q1$$
+                    </div>
+                    <div style="background: var(--gray-100); padding: 15px; border-radius: 12px; margin-top: 15px;">
+                        <p><strong>Contoh:</strong> Data: 4,6,7,8,9,10,12</p>
+                        <p>IQR = 10 - 6 = <strong>4</strong></p>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 0.95rem; color: var(--text-muted);">
+                        <i class="fas fa-info-circle"></i> Lebih robust terhadap outlier.
+                    </p>
+                </div>
+                
+                <!-- 4. Simpangan Kuartil -->
+                <div class="spread-card">
+                    <div class="spread-icon">
+                        <i class="fas fa-divide"></i>
+                    </div>
+                    <h3>Simpangan Kuartil</h3>
+                    <p>Setengah dari jangkauan interkuartil.</p>
+                    <div class="math-box">
+                        $$Q_d = \frac{Q3 - Q1}{2}$$
+                    </div>
+                    <div style="background: var(--gray-100); padding: 15px; border-radius: 12px; margin-top: 15px;">
+                        <p><strong>Contoh:</strong> IQR = 4</p>
+                        <p>Qd = 4 ÷ 2 = <strong>2</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Box Plot Visualisasi -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-chart-line"></i> VISUALISASI</span>
+            <div class="section-title">
+                <i class="fas fa-box"></i>
+                <h2>Diagram Box Plot (Kotak Garis)</h2>
+            </div>
+            
+            <p style="margin-bottom: 25px;">Box plot adalah cara grafis untuk menampilkan kuartil, jangkauan, dan outlier.</p>
+            
+            <div class="boxplot-container">
+                <p style="font-weight: 700; margin-bottom: 30px; text-align: center; font-size: 1.2rem;">Box Plot untuk Data: 4, 6, 7, 8, 9, 10, 12, 15, 18</p>
+                
+                <div style="position: relative; height: 120px; margin: 40px 0 60px;">
+                    <!-- Skala -->
+                    <div style="position: relative; height: 100px; background: linear-gradient(to right, #e2e8f0, #cbd5e1); border-radius: 12px;">
+                        
+                        <!-- Whisker kiri -->
+                        <div style="position: absolute; left: 10%; width: 3px; height: 60px; background: var(--accent); top: 20px;"></div>
+                        <div style="position: absolute; left: 10%; width: 20px; height: 3px; background: var(--accent); top: 48px; transform: translateX(-10px);"></div>
+                        
+                        <!-- Box (Q1 ke Q3) -->
+                        <div style="position: absolute; left: 25%; width: 40%; height: 100px; background: var(--secondary-soft); border: 3px solid var(--secondary); border-radius: 8px; top: 0;"></div>
+                        
+                        <!-- Median -->
+                        <div style="position: absolute; left: 45%; width: 3px; height: 100px; background: var(--danger); top: 0;"></div>
+                        
+                        <!-- Whisker kanan -->
+                        <div style="position: absolute; left: 75%; width: 3px; height: 60px; background: var(--accent); top: 20px;"></div>
+                        <div style="position: absolute; left: 75%; width: 20px; height: 3px; background: var(--accent); top: 48px;"></div>
+                        
+                        <!-- Label -->
+                        <div style="position: absolute; left: 10%; bottom: -35px; transform: translateX(-50%); font-weight: 700; color: var(--accent);">Min (4)</div>
+                        <div style="position: absolute; left: 25%; bottom: -35px; transform: translateX(-50%); font-weight: 700; color: var(--secondary);">Q1 (7)</div>
+                        <div style="position: absolute; left: 45%; bottom: -35px; transform: translateX(-50%); font-weight: 700; color: var(--danger);">Median (9)</div>
+                        <div style="position: absolute; left: 65%; bottom: -35px; transform: translateX(-50%); font-weight: 700; color: var(--secondary);">Q3 (12)</div>
+                        <div style="position: absolute; left: 75%; bottom: -35px; transform: translateX(-50%); font-weight: 700; color: var(--accent);">Max (18)</div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-around; margin-top: 30px; flex-wrap: wrap; gap: 20px;">
+                    <div><span style="display: inline-block; width: 20px; height: 20px; background: var(--secondary-soft); border: 2px solid var(--secondary); margin-right: 10px;"></span> Rentang antar kuartil (IQR)</div>
+                    <div><span style="display: inline-block; width: 20px; height: 3px; background: var(--accent); margin-right: 10px;"></span> Whisker (min-max)</div>
+                    <div><span style="display: inline-block; width: 3px; height: 20px; background: var(--danger); margin-right: 10px;"></span> Median</div>
+                </div>
+            </div>
+            
+            <div class="iqr-box">
+                <h4 style="color: #b45309; margin-bottom: 15px; font-size: 1.3rem;">📌 Pencilan (Outlier)</h4>
+                <p>Suatu data disebut outlier jika:</p>
+                <ul style="margin-left: 25px; margin-top: 10px; margin-bottom: 15px;">
+                    <li>Nilai < Q1 - 1,5 × IQR</li>
+                    <li>Nilai > Q3 + 1,5 × IQR</li>
+                </ul>
+                <div style="background: white; padding: 20px; border-radius: 16px;">
+                    <p><strong>Contoh:</strong> Q1 = 7, Q3 = 12, IQR = 5</p>
+                    <p>Batas bawah = 7 - 1,5×5 = 7 - 7,5 = -0,5</p>
+                    <p>Batas atas = 12 + 1,5×5 = 12 + 7,5 = 19,5</p>
+                    <p>Data < -0,5 atau > 19,5 adalah outlier.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Contoh Soal dan Pembahasan -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-pencil-ruler"></i> STUDI KASUS</span>
+            <div class="section-title">
+                <i class="fas fa-clipboard-list"></i>
+                <h2>Contoh Soal Kuartil dan IQR</h2>
+            </div>
+            
+            <div style="background: var(--accent-soft); padding: 30px; border-radius: 20px; margin-bottom: 30px;">
+                <h4 style="font-size: 1.3rem; margin-bottom: 20px; color: #b45309;">📝 Soal: Nilai Ulangan</h4>
+                <p style="margin-bottom: 15px;">Berikut adalah nilai ulangan 13 siswa: <strong>45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 100</strong></p>
+                <p style="margin-bottom: 10px;"><strong>Tentukan:</strong> a. Q1, Q2, Q3, b. Jangkauan, c. IQR, d. Simpangan Kuartil</p>
+                
+                <div style="background: white; padding: 25px; border-radius: 16px; margin-top: 20px;">
+                    <p style="font-weight: 700; color: #b45309; margin-bottom: 15px;"><i class="fas fa-check-circle"></i> Pembahasan:</p>
+                    
+                    <p><strong>Langkah 1: Urutkan data</strong></p>
+                    <p style="margin-left: 20px; margin-bottom: 15px;">45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 100</p>
+                    
+                    <p><strong>Langkah 2: Tentukan kuartil</strong></p>
+                    <p style="margin-left: 20px;">n = 13</p>
+                    <p style="margin-left: 20px;">Q2 (median) = data ke-7 = <strong>75</strong></p>
+                    <p style="margin-left: 20px;">Q1 = median dari 6 data pertama = (data ke-3 + ke-4)/2 = (55+60)/2 = <strong>57,5</strong></p>
+                    <p style="margin-left: 20px; margin-bottom: 15px;">Q3 = median dari 6 data terakhir = (data ke-10 + ke-11)/2 = (90+95)/2 = <strong>92,5</strong></p>
+                    
+                    <p><strong>Langkah 3: Hitung ukuran penyebaran</strong></p>
+                    <p style="margin-left: 20px;">Jangkauan = 100 - 45 = <strong>55</strong></p>
+                    <p style="margin-left: 20px;">IQR = Q3 - Q1 = 92,5 - 57,5 = <strong>35</strong></p>
+                    <p style="margin-left: 20px;">Simpangan Kuartil = IQR/2 = <strong>17,5</strong></p>
+                </div>
+            </div>
+            
+            <div style="background: var(--gray-100); padding: 30px; border-radius: 20px;">
+                <h4 style="font-size: 1.3rem; margin-bottom: 20px; color: var(--secondary);">📝 Soal: Data Ganjil vs Genap</h4>
+                <p style="margin-bottom: 15px;">Bagaimana cara menentukan kuartil jika jumlah data genap?</p>
+                <div style="background: white; padding: 20px; border-radius: 16px;">
+                    <p><strong>Data genap (n=10):</strong> 3,5,6,7,8,9,10,12,14,15</p>
+                    <p>Q2 = (data ke-5 + ke-6)/2 = (8+9)/2 = 8,5</p>
+                    <p>Q1 = median 5 data kiri = data ke-3 = 6</p>
+                    <p>Q3 = median 5 data kanan = data ke-8 = 12</p>
+                    <p>IQR = 12 - 6 = 6</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Kalkulator Kuartil Interaktif -->
+        <div class="simulator-box">
+            <div class="simulator-title">
+                <i class="fas fa-calculator"></i>
+                <h2 style="color: white; margin: 0;">Kalkulator Kuartil & IQR</h2>
+            </div>
+            <p style="margin-bottom: 25px; opacity: 0.9;">Masukkan data (pisahkan dengan koma) untuk menghitung kuartil, jangkauan, dan IQR.</p>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; align-items: flex-end;">
+                <div style="flex: 1; min-width: 250px;">
+                    <label style="display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--gray-300); margin-bottom: 8px;">Data</label>
+                    <input type="text" id="spreadDataset" placeholder="45,50,55,60,65,70,75,80,85,90,95,100,100" value="45,50,55,60,65,70,75,80,85,90,95,100,100" style="width: 100%; padding: 15px 20px; border-radius: 60px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); color: white; font-size: 1rem;">
+                </div>
+                <button onclick="calculateSpread()" style="background: var(--accent); color: white; border: none; padding: 15px 35px; border-radius: 60px; font-weight: 700; font-size: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-chart-line"></i> Hitung
+                </button>
+            </div>
+            
+            <div style="background: rgba(255,255,255,0.1); border-radius: 30px; padding: 30px; border: 1px solid rgba(255,255,255,0.2);">
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px;">
+                    <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 16px;">
+                        <div style="font-size: 0.8rem; color: var(--gray-300); margin-bottom: 8px;">Minimum</div>
+                        <div id="minVal" style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">45</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 16px;">
+                        <div style="font-size: 0.8rem; color: var(--gray-300); margin-bottom: 8px;">Maksimum</div>
+                        <div id="maxVal" style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">100</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 16px;">
+                        <div style="font-size: 0.8rem; color: var(--gray-300); margin-bottom: 8px;">Jangkauan</div>
+                        <div id="rangeVal" style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">55</div>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 16px;">
+                        <div style="font-size: 0.8rem; color: var(--gray-300); margin-bottom: 8px;">n</div>
+                        <div id="countVal" style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">13</div>
+                    </div>
+                </div>
+                
+                <div class="quartile-result">
+                    <div class="quartile-item">
+                        <div style="font-size: 0.9rem; margin-bottom: 10px; color: var(--gray-300);">Q1 (Kuartil Bawah)</div>
+                        <div class="quartile-value" id="q1Val">57.5</div>
+                    </div>
+                    <div class="quartile-item">
+                        <div style="font-size: 0.9rem; margin-bottom: 10px; color: var(--gray-300);">Q2 (Median)</div>
+                        <div class="quartile-value" id="q2Val">75</div>
+                    </div>
+                    <div class="quartile-item">
+                        <div style="font-size: 0.9rem; margin-bottom: 10px; color: var(--gray-300);">Q3 (Kuartil Atas)</div>
+                        <div class="quartile-value" id="q3Val">92.5</div>
+                    </div>
+                    <div class="quartile-item">
+                        <div style="font-size: 0.9rem; margin-bottom: 10px; color: var(--gray-300);">IQR</div>
+                        <div class="quartile-value" id="iqrVal">35</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Latihan Soal -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-pencil-alt"></i> LATIHAN SOAL</span>
+            <div class="section-title">
+                <i class="fas fa-question-circle"></i>
+                <h2>Uji Pemahaman</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 1</p>
+                    <p style="margin-bottom: 20px;">Diketahui data: 12, 15, 18, 20, 22, 25, 28, 30. Berapakah jangkauan data tersebut?</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="checkSpreadQuiz(1, 1)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); cursor: pointer;">A. 18</button>
+                        <button onclick="checkSpreadQuiz(1, 2)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); cursor: pointer;">B. 20</button>
+                        <button onclick="checkSpreadQuiz(1, 3)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); cursor: pointer;">C. 22</button>
+                        <button onclick="checkSpreadQuiz(1, 4)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); cursor: pointer;">D. 25</button>
+                    </div>
+                    <div id="spreadQuiz1" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+                
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 2</p>
+                    <p style="margin-bottom: 20px;">Dari data yang sama, berapakah kuartil bawah (Q1)?</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="checkSpreadQuiz(2, 1)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); cursor: pointer;">A. 15</button>
+                        <button onclick="checkSpreadQuiz(2, 2)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); cursor: pointer;">B. 16.5</button>
+                        <button onclick="checkSpreadQuiz(2, 3)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); cursor: pointer;">C. 18</button>
+                        <button onclick="checkSpreadQuiz(2, 4)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); cursor: pointer;">D. 20</button>
+                    </div>
+                    <div id="spreadQuiz2" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Aplikasi dalam Kehidupan -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-globe"></i> APLIKASI</span>
+            <div class="section-title">
+                <i class="fas fa-briefcase"></i>
+                <h2>Penyebaran Data dalam Kehidupan</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px;">
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-chart-simple" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Ekonomi</h4>
+                    <p>Analisis kesenjangan pendapatan menggunakan kuartil dan IQR.</p>
+                </div>
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-flask" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Penelitian</h4>
+                    <p>Mengidentifikasi outlier dalam data percobaan laboratorium.</p>
+                </div>
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-basketball" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Olahraga</h4>
+                    <p>Membandingkan performa atlet berdasarkan rentang skor.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="page-footer">
+            <a href="sub6-1-pemusatan.html" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Sebelumnya: Pemusatan Data
+            </a>
+            <a href="kuis-bab6.html" class="nav-btn right">
+                Uji Kompetensi <i class="fas fa-trophy"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MathMaster8 - Penyebaran Data (Jangkauan, Kuartil, IQR) | Kurikulum Merdeka</p>
+        <p style="margin-top: 8px; opacity: 0.6;">"Penyebaran data memberi kita gambaran seberapa beragam data tersebut." - N.A.</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+        };
+
+        // Fungsi menghitung kuartil
+        function calculateSpread() {
+            let input = document.getElementById('spreadDataset').value;
+            let numbers = input.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+            
+            if (numbers.length === 0) {
+                alert('Masukkan data yang valid!');
+                return;
+            }
+            
+            // Urutkan data
+            let sorted = [...numbers].sort((a, b) => a - b);
+            
+            // Min, Max, Range
+            let min = sorted[0];
+            let max = sorted[sorted.length - 1];
+            let range = max - min;
+            
+            document.getElementById('minVal').innerText = min;
+            document.getElementById('maxVal').innerText = max;
+            document.getElementById('rangeVal').innerText = range.toFixed(1);
+            document.getElementById('countVal').innerText = sorted.length;
+            
+            // Median (Q2)
+            let q2;
+            if (sorted.length % 2 === 1) {
+                q2 = sorted[Math.floor(sorted.length / 2)];
+            } else {
+                q2 = (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
+            }
+            document.getElementById('q2Val').innerText = q2.toFixed(1);
+            
+            // Q1
+            let lowerHalf;
+            if (sorted.length % 2 === 1) {
+                lowerHalf = sorted.slice(0, Math.floor(sorted.length / 2));
+            } else {
+                lowerHalf = sorted.slice(0, sorted.length / 2);
+            }
+            
+            let q1;
+            if (lowerHalf.length % 2 === 1) {
+                q1 = lowerHalf[Math.floor(lowerHalf.length / 2)];
+            } else {
+                q1 = (lowerHalf[lowerHalf.length / 2 - 1] + lowerHalf[lowerHalf.length / 2]) / 2;
+            }
+            document.getElementById('q1Val').innerText = q1.toFixed(1);
+            
+            // Q3
+            let upperHalf;
+            if (sorted.length % 2 === 1) {
+                upperHalf = sorted.slice(Math.floor(sorted.length / 2) + 1);
+            } else {
+                upperHalf = sorted.slice(sorted.length / 2);
+            }
+            
+            let q3;
+            if (upperHalf.length % 2 === 1) {
+                q3 = upperHalf[Math.floor(upperHalf.length / 2)];
+            } else {
+                q3 = (upperHalf[upperHalf.length / 2 - 1] + upperHalf[upperHalf.length / 2]) / 2;
+            }
+            document.getElementById('q3Val').innerText = q3.toFixed(1);
+            
+            // IQR
+            let iqr = q3 - q1;
+            document.getElementById('iqrVal').innerText = iqr.toFixed(1);
+        }
+
+        // Fungsi kuis
+        function checkSpreadQuiz(quizNum, answer) {
+            if (quizNum === 1) {
+                let fb = document.getElementById('spreadQuiz1');
+                fb.style.display = 'block';
+                if (answer === 1) {
+                    fb.innerHTML = '✅ Benar! Jangkauan = 30 - 12 = 18.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Salah. Jangkauan = nilai max - nilai min = 30 - 12 = 18.';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            } else if (quizNum === 2) {
+                let fb = document.getElementById('spreadQuiz2');
+                fb.style.display = 'block';
+                if (answer === 2) {
+                    fb.innerHTML = '✅ Benar! Q1 = (15+18)/2 = 16.5';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Salah. Q1 adalah median dari 4 data pertama: (15+18)/2 = 16.5.';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            }
+        }
+
+        // Inisialisasi
+        window.onload = function() {
+            calculateSpread();
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        };
+    </script>
+</body>
+</html>

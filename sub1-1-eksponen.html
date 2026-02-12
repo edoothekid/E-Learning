@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sifat-Sifat Eksponen | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* =========================================
+           1. VARIABLES & CORE STYLING (KONSISTEN)
+           ========================================= */
+        :root {
+            --primary: #0d9488;
+            --primary-light: #14b8a6;
+            --primary-soft: #ccfbf1;
+            --primary-dark: #0f766e;
+            --accent: #f59e0b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 24px;
+            --border-radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           2. NAVIGATION (KONSISTEN)
+           ========================================= */
+        .top-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-6px);
+            color: var(--primary-dark);
+        }
+
+        .chapter-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            background: var(--primary-soft);
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+
+        /* =========================================
+           3. HERO SECTION (KONSISTEN)
+           ========================================= */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 5% 80px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           4. MAIN CONTAINER
+           ========================================= */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* =========================================
+           5. CONTENT CARD (KONSISTEN)
+           ========================================= */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--primary-soft);
+            color: var(--primary-dark);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           6. VIDEO CONTAINER
+           ========================================= */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================================
+           7. FORMULA GRID
+           ========================================= */
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .formula-card {
+            background: var(--bg-page);
+            border-radius: 20px;
+            padding: 30px;
+            border-left: 6px solid var(--primary);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            border-left-width: 6px;
+        }
+
+        .formula-card:hover {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .formula-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .formula-card h4 i {
+            color: var(--primary);
+        }
+
+        .formula-card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .math-display {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 1px dashed var(--primary);
+            font-size: 1.3rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .example-box {
+            background: var(--primary-soft);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        /* =========================================
+           8. QUIZ PREVIEW
+           ========================================= */
+        .quiz-preview {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 40px;
+            padding: 50px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .quiz-preview h2 {
+            color: var(--primary-light);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .quiz-options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-check {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .btn-check:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        #quiz-result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* =========================================
+           9. PAGINATION FOOTER
+           ========================================= */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateX(-3px);
+        }
+
+        .nav-btn.right:hover {
+            transform: translateX(3px);
+        }
+
+        /* =========================================
+           10. PROGRESS BAR
+           ========================================= */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .content-card { padding: 30px; }
+            .formula-grid { grid-template-columns: 1fr; }
+            .quiz-preview { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="top-bar">
+        <a href="bab1-bilangan-berpangkat.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Bab 1
+        </a>
+        <span class="chapter-badge"><i class="fas fa-superscript"></i> Sub 1: Sifat Eksponen</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>🔢 Sifat-Sifat Eksponen</h1>
+        <p>Pelajari aturan perkalian, pembagian, dan perpangkatan pada bilangan berpangkat</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Card: Video Pembelajaran -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-play"></i> VIDEO PEMBELAJARAN</span>
+            <div class="section-title">
+                <i class="fas fa-film"></i>
+                <h2>Konsep Dasar Eksponen</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Tonton video berikut untuk memahami bagaimana sifat-sifat eksponen bekerja.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/94pc0dh92dA" title="Sifat Eksponen" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Card: Rangkuman Sifat Eksponen -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-cubes"></i> RUMUS PENTING</span>
+            <div class="section-title">
+                <i class="fas fa-book-open"></i>
+                <h2>4 Sifat Dasar Eksponen</h2>
+            </div>
+            
+            <div class="formula-grid">
+                <!-- 1. Perkalian Eksponen -->
+                <div class="formula-card">
+                    <h4><i class="fas fa-plus-circle"></i> 1. Perkalian</h4>
+                    <p>Jika basis sama, pangkat dijumlahkan.</p>
+                    <div class="math-display">
+                        \(a^m \times a^n = a^{m+n}\)
+                    </div>
+                    <div class="example-box">
+                        <strong>Contoh:</strong> \(2^3 \times 2^4 = 2^{3+4} = 2^7 = 128\)
+                    </div>
+                </div>
+                
+                <!-- 2. Pembagian Eksponen -->
+                <div class="formula-card">
+                    <h4><i class="fas fa-minus-circle"></i> 2. Pembagian</h4>
+                    <p>Jika basis sama, pangkat dikurangkan.</p>
+                    <div class="math-display">
+                        \(\frac{a^m}{a^n} = a^{m-n}\)
+                    </div>
+                    <div class="example-box">
+                        <strong>Contoh:</strong> \(5^6 \div 5^2 = 5^{6-2} = 5^4 = 625\)
+                    </div>
+                </div>
+                
+                <!-- 3. Pangkat Dipangkatkan -->
+                <div class="formula-card">
+                    <h4><i class="fas fa-times-circle"></i> 3. Pangkat dari Pangkat</h4>
+                    <p>Pangkat dikalikan.</p>
+                    <div class="math-display">
+                        \((a^m)^n = a^{m \times n}\)
+                    </div>
+                    <div class="example-box">
+                        <strong>Contoh:</strong> \((3^2)^3 = 3^{2 \times 3} = 3^6 = 729\)
+                    </div>
+                </div>
+                
+                <!-- 4. Pangkat Nol -->
+                <div class="formula-card">
+                    <h4><i class="fas fa-dot-circle"></i> 4. Pangkat Nol</h4>
+                    <p>Bilangan (bukan nol) pangkat 0 = 1.</p>
+                    <div class="math-display">
+                        \(a^0 = 1, \quad a \neq 0\)
+                    </div>
+                    <div class="example-box">
+                        <strong>Contoh:</strong> \(100^0 = 1\), \((-5)^0 = 1\)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Quiz Interaktif -->
+        <div class="quiz-preview">
+            <h2>⚡ Cek Pemahamanmu</h2>
+            <p style="margin-bottom: 25px;">Berapakah hasil dari \((2^2 \times 2^3) \div 2^4\)?</p>
+            
+            <div class="quiz-options">
+                <button class="btn-check" onclick="checkAnswer(1)">A. \(2^1\)</button>
+                <button class="btn-check" onclick="checkAnswer(2)">B. \(2^2\)</button>
+                <button class="btn-check" onclick="checkAnswer(3)">C. \(2^4\)</button>
+                <button class="btn-check" onclick="checkAnswer(4)">D. \(2^5\)</button>
+            </div>
+            <div id="quiz-result"></div>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="page-footer">
+            <a href="bab1-bilangan-berpangkat.html" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Kembali ke Bab
+            </a>
+            <a href="sub1-2-akar.html" class="nav-btn right">
+                Selanjutnya: Bilangan Akar <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MathMaster8 - Sifat Eksponen | Kurikulum Merdeka</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+        };
+
+        // Quiz Function
+        function checkAnswer(val) {
+            const result = document.getElementById('quiz-result');
+            if(val === 1) {
+                result.innerHTML = "✅ Benar! (2⁵ ÷ 2⁴ = 2¹)";
+                result.style.backgroundColor = "rgba(34,197,94,0.2)";
+                result.style.color = "#22c55e";
+            } else {
+                result.innerHTML = "❌ Salah. Ingat: perkalian = pangkat ditambah, pembagian = pangkat dikurang.";
+                result.style.backgroundColor = "rgba(239,68,68,0.2)";
+                result.style.color = "#ef4444";
+            }
+        }
+
+        // MathJax
+        if (window.MathJax) {
+            MathJax.typeset();
+        }
+    </script>
+</body>
+</html>

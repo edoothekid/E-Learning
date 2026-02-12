@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafik Persamaan Garis Lurus | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* =========================================
+           1. VARIABLES & CORE STYLING (KONSISTEN)
+           ========================================= */
+        :root {
+            --primary: #0d9488;
+            --primary-light: #14b8a6;
+            --primary-soft: #ccfbf1;
+            --primary-dark: #0f766e;
+            --secondary: #6366f1;
+            --secondary-light: #818cf8;
+            --secondary-soft: #e0e7ff;
+            --secondary-dark: #4f46e5;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --accent-soft: #fff3cd;
+            --accent-dark: #b45309;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(245,158,11,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 24px;
+            --border-radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           2. NAVIGATION (KONSISTEN)
+           ========================================= */
+        .top-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-6px);
+            color: var(--accent-dark);
+        }
+
+        .chapter-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+
+        /* =========================================
+           3. PROGRESS BAR
+           ========================================= */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--accent), var(--secondary));
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        .hero-section {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 60px 5% 80px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "📈";
+            position: absolute;
+            font-size: 180px;
+            top: -40px;
+            right: 5%;
+            opacity: 0.08;
+            transform: rotate(15deg);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           5. MAIN CONTAINER
+           ========================================= */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* =========================================
+           6. CONTENT CARD
+           ========================================= */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--accent-soft);
+            color: var(--accent-dark);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           7. VIDEO CONTAINER
+           ========================================= */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================================
+           8. KARTU KONSEP
+           ========================================= */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .concept-card {
+            background: var(--bg-page);
+            border-radius: 20px;
+            padding: 30px;
+            border-left: 6px solid var(--accent);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            border-left-width: 6px;
+        }
+
+        .concept-card:hover {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .concept-icon {
+            background: var(--accent-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-dark);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .math-definition {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 20px 0;
+            border: 2px dashed var(--accent);
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--accent-dark);
+        }
+
+        /* =========================================
+           9. SIMULATOR GRAFIK INTERAKTIF
+           ========================================= */
+        .simulator-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 40px;
+            padding: 50px;
+            margin-top: 20px;
+        }
+
+        .simulator-title {
+            color: var(--accent-light);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .graph-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .canvas-wrapper {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        canvas {
+            background: white;
+            border-radius: 12px;
+            width: 400px;
+            height: 400px;
+            display: block;
+        }
+
+        .control-panel {
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 30px;
+            min-width: 250px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .control-item {
+            margin-bottom: 25px;
+        }
+
+        .control-item label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--gray-300);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .control-item input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            -webkit-appearance: none;
+            margin-bottom: 10px;
+        }
+
+        .control-item input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 10px rgba(245,158,11,0.5);
+        }
+
+        .param-value {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 5px 15px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-light);
+        }
+
+        .btn-reset {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .btn-reset:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* =========================================
+           10. TITIK POTONG SUMBU
+           ========================================= */
+        .intercept-box {
+            background: var(--accent-soft);
+            border-radius: 30px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 8px solid var(--accent);
+        }
+
+        .formula-highlight {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            color: var(--accent-dark);
+            border: 2px dashed var(--accent);
+            margin: 15px 0;
+        }
+
+        /* =========================================
+           11. LATIHAN SOAL
+           ========================================= */
+        .quiz-mini {
+            background: var(--accent-soft);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .quiz-btn {
+            background: var(--white);
+            border: 2px solid var(--accent);
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: var(--accent);
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 5px;
+        }
+
+        .quiz-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* =========================================
+           12. PAGINATION FOOTER
+           ========================================= */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .content-card { padding: 30px; }
+            .graph-container { flex-direction: column; }
+            .simulator-box { padding: 30px; }
+            canvas { width: 300px; height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="top-bar">
+        <a href="bab5-persamaan-garis.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Bab 5
+        </a>
+        <span class="chapter-badge"><i class="fas fa-chart-line"></i> Sub A: Grafik Persamaan Garis</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>📈 Grafik Persamaan Garis Lurus</h1>
+        <p>Menggambar dan menginterpretasi grafik dari persamaan y = mx + c</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Card: Video Pembelajaran -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-play"></i> VIDEO PEMBELAJARAN</span>
+            <div class="section-title">
+                <i class="fas fa-film"></i>
+                <h2>Cara Menggambar Grafik Garis Lurus</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Tonton video berikut untuk memahami langkah-langkah menggambar grafik persamaan garis lurus.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/3X7hxHh2x34" title="Grafik Persamaan Garis Lurus" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top: 25px; padding: 20px; background: var(--accent-soft); border-radius: 20px;">
+                <p style="font-weight: 700; color: var(--accent-dark);"><i class="fas fa-lightbulb"></i> Poin Penting:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Bentuk umum:</strong> \(y = mx + c\)</li>
+                    <li><strong>m</strong> = gradien (kemiringan garis)</li>
+                    <li><strong>c</strong> = titik potong sumbu y (ordinat saat x = 0)</li>
+                    <li>Grafik garis lurus cukup ditentukan oleh <strong>2 titik</strong>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card: Bentuk Umum dan Komponen -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-info-circle"></i> KONSEP DASAR</span>
+            <div class="section-title">
+                <i class="fas fa-chart-line"></i>
+                <h2>Bentuk Umum Persamaan Garis Lurus</h2>
+            </div>
+            
+            <div class="math-definition">
+                <p style="font-size: 2rem; margin-bottom: 10px;">\(y = mx + c\)</p>
+                <p style="font-size: 1.1rem;">dengan <strong>m</strong> dan <strong>c</strong> adalah konstanta</p>
+            </div>
+            
+            <div class="concept-grid">
+                <div class="concept-card">
+                    <div class="concept-icon">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <h3 style="color: var(--accent-dark); margin-bottom: 10px;">Gradien (m)</h3>
+                    <p>Menunjukkan kemiringan garis:</p>
+                    <ul style="margin-top: 15px; list-style: none;">
+                        <li style="margin-bottom: 8px;">✓ <strong>m > 0</strong> : garis naik ke kanan</li>
+                        <li style="margin-bottom: 8px;">✓ <strong>m < 0</strong> : garis turun ke kanan</li>
+                        <li style="margin-bottom: 8px;">✓ <strong>m = 0</strong> : garis horizontal</li>
+                        <li>✓ <strong>m = ∞</strong> : garis vertikal</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-icon">
+                        <i class="fas fa-arrows-alt-v"></i>
+                    </div>
+                    <h3 style="color: var(--accent-dark); margin-bottom: 10px;">Konstanta (c)</h3>
+                    <p>Titik potong dengan sumbu Y:</p>
+                    <div style="background: white; padding: 15px; border-radius: 12px; margin-top: 15px; text-align: center;">
+                        <span style="font-size: 1.3rem; font-weight: 700; color: var(--accent);">(0, c)</span>
+                    </div>
+                    <p style="margin-top: 15px;">Garis memotong sumbu Y di y = c</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Simulator Grafik Interaktif -->
+        <div class="simulator-box">
+            <div class="simulator-title">
+                <i class="fas fa-chart-line"></i>
+                <h2 style="color: white; margin: 0;">Simulator Grafik Garis Lurus</h2>
+            </div>
+            <p style="margin-bottom: 25px; opacity: 0.9;">Atur nilai gradien (m) dan konstanta (c) untuk melihat perubahan grafik secara real-time.</p>
+            
+            <div class="graph-container">
+                <div class="canvas-wrapper">
+                    <canvas id="graphCanvas" width="400" height="400"></canvas>
+                </div>
+                
+                <div class="control-panel">
+                    <div class="control-item">
+                        <label>Gradien (m) = <span id="mValue" class="param-value">1.0</span></label>
+                        <input type="range" id="mSlider" min="-3" max="3" value="1" step="0.1">
+                    </div>
+                    
+                    <div class="control-item">
+                        <label>Konstanta (c) = <span id="cValue" class="param-value">2.0</span></label>
+                        <input type="range" id="cSlider" min="-5" max="5" value="2" step="0.5">
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 20px; margin-top: 20px;">
+                        <p style="font-weight: 700; color: var(--accent-light);">Persamaan Garis:</p>
+                        <p id="equationDisplay" style="font-size: 1.5rem; font-weight: 800; color: white; text-align: center; margin: 15px 0;">
+                            y = 1.0x + 2.0
+                        </p>
+                        <p id="interceptDisplay" style="color: var(--gray-300); font-size: 0.9rem;">
+                            Titik potong sumbu Y: (0, 2.0)
+                        </p>
+                    </div>
+                    
+                    <button onclick="resetGraph()" class="btn-reset">
+                        <i class="fas fa-redo-alt"></i> Reset ke Default
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: 2 Cara Menggambar Grafik -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-paint-brush"></i> METODE</span>
+            <div class="section-title">
+                <i class="fas fa-draw-polygon"></i>
+                <h2>2 Cara Menggambar Grafik</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+                <div style="background: var(--gray-100); padding: 30px; border-radius: 20px;">
+                    <div style="background: var(--accent-soft); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <span style="font-size: 1.8rem; font-weight: 800; color: var(--accent-dark);">1</span>
+                    </div>
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">Metode Tabel</h4>
+                    <ol style="margin-left: 20px;">
+                        <li style="margin-bottom: 10px;">Pilih beberapa nilai x (minimal 2)</li>
+                        <li style="margin-bottom: 10px;">Hitung nilai y = mx + c</li>
+                        <li style="margin-bottom: 10px;">Buat tabel pasangan (x,y)</li>
+                        <li>Plot titik-titik pada bidang koordinat</li>
+                        <li>Hubungkan titik-titik menjadi garis lurus</li>
+                    </ol>
+                    <div style="background: white; padding: 20px; border-radius: 16px; margin-top: 20px;">
+                        <p style="font-weight: 700;">Contoh: y = 2x + 1</p>
+                        <table style="width: 100%; margin-top: 10px;">
+                            <tr>
+                                <th style="text-align: left;">x</th>
+                                <th style="text-align: left;">0</th>
+                                <th style="text-align: left;">1</th>
+                                <th style="text-align: left;">2</th>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">y</td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>5</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div style="background: var(--gray-100); padding: 30px; border-radius: 20px;">
+                    <div style="background: var(--accent-soft); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <span style="font-size: 1.8rem; font-weight: 800; color: var(--accent-dark);">2</span>
+                    </div>
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">Metode Titik Potong</h4>
+                    <ol style="margin-left: 20px;">
+                        <li style="margin-bottom: 10px;">Tentukan titik potong sumbu Y: (0, c)</li>
+                        <li style="margin-bottom: 10px;">Tentukan titik potong sumbu X: saat y = 0</li>
+                        <li style="margin-bottom: 10px;">0 = mx + c → x = -c/m</li>
+                        <li style="margin-bottom: 10px;">Plot kedua titik potong</li>
+                        <li>Hubungkan kedua titik</li>
+                    </ol>
+                    <div style="background: white; padding: 20px; border-radius: 16px; margin-top: 20px;">
+                        <p style="font-weight: 700;">Contoh: y = 2x + 1</p>
+                        <p>Titik potong Y: (0, 1)</p>
+                        <p>Titik potong X: (-1/2, 0)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Titik Potong Sumbu -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-crosshairs"></i> TITIK POTONG</span>
+            <div class="section-title">
+                <i class="fas fa-arrows-alt"></i>
+                <h2>Titik Potong dengan Sumbu Koordinat</h2>
+            </div>
+            
+            <div class="intercept-box">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div style="background: white; padding: 25px; border-radius: 20px;">
+                        <i class="fas fa-arrow-up" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
+                        <h4 style="margin-bottom: 15px;">Titik Potong Sumbu Y</h4>
+                        <div class="formula-highlight">
+                            \( (0, c) \)
+                        </div>
+                        <p style="margin-top: 15px;">Substitusi x = 0 ke persamaan</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 25px; border-radius: 20px;">
+                        <i class="fas fa-arrow-left" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
+                        <h4 style="margin-bottom: 15px;">Titik Potong Sumbu X</h4>
+                        <div class="formula-highlight">
+                            \( \left(-\frac{c}{m}, 0\right) \)
+                        </div>
+                        <p style="margin-top: 15px;">Substitusi y = 0 ke persamaan</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; padding: 20px; background: var(--accent-soft); border-radius: 16px;">
+                    <p style="font-weight: 700; color: var(--accent-dark);">💡 Catatan:</p>
+                    <p>Jika m = 0 (garis horizontal), tidak ada titik potong sumbu X (kecuali c = 0).</p>
+                    <p>Jika garis vertikal (x = k), tidak memiliki bentuk y = mx + c.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Latihan Soal -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-pencil-alt"></i> LATIHAN</span>
+            <div class="section-title">
+                <i class="fas fa-question-circle"></i>
+                <h2>Uji Pemahaman Grafik</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 1</p>
+                    <p style="margin-bottom: 20px;">Gradien dari garis dengan persamaan y = 3x - 5 adalah...</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button onclick="checkGrafikQuiz(1,1)" class="quiz-btn">A. -5</button>
+                        <button onclick="checkGrafikQuiz(1,2)" class="quiz-btn">B. 3</button>
+                        <button onclick="checkGrafikQuiz(1,3)" class="quiz-btn">C. 5</button>
+                        <button onclick="checkGrafikQuiz(1,4)" class="quiz-btn">D. -3</button>
+                    </div>
+                    <div id="grafikQuiz1" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+                
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 2</p>
+                    <p style="margin-bottom: 20px;">Titik potong sumbu Y dari garis y = -2x + 4 adalah...</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button onclick="checkGrafikQuiz(2,1)" class="quiz-btn">A. (0, -2)</button>
+                        <button onclick="checkGrafikQuiz(2,2)" class="quiz-btn">B. (0, 2)</button>
+                        <button onclick="checkGrafikQuiz(2,3)" class="quiz-btn">C. (0, 4)</button>
+                        <button onclick="checkGrafikQuiz(2,4)" class="quiz-btn">D. (0, -4)</button>
+                    </div>
+                    <div id="grafikQuiz2" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Rangkuman -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-clipboard-check"></i> RANGKUMAN</span>
+            <div class="section-title">
+                <i class="fas fa-book"></i>
+                <h2>Intisari Grafik Garis Lurus</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">📌 Bentuk Umum</h4>
+                    <p style="font-size: 1.2rem; font-weight: 700;">y = mx + c</p>
+                </div>
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">📌 Gradien (m)</h4>
+                    <p>Kemiringan garis</p>
+                </div>
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">📌 Titik Potong Y</h4>
+                    <p style="font-size: 1.2rem; font-weight: 700;">(0, c)</p>
+                </div>
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">📌 Titik Potong X</h4>
+                    <p style="font-size: 1.2rem; font-weight: 700;">(-c/m, 0)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="page-footer">
+            <a href="bab5-persamaan-garis.html" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Kembali ke Bab
+            </a>
+            <a href="sub5-2-kemiringan.html" class="nav-btn right">
+                Selanjutnya: Pengertian Kemiringan <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MathMaster8 - Grafik Persamaan Garis Lurus | Kurikulum Merdeka</p>
+        <p style="margin-top: 8px; opacity: 0.6;">"Setiap garis memiliki cerita, temukan makna di balik kemiringannya." - N.A.</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+        };
+
+        // =========================================
+        // SIMULATOR GRAFIK INTERAKTIF
+        // =========================================
+        const canvas = document.getElementById('graphCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        const mSlider = document.getElementById('mSlider');
+        const cSlider = document.getElementById('cSlider');
+        const mValue = document.getElementById('mValue');
+        const cValue = document.getElementById('cValue');
+        const equationDisplay = document.getElementById('equationDisplay');
+        const interceptDisplay = document.getElementById('interceptDisplay');
+
+        function drawGrid() {
+            const w = canvas.width;
+            const h = canvas.height;
+            
+            // Bersihkan canvas
+            ctx.clearRect(0, 0, w, h);
+            
+            // Gambar background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, w, h);
+            
+            // Gambar grid
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 0.5;
+            
+            // Grid vertikal
+            for (let i = 0; i <= 10; i++) {
+                let x = i * 40;
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, h);
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.stroke();
+            }
+            
+            // Grid horizontal
+            for (let i = 0; i <= 10; i++) {
+                let y = i * 40;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(w, y);
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.stroke();
+            }
+            
+            // Gambar sumbu koordinat
+            ctx.beginPath();
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 2;
+            
+            // Sumbu X
+            ctx.moveTo(0, h/2);
+            ctx.lineTo(w, h/2);
+            ctx.stroke();
+            
+            // Sumbu Y
+            ctx.moveTo(w/2, 0);
+            ctx.lineTo(w/2, h);
+            ctx.stroke();
+            
+            // Label sumbu
+            ctx.font = '12px Plus Jakarta Sans';
+            ctx.fillStyle = '#64748b';
+            ctx.fillText('x', w - 20, h/2 - 10);
+            ctx.fillText('y', w/2 + 10, 20);
+            
+            // Titik asal
+            ctx.fillStyle = '#0f172a';
+            ctx.beginPath();
+            ctx.arc(w/2, h/2, 4, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+
+        function drawLine() {
+            let m = parseFloat(mSlider.value);
+            let c = parseFloat(cSlider.value);
+            
+            // Update display
+            mValue.innerText = m.toFixed(1);
+            cValue.innerText = c.toFixed(1);
+            
+            let cSign = c >= 0 ? `+ ${c.toFixed(1)}` : `- ${Math.abs(c).toFixed(1)}`;
+            equationDisplay.innerText = `y = ${m.toFixed(1)}x ${c >= 0 ? '+' : '-'} ${Math.abs(c).toFixed(1)}`;
+            interceptDisplay.innerText = `Titik potong sumbu Y: (0, ${c.toFixed(1)})`;
+            
+            const w = canvas.width;
+            const h = canvas.height;
+            const centerX = w / 2;
+            const centerY = h / 2;
+            const scale = 30; // 30 pixel per unit
+            
+            // Cari dua titik untuk menggambar garis
+            let x1 = -10;
+            let y1 = m * x1 + c;
+            let x2 = 10;
+            let y2 = m * x2 + c;
+            
+            // Konversi ke koordinat canvas
+            let canvasX1 = centerX + x1 * scale;
+            let canvasY1 = centerY - y1 * scale;
+            let canvasX2 = centerX + x2 * scale;
+            let canvasY2 = centerY - y2 * scale;
+            
+            // Gambar garis
+            ctx.beginPath();
+            ctx.moveTo(canvasX1, canvasY1);
+            ctx.lineTo(canvasX2, canvasY2);
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            // Gambar titik potong sumbu Y
+            let interceptX = centerX;
+            let interceptY = centerY - c * scale;
+            
+            ctx.beginPath();
+            ctx.arc(interceptX, interceptY, 6, 0, 2 * Math.PI);
+            ctx.fillStyle = '#f59e0b';
+            ctx.fill();
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Label titik potong
+            ctx.font = '12px Plus Jakarta Sans';
+            ctx.fillStyle = '#b45309';
+            ctx.fillText(`(0, ${c.toFixed(1)})`, interceptX + 15, interceptY - 15);
+        }
+
+        function updateGraph() {
+            drawGrid();
+            drawLine();
+        }
+
+        mSlider.addEventListener('input', updateGraph);
+        cSlider.addEventListener('input', updateGraph);
+
+        function resetGraph() {
+            mSlider.value = 1;
+            cSlider.value = 2;
+            updateGraph();
+        }
+
+        // Inisialisasi
+        updateGraph();
+
+        // =========================================
+        // FUNGSI KUIS
+        // =========================================
+        function checkGrafikQuiz(quizNum, answer) {
+            if (quizNum === 1) {
+                let fb = document.getElementById('grafikQuiz1');
+                fb.style.display = 'block';
+                if (answer === 2) {
+                    fb.innerHTML = '✅ Benar! Gradien adalah koefisien x, yaitu 3.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Coba lagi! Gradien adalah koefisien dari x.';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            } else if (quizNum === 2) {
+                let fb = document.getElementById('grafikQuiz2');
+                fb.style.display = 'block';
+                if (answer === 3) {
+                    fb.innerHTML = '✅ Benar! Titik potong sumbu Y adalah (0, c) = (0, 4).';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Coba lagi! Titik potong sumbu Y diperoleh saat x = 0.';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            }
+        }
+
+        // MathJax
+        if (window.MathJax) {
+            MathJax.typeset();
+        }
+    </script>
+</body>
+</html>

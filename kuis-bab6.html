@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Bab 1: Bilangan Berpangkat | MathMaster8</title>
+    <title>Kuis Bab 6: Statistika | MathMaster8</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,13 +12,16 @@
     
     <style>
         /* =========================================
-           1. VARIABLES & CORE STYLING 
+           1. VARIABLES & CORE STYLING (KONSISTEN)
            ========================================= */
         :root {
             --primary: #0d9488;
             --primary-light: #14b8a6;
             --primary-soft: #ccfbf1;
             --primary-dark: #0f766e;
+            --secondary: #6366f1;
+            --secondary-light: #818cf8;
+            --secondary-soft: #e0e7ff;
             --accent: #f59e0b;
             --success: #22c55e;
             --danger: #ef4444;
@@ -32,7 +35,7 @@
             --gray-300: #cbd5e1;
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
             --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --shadow-lg: 0 20px 40px -15px rgba(99,102,241,0.15);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
@@ -46,7 +49,7 @@
         }
 
         body {
-            background: linear-gradient(145deg, var(--primary-dark) 0%, #1e293b 100%);
+            background: linear-gradient(145deg, var(--secondary-dark, #4f46e5) 0%, #1e293b 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -69,7 +72,7 @@
         }
 
         .quiz-container::before {
-            content: "🔢";
+            content: "📊";
             position: absolute;
             font-size: 180px;
             bottom: -40px;
@@ -89,9 +92,9 @@
 
         .quiz-icon {
             font-size: 4.5rem;
-            color: var(--primary);
+            color: var(--secondary);
             margin-bottom: 25px;
-            background: var(--primary-soft);
+            background: var(--secondary-soft);
             width: 120px;
             height: 120px;
             border-radius: 50%;
@@ -129,7 +132,7 @@
 
         .info-item i {
             font-size: 1.5rem;
-            color: var(--primary);
+            color: var(--secondary);
         }
 
         .info-item span {
@@ -149,14 +152,14 @@
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: var(--secondary);
             color: white;
         }
 
         .btn-primary:hover {
-            background: var(--primary-dark);
+            background: #4f46e5;
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(13,148,136,0.3);
+            box-shadow: 0 15px 30px rgba(99,102,241,0.3);
         }
 
         .btn-secondary {
@@ -190,7 +193,7 @@
             padding: 10px 20px;
             border-radius: 60px;
             font-weight: 700;
-            color: var(--primary-dark);
+            color: var(--secondary);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -202,11 +205,11 @@
         }
 
         .question-counter {
-            background: var(--primary-soft);
+            background: var(--secondary-soft);
             padding: 10px 20px;
             border-radius: 60px;
             font-weight: 700;
-            color: var(--primary-dark);
+            color: var(--secondary);
         }
 
         .progress-bar-wrap {
@@ -220,7 +223,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            background: linear-gradient(to right, var(--secondary), var(--accent));
             width: 0%;
             transition: var(--transition);
             border-radius: 10px;
@@ -237,9 +240,9 @@
             font-weight: 700;
             line-height: 1.5;
             padding: 20px;
-            background: var(--primary-soft);
+            background: var(--secondary-soft);
             border-radius: 20px;
-            border-left: 8px solid var(--primary);
+            border-left: 8px solid var(--secondary);
         }
 
         .options-grid {
@@ -269,15 +272,15 @@
         }
 
         .option:hover {
-            border-color: var(--primary);
-            background: var(--primary-soft);
+            border-color: var(--secondary);
+            background: var(--secondary-soft);
             transform: translateY(-3px);
             box-shadow: var(--shadow);
         }
 
         .option.selected {
-            border-color: var(--primary);
-            background: var(--primary);
+            border-color: var(--secondary);
+            background: var(--secondary);
             color: white;
         }
 
@@ -316,7 +319,7 @@
         }
 
         .btn-next {
-            background: var(--primary);
+            background: var(--secondary);
             color: white;
             padding: 14px 40px;
             border-radius: 60px;
@@ -331,7 +334,7 @@
         }
 
         .btn-next:hover:not(:disabled) {
-            background: var(--primary-dark);
+            background: #4f46e5;
             transform: translateX(5px);
             box-shadow: var(--shadow);
         }
@@ -368,7 +371,7 @@
             width: 160px;
             height: 160px;
             border-radius: 50%;
-            background: linear-gradient(145deg, var(--primary-soft), white);
+            background: linear-gradient(145deg, var(--secondary-soft), white);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -381,7 +384,7 @@
         .score-number {
             font-size: 3.2rem;
             font-weight: 800;
-            color: var(--primary-dark);
+            color: var(--secondary);
             line-height: 1;
         }
 
@@ -411,7 +414,7 @@
         .stat-value {
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--secondary);
         }
 
         .stat-label {
@@ -434,7 +437,7 @@
             padding: 25px;
             border-radius: 20px;
             margin-bottom: 20px;
-            border-left: 6px solid var(--primary);
+            border-left: 6px solid var(--secondary);
         }
 
         .review-card.correct {
@@ -532,21 +535,21 @@
         <!-- START SCREEN -->
         <div id="start-screen">
             <div class="quiz-icon animate">
-                <i class="fas fa-superscript"></i>
+                <i class="fas fa-chart-line"></i>
             </div>
-            <h1 class="animate">Kuis Bilangan Berpangkat</h1>
+            <h1 class="animate">Kuis Statistika</h1>
             <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;" class="animate">
-                Uji pemahamanmu tentang eksponen, akar, dan notasi ilmiah!
+                Uji pemahamanmu tentang pemusatan dan penyebaran data!
             </p>
             
             <div class="quiz-info animate" style="animation-delay: 0.1s;">
                 <div class="info-item">
                     <i class="fas fa-question-circle"></i>
-                    <span>10 Soal</span>
+                    <span>15 Soal</span>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-clock"></i>
-                    <span>15 Menit</span>
+                    <span>20 Menit</span>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-star"></i>
@@ -567,10 +570,10 @@
         <div id="quiz-screen">
             <div class="quiz-header">
                 <div class="timer-box">
-                    <i class="fas fa-hourglass-half"></i> <span id="time-left">15:00</span>
+                    <i class="fas fa-hourglass-half"></i> <span id="time-left">20:00</span>
                 </div>
                 <div class="question-counter">
-                    <span id="current-q-num">1</span>/10
+                    <span id="current-q-num">1</span>/15
                 </div>
             </div>
             
@@ -640,68 +643,113 @@
     
     <script>
         // =========================================
-        // BANK SOAL BAB 1: BILANGAN BERPANGKAT
+        // BANK SOAL BAB 4: STATISTIKA
         // =========================================
         const questionsBank = [
+            // SOAL 1: Mean (rata-rata)
             {
-                question: "Hasil dari 2³ × 2⁴ adalah...",
-                options: ["2¹²", "2⁷", "4⁷", "2¹"],
+                question: "Nilai ulangan 5 siswa: 7, 8, 6, 9, 10. Rata-rata nilai tersebut adalah...",
+                options: ["7,5", "8,0", "8,5", "9,0"],
                 answer: 1,
-                explanation: "Sifat perkalian eksponen: aᵐ × aⁿ = aᵐ⁺ⁿ. Jadi 2³⁺⁴ = 2⁷."
+                explanation: "Mean = (7+8+6+9+10) ÷ 5 = 40 ÷ 5 = 8,0."
             },
+            // SOAL 2: Median (nilai tengah) data ganjil
             {
-                question: "Bentuk sederhana dari √48 adalah...",
-                options: ["4√3", "3√4", "16√3", "2√12"],
+                question: "Median dari data: 4, 7, 5, 8, 6, 9, 7 adalah...",
+                options: ["6", "7", "7,5", "8"],
+                answer: 1,
+                explanation: "Urutkan: 4,5,6,7,7,8,9. n=7 (ganjil), median = data ke-4 = 7."
+            },
+            // SOAL 3: Median data genap
+            {
+                question: "Median dari data: 12, 15, 14, 18, 16, 20 adalah...",
+                options: ["15", "15,5", "16", "16,5"],
+                answer: 1,
+                explanation: "Urutkan: 12,14,15,16,18,20. n=6 (genap), median = (15+16)/2 = 15,5."
+            },
+            // SOAL 4: Modus
+            {
+                question: "Modus dari data: 5, 6, 7, 7, 8, 8, 8, 9, 10 adalah...",
+                options: ["7", "8", "9", "Tidak ada"],
+                answer: 1,
+                explanation: "Nilai 8 muncul 3 kali, paling sering dibanding yang lain."
+            },
+            // SOAL 5: Modus bimodal
+            {
+                question: "Data berikut yang memiliki modus lebih dari satu adalah...",
+                options: ["4,5,5,6,7,7,8", "3,4,4,4,5,6,7", "2,3,4,5,6,7,8", "5,5,6,6,7,8,9"],
+                answer: 3,
+                explanation: "(5,5,6,6,7,8,9) memiliki dua modus: 5 dan 6 (bimodal)."
+            },
+            // SOAL 6: Mean data berkelompok
+            {
+                question: "Tabel frekuensi: Nilai 5 (f=2), 6 (f=3), 7 (f=4), 8 (f=1). Rata-ratanya adalah...",
+                options: ["6,2", "6,4", "6,6", "6,8"],
+                answer: 1,
+                explanation: "Mean = (5×2 + 6×3 + 7×4 + 8×1) ÷ (2+3+4+1) = (10+18+28+8) ÷ 10 = 64 ÷ 10 = 6,4."
+            },
+            // SOAL 7: Jangkauan (Range)
+            {
+                question: "Jangkauan dari data: 23, 45, 32, 56, 41, 38 adalah...",
+                options: ["23", "33", "43", "56"],
+                answer: 1,
+                explanation: "Jangkauan = nilai max - nilai min = 56 - 23 = 33."
+            },
+            // SOAL 8: Kuartil bawah (Q1)
+            {
+                question: "Kuartil bawah (Q1) dari data: 3, 5, 6, 7, 8, 9, 10, 12, 15 adalah...",
+                options: ["5", "5,5", "6", "6,5"],
+                answer: 1,
+                explanation: "n=9, Q1 = median dari 4 data kiri: (5+6)/2 = 5,5."
+            },
+            // SOAL 9: Kuartil atas (Q3)
+            {
+                question: "Kuartil atas (Q3) dari data: 40, 45, 50, 55, 60, 65, 70, 75, 80 adalah...",
+                options: ["70", "72,5", "75", "77,5"],
+                answer: 1,
+                explanation: "n=9, Q3 = median dari 4 data kanan: (70+75)/2 = 72,5."
+            },
+            // SOAL 10: Jangkauan Interkuartil (IQR)
+            {
+                question: "Jika Q1 = 12 dan Q3 = 28, maka jangkauan interkuartil (IQR) adalah...",
+                options: ["12", "16", "20", "28"],
+                answer: 1,
+                explanation: "IQR = Q3 - Q1 = 28 - 12 = 16."
+            },
+            // SOAL 11: Simpangan kuartil
+            {
+                question: "Simpangan kuartil dari data dengan Q1 = 15 dan Q3 = 35 adalah...",
+                options: ["5", "10", "15", "20"],
+                answer: 1,
+                explanation: "Simpangan kuartil = (Q3 - Q1)/2 = (35-15)/2 = 10."
+            },
+            // SOAL 12: Soal cerita mean
+            {
+                question: "Rata-rata nilai 10 siswa adalah 75. Jika ditambah 2 siswa dengan nilai 80 dan 90, rata-rata menjadi...",
+                options: ["76", "77", "78", "79"],
+                answer: 1,
+                explanation: "Total awal = 10×75 = 750. Total akhir = 750+80+90 = 920. Banyak data = 12. Mean = 920/12 = 76,67 ≈ 77."
+            },
+            // SOAL 13: Soal cerita median
+            {
+                question: "Nilai ulangan Budi: 7, 8, 6, 9, 8, 7, 10. Setelah diperbaiki, nilai 6 menjadi 8. Perubahan median adalah...",
+                options: ["Tetap", "Naik 0,5", "Naik 1", "Turun 0,5"],
                 answer: 0,
-                explanation: "√48 = √(16 × 3) = 4√3."
+                explanation: "Data awal: 6,7,7,8,8,9,10 → median=8. Data akhir: 7,7,8,8,8,9,10 → median=8. Tetap."
             },
+            // SOAL 14: Soal cerita modus
             {
-                question: "Bentuk baku dari 0,000025 adalah...",
-                options: ["2,5 × 10⁻⁴", "2,5 × 10⁻⁵", "25 × 10⁻⁶", "0,25 × 10⁻⁴"],
-                answer: 1,
-                explanation: "Koma digeser ke kanan 5 kali, maka pangkat negatif 5: 2,5 × 10⁻⁵."
-            },
-            {
-                question: "Hasil dari (3²)³ adalah...",
-                options: ["3⁵", "3⁶", "3⁸", "9²"],
-                answer: 1,
-                explanation: "Sifat pangkat: (aᵐ)ⁿ = aᵐ×ⁿ. Jadi 3²×³ = 3⁶."
-            },
-            {
-                question: "Nilai dari √12 + √27 adalah...",
-                options: ["√39", "5√3", "6√3", "13√3"],
-                answer: 1,
-                explanation: "√12 = 2√3, √27 = 3√3, maka 2√3 + 3√3 = 5√3."
-            },
-            {
-                question: "Hasil dari 5⁰ + 2⁰ - 3⁰ adalah...",
-                options: ["0", "1", "4", "3"],
-                answer: 1,
-                explanation: "Semua bilangan (kecuali 0) pangkat 0 = 1. Jadi 1 + 1 - 1 = 1."
-            },
-            {
-                question: "Notasi ilmiah untuk 150.000.000 adalah...",
-                options: ["1,5 × 10⁸", "1,5 × 10⁷", "15 × 10⁷", "1,5 × 10⁻⁸"],
-                answer: 0,
-                explanation: "Koma digeser ke kiri 8 kali: 1,5 × 10⁸."
-            },
-            {
-                question: "Hasil dari 10⁵ ÷ 10² adalah...",
-                options: ["10⁷", "10¹⁰", "10³", "100"],
+                question: "Hasil panen (ton) selama 8 bulan: 5,6,6,7,8,8,8,9. Modus dari data tersebut adalah...",
+                options: ["6 ton", "7 ton", "8 ton", "9 ton"],
                 answer: 2,
-                explanation: "Sifat pembagian: aᵐ ÷ aⁿ = aᵐ⁻ⁿ. Jadi 10⁵⁻² = 10³."
+                explanation: "Nilai 8 muncul 3 kali, paling sering."
             },
+            // SOAL 15: Soal cerita kuartil
             {
-                question: "√125 jika disederhanakan menjadi...",
-                options: ["5√5", "25√5", "5√25", "15√5"],
-                answer: 0,
-                explanation: "√125 = √(25 × 5) = 5√5."
-            },
-            {
-                question: "Hasil dari 2√3 × √2 adalah...",
-                options: ["2√5", "2√6", "6√2", "√12"],
+                question: "Nilai tes calon pegawai: 65,70,75,80,85,90,95,100. Seseorang dinyatakan lulus jika nilainya di atas Q3. Berapa batas minimal nilai lulus?",
+                options: ["90", "92,5", "95", "97,5"],
                 answer: 1,
-                explanation: "2√3 × √2 = 2√(3 × 2) = 2√6."
+                explanation: "n=8 (genap). Q3 = median dari 4 data kanan = (90+95)/2 = 92,5. Lulus > 92,5."
             }
         ];
 
@@ -711,64 +759,44 @@
         let currentQuestionIndex = 0;
         let userAnswers = [];
         let timer;
-        let timeLeft = 900; // 15 menit = 900 detik
+        let timeLeft = 1200; // 20 menit = 1200 detik
 
         // =========================================
         // INISIALISASI EVENT LISTENER
         // =========================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Setup tombol start
             document.getElementById('startQuizBtn').addEventListener('click', startQuiz);
-            
-            // Setup tombol next
             document.getElementById('next-btn').addEventListener('click', nextQuestion);
-            
-            // Setup tombol restart
             document.getElementById('restartBtn').addEventListener('click', restartQuiz);
-            
-            // Setup tombol kembali ke bab
             document.getElementById('backToBabBtn').addEventListener('click', goToBab);
             
-            // Inisialisasi
             userAnswers = new Array(questionsBank.length).fill(null);
             document.getElementById('start-screen').style.display = 'block';
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'none';
         });
 
-        // =========================================
-        // FUNGSI-FUNGSI QUIZ
-        // =========================================
-        
         function startQuiz() {
-            // Reset semua variabel
             currentQuestionIndex = 0;
             userAnswers = new Array(questionsBank.length).fill(null);
-            timeLeft = 900;
+            timeLeft = 1200;
             
-            // Update tampilan timer
             updateTimerDisplay();
             
-            // Tampilkan layar quiz
             document.getElementById('start-screen').style.display = 'none';
             document.getElementById('quiz-screen').style.display = 'block';
             document.getElementById('result-screen').style.display = 'none';
             
-            // Tampilkan soal pertama
             showQuestion();
-            
-            // Mulai timer
             startTimer();
         }
 
         function showQuestion() {
             const q = questionsBank[currentQuestionIndex];
             
-            // Tampilkan teks soal - sudah dalam bentuk teks biasa, bukan LaTeX
             document.getElementById('question-text').innerHTML = 
                 (currentQuestionIndex + 1) + ". " + q.question;
             
-            // Render opsi jawaban
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
             
@@ -776,7 +804,6 @@
                 const optionDiv = document.createElement('div');
                 optionDiv.className = 'option';
                 
-                // Jika sudah pernah menjawab, tampilkan jawaban yang dipilih
                 if (userAnswers[currentQuestionIndex] === index) {
                     optionDiv.classList.add('selected');
                 }
@@ -786,7 +813,6 @@
                     <span>${opt}</span>
                 `;
                 
-                // Gunakan closure untuk menyimpan index dengan benar
                 optionDiv.addEventListener('click', (function(idx) {
                     return function() {
                         selectOption(idx);
@@ -796,35 +822,23 @@
                 optionsContainer.appendChild(optionDiv);
             });
             
-            // Update nomor soal
             document.getElementById('current-q-num').innerText = currentQuestionIndex + 1;
             
-            // Update progress bar
             const progress = (currentQuestionIndex / questionsBank.length) * 100;
             document.getElementById('progress-fill').style.width = progress + '%';
             
-            // Update tombol next
             updateNextButton();
-            
-            // Hapus feedback
             document.getElementById('feedback').innerHTML = '';
         }
 
         function selectOption(index) {
-            // Hapus class selected dari semua opsi
             const options = document.querySelectorAll('.option');
             options.forEach(opt => opt.classList.remove('selected'));
-            
-            // Tambah class selected ke opsi yang dipilih
             options[index].classList.add('selected');
             
-            // Simpan jawaban user
             userAnswers[currentQuestionIndex] = index;
-            
-            // Update tombol next
             updateNextButton();
             
-            // Beri feedback langsung
             const q = questionsBank[currentQuestionIndex];
             if (index === q.answer) {
                 document.getElementById('feedback').innerHTML = '✅ Jawaban benar!';
@@ -837,11 +851,7 @@
 
         function updateNextButton() {
             const nextBtn = document.getElementById('next-btn');
-            if (userAnswers[currentQuestionIndex] !== null && userAnswers[currentQuestionIndex] !== undefined) {
-                nextBtn.disabled = false;
-            } else {
-                nextBtn.disabled = true;
-            }
+            nextBtn.disabled = (userAnswers[currentQuestionIndex] === null || userAnswers[currentQuestionIndex] === undefined);
         }
 
         function nextQuestion() {
@@ -860,7 +870,6 @@
                     timeLeft--;
                     updateTimerDisplay();
                 } else {
-                    // Waktu habis
                     clearInterval(timer);
                     finishQuiz();
                 }
@@ -875,14 +884,11 @@
         }
 
         function finishQuiz() {
-            // Hentikan timer
             clearInterval(timer);
             
-            // Sembunyikan quiz screen, tampilkan result screen
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'block';
             
-            // Hitung jumlah jawaban benar
             let correct = 0;
             for (let i = 0; i < questionsBank.length; i++) {
                 if (userAnswers[i] === questionsBank[i].answer) {
@@ -892,19 +898,17 @@
             
             let wrong = questionsBank.length - correct;
             let accuracy = Math.round((correct / questionsBank.length) * 100);
-            let score = correct * 10; // Maksimal 100
+            let score = Math.round((correct / questionsBank.length) * 100);
             
-            // Tampilkan skor
             document.getElementById('final-score').innerText = score;
             document.getElementById('correct-count').innerText = correct;
             document.getElementById('wrong-count').innerText = wrong;
             document.getElementById('accuracy').innerText = accuracy + '%';
             
-            // Tampilkan pesan berdasarkan skor
             let message, submessage;
             if (score >= 80) {
                 message = "🎉 Luar Biasa!";
-                submessage = "Kamu menguasai bilangan berpangkat dengan baik!";
+                submessage = "Kamu menguasai Statistika dengan baik!";
             } else if (score >= 60) {
                 message = "👍 Cukup Baik!";
                 submessage = "Tingkatkan lagi, kamu pasti bisa lebih baik!";
@@ -916,7 +920,6 @@
             document.getElementById('congrats-message').innerText = message;
             document.getElementById('result-submessage').innerText = submessage;
             
-            // Tampilkan review jawaban
             displayReview();
         }
 
@@ -954,13 +957,13 @@
                         </div>
                         <div style="flex: 1;">
                             <span style="font-weight: 600; color: var(--text-muted);">Jawaban Benar:</span><br>
-                            <span style="font-weight: 700; color: var(--primary-dark);">
+                            <span style="font-weight: 700; color: var(--secondary);">
                                 ${correctAnswerText}
                             </span>
                         </div>
                     </div>
                     <div class="explanation">
-                        <span style="font-weight: 700; color: var(--primary-dark);"><i class="fas fa-lightbulb"></i> Pembahasan:</span>
+                        <span style="font-weight: 700; color: var(--secondary);"><i class="fas fa-lightbulb"></i> Pembahasan:</span>
                         <p style="margin-top: 8px;">${q.explanation}</p>
                     </div>
                 `;
@@ -970,22 +973,19 @@
         }
 
         function restartQuiz() {
-            // Reset semua variabel
             currentQuestionIndex = 0;
             userAnswers = new Array(questionsBank.length).fill(null);
-            timeLeft = 900;
+            timeLeft = 1200;
             
-            // Tampilkan start screen
             document.getElementById('start-screen').style.display = 'block';
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'none';
             
-            // Hentikan timer
             clearInterval(timer);
         }
 
         function goToBab() {
-            window.location.href = 'bab1-bilangan-berpangkat.html';
+            window.location.href = 'bab6-statistika.html';
         }
     </script>
 </body>

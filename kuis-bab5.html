@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Bab 1: Bilangan Berpangkat | MathMaster8</title>
+    <title>Kuis Bab 5: Persamaan Garis Lurus | MathMaster8</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,7 +12,8 @@
     
     <style>
         /* =========================================
-           1. VARIABLES & CORE STYLING 
+           CSS SAMA PERSIS DENGAN KUIS BAB 1
+           (WARNA ACCENT UNTUK BAB 5)
            ========================================= */
         :root {
             --primary: #0d9488;
@@ -20,6 +21,9 @@
             --primary-soft: #ccfbf1;
             --primary-dark: #0f766e;
             --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --accent-soft: #fff3cd;
+            --accent-dark: #b45309;
             --success: #22c55e;
             --danger: #ef4444;
             --dark: #0f172a;
@@ -32,7 +36,7 @@
             --gray-300: #cbd5e1;
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
             --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --shadow-lg: 0 20px 40px -15px rgba(245,158,11,0.15);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
@@ -46,7 +50,7 @@
         }
 
         body {
-            background: linear-gradient(145deg, var(--primary-dark) 0%, #1e293b 100%);
+            background: linear-gradient(145deg, var(--accent-dark) 0%, #1e293b 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -54,9 +58,6 @@
             padding: 20px;
         }
 
-        /* =========================================
-           2. QUIZ CONTAINER
-           ========================================= */
         .quiz-container {
             background: var(--white);
             width: 100%;
@@ -69,7 +70,7 @@
         }
 
         .quiz-container::before {
-            content: "🔢";
+            content: "📈";
             position: absolute;
             font-size: 180px;
             bottom: -40px;
@@ -78,9 +79,7 @@
             transform: rotate(15deg);
         }
 
-        /* =========================================
-           3. START SCREEN
-           ========================================= */
+        /* START SCREEN */
         #start-screen {
             text-align: center;
             position: relative;
@@ -89,9 +88,9 @@
 
         .quiz-icon {
             font-size: 4.5rem;
-            color: var(--primary);
+            color: var(--accent);
             margin-bottom: 25px;
-            background: var(--primary-soft);
+            background: var(--accent-soft);
             width: 120px;
             height: 120px;
             border-radius: 50%;
@@ -129,7 +128,7 @@
 
         .info-item i {
             font-size: 1.5rem;
-            color: var(--primary);
+            color: var(--accent);
         }
 
         .info-item span {
@@ -149,14 +148,14 @@
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: var(--accent);
             color: white;
         }
 
         .btn-primary:hover {
-            background: var(--primary-dark);
+            background: var(--accent-dark);
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(13,148,136,0.3);
+            box-shadow: 0 15px 30px rgba(245,158,11,0.3);
         }
 
         .btn-secondary {
@@ -169,9 +168,7 @@
             transform: translateY(-3px);
         }
 
-        /* =========================================
-           4. QUIZ SCREEN
-           ========================================= */
+        /* QUIZ SCREEN */
         #quiz-screen {
             display: none;
         }
@@ -190,7 +187,7 @@
             padding: 10px 20px;
             border-radius: 60px;
             font-weight: 700;
-            color: var(--primary-dark);
+            color: var(--accent-dark);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -202,11 +199,11 @@
         }
 
         .question-counter {
-            background: var(--primary-soft);
+            background: var(--accent-soft);
             padding: 10px 20px;
             border-radius: 60px;
             font-weight: 700;
-            color: var(--primary-dark);
+            color: var(--accent-dark);
         }
 
         .progress-bar-wrap {
@@ -220,7 +217,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            background: linear-gradient(to right, var(--accent), var(--accent-light));
             width: 0%;
             transition: var(--transition);
             border-radius: 10px;
@@ -237,9 +234,9 @@
             font-weight: 700;
             line-height: 1.5;
             padding: 20px;
-            background: var(--primary-soft);
+            background: var(--accent-soft);
             border-radius: 20px;
-            border-left: 8px solid var(--primary);
+            border-left: 8px solid var(--accent);
         }
 
         .options-grid {
@@ -269,15 +266,15 @@
         }
 
         .option:hover {
-            border-color: var(--primary);
-            background: var(--primary-soft);
+            border-color: var(--accent);
+            background: var(--accent-soft);
             transform: translateY(-3px);
             box-shadow: var(--shadow);
         }
 
         .option.selected {
-            border-color: var(--primary);
-            background: var(--primary);
+            border-color: var(--accent);
+            background: var(--accent);
             color: white;
         }
 
@@ -316,7 +313,7 @@
         }
 
         .btn-next {
-            background: var(--primary);
+            background: var(--accent);
             color: white;
             padding: 14px 40px;
             border-radius: 60px;
@@ -331,7 +328,7 @@
         }
 
         .btn-next:hover:not(:disabled) {
-            background: var(--primary-dark);
+            background: var(--accent-dark);
             transform: translateX(5px);
             box-shadow: var(--shadow);
         }
@@ -343,9 +340,7 @@
             opacity: 0.6;
         }
 
-        /* =========================================
-           5. RESULT SCREEN
-           ========================================= */
+        /* RESULT SCREEN */
         #result-screen {
             display: none;
             text-align: center;
@@ -368,7 +363,7 @@
             width: 160px;
             height: 160px;
             border-radius: 50%;
-            background: linear-gradient(145deg, var(--primary-soft), white);
+            background: linear-gradient(145deg, var(--accent-soft), white);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -381,7 +376,7 @@
         .score-number {
             font-size: 3.2rem;
             font-weight: 800;
-            color: var(--primary-dark);
+            color: var(--accent-dark);
             line-height: 1;
         }
 
@@ -411,7 +406,7 @@
         .stat-value {
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--accent);
         }
 
         .stat-label {
@@ -434,7 +429,7 @@
             padding: 25px;
             border-radius: 20px;
             margin-bottom: 20px;
-            border-left: 6px solid var(--primary);
+            border-left: 6px solid var(--accent);
         }
 
         .review-card.correct {
@@ -532,21 +527,21 @@
         <!-- START SCREEN -->
         <div id="start-screen">
             <div class="quiz-icon animate">
-                <i class="fas fa-superscript"></i>
+                <i class="fas fa-chart-line"></i>
             </div>
-            <h1 class="animate">Kuis Bilangan Berpangkat</h1>
+            <h1 class="animate">Kuis Persamaan Garis Lurus</h1>
             <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;" class="animate">
-                Uji pemahamanmu tentang eksponen, akar, dan notasi ilmiah!
+                Uji pemahamanmu tentang grafik garis lurus dan gradien!
             </p>
             
             <div class="quiz-info animate" style="animation-delay: 0.1s;">
                 <div class="info-item">
                     <i class="fas fa-question-circle"></i>
-                    <span>10 Soal</span>
+                    <span>15 Soal</span>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-clock"></i>
-                    <span>15 Menit</span>
+                    <span>20 Menit</span>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-star"></i>
@@ -567,10 +562,10 @@
         <div id="quiz-screen">
             <div class="quiz-header">
                 <div class="timer-box">
-                    <i class="fas fa-hourglass-half"></i> <span id="time-left">15:00</span>
+                    <i class="fas fa-hourglass-half"></i> <span id="time-left">20:00</span>
                 </div>
                 <div class="question-counter">
-                    <span id="current-q-num">1</span>/10
+                    <span id="current-q-num">1</span>/15
                 </div>
             </div>
             
@@ -640,68 +635,113 @@
     
     <script>
         // =========================================
-        // BANK SOAL BAB 1: BILANGAN BERPANGKAT
+        // BANK SOAL BAB 5: PERSAMAAN GARIS LURUS
         // =========================================
         const questionsBank = [
+            // SOAL 1: Bentuk umum persamaan garis
             {
-                question: "Hasil dari 2³ × 2⁴ adalah...",
-                options: ["2¹²", "2⁷", "4⁷", "2¹"],
+                question: "Bentuk umum persamaan garis lurus adalah...",
+                options: ["y = mx² + c", "y = mx + c", "ax + by = c", "y = m/x + c"],
                 answer: 1,
-                explanation: "Sifat perkalian eksponen: aᵐ × aⁿ = aᵐ⁺ⁿ. Jadi 2³⁺⁴ = 2⁷."
+                explanation: "Bentuk umum persamaan garis lurus adalah y = mx + c, dengan m adalah gradien dan c adalah konstanta."
             },
+            // SOAL 2: Gradien
             {
-                question: "Bentuk sederhana dari √48 adalah...",
-                options: ["4√3", "3√4", "16√3", "2√12"],
-                answer: 0,
-                explanation: "√48 = √(16 × 3) = 4√3."
-            },
-            {
-                question: "Bentuk baku dari 0,000025 adalah...",
-                options: ["2,5 × 10⁻⁴", "2,5 × 10⁻⁵", "25 × 10⁻⁶", "0,25 × 10⁻⁴"],
+                question: "Gradien dari garis y = 3x - 5 adalah...",
+                options: ["-5", "3", "5", "-3"],
                 answer: 1,
-                explanation: "Koma digeser ke kanan 5 kali, maka pangkat negatif 5: 2,5 × 10⁻⁵."
+                explanation: "Gradien adalah koefisien x, yaitu 3."
             },
+            // SOAL 3: Titik potong sumbu Y
             {
-                question: "Hasil dari (3²)³ adalah...",
-                options: ["3⁵", "3⁶", "3⁸", "9²"],
-                answer: 1,
-                explanation: "Sifat pangkat: (aᵐ)ⁿ = aᵐ×ⁿ. Jadi 3²×³ = 3⁶."
-            },
-            {
-                question: "Nilai dari √12 + √27 adalah...",
-                options: ["√39", "5√3", "6√3", "13√3"],
-                answer: 1,
-                explanation: "√12 = 2√3, √27 = 3√3, maka 2√3 + 3√3 = 5√3."
-            },
-            {
-                question: "Hasil dari 5⁰ + 2⁰ - 3⁰ adalah...",
-                options: ["0", "1", "4", "3"],
-                answer: 1,
-                explanation: "Semua bilangan (kecuali 0) pangkat 0 = 1. Jadi 1 + 1 - 1 = 1."
-            },
-            {
-                question: "Notasi ilmiah untuk 150.000.000 adalah...",
-                options: ["1,5 × 10⁸", "1,5 × 10⁷", "15 × 10⁷", "1,5 × 10⁻⁸"],
-                answer: 0,
-                explanation: "Koma digeser ke kiri 8 kali: 1,5 × 10⁸."
-            },
-            {
-                question: "Hasil dari 10⁵ ÷ 10² adalah...",
-                options: ["10⁷", "10¹⁰", "10³", "100"],
+                question: "Titik potong sumbu Y dari garis y = -2x + 7 adalah...",
+                options: ["(0, -2)", "(0, 2)", "(0, 7)", "(0, -7)"],
                 answer: 2,
-                explanation: "Sifat pembagian: aᵐ ÷ aⁿ = aᵐ⁻ⁿ. Jadi 10⁵⁻² = 10³."
+                explanation: "Titik potong sumbu Y diperoleh saat x = 0, maka y = 7. Jadi titiknya (0, 7)."
             },
+            // SOAL 4: Titik potong sumbu X
             {
-                question: "√125 jika disederhanakan menjadi...",
-                options: ["5√5", "25√5", "5√25", "15√5"],
+                question: "Titik potong sumbu X dari garis y = 2x - 4 adalah...",
+                options: ["(2, 0)", "(-2, 0)", "(4, 0)", "(0, 4)"],
                 answer: 0,
-                explanation: "√125 = √(25 × 5) = 5√5."
+                explanation: "Saat y = 0: 0 = 2x - 4 → 2x = 4 → x = 2. Titik (2, 0)."
             },
+            // SOAL 5: Gradien melalui dua titik
             {
-                question: "Hasil dari 2√3 × √2 adalah...",
-                options: ["2√5", "2√6", "6√2", "√12"],
+                question: "Gradien garis yang melalui titik (2, 1) dan (4, 7) adalah...",
+                options: ["2", "3", "4", "6"],
                 answer: 1,
-                explanation: "2√3 × √2 = 2√(3 × 2) = 2√6."
+                explanation: "m = (7-1)/(4-2) = 6/2 = 3."
+            },
+            // SOAL 6: Gradien garis horizontal
+            {
+                question: "Gradien garis y = 5 adalah...",
+                options: ["5", "0", "1", "Tak terdefinisi"],
+                answer: 1,
+                explanation: "Garis horizontal (y = konstanta) memiliki gradien 0."
+            },
+            // SOAL 7: Gradien garis vertikal
+            {
+                question: "Gradien garis x = -3 adalah...",
+                options: ["-3", "0", "1", "Tak terdefinisi"],
+                answer: 3,
+                explanation: "Garis vertikal (x = konstanta) memiliki gradien tak terdefinisi (∞)."
+            },
+            // SOAL 8: Gradien positif/negatif
+            {
+                question: "Garis dengan gradien negatif akan...",
+                options: ["Naik ke kanan", "Turun ke kanan", "Horizontal", "Vertikal"],
+                answer: 1,
+                explanation: "Gradien negatif menyebabkan garis turun ke kanan."
+            },
+            // SOAL 9: Gradien garis sejajar
+            {
+                question: "Garis yang sejajar dengan y = 4x + 1 memiliki gradien...",
+                options: ["-4", "¼", "4", "-¼"],
+                answer: 2,
+                explanation: "Garis sejajar memiliki gradien yang sama, yaitu 4."
+            },
+            // SOAL 10: Gradien garis tegak lurus
+            {
+                question: "Garis yang tegak lurus dengan y = 2x - 3 memiliki gradien...",
+                options: ["2", "-2", "½", "-½"],
+                answer: 3,
+                explanation: "Hasil kali gradien = -1, maka m₂ = -1/2."
+            },
+            // SOAL 11: Menentukan persamaan garis
+            {
+                question: "Persamaan garis dengan gradien 3 dan melalui titik (0, -2) adalah...",
+                options: ["y = 3x + 2", "y = 3x - 2", "y = -3x + 2", "y = -3x - 2"],
+                answer: 1,
+                explanation: "Bentuk y = mx + c. m = 3, c = -2 (titik potong Y). Jadi y = 3x - 2."
+            },
+            // SOAL 12: Gradien dari persamaan ax + by = c
+            {
+                question: "Gradien garis 2x + 3y = 6 adalah...",
+                options: ["-2/3", "2/3", "-3/2", "3/2"],
+                answer: 0,
+                explanation: "Ubah ke y = mx + c: 3y = -2x + 6 → y = -2/3 x + 2. Gradien = -2/3."
+            },
+            // SOAL 13: Soal cerita gradien
+            {
+                question: "Seorang pendaki menempuh ketinggian 400 m dalam jarak horizontal 800 m. Gradien tanjakan yang didaki adalah...",
+                options: ["0,5", "1", "2", "4"],
+                answer: 0,
+                explanation: "Gradien = Δy/Δx = 400/800 = 0,5."
+            },
+            // SOAL 14: Titik potong dua garis
+            {
+                question: "Titik potong garis y = 2x + 1 dan y = x + 3 adalah...",
+                options: ["(1, 3)", "(2, 5)", "(3, 7)", "(4, 9)"],
+                answer: 1,
+                explanation: "2x + 1 = x + 3 → x = 2, y = 2(2)+1 = 5. Titik (2,5)."
+            },
+            // SOAL 15: Gradien garis melalui titik asal
+            {
+                question: "Gradien garis yang melalui titik (0, 0) dan (4, 6) adalah...",
+                options: ["1,5", "2", "0,5", "1"],
+                answer: 0,
+                explanation: "m = (6-0)/(4-0) = 6/4 = 1,5."
             }
         ];
 
@@ -711,64 +751,44 @@
         let currentQuestionIndex = 0;
         let userAnswers = [];
         let timer;
-        let timeLeft = 900; // 15 menit = 900 detik
+        let timeLeft = 1200; // 20 menit = 1200 detik
 
         // =========================================
         // INISIALISASI EVENT LISTENER
         // =========================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Setup tombol start
             document.getElementById('startQuizBtn').addEventListener('click', startQuiz);
-            
-            // Setup tombol next
             document.getElementById('next-btn').addEventListener('click', nextQuestion);
-            
-            // Setup tombol restart
             document.getElementById('restartBtn').addEventListener('click', restartQuiz);
-            
-            // Setup tombol kembali ke bab
             document.getElementById('backToBabBtn').addEventListener('click', goToBab);
             
-            // Inisialisasi
             userAnswers = new Array(questionsBank.length).fill(null);
             document.getElementById('start-screen').style.display = 'block';
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'none';
         });
 
-        // =========================================
-        // FUNGSI-FUNGSI QUIZ
-        // =========================================
-        
         function startQuiz() {
-            // Reset semua variabel
             currentQuestionIndex = 0;
             userAnswers = new Array(questionsBank.length).fill(null);
-            timeLeft = 900;
+            timeLeft = 1200;
             
-            // Update tampilan timer
             updateTimerDisplay();
             
-            // Tampilkan layar quiz
             document.getElementById('start-screen').style.display = 'none';
             document.getElementById('quiz-screen').style.display = 'block';
             document.getElementById('result-screen').style.display = 'none';
             
-            // Tampilkan soal pertama
             showQuestion();
-            
-            // Mulai timer
             startTimer();
         }
 
         function showQuestion() {
             const q = questionsBank[currentQuestionIndex];
             
-            // Tampilkan teks soal - sudah dalam bentuk teks biasa, bukan LaTeX
             document.getElementById('question-text').innerHTML = 
                 (currentQuestionIndex + 1) + ". " + q.question;
             
-            // Render opsi jawaban
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
             
@@ -776,7 +796,6 @@
                 const optionDiv = document.createElement('div');
                 optionDiv.className = 'option';
                 
-                // Jika sudah pernah menjawab, tampilkan jawaban yang dipilih
                 if (userAnswers[currentQuestionIndex] === index) {
                     optionDiv.classList.add('selected');
                 }
@@ -786,7 +805,6 @@
                     <span>${opt}</span>
                 `;
                 
-                // Gunakan closure untuk menyimpan index dengan benar
                 optionDiv.addEventListener('click', (function(idx) {
                     return function() {
                         selectOption(idx);
@@ -796,35 +814,23 @@
                 optionsContainer.appendChild(optionDiv);
             });
             
-            // Update nomor soal
             document.getElementById('current-q-num').innerText = currentQuestionIndex + 1;
             
-            // Update progress bar
             const progress = (currentQuestionIndex / questionsBank.length) * 100;
             document.getElementById('progress-fill').style.width = progress + '%';
             
-            // Update tombol next
             updateNextButton();
-            
-            // Hapus feedback
             document.getElementById('feedback').innerHTML = '';
         }
 
         function selectOption(index) {
-            // Hapus class selected dari semua opsi
             const options = document.querySelectorAll('.option');
             options.forEach(opt => opt.classList.remove('selected'));
-            
-            // Tambah class selected ke opsi yang dipilih
             options[index].classList.add('selected');
             
-            // Simpan jawaban user
             userAnswers[currentQuestionIndex] = index;
-            
-            // Update tombol next
             updateNextButton();
             
-            // Beri feedback langsung
             const q = questionsBank[currentQuestionIndex];
             if (index === q.answer) {
                 document.getElementById('feedback').innerHTML = '✅ Jawaban benar!';
@@ -837,11 +843,7 @@
 
         function updateNextButton() {
             const nextBtn = document.getElementById('next-btn');
-            if (userAnswers[currentQuestionIndex] !== null && userAnswers[currentQuestionIndex] !== undefined) {
-                nextBtn.disabled = false;
-            } else {
-                nextBtn.disabled = true;
-            }
+            nextBtn.disabled = (userAnswers[currentQuestionIndex] === null || userAnswers[currentQuestionIndex] === undefined);
         }
 
         function nextQuestion() {
@@ -860,7 +862,6 @@
                     timeLeft--;
                     updateTimerDisplay();
                 } else {
-                    // Waktu habis
                     clearInterval(timer);
                     finishQuiz();
                 }
@@ -875,14 +876,11 @@
         }
 
         function finishQuiz() {
-            // Hentikan timer
             clearInterval(timer);
             
-            // Sembunyikan quiz screen, tampilkan result screen
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'block';
             
-            // Hitung jumlah jawaban benar
             let correct = 0;
             for (let i = 0; i < questionsBank.length; i++) {
                 if (userAnswers[i] === questionsBank[i].answer) {
@@ -892,19 +890,17 @@
             
             let wrong = questionsBank.length - correct;
             let accuracy = Math.round((correct / questionsBank.length) * 100);
-            let score = correct * 10; // Maksimal 100
+            let score = Math.round((correct / questionsBank.length) * 100);
             
-            // Tampilkan skor
             document.getElementById('final-score').innerText = score;
             document.getElementById('correct-count').innerText = correct;
             document.getElementById('wrong-count').innerText = wrong;
             document.getElementById('accuracy').innerText = accuracy + '%';
             
-            // Tampilkan pesan berdasarkan skor
             let message, submessage;
             if (score >= 80) {
                 message = "🎉 Luar Biasa!";
-                submessage = "Kamu menguasai bilangan berpangkat dengan baik!";
+                submessage = "Kamu menguasai Persamaan Garis Lurus dengan baik!";
             } else if (score >= 60) {
                 message = "👍 Cukup Baik!";
                 submessage = "Tingkatkan lagi, kamu pasti bisa lebih baik!";
@@ -916,7 +912,6 @@
             document.getElementById('congrats-message').innerText = message;
             document.getElementById('result-submessage').innerText = submessage;
             
-            // Tampilkan review jawaban
             displayReview();
         }
 
@@ -954,13 +949,13 @@
                         </div>
                         <div style="flex: 1;">
                             <span style="font-weight: 600; color: var(--text-muted);">Jawaban Benar:</span><br>
-                            <span style="font-weight: 700; color: var(--primary-dark);">
+                            <span style="font-weight: 700; color: var(--accent-dark);">
                                 ${correctAnswerText}
                             </span>
                         </div>
                     </div>
                     <div class="explanation">
-                        <span style="font-weight: 700; color: var(--primary-dark);"><i class="fas fa-lightbulb"></i> Pembahasan:</span>
+                        <span style="font-weight: 700; color: var(--accent-dark);"><i class="fas fa-lightbulb"></i> Pembahasan:</span>
                         <p style="margin-top: 8px;">${q.explanation}</p>
                     </div>
                 `;
@@ -970,22 +965,19 @@
         }
 
         function restartQuiz() {
-            // Reset semua variabel
             currentQuestionIndex = 0;
             userAnswers = new Array(questionsBank.length).fill(null);
-            timeLeft = 900;
+            timeLeft = 1200;
             
-            // Tampilkan start screen
             document.getElementById('start-screen').style.display = 'block';
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'none';
             
-            // Hentikan timer
             clearInterval(timer);
         }
 
         function goToBab() {
-            window.location.href = 'bab1-bilangan-berpangkat.html';
+            window.location.href = 'bab5-persamaan-garis.html';
         }
     </script>
 </body>

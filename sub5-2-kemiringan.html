@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengertian Kemiringan (Gradien) | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* =========================================
+           1. VARIABLES & CORE STYLING (KONSISTEN)
+           ========================================= */
+        :root {
+            --primary: #0d9488;
+            --primary-light: #14b8a6;
+            --primary-soft: #ccfbf1;
+            --primary-dark: #0f766e;
+            --secondary: #6366f1;
+            --secondary-light: #818cf8;
+            --secondary-soft: #e0e7ff;
+            --secondary-dark: #4f46e5;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --accent-soft: #fff3cd;
+            --accent-dark: #b45309;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(245,158,11,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 24px;
+            --border-radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           2. NAVIGATION (KONSISTEN)
+           ========================================= */
+        .top-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-6px);
+            color: var(--accent-dark);
+        }
+
+        .chapter-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+
+        /* =========================================
+           3. PROGRESS BAR
+           ========================================= */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--accent), var(--secondary));
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        .hero-section {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            padding: 60px 5% 80px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "⛰️";
+            position: absolute;
+            font-size: 180px;
+            top: -40px;
+            right: 5%;
+            opacity: 0.08;
+            transform: rotate(15deg);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           5. MAIN CONTAINER
+           ========================================= */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* =========================================
+           6. CONTENT CARD
+           ========================================= */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--accent-soft);
+            color: var(--accent-dark);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           7. VIDEO CONTAINER
+           ========================================= */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================================
+           8. GRADIEN CARDS
+           ========================================= */
+        .gradient-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .gradient-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            border-top: 6px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .gradient-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gradient-icon {
+            background: var(--accent-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-dark);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .formula-box {
+            background: var(--gray-100);
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px 0;
+            border-left: 6px solid var(--accent);
+            font-size: 1.3rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--accent-dark);
+        }
+
+        /* =========================================
+           9. SIMULATOR GRADIEN
+           ========================================= */
+        .simulator-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 40px;
+            padding: 50px;
+            margin-top: 20px;
+        }
+
+        .simulator-title {
+            color: var(--accent-light);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .point-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .point-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 25px;
+            min-width: 200px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .point-card h4 {
+            color: var(--accent-light);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .coord-input {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .coord-field {
+            flex: 1;
+        }
+
+        .coord-field label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--gray-300);
+            margin-bottom: 5px;
+        }
+
+        .coord-field input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .gradient-result {
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .gradient-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-light);
+        }
+
+        .btn-calc {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+
+        .btn-calc:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245,158,11,0.3);
+        }
+
+        /* =========================================
+           10. HUBUNGAN GRADIEN
+           ========================================= */
+        .relation-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .relation-box {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .relation-item {
+            background: var(--gray-100);
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        /* =========================================
+           11. LATIHAN SOAL
+           ========================================= */
+        .quiz-mini {
+            background: var(--accent-soft);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .quiz-btn {
+            background: var(--white);
+            border: 2px solid var(--accent);
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: var(--accent);
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 5px;
+        }
+
+        .quiz-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* =========================================
+           12. PAGINATION FOOTER
+           ========================================= */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .content-card { padding: 30px; }
+            .point-selector { flex-direction: column; }
+            .simulator-box { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="top-bar">
+        <a href="bab5-persamaan-garis.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Bab 5
+        </a>
+        <span class="chapter-badge"><i class="fas fa-mountain"></i> Sub B: Pengertian Kemiringan</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>⛰️ Pengertian Kemiringan (Gradien)</h1>
+        <p>Memahami gradien sebagai ukuran kemiringan garis dan cara menghitungnya</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Card: Video Pembelajaran -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-play"></i> VIDEO PEMBELAJARAN</span>
+            <div class="section-title">
+                <i class="fas fa-film"></i>
+                <h2>Apa itu Gradien?</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Tonton video berikut untuk memahami konsep gradien sebagai kemiringan garis.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/3G4X2a2-z3M" title="Gradien Garis Lurus" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top: 25px; padding: 20px; background: var(--accent-soft); border-radius: 20px;">
+                <p style="font-weight: 700; color: var(--accent-dark);"><i class="fas fa-lightbulb"></i> Poin Penting:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Gradien</strong> adalah ukuran kemiringan suatu garis.</li>
+                    <li>Gradien = <strong>perubahan vertikal / perubahan horizontal</strong></li>
+                    <li>Rumus: \(m = \frac{y_2 - y_1}{x_2 - x_1}\)</li>
+                    <li>Gradien positif: garis naik ke kanan, negatif: garis turun ke kanan.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card: Definisi dan Rumus Gradien -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-info-circle"></i> DEFINISI</span>
+            <div class="section-title">
+                <i class="fas fa-mountain"></i>
+                <h2>Gradien (Kemiringan) Garis</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;">
+                <div>
+                    <div class="math-definition" style="border: 2px dashed var(--accent);">
+                        <p style="font-size: 1.8rem; margin-bottom: 10px;">\(m = \frac{\Delta y}{\Delta x}\)</p>
+                        <p style="font-size: 1.3rem;">\(m = \frac{y_2 - y_1}{x_2 - x_1}\)</p>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <p><strong>Keterangan:</strong></p>
+                        <ul style="list-style: none; margin-top: 15px;">
+                            <li style="margin-bottom: 10px;">✓ <strong>Δy</strong> = perubahan vertikal (selisih y)</li>
+                            <li style="margin-bottom: 10px;">✓ <strong>Δx</strong> = perubahan horizontal (selisih x)</li>
+                            <li>✓ <strong>(x₁, y₁)</strong> dan <strong>(x₂, y₂)</strong> = dua titik pada garis</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: var(--accent-soft); padding: 30px; border-radius: 20px;">
+                    <h4 style="color: var(--accent-dark); margin-bottom: 20px;">📌 Visualisasi Gradien</h4>
+                    <svg width="200" height="150" viewBox="0 0 200 150" style="display: block; margin: 0 auto;">
+                        <!-- Garis -->
+                        <line x1="30" y1="110" x2="170" y2="40" stroke="var(--accent)" stroke-width="3"/>
+                        
+                        <!-- Titik -->
+                        <circle cx="30" cy="110" r="5" fill="var(--accent-dark)"/>
+                        <circle cx="170" cy="40" r="5" fill="var(--accent-dark)"/>
+                        
+                        <!-- Label titik -->
+                        <text x="15" y="130" fill="var(--accent-dark)" font-size="12">(x₁, y₁)</text>
+                        <text x="150" y="30" fill="var(--accent-dark)" font-size="12">(x₂, y₂)</text>
+                        
+                        <!-- Garis bantu horizontal -->
+                        <line x1="30" y1="110" x2="170" y2="110" stroke="var(--gray-300)" stroke-width="1" stroke-dasharray="4"/>
+                        <text x="90" y="130" fill="var(--text-muted)" font-size="11">Δx = x₂ - x₁</text>
+                        
+                        <!-- Garis bantu vertikal -->
+                        <line x1="170" y1="110" x2="170" y2="40" stroke="var(--gray-300)" stroke-width="1" stroke-dasharray="4"/>
+                        <text x="180" y="75" fill="var(--text-muted)" font-size="11">Δy = y₂ - y₁</text>
+                    </svg>
+                    <p style="text-align: center; margin-top: 20px; font-weight: 700;">
+                        \(m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1}\)
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Jenis-jenis Gradien -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-tag"></i> JENIS</span>
+            <div class="section-title">
+                <i class="fas fa-sitemap"></i>
+                <h2>Macam-macam Gradien</h2>
+            </div>
+            
+            <div class="gradient-grid">
+                <div class="gradient-card">
+                    <div class="gradient-icon">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">Gradien Positif</h3>
+                    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                        <svg width="120" height="80" viewBox="0 0 120 80">
+                            <line x1="20" y1="60" x2="100" y2="20" stroke="var(--success)" stroke-width="3"/>
+                            <text x="50" y="50" fill="var(--success)" font-size="12">m > 0</text>
+                        </svg>
+                    </div>
+                    <p>Garis naik ke kanan</p>
+                    <p style="margin-top: 10px; font-weight: 700;">Contoh: m = 2, m = ½</p>
+                </div>
+                
+                <div class="gradient-card">
+                    <div class="gradient-icon">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">Gradien Negatif</h3>
+                    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                        <svg width="120" height="80" viewBox="0 0 120 80">
+                            <line x1="20" y1="20" x2="100" y2="60" stroke="var(--danger)" stroke-width="3"/>
+                            <text x="50" y="50" fill="var(--danger)" font-size="12">m < 0</text>
+                        </svg>
+                    </div>
+                    <p>Garis turun ke kanan</p>
+                    <p style="margin-top: 10px; font-weight: 700;">Contoh: m = -2, m = -½</p>
+                </div>
+                
+                <div class="gradient-card">
+                    <div class="gradient-icon">
+                        <i class="fas fa-minus"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">Gradien Nol</h3>
+                    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                        <svg width="120" height="80" viewBox="0 0 120 80">
+                            <line x1="20" y1="40" x2="100" y2="40" stroke="var(--gray-600)" stroke-width="3"/>
+                            <text x="50" y="30" fill="var(--gray-600)" font-size="12">m = 0</text>
+                        </svg>
+                    </div>
+                    <p>Garis horizontal (mendatar)</p>
+                    <p style="margin-top: 10px; font-weight: 700;">Contoh: y = 3</p>
+                </div>
+                
+                <div class="gradient-card">
+                    <div class="gradient-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px;">Gradien Tak Terdefinisi</h3>
+                    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                        <svg width="120" height="80" viewBox="0 0 120 80">
+                            <line x1="60" y1="10" x2="60" y2="70" stroke="var(--gray-600)" stroke-width="3"/>
+                            <text x="70" y="45" fill="var(--gray-600)" font-size="12">m = ∞</text>
+                        </svg>
+                    </div>
+                    <p>Garis vertikal (tegak)</p>
+                    <p style="margin-top: 10px; font-weight: 700;">Contoh: x = 2</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Simulator Gradien Interaktif -->
+        <div class="simulator-box">
+            <div class="simulator-title">
+                <i class="fas fa-calculator"></i>
+                <h2 style="color: white; margin: 0;">Kalkulator Gradien</h2>
+            </div>
+            <p style="margin-bottom: 25px; opacity: 0.9;">Masukkan koordinat dua titik untuk menghitung gradien garis yang melaluinya.</p>
+            
+            <div class="point-selector">
+                <div class="point-card">
+                    <h4><i class="fas fa-map-pin"></i> Titik Pertama (x₁, y₁)</h4>
+                    <div class="coord-input">
+                        <div class="coord-field">
+                            <label>X₁</label>
+                            <input type="number" id="x1" value="1" step="any">
+                        </div>
+                        <div class="coord-field">
+                            <label>Y₁</label>
+                            <input type="number" id="y1" value="2" step="any">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="point-card">
+                    <h4><i class="fas fa-map-pin"></i> Titik Kedua (x₂, y₂)</h4>
+                    <div class="coord-input">
+                        <div class="coord-field">
+                            <label>X₂</label>
+                            <input type="number" id="x2" value="3" step="any">
+                        </div>
+                        <div class="coord-field">
+                            <label>Y₂</label>
+                            <input type="number" id="y2" value="6" step="any">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <button onclick="hitungGradien()" class="btn-calc">
+                    <i class="fas fa-calculator"></i> Hitung Gradien
+                </button>
+                <button onclick="resetGradien()" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 15px 35px; border-radius: 60px; font-weight: 700; margin-left: 15px; cursor: pointer;">
+                    <i class="fas fa-redo-alt"></i> Reset
+                </button>
+            </div>
+            
+            <div class="gradient-result">
+                <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 10px;">Gradien (m) =</p>
+                <span class="gradient-value" id="gradientResult">2.00</span>
+                <p id="gradientDesc" style="margin-top: 15px; color: var(--gray-300);">
+                    \(m = \frac{6 - 2}{3 - 1} = \frac{4}{2} = 2\) (Gradien Positif)
+                </p>
+                <p id="gradientType" style="margin-top: 10px; font-weight: 700; color: var(--accent-light);">
+                    Garis naik ke kanan
+                </p>
+            </div>
+        </div>
+
+        <!-- Card: Gradien Garis Sejajar dan Tegak Lurus -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-code-branch"></i> HUBUNGAN</span>
+            <div class="section-title">
+                <i class="fas fa-arrows-alt-h"></i>
+                <h2>Gradien Garis Sejajar & Tegak Lurus</h2>
+            </div>
+            
+            <div class="relation-box">
+                <div style="background: var(--gray-100); padding: 30px; border-radius: 20px;">
+                    <i class="fas fa-equals" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">Garis Sejajar</h4>
+                    <div class="formula-box" style="background: white;">
+                        \(m_1 = m_2\)
+                    </div>
+                    <div style="display: flex; justify-content: center; margin: 20px 0;">
+                        <svg width="150" height="80" viewBox="0 0 150 80">
+                            <line x1="20" y1="30" x2="130" y2="30" stroke="var(--accent)" stroke-width="3"/>
+                            <line x1="20" y1="50" x2="130" y2="50" stroke="var(--accent)" stroke-width="3" stroke-dasharray="5"/>
+                        </svg>
+                    </div>
+                    <p>Dua garis sejajar memiliki <strong>gradien yang sama</strong>.</p>
+                </div>
+                
+                <div style="background: var(--gray-100); padding: 30px; border-radius: 20px;">
+                    <i class="fas fa-times" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">Garis Tegak Lurus</h4>
+                    <div class="formula-box" style="background: white;">
+                        \(m_1 \times m_2 = -1\)
+                    </div>
+                    <div style="display: flex; justify-content: center; margin: 20px 0;">
+                        <svg width="150" height="80" viewBox="0 0 150 80">
+                            <line x1="20" y1="60" x2="130" y2="20" stroke="var(--accent)" stroke-width="3"/>
+                            <line x1="20" y1="20" x2="130" y2="60" stroke="var(--accent)" stroke-width="3" stroke-dasharray="5"/>
+                        </svg>
+                    </div>
+                    <p>Dua garis tegak lurus: hasil kali gradien = <strong>-1</strong>.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 25px; background: var(--accent-soft); border-radius: 20px;">
+                <p style="font-weight: 700; color: var(--accent-dark);">📌 Contoh:</p>
+                <p>Garis A: y = 2x + 3 (m₁ = 2)</p>
+                <p>Garis B: y = 2x - 5 (m₂ = 2) → <strong>Sejajar</strong></p>
+                <p>Garis C: y = -½x + 1 (m₃ = -½) → <strong>Tegak Lurus</strong> (2 × -½ = -1)</p>
+            </div>
+        </div>
+
+        <!-- Card: Latihan Soal -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-pencil-alt"></i> LATIHAN</span>
+            <div class="section-title">
+                <i class="fas fa-question-circle"></i>
+                <h2>Uji Pemahaman Gradien</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 1</p>
+                    <p style="margin-bottom: 20px;">Gradien garis yang melalui titik (2, 3) dan (4, 7) adalah...</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button onclick="checkGradienQuiz(1,1)" class="quiz-btn">A. 1</button>
+                        <button onclick="checkGradienQuiz(1,2)" class="quiz-btn">B. 2</button>
+                        <button onclick="checkGradienQuiz(1,3)" class="quiz-btn">C. 3</button>
+                        <button onclick="checkGradienQuiz(1,4)" class="quiz-btn">D. 4</button>
+                    </div>
+                    <div id="gradienQuiz1" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+                
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 2</p>
+                    <p style="margin-bottom: 20px;">Gradien garis yang tegak lurus dengan garis y = 3x - 2 adalah...</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button onclick="checkGradienQuiz(2,1)" class="quiz-btn">A. 3</button>
+                        <button onclick="checkGradienQuiz(2,2)" class="quiz-btn">B. -3</button>
+                        <button onclick="checkGradienQuiz(2,3)" class="quiz-btn">C. ⅓</button>
+                        <button onclick="checkGradienQuiz(2,4)" class="quiz-btn">D. -⅓</button>
+                    </div>
+                    <div id="gradienQuiz2" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Rangkuman -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-clipboard-check"></i> RANGKUMAN</span>
+            <div class="section-title">
+                <i class="fas fa-book"></i>
+                <h2>Intisari Gradien</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">📌 Rumus Gradien</h4>
+                    <p style="font-size: 1.2rem; font-weight: 700;">\(m = \frac{y_2 - y_1}{x_2 - x_1}\)</p>
+                </div>
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">📌 Gradien Positif</h4>
+                    <p>m > 0, garis naik ke kanan</p>
+                </div>
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">📌 Gradien Negatif</h4>
+                    <p>m < 0, garis turun ke kanan</p>
+                </div>
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--accent-dark); margin-bottom: 15px;">📌 Sejajar & Tegak Lurus</h4>
+                    <p>Sejajar: m₁ = m₂<br>Tegak lurus: m₁ × m₂ = -1</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="page-footer">
+            <a href="sub5-1-grafik.html" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Sebelumnya: Grafik Garis Lurus
+            </a>
+            <a href="kuis-bab5.html" class="nav-btn right">
+                Uji Kompetensi <i class="fas fa-trophy"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MathMaster8 - Pengertian Kemiringan (Gradien) | Kurikulum Merdeka</p>
+        <p style="margin-top: 8px; opacity: 0.6;">"Setiap garis memiliki cerita, gradien adalah bahasanya." - N.A.</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+        };
+
+        // =========================================
+        // KALKULATOR GRADIEN
+        // =========================================
+        function hitungGradien() {
+            let x1 = parseFloat(document.getElementById('x1').value);
+            let y1 = parseFloat(document.getElementById('y1').value);
+            let x2 = parseFloat(document.getElementById('x2').value);
+            let y2 = parseFloat(document.getElementById('y2').value);
+            
+            let result = document.getElementById('gradientResult');
+            let desc = document.getElementById('gradientDesc');
+            let type = document.getElementById('gradientType');
+            
+            if (isNaN(x1) || isNaN(y1) || isNaN(x2) || isNaN(y2)) {
+                result.innerText = '???';
+                desc.innerHTML = 'Masukkan koordinat yang valid!';
+                type.innerHTML = '';
+                return;
+            }
+            
+            if (x1 === x2) {
+                result.innerText = '∞';
+                desc.innerHTML = `Garis vertikal (x = ${x1.toFixed(1)}), gradien tidak terdefinisi.`;
+                type.innerHTML = 'Garis vertikal';
+                return;
+            }
+            
+            let m = (y2 - y1) / (x2 - x1);
+            result.innerText = m.toFixed(2);
+            
+            desc.innerHTML = `\\(m = \\frac{${y2} - ${y1}}{${x2} - ${x1}} = \\frac{${(y2 - y1).toFixed(1)}}{${(x2 - x1).toFixed(1)}} = ${m.toFixed(2)}\\)`;
+            
+            if (m > 0) {
+                type.innerHTML = '📈 Gradien Positif - Garis naik ke kanan';
+                type.style.color = '#22c55e';
+            } else if (m < 0) {
+                type.innerHTML = '📉 Gradien Negatif - Garis turun ke kanan';
+                type.style.color = '#ef4444';
+            } else {
+                type.innerHTML = '➡️ Gradien Nol - Garis horizontal';
+                type.style.color = '#64748b';
+            }
+            
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        }
+
+        function resetGradien() {
+            document.getElementById('x1').value = 1;
+            document.getElementById('y1').value = 2;
+            document.getElementById('x2').value = 3;
+            document.getElementById('y2').value = 6;
+            hitungGradien();
+        }
+
+        // =========================================
+        // FUNGSI KUIS
+        // =========================================
+        function checkGradienQuiz(quizNum, answer) {
+            if (quizNum === 1) {
+                let fb = document.getElementById('gradienQuiz1');
+                fb.style.display = 'block';
+                if (answer === 2) {
+                    fb.innerHTML = '✅ Benar! m = (7-3)/(4-2) = 4/2 = 2.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Coba lagi! Gunakan rumus m = (y₂ - y₁)/(x₂ - x₁).';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            } else if (quizNum === 2) {
+                let fb = document.getElementById('gradienQuiz2');
+                fb.style.display = 'block';
+                if (answer === 4) {
+                    fb.innerHTML = '✅ Benar! m₁ × m₂ = -1, maka m₂ = -1/3.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Coba lagi! Hasil kali gradien garis tegak lurus = -1.';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            }
+        }
+
+        // Inisialisasi
+        window.onload = function() {
+            hitungGradien();
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        };
+    </script>
+</body>
+</html>

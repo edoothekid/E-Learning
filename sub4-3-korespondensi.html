@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korespondensi Satu-satu | Pengayaan | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* =========================================
+           1. VARIABLES & CORE STYLING (KONSISTEN)
+           ========================================= */
+        :root {
+            --primary: #0d9488;
+            --primary-light: #14b8a6;
+            --primary-soft: #ccfbf1;
+            --primary-dark: #0f766e;
+            --secondary: #6366f1;
+            --secondary-light: #818cf8;
+            --secondary-soft: #e0e7ff;
+            --secondary-dark: #4f46e5;
+            --accent: #f59e0b;
+            --accent-soft: #fff3cd;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(99,102,241,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 24px;
+            --border-radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           2. NAVIGATION (KONSISTEN)
+           ========================================= */
+        .top-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-6px);
+            color: var(--secondary-dark);
+        }
+
+        .chapter-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--secondary);
+            background: var(--secondary-soft);
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+
+        /* =========================================
+           3. PROGRESS BAR
+           ========================================= */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        .hero-section {
+            background: linear-gradient(135deg, var(--accent) 0%, #b45309 100%);
+            color: white;
+            padding: 60px 5% 80px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "1↔1";
+            position: absolute;
+            font-size: 180px;
+            top: -40px;
+            right: 5%;
+            opacity: 0.08;
+            transform: rotate(15deg);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           5. MAIN CONTAINER
+           ========================================= */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* =========================================
+           6. CONTENT CARD
+           ========================================= */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+            font-size: 2rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--accent-soft);
+            color: #b45309;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           7. VIDEO CONTAINER
+           ========================================= */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================================
+           8. ONE-ONE CARDS
+           ========================================= */
+        .oneone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .oneone-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            border-top: 6px solid var(--accent);
+            transition: var(--transition);
+        }
+
+        .oneone-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .oneone-icon {
+            background: var(--accent-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .comparison-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .badge-function {
+            background: var(--secondary-soft);
+            color: var(--secondary-dark);
+        }
+
+        .badge-oneone {
+            background: var(--accent-soft);
+            color: #b45309;
+        }
+
+        /* =========================================
+           9. SYARAT KORESPONDENSI
+           ========================================= */
+        .requirement-box {
+            background: var(--gray-100);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 30px 0;
+            border-left: 8px solid var(--accent);
+        }
+
+        .requirement-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .requirement-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =========================================
+           10. SIMULATOR KORESPONDENSI
+           ========================================= */
+        .simulator-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 40px;
+            padding: 50px;
+            margin-top: 20px;
+        }
+
+        .simulator-title {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .oneone-builder {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .set-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 25px;
+            min-width: 200px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .set-card h4 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .pair-list {
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .pair-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 60px;
+            margin-bottom: 10px;
+        }
+
+        .pair-arrow {
+            color: var(--accent);
+            margin: 0 15px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        .status-oneone {
+            background: var(--success);
+            color: white;
+        }
+
+        .status-not {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* =========================================
+           11. LATIHAN SOAL
+           ========================================= */
+        .quiz-mini {
+            background: var(--accent-soft);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .quiz-btn {
+            background: var(--white);
+            border: 2px solid var(--accent);
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: var(--accent);
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 5px;
+        }
+
+        .quiz-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* =========================================
+           12. PAGINATION FOOTER
+           ========================================= */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .content-card { padding: 30px; }
+            .oneone-grid { grid-template-columns: 1fr; }
+            .simulator-box { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="top-bar">
+        <a href="bab4-relasi-fungsi.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Bab 4
+        </a>
+        <span class="chapter-badge"><i class="fas fa-link"></i> Sub C: Korespondensi Satu-satu</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>1↔1 Korespondensi Satu-satu</h1>
+        <p>Fungsi khusus yang memasangkan setiap anggota domain tepat satu dengan anggota kodomain, dan sebaliknya</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Card: Video Pembelajaran -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-play"></i> VIDEO PEMBELAJARAN</span>
+            <div class="section-title">
+                <i class="fas fa-film"></i>
+                <h2>Apa itu Korespondensi Satu-satu?</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Pelajari konsep fungsi bijektif yang memasangkan setiap anggota himpunan A dan B secara berpasangan tepat satu.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/6zFtvJ7c8hQ" title="Korespondensi Satu-satu" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top: 25px; padding: 20px; background: var(--accent-soft); border-radius: 20px;">
+                <p style="font-weight: 700; color: #b45309;"><i class="fas fa-lightbulb"></i> Poin Penting:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Korespondensi satu-satu (fungsi bijektif)</strong> adalah fungsi yang <strong>injektif</strong> (satu-satu) sekaligus <strong>surjektif</strong> (pada).</li>
+                    <li>Setiap anggota domain dipasangkan dengan <strong>tepat satu</strong> anggota kodomain.</li>
+                    <li>Setiap anggota kodomain dipasangkan dengan <strong>tepat satu</strong> anggota domain.</li>
+                    <li>Banyak anggota domain = banyak anggota kodomain.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card: Definisi dan Syarat -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-info-circle"></i> DEFINISI</span>
+            <div class="section-title">
+                <i class="fas fa-link"></i>
+                <h2>Korespondensi Satu-satu</h2>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <div style="font-size: 2rem; font-weight: 800; color: #b45309; background: var(--accent-soft); padding: 30px; border-radius: 30px; display: inline-block;">
+                    \(n(A) = n(B)\)
+                </div>
+            </div>
+            
+            <div class="requirement-box">
+                <h3 style="color: #b45309; margin-bottom: 25px;">📌 3 Syarat Korespondensi Satu-satu:</h3>
+                
+                <div class="requirement-list">
+                    <div style="background: white; padding: 25px; border-radius: 20px;">
+                        <div style="background: var(--accent-soft); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <span style="font-size: 1.5rem; font-weight: 800; color: #b45309;">1</span>
+                        </div>
+                        <h4 style="margin-bottom: 10px;">Fungsi (Pemetaan)</h4>
+                        <p>Setiap anggota domain memiliki <strong>tepat satu</strong> pasangan di kodomain.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 25px; border-radius: 20px;">
+                        <div style="background: var(--accent-soft); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <span style="font-size: 1.5rem; font-weight: 800; color: #b45309;">2</span>
+                        </div>
+                        <h4 style="margin-bottom: 10px;">Injektif (Satu-satu)</h4>
+                        <p>Tidak ada dua anggota domain berbeda yang memiliki pasangan yang sama di kodomain.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 25px; border-radius: 20px;">
+                        <div style="background: var(--accent-soft); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <span style="font-size: 1.5rem; font-weight: 800; color: #b45309;">3</span>
+                        </div>
+                        <h4 style="margin-bottom: 10px;">Surjektif (Pada)</h4>
+                        <p>Setiap anggota kodomain memiliki pasangan di domain (range = kodomain).</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 25px; border-radius: 20px;">
+                        <div style="background: var(--accent-soft); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                            <span style="font-size: 1.5rem; font-weight: 800; color: #b45309;">4</span>
+                        </div>
+                        <h4 style="margin-bottom: 10px;">Jumlah Anggota</h4>
+                        <p>Banyak anggota domain <strong>sama dengan</strong> banyak anggota kodomain.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Perbandingan Fungsi -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-code-branch"></i> PERBANDINGAN</span>
+            <div class="section-title">
+                <i class="fas fa-balance-scale"></i>
+                <h2>Fungsi Biasa vs Korespondensi Satu-satu</h2>
+            </div>
+            
+            <div class="oneone-grid">
+                <!-- Fungsi Biasa (Injektif) -->
+                <div class="oneone-card">
+                    <div class="oneone-icon">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <h3 style="margin-bottom: 20px;">Fungsi Injektif (Satu-satu)</h3>
+                    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                        <svg width="200" height="150" viewBox="0 0 200 150">
+                            <rect x="20" y="20" width="60" height="110" rx="10" fill="var(--secondary-soft)" stroke="var(--secondary)" stroke-width="2"/>
+                            <text x="50" y="15" fill="var(--secondary-dark)" font-weight="bold">A</text>
+                            <text x="40" y="50" fill="var(--dark)">1</text>
+                            <text x="40" y="80" fill="var(--dark)">2</text>
+                            <text x="40" y="110" fill="var(--dark)">3</text>
+                            
+                            <rect x="120" y="20" width="60" height="110" rx="10" fill="var(--secondary-soft)" stroke="var(--secondary)" stroke-width="2"/>
+                            <text x="150" y="15" fill="var(--secondary-dark)" font-weight="bold">B</text>
+                            <text x="140" y="50" fill="var(--dark)">a</text>
+                            <text x="140" y="80" fill="var(--dark)">b</text>
+                            <text x="140" y="110" fill="var(--dark)">c</text>
+                            
+                            <line x1="80" y1="45" x2="120" y2="45" stroke="var(--success)" stroke-width="2"/>
+                            <line x1="80" y1="75" x2="120" y2="75" stroke="var(--success)" stroke-width="2"/>
+                            <line x1="80" y1="105" x2="120" y2="105" stroke="var(--success)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p style="margin-bottom: 10px;">✓ Setiap anggota domain punya pasangan</p>
+                    <p style="margin-bottom: 10px;">✓ Tidak ada pasangan yang sama</p>
+                    <p style="margin-bottom: 10px;">✗ Range ≠ Kodomain (ada anggota B tidak terpasang)</p>
+                    <p style="margin-top: 15px;"><strong>n(A) = 3, n(B) = 3</strong> (sama)</p>
+                </div>
+                
+                <!-- Fungsi Surjektif -->
+                <div class="oneone-card">
+                    <div class="oneone-icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <h3 style="margin-bottom: 20px;">Fungsi Surjektif (Pada)</h3>
+                    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                        <svg width="200" height="150" viewBox="0 0 200 150">
+                            <rect x="20" y="20" width="60" height="110" rx="10" fill="var(--secondary-soft)" stroke="var(--secondary)" stroke-width="2"/>
+                            <text x="50" y="15" fill="var(--secondary-dark)" font-weight="bold">A</text>
+                            <text x="40" y="50" fill="var(--dark)">1</text>
+                            <text x="40" y="80" fill="var(--dark)">2</text>
+                            <text x="40" y="110" fill="var(--dark)">3</text>
+                            
+                            <rect x="120" y="20" width="60" height="80" rx="10" fill="var(--secondary-soft)" stroke="var(--secondary)" stroke-width="2"/>
+                            <text x="150" y="15" fill="var(--secondary-dark)" font-weight="bold">B</text>
+                            <text x="140" y="50" fill="var(--dark)">a</text>
+                            <text x="140" y="80" fill="var(--dark)">b</text>
+                            
+                            <line x1="80" y1="45" x2="120" y2="45" stroke="var(--success)" stroke-width="2"/>
+                            <line x1="80" y1="75" x2="120" y2="45" stroke="var(--success)" stroke-width="2"/>
+                            <line x1="80" y1="105" x2="120" y2="75" stroke="var(--success)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p style="margin-bottom: 10px;">✓ Setiap anggota domain punya pasangan</p>
+                    <p style="margin-bottom: 10px;">✓ Setiap anggota kodomain punya pasangan (range = kodomain)</p>
+                    <p style="margin-bottom: 10px;">✗ Ada anggota domain yang punya pasangan sama</p>
+                    <p style="margin-top: 15px;"><strong>n(A) = 3, n(B) = 2</strong> (berbeda)</p>
+                </div>
+                
+                <!-- Korespondensi Satu-satu (Bijektif) -->
+                <div class="oneone-card" style="border-top-color: var(--accent);">
+                    <div class="oneone-icon" style="background: var(--accent-soft); color: var(--accent);">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <h3 style="color: #b45309; margin-bottom: 20px;">Korespondensi Satu-satu</h3>
+                    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                        <svg width="200" height="150" viewBox="0 0 200 150">
+                            <rect x="20" y="20" width="60" height="110" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+                            <text x="50" y="15" fill="#b45309" font-weight="bold">A</text>
+                            <text x="40" y="50" fill="var(--dark)">1</text>
+                            <text x="40" y="80" fill="var(--dark)">2</text>
+                            <text x="40" y="110" fill="var(--dark)">3</text>
+                            
+                            <rect x="120" y="20" width="60" height="110" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+                            <text x="150" y="15" fill="#b45309" font-weight="bold">B</text>
+                            <text x="140" y="50" fill="var(--dark)">a</text>
+                            <text x="140" y="80" fill="var(--dark)">b</text>
+                            <text x="140" y="110" fill="var(--dark)">c</text>
+                            
+                            <line x1="80" y1="45" x2="120" y2="45" stroke="var(--accent)" stroke-width="2"/>
+                            <line x1="80" y1="75" x2="120" y2="75" stroke="var(--accent)" stroke-width="2"/>
+                            <line x1="80" y1="105" x2="120" y2="105" stroke="var(--accent)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p style="margin-bottom: 10px;">✓ Setiap anggota domain punya <strong>tepat satu</strong> pasangan</p>
+                    <p style="margin-bottom: 10px;">✓ Setiap anggota kodomain punya <strong>tepat satu</strong> pasangan</p>
+                    <p style="margin-bottom: 10px;">✓ Tidak ada pasangan yang sama</p>
+                    <p style="margin-top: 15px; font-weight: 700; color: #b45309;">n(A) = n(B) = 3</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Simulator Korespondensi Satu-satu -->
+        <div class="simulator-box">
+            <div class="simulator-title">
+                <i class="fas fa-link"></i>
+                <h2 style="color: white; margin: 0;">Cek Korespondensi Satu-satu</h2>
+            </div>
+            <p style="margin-bottom: 25px; opacity: 0.9;">Atur pasangan antara himpunan A dan B, lihat apakah memenuhi syarat korespondensi satu-satu.</p>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
+                <div class="set-card">
+                    <h4>Himpunan A</h4>
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <span style="font-weight: 700;">1</span>
+                            <select id="pair1" style="padding: 10px 20px; border-radius: 60px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+                                <option value="a">a</option>
+                                <option value="b">b</option>
+                                <option value="c">c</option>
+                                <option value="-">-</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <span style="font-weight: 700;">2</span>
+                            <select id="pair2" style="padding: 10px 20px; border-radius: 60px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+                                <option value="a">a</option>
+                                <option value="b">b</option>
+                                <option value="c">c</option>
+                                <option value="-">-</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <span style="font-weight: 700;">3</span>
+                            <select id="pair3" style="padding: 10px 20px; border-radius: 60px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+                                <option value="a">a</option>
+                                <option value="b">b</option>
+                                <option value="c">c</option>
+                                <option value="-">-</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="set-card">
+                    <h4>Himpunan B</h4>
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div><span style="font-weight: 700;">a</span></div>
+                        <div><span style="font-weight: 700;">b</span></div>
+                        <div><span style="font-weight: 700;">c</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="checkOneOne()" style="background: var(--accent); color: white; border: none; padding: 15px 40px; border-radius: 60px; font-weight: 700; font-size: 1.1rem; cursor: pointer;">
+                    <i class="fas fa-check-circle"></i> Cek Korespondensi
+                </button>
+            </div>
+            
+            <div id="oneoneResult" style="margin-top: 30px; padding: 25px; background: rgba(255,255,255,0.1); border-radius: 30px; text-align: center;">
+                <span id="oneoneStatus" style="font-size: 1.3rem; font-weight: 700;">🔍 Atur pasangan dan klik cek</span>
+                <p id="oneoneDetail" style="margin-top: 15px; color: var(--gray-300);"></p>
+            </div>
+        </div>
+
+        <!-- Card: Contoh dalam Kehidupan -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-globe"></i> APLIKASI</span>
+            <div class="section-title">
+                <i class="fas fa-users"></i>
+                <h2>Korespondensi Satu-satu dalam Kehidupan</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-id-card" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Nomor Induk Siswa</h4>
+                    <p>Setiap siswa memiliki satu NIS, dan setiap NIS hanya dimiliki oleh satu siswa.</p>
+                </div>
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-passport" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Nomor Paspor</h4>
+                    <p>Setiap warga negara memiliki satu nomor paspor, dan setiap nomor paspor hanya dimiliki satu orang.</p>
+                </div>
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-car" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Nomor Polisi</h4>
+                    <p>Setiap kendaraan memiliki satu nomor polisi, dan setiap nomor polisi hanya dimiliki satu kendaraan.</p>
+                </div>
+                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-fingerprint" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Sidik Jari</h4>
+                    <p>Setiap orang memiliki sidik jari unik, dan setiap sidik jari hanya dimiliki satu orang.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Latihan Soal -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-pencil-alt"></i> LATIHAN</span>
+            <div class="section-title">
+                <i class="fas fa-question-circle"></i>
+                <h2>Uji Pemahaman</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 1</p>
+                    <p style="margin-bottom: 20px;">Diketahui A = {1,2,3} dan B = {a,b,c}. Relasi berikut yang merupakan korespondensi satu-satu adalah...</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button onclick="checkOneOneQuiz(1,1)" class="quiz-btn">A. {(1,a), (2,a), (3,c)}</button>
+                        <button onclick="checkOneOneQuiz(1,2)" class="quiz-btn">B. {(1,a), (2,b), (3,c)}</button>
+                        <button onclick="checkOneOneQuiz(1,3)" class="quiz-btn">C. {(1,a), (2,b), (3,b)}</button>
+                        <button onclick="checkOneOneQuiz(1,4)" class="quiz-btn">D. {(1,a), (2,b)}</button>
+                    </div>
+                    <div id="oneoneQuiz1" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+                
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 2</p>
+                    <p style="margin-bottom: 20px;">Jika n(A) = 5 dan n(B) = 5, maka banyak korespondensi satu-satu yang mungkin dari A ke B adalah...</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button onclick="checkOneOneQuiz(2,1)" class="quiz-btn">A. 25</button>
+                        <button onclick="checkOneOneQuiz(2,2)" class="quiz-btn">B. 120</button>
+                        <button onclick="checkOneOneQuiz(2,3)" class="quiz-btn">C. 240</button>
+                        <button onclick="checkOneOneQuiz(2,4)" class="quiz-btn">D. 625</button>
+                    </div>
+                    <div id="oneoneQuiz2" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Rumus Banyak Korespondensi -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-calculator"></i> RUMUS</span>
+            <div class="section-title">
+                <i class="fas fa-superscript"></i>
+                <h2>Menghitung Banyak Korespondensi Satu-satu</h2>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <div style="font-size: 2.2rem; font-weight: 800; color: #b45309; background: var(--accent-soft); padding: 30px; border-radius: 30px; display: inline-block;">
+                    \(n! = n \times (n-1) \times (n-2) \times ... \times 3 \times 2 \times 1\)
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-bottom: 30px;">Jika \(n(A) = n(B) = n\), maka banyak korespondensi satu-satu yang mungkin = <strong>n! (n faktorial)</strong></p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div style="background: white; border: 2px solid var(--accent-soft); padding: 20px; border-radius: 16px;">
+                    <p style="font-weight: 700;">n = 2</p>
+                    <p style="font-size: 1.5rem; color: var(--accent);">2! = 2</p>
+                </div>
+                <div style="background: white; border: 2px solid var(--accent-soft); padding: 20px; border-radius: 16px;">
+                    <p style="font-weight: 700;">n = 3</p>
+                    <p style="font-size: 1.5rem; color: var(--accent);">3! = 6</p>
+                </div>
+                <div style="background: white; border: 2px solid var(--accent-soft); padding: 20px; border-radius: 16px;">
+                    <p style="font-weight: 700;">n = 4</p>
+                    <p style="font-size: 1.5rem; color: var(--accent);">4! = 24</p>
+                </div>
+                <div style="background: white; border: 2px solid var(--accent-soft); padding: 20px; border-radius: 16px;">
+                    <p style="font-weight: 700;">n = 5</p>
+                    <p style="font-size: 1.5rem; color: var(--accent);">5! = 120</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="page-footer">
+            <a href="sub4-2-fungsi.html" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Sebelumnya: Fungsi
+            </a>
+            <a href="kuis-bab4.html" class="nav-btn right">
+                Uji Kompetensi <i class="fas fa-trophy"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MathMaster8 - Korespondensi Satu-satu (Pengayaan) | Kurikulum Merdeka</p>
+        <p style="margin-top: 8px; opacity: 0.6;">"Korespondensi satu-satu adalah tarian elegan antara dua himpunan." - N.A.</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+        };
+
+        // Simulator Korespondensi Satu-satu
+        function checkOneOne() {
+            let pair1 = document.getElementById('pair1').value;
+            let pair2 = document.getElementById('pair2').value;
+            let pair3 = document.getElementById('pair3').value;
+            
+            let pairs = [pair1, pair2, pair3];
+            let status = document.getElementById('oneoneStatus');
+            let detail = document.getElementById('oneoneDetail');
+            
+            // Cek apakah semua anggota A memiliki pasangan
+            let hasMissing = pairs.includes('-');
+            if (hasMissing) {
+                status.innerHTML = '❌ Bukan Korespondensi Satu-satu';
+                status.style.color = '#ef4444';
+                detail.innerHTML = 'Ada anggota domain yang tidak memiliki pasangan.';
+                return;
+            }
+            
+            // Cek apakah ada pasangan yang sama (tidak injektif)
+            let seen = {};
+            let duplicate = false;
+            for (let i = 0; i < pairs.length; i++) {
+                if (seen[pairs[i]]) {
+                    duplicate = true;
+                    break;
+                }
+                seen[pairs[i]] = true;
+            }
+            
+            if (duplicate) {
+                status.innerHTML = '❌ Bukan Korespondensi Satu-satu';
+                status.style.color = '#ef4444';
+                detail.innerHTML = 'Ada anggota kodomain yang dipasangkan lebih dari satu kali.';
+                return;
+            }
+            
+            // Cek apakah semua anggota B terpasang (surjektif)
+            let allValues = ['a', 'b', 'c'];
+            let allCovered = true;
+            for (let i = 0; i < allValues.length; i++) {
+                if (!seen[allValues[i]]) {
+                    allCovered = false;
+                    break;
+                }
+            }
+            
+            if (!allCovered) {
+                status.innerHTML = '❌ Bukan Korespondensi Satu-satu';
+                status.style.color = '#ef4444';
+                detail.innerHTML = 'Ada anggota kodomain yang tidak memiliki pasangan.';
+                return;
+            }
+            
+            // Semua syarat terpenuhi
+            status.innerHTML = '✅ Ini adalah Korespondensi Satu-satu!';
+            status.style.color = '#22c55e';
+            detail.innerHTML = 'Setiap anggota A dipasangkan tepat satu dengan anggota B, dan sebaliknya.';
+        }
+
+        // Fungsi kuis
+        function checkOneOneQuiz(quizNum, answer) {
+            if (quizNum === 1) {
+                let fb = document.getElementById('oneoneQuiz1');
+                fb.style.display = 'block';
+                if (answer === 2) {
+                    fb.innerHTML = '✅ Benar! (1,a), (2,b), (3,c) memenuhi syarat korespondensi satu-satu.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Coba lagi! Syarat: setiap anggota A dan B punya tepat satu pasangan.';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            } else if (quizNum === 2) {
+                let fb = document.getElementById('oneoneQuiz2');
+                fb.style.display = 'block';
+                if (answer === 2) {
+                    fb.innerHTML = '✅ Benar! Banyak korespondensi satu-satu = 5! = 5×4×3×2×1 = 120.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Coba lagi! Gunakan rumus n! (n faktorial).';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            }
+        }
+
+        // Inisialisasi
+        window.onload = function() {
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        };
+    </script>
+</body>
+</html>

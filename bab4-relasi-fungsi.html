@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bab 1: Bilangan Berpangkat | MathMaster8</title>
+    <title>Bab 4: Relasi dan Fungsi | MathMaster8</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,6 +19,10 @@
             --primary-light: #14b8a6;
             --primary-soft: #ccfbf1;
             --primary-dark: #0f766e;
+            --secondary: #6366f1;
+            --secondary-light: #818cf8;
+            --secondary-soft: #e0e7ff;
+            --secondary-dark: #4f46e5;
             --accent: #f59e0b;
             --success: #22c55e;
             --danger: #ef4444;
@@ -33,7 +37,7 @@
             --gray-600: #475569;
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
             --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --shadow-lg: 0 20px 40px -15px rgba(99,102,241,0.15);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
@@ -74,7 +78,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            color: var(--primary);
+            color: var(--secondary);
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
@@ -83,7 +87,7 @@
 
         .back-link:hover {
             transform: translateX(-6px);
-            color: var(--primary-dark);
+            color: var(--secondary-dark);
         }
 
         .chapter-badge {
@@ -91,8 +95,8 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--primary);
-            background: var(--primary-soft);
+            color: var(--secondary);
+            background: var(--secondary-soft);
             padding: 6px 18px;
             border-radius: 60px;
         }
@@ -101,7 +105,7 @@
            3. HERO SECTION (KONSISTEN)
            ========================================= */
         .chapter-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
             color: white;
             padding: 80px 5% 120px;
             text-align: center;
@@ -111,7 +115,7 @@
         }
 
         .chapter-header::before {
-            content: "🔢";
+            content: "🔄";
             position: absolute;
             font-size: 200px;
             top: -50px;
@@ -174,7 +178,7 @@
             left: 0;
             width: 6px;
             height: 100%;
-            background: var(--primary);
+            background: var(--secondary);
             opacity: 0;
             transition: var(--transition);
         }
@@ -182,7 +186,7 @@
         .sub-card:hover {
             transform: translateY(-5px) scale(1.01);
             box-shadow: var(--shadow-lg);
-            border-color: var(--primary-light);
+            border-color: var(--secondary-light);
         }
 
         .sub-card:hover::before {
@@ -192,18 +196,18 @@
         .icon-box {
             width: 120px;
             height: 120px;
-            background: var(--primary-soft);
+            background: var(--secondary-soft);
             border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 48px;
-            color: var(--primary-dark);
+            color: var(--secondary);
             transition: var(--transition);
         }
 
         .sub-card:hover .icon-box {
-            background: var(--primary);
+            background: var(--secondary);
             color: white;
             transform: rotate(5deg);
         }
@@ -251,18 +255,18 @@
         .btn-enter {
             width: 60px;
             height: 60px;
-            background: var(--primary-soft);
+            background: var(--secondary-soft);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-dark);
+            color: var(--secondary);
             font-size: 1.2rem;
             transition: var(--transition);
         }
 
         .sub-card:hover .btn-enter {
-            background: var(--primary);
+            background: var(--secondary);
             color: white;
             transform: translateX(8px);
         }
@@ -271,7 +275,7 @@
            5. FINAL CARD
            ========================================= */
         .final-card {
-            background: linear-gradient(145deg, var(--accent), #b45309);
+            background: linear-gradient(145deg, var(--secondary), var(--secondary-dark));
             border: none;
         }
         .final-card .icon-box {
@@ -305,7 +309,7 @@
         }
 
         .curriculum-box::after {
-            content: "📏";
+            content: "🔄";
             position: absolute;
             font-size: 150px;
             bottom: -30px;
@@ -322,7 +326,7 @@
         }
 
         .cp-text h2 {
-            color: var(--primary-light);
+            color: var(--secondary-light);
             margin-bottom: 15px;
             font-size: 1.8rem;
             font-weight: 700;
@@ -355,7 +359,7 @@
 
         .stat-circle i {
             font-size: 26px;
-            color: var(--primary-light);
+            color: var(--secondary-light);
             margin-bottom: 12px;
         }
 
@@ -423,15 +427,15 @@
         <a href="index.html" class="back-link">
             <i class="fas fa-arrow-left"></i> Kembali ke Beranda
         </a>
-        <span class="chapter-badge"><i class="fas fa-star"></i> Bab 1: Bilangan Berpangkat</span>
+        <span class="chapter-badge"><i class="fas fa-star"></i> Bab 4: Relasi dan Fungsi</span>
     </div>
 
     <!-- Hero Section -->
     <header class="chapter-header">
         <div class="animate">
-            <p style="font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 10px;">UNIT PEMBELAJARAN 01</p>
-            <h1>Bilangan Berpangkat</h1>
-            <p>Mengeksplorasi dunia angka besar dan kecil melalui konsep perpangkatan, penarikan akar, dan notasi ilmiah yang efisien.</p>
+            <p style="font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 10px;">UNIT PEMBELAJARAN 04</p>
+            <h1>Relasi dan Fungsi</h1>
+            <p>Memahami hubungan antara dua himpunan, aturan pemasangan, dan konsep fungsi sebagai relasi khusus dalam matematika.</p>
         </div>
     </header>
 
@@ -439,54 +443,57 @@
     <main class="container">
         <div class="learning-grid">
             
-            <!-- Sub Bab 1: Sifat-sifat Eksponen -->
-            <div class="sub-card animate" style="animation-delay: 0.1s;" onclick="location.href='sub1-1-eksponen.html'">
+            <!-- Sub Bab A: Memahami Relasi -->
+            <div class="sub-card animate" style="animation-delay: 0.1s;" onclick="location.href='sub4-1-relasi.html'">
                 <div class="icon-box">
-                    <i class="fas fa-superscript"></i>
+                    <i class="fas fa-project-diagram"></i>
                 </div>
                 <div class="sub-info">
                     <div class="tag-group">
                         <span class="tag tag-video"><i class="fas fa-play"></i> Video</span>
-                        <span class="tag tag-doc"><i class="fas fa-file-alt"></i> Materi</span>
+                        <span class="tag tag-interactive"><i class="fas fa-puzzle-piece"></i> Diagram Panah</span>
+                        <span class="tag tag-doc"><i class="fas fa-file-alt"></i> Konsep</span>
                     </div>
-                    <h3>Sifat-sifat Eksponen</h3>
-                    <p>Pelajari perkalian, pembagian, dan perpangkatan pada bilangan berpangkat bulat positif dan negatif.</p>
+                    <h3>A. Memahami Relasi</h3>
+                    <p>Pelajari pengertian relasi, cara menyatakan relasi (diagram panah, himpunan pasangan berurutan, diagram Cartesius), dan contoh dalam kehidupan sehari-hari.</p>
                 </div>
                 <div class="btn-enter">
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
 
-            <!-- Sub Bab 2: Bilangan Akar -->
-            <div class="sub-card animate" style="animation-delay: 0.2s;" onclick="location.href='sub1-2-akar.html'">
+            <!-- Sub Bab B: Memahami Fungsi -->
+            <div class="sub-card animate" style="animation-delay: 0.2s;" onclick="location.href='sub4-2-fungsi.html'">
                 <div class="icon-box">
-                    <i class="fas fa-square-root-variable"></i>
+                    <i class="fas fa-function"></i>
                 </div>
                 <div class="sub-info">
                     <div class="tag-group">
                         <span class="tag tag-video"><i class="fas fa-play"></i> Video</span>
-                        <span class="tag tag-interactive"><i class="fas fa-calculator"></i> Interaktif</span>
+                        <span class="tag tag-interactive"><i class="fas fa-calculator"></i> Kalkulator Fungsi</span>
+                        <span class="tag tag-quiz"><i class="fas fa-pencil-alt"></i> Latihan</span>
                     </div>
-                    <h3>Bilangan Akar</h3>
-                    <p>Menyederhanakan bentuk akar dan memahami hubungan antara pangkat pecahan dengan bentuk akar.</p>
+                    <h3>B. Memahami Fungsi</h3>
+                    <p>Definisi fungsi, domain, kodomain, range, notasi fungsi, nilai fungsi, dan cara membedakan relasi yang merupakan fungsi.</p>
                 </div>
                 <div class="btn-enter">
                     <i class="fas fa-chevron-right"></i>
                 </div>
             </div>
 
-            <!-- Sub Bab 3: Notasi Ilmiah -->
-            <div class="sub-card animate" style="animation-delay: 0.3s;" onclick="location.href='sub1-3-notasi.html'">
+            <!-- Sub Bab C: Korespondensi Satu-satu (Pengayaan) -->
+            <div class="sub-card animate" style="animation-delay: 0.3s;" onclick="location.href='sub4-3-korespondensi.html'">
                 <div class="icon-box">
-                    <i class="fas fa-microscope"></i>
+                    <i class="fas fa-link"></i>
                 </div>
                 <div class="sub-info">
                     <div class="tag-group">
-                        <span class="tag tag-doc"><i class="fas fa-pencil-alt"></i> Latihan</span>
-                        <span class="tag tag-interactive"><i class="fas fa-robot"></i> Simulator</span>
+                        <span class="tag tag-video"><i class="fas fa-play"></i> Video</span>
+                        <span class="tag tag-interactive"><i class="fas fa-arrows-alt-h"></i> Visualisasi</span>
+                        <span class="tag tag-doc"><i class="fas fa-star"></i> Pengayaan</span>
                     </div>
-                    <h3>Notasi Ilmiah</h3>
-                    <p>Cara menuliskan angka yang sangat besar atau sangat kecil secara ringkas menggunakan pangkat sepuluh.</p>
+                    <h3>C. Korespondensi Satu-satu</h3>
+                    <p>Fungsi khusus yang memasangkan setiap anggota himpunan A tepat satu dengan anggota himpunan B dan sebaliknya. Syarat dan contoh dalam kehidupan.</p>
                 </div>
                 <div class="btn-enter">
                     <i class="fas fa-chevron-right"></i>
@@ -494,7 +501,7 @@
             </div>
 
             <!-- Final Test Card -->
-            <div class="sub-card final-card animate" style="animation-delay: 0.4s;" onclick="location.href='kuis-bab1.html'">
+            <div class="sub-card final-card animate" style="animation-delay: 0.4s;" onclick="location.href='kuis-bab4.html'">
                 <div class="icon-box" style="background: rgba(255,255,255,0.2); color: white;">
                     <i class="fas fa-trophy"></i>
                 </div>
@@ -502,8 +509,8 @@
                     <div class="tag-group">
                         <span class="tag" style="background: #ffedd5; color: #7b341e;">🏆 Final Test</span>
                     </div>
-                    <h3>Uji Kompetensi Bab 1</h3>
-                    <p>Evaluasi pemahamanmu tentang eksponen, akar, dan notasi ilmiah dalam satu tes terpadu.</p>
+                    <h3>Uji Kompetensi Bab 4</h3>
+                    <p>Evaluasi pemahamanmu tentang Relasi, Fungsi, dan Korespondensi Satu-satu. 15 soal + pembahasan lengkap.</p>
                 </div>
                 <div class="btn-enter" style="background: rgba(255,255,255,0.2); color: white;">
                     <i class="fas fa-play"></i>
@@ -515,12 +522,21 @@
         <div class="curriculum-box animate" style="animation-delay: 0.5s;">
             <div class="cp-text">
                 <h2>📌 Capaian Pembelajaran</h2>
-                <p>Di akhir fase D, peserta didik dapat membaca, menulis, dan membandingkan bilangan bulat, bilangan rasional dan irasional, bilangan desimal, bilangan berpangkat bulat dan akar, bilangan dalam notasi ilmiah.</p>
+                <p>Di akhir fase D, peserta didik dapat memahami konsep relasi dan fungsi, menyajikannya dalam berbagai representasi, membedakan fungsi dan bukan fungsi, serta menentukan domain, kodomain, dan range. Mereka juga dapat mengenali dan menganalisis korespondensi satu-satu.</p>
+                <p style="margin-top: 15px; font-size: 0.9rem;"><i class="fas fa-check-circle" style="color: var(--secondary-light);"></i> Tujuan Pembelajaran:</p>
+                <ul style="margin-left: 20px; list-style-type: disc; opacity: 0.9;">
+                    <li>Memahami pengertian relasi antar himpunan.</li>
+                    <li>Menyatakan relasi dengan diagram panah, himpunan pasangan berurutan, dan diagram Cartesius.</li>
+                    <li>Memahami konsep fungsi sebagai relasi khusus.</li>
+                    <li>Menentukan domain, kodomain, dan range suatu fungsi.</li>
+                    <li>Menghitung nilai fungsi dan menyajikan fungsi dalam berbagai bentuk.</li>
+                    <li>Mengenal dan membedakan korespondensi satu-satu.</li>
+                </ul>
             </div>
             <div class="cp-stats">
                 <div class="stat-circle">
                     <i class="fas fa-clock"></i>
-                    <span>12 JP</span>
+                    <span>14 JP</span>
                     <label>Alokasi Waktu</label>
                 </div>
                 <div class="stat-circle">
@@ -530,12 +546,12 @@
                 </div>
                 <div class="stat-circle">
                     <i class="fas fa-video"></i>
-                    <span>4 Video</span>
+                    <span>5 Video</span>
                     <label>Pembahasan</label>
                 </div>
                 <div class="stat-circle">
                     <i class="fas fa-question-circle"></i>
-                    <span>20+ Soal</span>
+                    <span>25+ Soal</span>
                     <label>Latihan</label>
                 </div>
             </div>
@@ -544,7 +560,7 @@
 
     <footer>
         <p>&copy; 2024 MathMaster8 - Kurikulum Merdeka | Matematika Kelas VIII</p>
-        <p style="margin-top: 8px; opacity: 0.6;">"Matematika adalah bahasa alam semesta." - Galileo Galilei</p>
+        <p style="margin-top: 8px; opacity: 0.6;">"Fungsi adalah jantung dari matematika modern." - N.A.</p>
     </footer>
 
     <script>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Bab 1: Bilangan Berpangkat | MathMaster8</title>
+    <title>Kuis Bab 3: PLSV & PtLSV | MathMaster8</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,13 +12,16 @@
     
     <style>
         /* =========================================
-           1. VARIABLES & CORE STYLING 
+           1. VARIABLES & CORE STYLING (KONSISTEN)
            ========================================= */
         :root {
             --primary: #0d9488;
             --primary-light: #14b8a6;
             --primary-soft: #ccfbf1;
             --primary-dark: #0f766e;
+            --tertiary: #8b5cf6;
+            --tertiary-light: #a78bfa;
+            --tertiary-soft: #ede9fe;
             --accent: #f59e0b;
             --success: #22c55e;
             --danger: #ef4444;
@@ -32,7 +35,7 @@
             --gray-300: #cbd5e1;
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
             --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --shadow-lg: 0 20px 40px -15px rgba(139,92,246,0.15);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
@@ -46,7 +49,7 @@
         }
 
         body {
-            background: linear-gradient(145deg, var(--primary-dark) 0%, #1e293b 100%);
+            background: linear-gradient(145deg, var(--tertiary-dark, #6d28d9) 0%, #1e293b 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -69,7 +72,7 @@
         }
 
         .quiz-container::before {
-            content: "🔢";
+            content: "⚖️";
             position: absolute;
             font-size: 180px;
             bottom: -40px;
@@ -89,9 +92,9 @@
 
         .quiz-icon {
             font-size: 4.5rem;
-            color: var(--primary);
+            color: var(--tertiary);
             margin-bottom: 25px;
-            background: var(--primary-soft);
+            background: var(--tertiary-soft);
             width: 120px;
             height: 120px;
             border-radius: 50%;
@@ -129,7 +132,7 @@
 
         .info-item i {
             font-size: 1.5rem;
-            color: var(--primary);
+            color: var(--tertiary);
         }
 
         .info-item span {
@@ -149,14 +152,14 @@
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: var(--tertiary);
             color: white;
         }
 
         .btn-primary:hover {
-            background: var(--primary-dark);
+            background: #6d28d9;
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(13,148,136,0.3);
+            box-shadow: 0 15px 30px rgba(139,92,246,0.3);
         }
 
         .btn-secondary {
@@ -190,7 +193,7 @@
             padding: 10px 20px;
             border-radius: 60px;
             font-weight: 700;
-            color: var(--primary-dark);
+            color: var(--tertiary);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -202,11 +205,11 @@
         }
 
         .question-counter {
-            background: var(--primary-soft);
+            background: var(--tertiary-soft);
             padding: 10px 20px;
             border-radius: 60px;
             font-weight: 700;
-            color: var(--primary-dark);
+            color: var(--tertiary);
         }
 
         .progress-bar-wrap {
@@ -220,7 +223,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            background: linear-gradient(to right, var(--tertiary), var(--accent));
             width: 0%;
             transition: var(--transition);
             border-radius: 10px;
@@ -237,9 +240,9 @@
             font-weight: 700;
             line-height: 1.5;
             padding: 20px;
-            background: var(--primary-soft);
+            background: var(--tertiary-soft);
             border-radius: 20px;
-            border-left: 8px solid var(--primary);
+            border-left: 8px solid var(--tertiary);
         }
 
         .options-grid {
@@ -269,15 +272,15 @@
         }
 
         .option:hover {
-            border-color: var(--primary);
-            background: var(--primary-soft);
+            border-color: var(--tertiary);
+            background: var(--tertiary-soft);
             transform: translateY(-3px);
             box-shadow: var(--shadow);
         }
 
         .option.selected {
-            border-color: var(--primary);
-            background: var(--primary);
+            border-color: var(--tertiary);
+            background: var(--tertiary);
             color: white;
         }
 
@@ -316,7 +319,7 @@
         }
 
         .btn-next {
-            background: var(--primary);
+            background: var(--tertiary);
             color: white;
             padding: 14px 40px;
             border-radius: 60px;
@@ -331,7 +334,7 @@
         }
 
         .btn-next:hover:not(:disabled) {
-            background: var(--primary-dark);
+            background: #6d28d9;
             transform: translateX(5px);
             box-shadow: var(--shadow);
         }
@@ -368,7 +371,7 @@
             width: 160px;
             height: 160px;
             border-radius: 50%;
-            background: linear-gradient(145deg, var(--primary-soft), white);
+            background: linear-gradient(145deg, var(--tertiary-soft), white);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -381,7 +384,7 @@
         .score-number {
             font-size: 3.2rem;
             font-weight: 800;
-            color: var(--primary-dark);
+            color: var(--tertiary);
             line-height: 1;
         }
 
@@ -411,7 +414,7 @@
         .stat-value {
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--tertiary);
         }
 
         .stat-label {
@@ -434,7 +437,7 @@
             padding: 25px;
             border-radius: 20px;
             margin-bottom: 20px;
-            border-left: 6px solid var(--primary);
+            border-left: 6px solid var(--tertiary);
         }
 
         .review-card.correct {
@@ -532,21 +535,21 @@
         <!-- START SCREEN -->
         <div id="start-screen">
             <div class="quiz-icon animate">
-                <i class="fas fa-superscript"></i>
+                <i class="fas fa-equals"></i>
             </div>
-            <h1 class="animate">Kuis Bilangan Berpangkat</h1>
+            <h1 class="animate">Kuis PLSV & PtLSV</h1>
             <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;" class="animate">
-                Uji pemahamanmu tentang eksponen, akar, dan notasi ilmiah!
+                Uji pemahamanmu tentang persamaan dan pertidaksamaan linier satu variabel!
             </p>
             
             <div class="quiz-info animate" style="animation-delay: 0.1s;">
                 <div class="info-item">
                     <i class="fas fa-question-circle"></i>
-                    <span>10 Soal</span>
+                    <span>15 Soal</span>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-clock"></i>
-                    <span>15 Menit</span>
+                    <span>20 Menit</span>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-star"></i>
@@ -567,10 +570,10 @@
         <div id="quiz-screen">
             <div class="quiz-header">
                 <div class="timer-box">
-                    <i class="fas fa-hourglass-half"></i> <span id="time-left">15:00</span>
+                    <i class="fas fa-hourglass-half"></i> <span id="time-left">20:00</span>
                 </div>
                 <div class="question-counter">
-                    <span id="current-q-num">1</span>/10
+                    <span id="current-q-num">1</span>/15
                 </div>
             </div>
             
@@ -640,68 +643,113 @@
     
     <script>
         // =========================================
-        // BANK SOAL BAB 1: BILANGAN BERPANGKAT
+        // BANK SOAL BAB 3: PLSV & PtLSV
         // =========================================
         const questionsBank = [
+            // SOAL 1: Konsep PLSV
             {
-                question: "Hasil dari 2³ × 2⁴ adalah...",
-                options: ["2¹²", "2⁷", "4⁷", "2¹"],
-                answer: 1,
-                explanation: "Sifat perkalian eksponen: aᵐ × aⁿ = aᵐ⁺ⁿ. Jadi 2³⁺⁴ = 2⁷."
-            },
-            {
-                question: "Bentuk sederhana dari √48 adalah...",
-                options: ["4√3", "3√4", "16√3", "2√12"],
-                answer: 0,
-                explanation: "√48 = √(16 × 3) = 4√3."
-            },
-            {
-                question: "Bentuk baku dari 0,000025 adalah...",
-                options: ["2,5 × 10⁻⁴", "2,5 × 10⁻⁵", "25 × 10⁻⁶", "0,25 × 10⁻⁴"],
-                answer: 1,
-                explanation: "Koma digeser ke kanan 5 kali, maka pangkat negatif 5: 2,5 × 10⁻⁵."
-            },
-            {
-                question: "Hasil dari (3²)³ adalah...",
-                options: ["3⁵", "3⁶", "3⁸", "9²"],
-                answer: 1,
-                explanation: "Sifat pangkat: (aᵐ)ⁿ = aᵐ×ⁿ. Jadi 3²×³ = 3⁶."
-            },
-            {
-                question: "Nilai dari √12 + √27 adalah...",
-                options: ["√39", "5√3", "6√3", "13√3"],
-                answer: 1,
-                explanation: "√12 = 2√3, √27 = 3√3, maka 2√3 + 3√3 = 5√3."
-            },
-            {
-                question: "Hasil dari 5⁰ + 2⁰ - 3⁰ adalah...",
-                options: ["0", "1", "4", "3"],
-                answer: 1,
-                explanation: "Semua bilangan (kecuali 0) pangkat 0 = 1. Jadi 1 + 1 - 1 = 1."
-            },
-            {
-                question: "Notasi ilmiah untuk 150.000.000 adalah...",
-                options: ["1,5 × 10⁸", "1,5 × 10⁷", "15 × 10⁷", "1,5 × 10⁻⁸"],
-                answer: 0,
-                explanation: "Koma digeser ke kiri 8 kali: 1,5 × 10⁸."
-            },
-            {
-                question: "Hasil dari 10⁵ ÷ 10² adalah...",
-                options: ["10⁷", "10¹⁰", "10³", "100"],
+                question: "Manakah yang merupakan Persamaan Linier Satu Variabel (PLSV)?",
+                options: ["2x + 3y = 7", "x² + 4 = 13", "3x - 5 = 10", "2/x + 1 = 5"],
                 answer: 2,
-                explanation: "Sifat pembagian: aᵐ ÷ aⁿ = aᵐ⁻ⁿ. Jadi 10⁵⁻² = 10³."
+                explanation: "PLSV harus memiliki SATU variabel berpangkat SATU. 3x - 5 = 10 memenuhi syarat tersebut."
             },
+            // SOAL 2: Bentuk umum PLSV
             {
-                question: "√125 jika disederhanakan menjadi...",
-                options: ["5√5", "25√5", "5√25", "15√5"],
-                answer: 0,
-                explanation: "√125 = √(25 × 5) = 5√5."
-            },
-            {
-                question: "Hasil dari 2√3 × √2 adalah...",
-                options: ["2√5", "2√6", "6√2", "√12"],
+                question: "Bentuk umum dari Persamaan Linier Satu Variabel adalah...",
+                options: ["ax² + bx + c = 0", "ax + b = c, a ≠ 0", "ax + by = c", "a/x + b = c"],
                 answer: 1,
-                explanation: "2√3 × √2 = 2√(3 × 2) = 2√6."
+                explanation: "Bentuk umum PLSV adalah ax + b = c, dengan a ≠ 0, x adalah variabel, a koefisien, b dan c konstanta."
+            },
+            // SOAL 3: Menyelesaikan PLSV (penjumlahan)
+            {
+                question: "Nilai x yang memenuhi persamaan x + 7 = 15 adalah...",
+                options: ["x = 7", "x = 8", "x = 22", "x = -8"],
+                answer: 1,
+                explanation: "x + 7 = 15 → x = 15 - 7 = 8."
+            },
+            // SOAL 4: Menyelesaikan PLSV (perkalian)
+            {
+                question: "Himpunan penyelesaian dari 4x = 28 adalah...",
+                options: ["x = 6", "x = 7", "x = 8", "x = 9"],
+                answer: 1,
+                explanation: "4x = 28 → x = 28 ÷ 4 = 7."
+            },
+            // SOAL 5: PLSV dengan variabel di kedua ruas
+            {
+                question: "Nilai x dari persamaan 2x + 5 = 3x - 2 adalah...",
+                options: ["x = 7", "x = -7", "x = 3", "x = -3"],
+                answer: 0,
+                explanation: "2x + 5 = 3x - 2 → 2x - 3x = -2 - 5 → -x = -7 → x = 7."
+            },
+            // SOAL 6: PLSV bentuk pecahan
+            {
+                question: "Jika ½x + 3 = 7, maka nilai x adalah...",
+                options: ["x = 4", "x = 6", "x = 8", "x = 10"],
+                answer: 2,
+                explanation: "½x + 3 = 7 → ½x = 4 → x = 8."
+            },
+            // SOAL 7: Konsep PtLSV (tanda)
+            {
+                question: "Manakah yang merupakan pertidaksamaan linier satu variabel?",
+                options: ["2x + 3 = 9", "3x - 5 ≥ 10", "x² < 16", "2x + 3y > 5"],
+                answer: 1,
+                explanation: "Pertidaksamaan linier satu variabel menggunakan tanda <, >, ≤, ≥ dan hanya memiliki satu variabel berpangkat satu."
+            },
+            // SOAL 8: Membandingkan bilangan negatif
+            {
+                question: "Pertidaksamaan berikut yang BENAR adalah...",
+                options: ["-3 > -1", "-5 < -2", "0 > 2", "-7 < -10"],
+                answer: 1,
+                explanation: "Pada bilangan negatif, semakin besar angkanya semakin kecil nilainya. -5 < -2 adalah benar."
+            },
+            // SOAL 9: Aturan pembagian dengan negatif
+            {
+                question: "Jika -2x < 6, maka ...",
+                options: ["x < -3", "x > -3", "x < 3", "x > 3"],
+                answer: 1,
+                explanation: "-2x < 6 → kedua ruas dibagi -2, tanda DIBALIK → x > -3."
+            },
+            // SOAL 10: Menyelesaikan PtLSV sederhana
+            {
+                question: "Himpunan penyelesaian dari 3x - 5 > 10 adalah...",
+                options: ["x > 3", "x > 4", "x > 5", "x > 6"],
+                answer: 2,
+                explanation: "3x - 5 > 10 → 3x > 15 → x > 5."
+            },
+            // SOAL 11: PtLSV dengan koefisien negatif
+            {
+                question: "Penyelesaian dari 5 - 2x ≤ 11 adalah...",
+                options: ["x ≤ -3", "x ≥ -3", "x ≤ 3", "x ≥ 3"],
+                answer: 1,
+                explanation: "5 - 2x ≤ 11 → -2x ≤ 6 → x ≥ -3 (tanda dibalik karena dibagi -2)."
+            },
+            // SOAL 12: Soal cerita PLSV
+            {
+                question: "Tiga kali suatu bilangan dikurangi 4 adalah 23. Bilangan tersebut adalah...",
+                options: ["7", "8", "9", "10"],
+                answer: 2,
+                explanation: "Misal bilangan = x. 3x - 4 = 23 → 3x = 27 → x = 9."
+            },
+            // SOAL 13: Soal cerita PtLSV (usia)
+            {
+                question: "Lima tahun yang lalu, usia Ayah 4 kali usia anak. Jika usia anak sekarang 12 tahun, berapa batas minimal usia Ayah sekarang?",
+                options: ["33 tahun", "38 tahun", "43 tahun", "48 tahun"],
+                answer: 0,
+                explanation: "Usia anak sekarang 12, 5 tahun lalu = 7. Misal usia Ayah sekarang = x, 5 tahun lalu = x-5. x-5 = 4×7 = 28 → x = 33. Usia Ayah minimal 33 tahun."
+            },
+            // SOAL 14: Soal cerita PtLSV (keuntungan)
+            {
+                question: "Sebuah taksi menetapkan tarif buka pintu Rp6.000 dan tarif per km Rp3.000. Jika biaya tidak lebih dari Rp60.000, jarak maksimal yang ditempuh adalah...",
+                options: ["16 km", "17 km", "18 km", "19 km"],
+                answer: 2,
+                explanation: "6000 + 3000x ≤ 60000 → 3000x ≤ 54000 → x ≤ 18 km."
+            },
+            // SOAL 15: Soal cerita PtLSV (geometri)
+            {
+                question: "Suatu persegi panjang memiliki panjang 4 cm lebih dari lebarnya. Jika kelilingnya tidak kurang dari 40 cm, lebar minimal persegi panjang adalah...",
+                options: ["6 cm", "7 cm", "8 cm", "9 cm"],
+                answer: 2,
+                explanation: "Misal lebar = x, panjang = x+4. Keliling = 2(x + x+4) = 4x + 8 ≥ 40 → 4x ≥ 32 → x ≥ 8 cm."
             }
         ];
 
@@ -711,64 +759,44 @@
         let currentQuestionIndex = 0;
         let userAnswers = [];
         let timer;
-        let timeLeft = 900; // 15 menit = 900 detik
+        let timeLeft = 1200; // 20 menit = 1200 detik
 
         // =========================================
         // INISIALISASI EVENT LISTENER
         // =========================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Setup tombol start
             document.getElementById('startQuizBtn').addEventListener('click', startQuiz);
-            
-            // Setup tombol next
             document.getElementById('next-btn').addEventListener('click', nextQuestion);
-            
-            // Setup tombol restart
             document.getElementById('restartBtn').addEventListener('click', restartQuiz);
-            
-            // Setup tombol kembali ke bab
             document.getElementById('backToBabBtn').addEventListener('click', goToBab);
             
-            // Inisialisasi
             userAnswers = new Array(questionsBank.length).fill(null);
             document.getElementById('start-screen').style.display = 'block';
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'none';
         });
 
-        // =========================================
-        // FUNGSI-FUNGSI QUIZ
-        // =========================================
-        
         function startQuiz() {
-            // Reset semua variabel
             currentQuestionIndex = 0;
             userAnswers = new Array(questionsBank.length).fill(null);
-            timeLeft = 900;
+            timeLeft = 1200;
             
-            // Update tampilan timer
             updateTimerDisplay();
             
-            // Tampilkan layar quiz
             document.getElementById('start-screen').style.display = 'none';
             document.getElementById('quiz-screen').style.display = 'block';
             document.getElementById('result-screen').style.display = 'none';
             
-            // Tampilkan soal pertama
             showQuestion();
-            
-            // Mulai timer
             startTimer();
         }
 
         function showQuestion() {
             const q = questionsBank[currentQuestionIndex];
             
-            // Tampilkan teks soal - sudah dalam bentuk teks biasa, bukan LaTeX
             document.getElementById('question-text').innerHTML = 
                 (currentQuestionIndex + 1) + ". " + q.question;
             
-            // Render opsi jawaban
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
             
@@ -776,7 +804,6 @@
                 const optionDiv = document.createElement('div');
                 optionDiv.className = 'option';
                 
-                // Jika sudah pernah menjawab, tampilkan jawaban yang dipilih
                 if (userAnswers[currentQuestionIndex] === index) {
                     optionDiv.classList.add('selected');
                 }
@@ -786,7 +813,6 @@
                     <span>${opt}</span>
                 `;
                 
-                // Gunakan closure untuk menyimpan index dengan benar
                 optionDiv.addEventListener('click', (function(idx) {
                     return function() {
                         selectOption(idx);
@@ -796,35 +822,23 @@
                 optionsContainer.appendChild(optionDiv);
             });
             
-            // Update nomor soal
             document.getElementById('current-q-num').innerText = currentQuestionIndex + 1;
             
-            // Update progress bar
             const progress = (currentQuestionIndex / questionsBank.length) * 100;
             document.getElementById('progress-fill').style.width = progress + '%';
             
-            // Update tombol next
             updateNextButton();
-            
-            // Hapus feedback
             document.getElementById('feedback').innerHTML = '';
         }
 
         function selectOption(index) {
-            // Hapus class selected dari semua opsi
             const options = document.querySelectorAll('.option');
             options.forEach(opt => opt.classList.remove('selected'));
-            
-            // Tambah class selected ke opsi yang dipilih
             options[index].classList.add('selected');
             
-            // Simpan jawaban user
             userAnswers[currentQuestionIndex] = index;
-            
-            // Update tombol next
             updateNextButton();
             
-            // Beri feedback langsung
             const q = questionsBank[currentQuestionIndex];
             if (index === q.answer) {
                 document.getElementById('feedback').innerHTML = '✅ Jawaban benar!';
@@ -837,11 +851,7 @@
 
         function updateNextButton() {
             const nextBtn = document.getElementById('next-btn');
-            if (userAnswers[currentQuestionIndex] !== null && userAnswers[currentQuestionIndex] !== undefined) {
-                nextBtn.disabled = false;
-            } else {
-                nextBtn.disabled = true;
-            }
+            nextBtn.disabled = (userAnswers[currentQuestionIndex] === null || userAnswers[currentQuestionIndex] === undefined);
         }
 
         function nextQuestion() {
@@ -860,7 +870,6 @@
                     timeLeft--;
                     updateTimerDisplay();
                 } else {
-                    // Waktu habis
                     clearInterval(timer);
                     finishQuiz();
                 }
@@ -875,14 +884,11 @@
         }
 
         function finishQuiz() {
-            // Hentikan timer
             clearInterval(timer);
             
-            // Sembunyikan quiz screen, tampilkan result screen
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'block';
             
-            // Hitung jumlah jawaban benar
             let correct = 0;
             for (let i = 0; i < questionsBank.length; i++) {
                 if (userAnswers[i] === questionsBank[i].answer) {
@@ -892,19 +898,17 @@
             
             let wrong = questionsBank.length - correct;
             let accuracy = Math.round((correct / questionsBank.length) * 100);
-            let score = correct * 10; // Maksimal 100
+            let score = Math.round((correct / questionsBank.length) * 100);
             
-            // Tampilkan skor
             document.getElementById('final-score').innerText = score;
             document.getElementById('correct-count').innerText = correct;
             document.getElementById('wrong-count').innerText = wrong;
             document.getElementById('accuracy').innerText = accuracy + '%';
             
-            // Tampilkan pesan berdasarkan skor
             let message, submessage;
             if (score >= 80) {
                 message = "🎉 Luar Biasa!";
-                submessage = "Kamu menguasai bilangan berpangkat dengan baik!";
+                submessage = "Kamu menguasai PLSV dan PtLSV dengan baik!";
             } else if (score >= 60) {
                 message = "👍 Cukup Baik!";
                 submessage = "Tingkatkan lagi, kamu pasti bisa lebih baik!";
@@ -916,7 +920,6 @@
             document.getElementById('congrats-message').innerText = message;
             document.getElementById('result-submessage').innerText = submessage;
             
-            // Tampilkan review jawaban
             displayReview();
         }
 
@@ -954,13 +957,13 @@
                         </div>
                         <div style="flex: 1;">
                             <span style="font-weight: 600; color: var(--text-muted);">Jawaban Benar:</span><br>
-                            <span style="font-weight: 700; color: var(--primary-dark);">
+                            <span style="font-weight: 700; color: var(--tertiary);">
                                 ${correctAnswerText}
                             </span>
                         </div>
                     </div>
                     <div class="explanation">
-                        <span style="font-weight: 700; color: var(--primary-dark);"><i class="fas fa-lightbulb"></i> Pembahasan:</span>
+                        <span style="font-weight: 700; color: var(--tertiary);"><i class="fas fa-lightbulb"></i> Pembahasan:</span>
                         <p style="margin-top: 8px;">${q.explanation}</p>
                     </div>
                 `;
@@ -970,22 +973,19 @@
         }
 
         function restartQuiz() {
-            // Reset semua variabel
             currentQuestionIndex = 0;
             userAnswers = new Array(questionsBank.length).fill(null);
-            timeLeft = 900;
+            timeLeft = 1200;
             
-            // Tampilkan start screen
             document.getElementById('start-screen').style.display = 'block';
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'none';
             
-            // Hentikan timer
             clearInterval(timer);
         }
 
         function goToBab() {
-            window.location.href = 'bab1-bilangan-berpangkat.html';
+            window.location.href = 'bab3-plsv-ptlsv.html';
         }
     </script>
 </body>

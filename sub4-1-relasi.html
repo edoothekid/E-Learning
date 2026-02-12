@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memahami Relasi | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* =========================================
+           1. VARIABLES & CORE STYLING (KONSISTEN)
+           ========================================= */
+        :root {
+            --primary: #0d9488;
+            --primary-light: #14b8a6;
+            --primary-soft: #ccfbf1;
+            --primary-dark: #0f766e;
+            --secondary: #6366f1;
+            --secondary-light: #818cf8;
+            --secondary-soft: #e0e7ff;
+            --secondary-dark: #4f46e5;
+            --accent: #f59e0b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(99,102,241,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 24px;
+            --border-radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           2. NAVIGATION (KONSISTEN)
+           ========================================= */
+        .top-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-6px);
+            color: var(--secondary-dark);
+        }
+
+        .chapter-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--secondary);
+            background: var(--secondary-soft);
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+
+        /* =========================================
+           3. PROGRESS BAR
+           ========================================= */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        .hero-section {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            color: white;
+            padding: 60px 5% 80px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "🔄";
+            position: absolute;
+            font-size: 180px;
+            top: -40px;
+            right: 5%;
+            opacity: 0.08;
+            transform: rotate(15deg);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           5. MAIN CONTAINER
+           ========================================= */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* =========================================
+           6. CONTENT CARD
+           ========================================= */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .section-title i {
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--secondary-soft);
+            color: var(--secondary-dark);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           7. VIDEO CONTAINER
+           ========================================= */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================================
+           8. KARTU KONSEP
+           ========================================= */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .concept-card {
+            background: var(--bg-page);
+            border-radius: 20px;
+            padding: 30px;
+            border-left: 6px solid var(--secondary);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            border-left-width: 6px;
+        }
+
+        .concept-card:hover {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .concept-icon {
+            background: var(--secondary-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-dark);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .math-definition {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 20px 0;
+            border: 2px dashed var(--secondary);
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--secondary-dark);
+        }
+
+        /* =========================================
+           9. REPRESENTASI RELASI
+           ========================================= */
+        .representation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .rep-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            border-top: 6px solid var(--secondary);
+            transition: var(--transition);
+        }
+
+        .rep-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .rep-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--secondary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .diagram-container {
+            background: var(--gray-100);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .example-box {
+            background: var(--gray-100);
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 15px;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* =========================================
+           10. SIMULATOR RELASI INTERAKTIF
+           ========================================= */
+        .simulator-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 40px;
+            padding: 50px;
+            margin-top: 20px;
+        }
+
+        .simulator-title {
+            color: var(--secondary-light);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .relation-builder {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .set-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 25px;
+            min-width: 200px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .set-title {
+            color: var(--secondary-light);
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .set-elements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .element {
+            background: rgba(255,255,255,0.15);
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .element:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .element.selected {
+            background: var(--secondary);
+            border: 2px solid white;
+        }
+
+        .arrow-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-add-relation {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+
+        .btn-add-relation:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99,102,241,0.3);
+        }
+
+        .relation-list {
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .pair-chip {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 10px 20px;
+            border-radius: 60px;
+            margin: 8px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* =========================================
+           11. LATIHAN SOAL
+           ========================================= */
+        .quiz-mini {
+            background: var(--secondary-soft);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .quiz-btn {
+            background: var(--white);
+            border: 2px solid var(--secondary);
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: var(--secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 5px;
+        }
+
+        .quiz-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* =========================================
+           12. PAGINATION FOOTER
+           ========================================= */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .content-card { padding: 30px; }
+            .concept-grid { grid-template-columns: 1fr; }
+            .simulator-box { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="top-bar">
+        <a href="bab4-relasi-fungsi.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Bab 4
+        </a>
+        <span class="chapter-badge"><i class="fas fa-project-diagram"></i> Sub A: Memahami Relasi</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>🔄 Memahami Relasi</h1>
+        <p>Hubungan antara dua himpunan dan cara menyatakannya dalam berbagai representasi</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Card: Video Pembelajaran -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-play"></i> VIDEO PEMBELAJARAN</span>
+            <div class="section-title">
+                <i class="fas fa-film"></i>
+                <h2>Apa Itu Relasi?</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Tonton video berikut untuk memahami konsep relasi antar himpunan dan berbagai cara menyatakannya.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/7lLN65Lp2DQ" title="Konsep Relasi" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top: 25px; padding: 20px; background: var(--secondary-soft); border-radius: 20px;">
+                <p style="font-weight: 700; color: var(--secondary-dark);"><i class="fas fa-lightbulb"></i> Poin Penting:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Relasi</strong> adalah hubungan antara anggota himpunan satu dengan himpunan lainnya.</li>
+                    <li>Relasi dapat dinyatakan dengan <strong>3 cara</strong>: diagram panah, himpunan pasangan berurutan, dan diagram Cartesius.</li>
+                    <li>Relasi memiliki <strong>aturan tertentu</strong> yang menghubungkan anggota domain ke kodomain.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card: Definisi Relasi -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-info-circle"></i> DEFINISI</span>
+            <div class="section-title">
+                <i class="fas fa-link"></i>
+                <h2>Apa itu Relasi?</h2>
+            </div>
+            
+            <div class="math-definition">
+                <p style="font-size: 1.3rem; margin-bottom: 15px;">Relasi dari himpunan A ke himpunan B</p>
+                <p>adalah aturan yang memasangkan anggota-anggota himpunan A dengan anggota-anggota himpunan B.</p>
+            </div>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 30px;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Istilah Penting:</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
+                            <span style="background: var(--secondary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">1</span>
+                            <span><strong>Domain</strong> = Himpunan asal (A)</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
+                            <span style="background: var(--secondary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">2</span>
+                            <span><strong>Kodomain</strong> = Himpunan lawan (B)</span>
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 15px;">
+                            <span style="background: var(--secondary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">3</span>
+                            <span><strong>Range</strong> = Himpunan hasil (anggota kodomain yang memiliki pasangan)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div style="flex: 1; min-width: 250px; background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; color: var(--secondary-dark); margin-bottom: 10px;">Contoh Relasi:</p>
+                    <p style="margin-bottom: 5px;">A = {1, 2, 3, 4}</p>
+                    <p style="margin-bottom: 5px;">B = {1, 2, 4, 9, 16}</p>
+                    <p style="margin-bottom: 15px;">Relasi: "kuadrat dari"</p>
+                    <p>1 berelasi dengan 1 (1² = 1)</p>
+                    <p>2 berelasi dengan 4 (2² = 4)</p>
+                    <p>3 berelasi dengan 9 (3² = 9)</p>
+                    <p>4 berelasi dengan 16 (4² = 16)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: 3 Cara Menyatakan Relasi -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-paint-brush"></i> REPRESENTASI</span>
+            <div class="section-title">
+                <i class="fas fa-vector-square"></i>
+                <h2>3 Cara Menyatakan Relasi</h2>
+            </div>
+            
+            <div class="representation-grid">
+                <!-- 1. Diagram Panah -->
+                <div class="rep-card">
+                    <div class="rep-title">
+                        <i class="fas fa-arrows-alt-h"></i> Diagram Panah
+                    </div>
+                    <div class="diagram-container">
+                        <svg width="250" height="180" viewBox="0 0 250 180">
+                            <!-- Himpunan A -->
+                            <rect x="20" y="20" width="70" height="140" rx="10" fill="var(--secondary-soft)" stroke="var(--secondary)" stroke-width="2"/>
+                            <text x="55" y="15" fill="var(--secondary-dark)" font-weight="bold">A</text>
+                            <text x="40" y="50" fill="var(--dark)">1</text>
+                            <text x="40" y="80" fill="var(--dark)">2</text>
+                            <text x="40" y="110" fill="var(--dark)">3</text>
+                            <text x="40" y="140" fill="var(--dark)">4</text>
+                            
+                            <!-- Himpunan B -->
+                            <rect x="160" y="20" width="70" height="140" rx="10" fill="var(--secondary-soft)" stroke="var(--secondary)" stroke-width="2"/>
+                            <text x="195" y="15" fill="var(--secondary-dark)" font-weight="bold">B</text>
+                            <text x="180" y="40" fill="var(--dark)">1</text>
+                            <text x="180" y="60" fill="var(--dark)">4</text>
+                            <text x="180" y="80" fill="var(--dark)">9</text>
+                            <text x="180" y="100" fill="var(--dark)">16</text>
+                            <text x="180" y="120" fill="var(--dark)">25</text>
+                            
+                            <!-- Panah -->
+                            <line x1="90" y1="45" x2="160" y2="35" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="90" y1="75" x2="160" y2="55" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="90" y1="105" x2="160" y2="75" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <line x1="90" y1="135" x2="160" y2="95" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            
+                            <!-- Marker panah -->
+                            <defs>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                                    <polygon points="0 0, 10 5, 0 10" fill="var(--accent)"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="example-box">
+                        <p><strong>Contoh:</strong> Relasi "kuadrat dari"</p>
+                        <p>1 → 1, 2 → 4, 3 → 9, 4 → 16</p>
+                    </div>
+                </div>
+                
+                <!-- 2. Himpunan Pasangan Berurutan -->
+                <div class="rep-card">
+                    <div class="rep-title">
+                        <i class="fas fa-list-ul"></i> Himpunan Pasangan Berurutan
+                    </div>
+                    <div style="background: var(--gray-100); padding: 25px; border-radius: 16px; margin-bottom: 20px;">
+                        <p style="font-family: monospace; font-size: 1.2rem;">{(1,1), (2,4), (3,9), (4,16)}</p>
+                    </div>
+                    <div class="example-box">
+                        <p><strong>Penulisan:</strong> (x,y) dengan x ∈ A, y ∈ B</p>
+                        <p>Pasangan berurutan (x,y) dibaca:</p>
+                        <p>"x berelasi dengan y"</p>
+                    </div>
+                </div>
+                
+                <!-- 3. Diagram Cartesius -->
+                <div class="rep-card">
+                    <div class="rep-title">
+                        <i class="fas fa-chart-scatter"></i> Diagram Cartesius
+                    </div>
+                    <div class="diagram-container">
+                        <svg width="200" height="180" viewBox="0 0 200 180">
+                            <!-- Sumbu X dan Y -->
+                            <line x1="30" y1="150" x2="180" y2="150" stroke="black" stroke-width="2"/>
+                            <line x1="30" y1="150" x2="30" y2="30" stroke="black" stroke-width="2"/>
+                            
+                            <!-- Titik-titik -->
+                            <circle cx="40" cy="140" r="5" fill="var(--secondary)"/>
+                            <circle cx="60" cy="110" r="5" fill="var(--secondary)"/>
+                            <circle cx="80" cy="70" r="5" fill="var(--secondary)"/>
+                            <circle cx="100" cy="30" r="5" fill="var(--secondary)"/>
+                            
+                            <!-- Label -->
+                            <text x="15" y="40" fill="var(--dark)">16</text>
+                            <text x="15" y="70" fill="var(--dark)">9</text>
+                            <text x="15" y="110" fill="var(--dark)">4</text>
+                            <text x="15" y="140" fill="var(--dark)">1</text>
+                            <text x="40" y="170" fill="var(--dark)">1</text>
+                            <text x="60" y="170" fill="var(--dark)">2</text>
+                            <text x="80" y="170" fill="var(--dark)">3</text>
+                            <text x="100" y="170" fill="var(--dark)">4</text>
+                        </svg>
+                    </div>
+                    <div class="example-box">
+                        <p><strong>Sumbu horizontal:</strong> Domain (A)</p>
+                        <p><strong>Sumbu vertikal:</strong> Kodomain (B)</p>
+                        <p>Titik (x,y) menunjukkan relasi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Simulator Relasi Interaktif -->
+        <div class="simulator-box">
+            <div class="simulator-title">
+                <i class="fas fa-puzzle-piece"></i>
+                <h2 style="color: white; margin: 0;">Simulator Relasi</h2>
+            </div>
+            <p style="margin-bottom: 25px; opacity: 0.9;">Buat relasi antara himpunan A dan B dengan mengklik elemen.</p>
+            
+            <div class="relation-builder">
+                <div class="set-box">
+                    <div class="set-title">Himpunan A (Domain)</div>
+                    <div class="set-elements">
+                        <span id="a1" class="element" onclick="selectElement('a', 1)">Ayu</span>
+                        <span id="a2" class="element" onclick="selectElement('a', 2)">Budi</span>
+                        <span id="a3" class="element" onclick="selectElement('a', 3)">Citra</span>
+                        <span id="a4" class="element" onclick="selectElement('a', 4)">Dodi</span>
+                    </div>
+                </div>
+                
+                <div class="arrow-zone">
+                    <i class="fas fa-arrow-right" style="font-size: 3rem; color: var(--secondary-light);"></i>
+                    <div style="margin-top: 15px; color: var(--gray-300);">Klik elemen kiri, lalu kanan</div>
+                </div>
+                
+                <div class="set-box">
+                    <div class="set-title">Himpunan B (Kodomain)</div>
+                    <div class="set-elements">
+                        <span id="b1" class="element" onclick="selectElement('b', 1)">Basket</span>
+                        <span id="b2" class="element" onclick="selectElement('b', 2)">Voli</span>
+                        <span id="b3" class="element" onclick="selectElement('b', 3)">Renang</span>
+                        <span id="b4" class="element" onclick="selectElement('b', 4)">Sepak bola</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <button onclick="addRelation()" class="btn-add-relation">
+                    <i class="fas fa-plus-circle"></i> Tambah Relasi
+                </button>
+                <button onclick="clearRelations()" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 15px 30px; border-radius: 60px; font-weight: 700; margin-left: 15px; cursor: pointer;" onclick="clearRelations()">
+                    <i class="fas fa-trash"></i> Hapus Semua
+                </button>
+            </div>
+            
+            <div id="relationList" class="relation-list">
+                <p style="font-weight: 700; margin-bottom: 15px; color: var(--secondary-light);">Relasi yang terbentuk:</p>
+                <div id="relationPairs">
+                    <span class="pair-chip">Ayu → Basket</span>
+                    <span class="pair-chip">Budi → Voli</span>
+                    <span class="pair-chip">Citra → Renang</span>
+                    <span class="pair-chip">Dodi → Sepak bola</span>
+                </div>
+                <p id="relationInfo" style="margin-top: 20px; color: var(--gray-300); font-style: italic;">Domain = {Ayu, Budi, Citra, Dodi} | Range = {Basket, Voli, Renang, Sepak bola}</p>
+            </div>
+        </div>
+
+        <!-- Card: Contoh Relasi dalam Kehidupan -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-globe"></i> APLIKASI</span>
+            <div class="section-title">
+                <i class="fas fa-users"></i>
+                <h2>Relasi dalam Kehidupan Sehari-hari</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-utensils" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Menu Makanan</h4>
+                    <p>Relasi "harga dari" antara menu makanan dengan harganya.</p>
+                </div>
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-book" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Perpustakaan</h4>
+                    <p>Relasi "dipinjam oleh" antara buku dengan anggota.</p>
+                </div>
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-bus" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Transportasi</h4>
+                    <p>Relasi "rute" antara kota asal dan kota tujuan.</p>
+                </div>
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-chalkboard-teacher" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Sekolah</h4>
+                    <p>Relasi "wali kelas" antara guru dan kelas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Latihan Soal -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-pencil-alt"></i> LATIHAN</span>
+            <div class="section-title">
+                <i class="fas fa-question-circle"></i>
+                <h2>Uji Pemahaman Relasi</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 1</p>
+                    <p style="margin-bottom: 20px;">Diketahui A = {1, 2, 3, 4} dan B = {2, 4, 6, 8}. Relasi dari A ke B adalah "faktor dari". Himpunan pasangan berurutan yang tepat adalah...</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button onclick="checkRelasiQuiz(1,1)" class="quiz-btn">A. {(1,2), (2,4), (4,8)}</button>
+                        <button onclick="checkRelasiQuiz(1,2)" class="quiz-btn">B. {(2,1), (4,2), (8,4)}</button>
+                        <button onclick="checkRelasiQuiz(1,3)" class="quiz-btn">C. {(1,2), (2,4), (3,6), (4,8)}</button>
+                        <button onclick="checkRelasiQuiz(1,4)" class="quiz-btn">D. {(1,1), (2,2), (3,3), (4,4)}</button>
+                    </div>
+                    <div id="relasiQuiz1" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+                
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 2</p>
+                    <p style="margin-bottom: 20px;">Dari relasi {(1,a), (2,b), (3,c), (4,d)}, manakah pernyataan yang BENAR?</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button onclick="checkRelasiQuiz(2,1)" class="quiz-btn">A. Domain = {a,b,c,d}</button>
+                        <button onclick="checkRelasiQuiz(2,2)" class="quiz-btn">B. Kodomain = {1,2,3,4}</button>
+                        <button onclick="checkRelasiQuiz(2,3)" class="quiz-btn">C. Range = {a,b,c,d}</button>
+                        <button onclick="checkRelasiQuiz(2,4)" class="quiz-btn">D. Domain = {1,2,3,4}</button>
+                    </div>
+                    <div id="relasiQuiz2" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Rangkuman -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-clipboard-check"></i> RANGKUMAN</span>
+            <div class="section-title">
+                <i class="fas fa-book"></i>
+                <h2>Intisari Relasi</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Definisi</h4>
+                    <p>Relasi adalah aturan yang memasangkan anggota himpunan A ke himpunan B.</p>
+                </div>
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 3 Cara Representasi</h4>
+                    <p>• Diagram Panah<br>• Himpunan Pasangan Berurutan<br>• Diagram Cartesius</p>
+                </div>
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Istilah</h4>
+                    <p>Domain: himpunan asal<br>Kodomain: himpunan lawan<br>Range: himpunan hasil</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="page-footer">
+            <a href="bab4-relasi-fungsi.html" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Kembali ke Bab
+            </a>
+            <a href="sub4-2-fungsi.html" class="nav-btn right">
+                Selanjutnya: Memahami Fungsi <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MathMaster8 - Memahami Relasi | Kurikulum Merdeka</p>
+        <p style="margin-top: 8px; opacity: 0.6;">"Relasi adalah jembatan yang menghubungkan dua dunia." - N.A.</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+        };
+
+        // Simulator Relasi
+        let selectedA = null;
+        let selectedB = null;
+        let relations = [
+            {a: 'Ayu', b: 'Basket'},
+            {a: 'Budi', b: 'Voli'},
+            {a: 'Citra', b: 'Renang'},
+            {a: 'Dodi', b: 'Sepak bola'}
+        ];
+
+        const elementMap = {
+            a1: 'Ayu', a2: 'Budi', a3: 'Citra', a4: 'Dodi',
+            b1: 'Basket', b2: 'Voli', b3: 'Renang', b4: 'Sepak bola'
+        };
+
+        function selectElement(type, id) {
+            // Hapus seleksi sebelumnya
+            if (type === 'a') {
+                document.querySelectorAll('#a1, #a2, #a3, #a4').forEach(el => el.classList.remove('selected'));
+                document.getElementById(`a${id}`).classList.add('selected');
+                selectedA = elementMap[`a${id}`];
+            } else {
+                document.querySelectorAll('#b1, #b2, #b3, #b4').forEach(el => el.classList.remove('selected'));
+                document.getElementById(`b${id}`).classList.add('selected');
+                selectedB = elementMap[`b${id}`];
+            }
+        }
+
+        function addRelation() {
+            if (selectedA && selectedB) {
+                // Cek apakah sudah ada relasi yang sama
+                let exists = relations.some(r => r.a === selectedA && r.b === selectedB);
+                if (!exists) {
+                    relations.push({a: selectedA, b: selectedB});
+                    updateRelationList();
+                }
+                // Hapus seleksi
+                document.querySelectorAll('.element').forEach(el => el.classList.remove('selected'));
+                selectedA = null;
+                selectedB = null;
+            } else {
+                alert('Pilih satu elemen dari himpunan A dan satu elemen dari himpunan B!');
+            }
+        }
+
+        function clearRelations() {
+            relations = [];
+            updateRelationList();
+            document.querySelectorAll('.element').forEach(el => el.classList.remove('selected'));
+            selectedA = null;
+            selectedB = null;
+        }
+
+        function updateRelationList() {
+            let pairsDiv = document.getElementById('relationPairs');
+            let infoDiv = document.getElementById('relationInfo');
+            
+            if (relations.length === 0) {
+                pairsDiv.innerHTML = '<p style="color: var(--gray-400);">Belum ada relasi.</p>';
+                infoDiv.innerHTML = 'Domain = { } | Range = { }';
+                return;
+            }
+            
+            let html = '';
+            let domainSet = new Set();
+            let rangeSet = new Set();
+            
+            relations.forEach(r => {
+                html += `<span class="pair-chip">${r.a} → ${r.b}</span>`;
+                domainSet.add(r.a);
+                rangeSet.add(r.b);
+            });
+            
+            pairsDiv.innerHTML = html;
+            infoDiv.innerHTML = `Domain = {${Array.from(domainSet).join(', ')}} | Range = {${Array.from(rangeSet).join(', ')}}`;
+        }
+
+        // Fungsi kuis
+        function checkRelasiQuiz(quizNum, answer) {
+            if (quizNum === 1) {
+                let fb = document.getElementById('relasiQuiz1');
+                fb.style.display = 'block';
+                if (answer === 3) {
+                    fb.innerHTML = '✅ Benar! 1 faktor dari 2, 2 faktor dari 4, 3 faktor dari 6, 4 faktor dari 8.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Coba lagi! Perhatikan relasi "faktor dari".';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            } else if (quizNum === 2) {
+                let fb = document.getElementById('relasiQuiz2');
+                fb.style.display = 'block';
+                if (answer === 4) {
+                    fb.innerHTML = '✅ Benar! Domain = {1,2,3,4} (anggota pertama pasangan berurutan).';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Salah. Domain adalah himpunan elemen pertama dari pasangan berurutan.';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            }
+        }
+
+        // Inisialisasi
+        window.onload = function() {
+            updateRelationList();
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        };
+    </script>
+</body>
+</html>

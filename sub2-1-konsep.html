@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menemukan Konsep Pythagoras | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* =========================================
+           1. VARIABLES & CORE STYLING (KONSISTEN)
+           ========================================= */
+        :root {
+            --primary: #0d9488;
+            --primary-light: #14b8a6;
+            --primary-soft: #ccfbf1;
+            --primary-dark: #0f766e;
+            --accent: #f59e0b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 24px;
+            --border-radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           2. NAVIGATION (KONSISTEN)
+           ========================================= */
+        .top-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-6px);
+            color: var(--primary-dark);
+        }
+
+        .chapter-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            background: var(--primary-soft);
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+
+        /* =========================================
+           3. PROGRESS BAR
+           ========================================= */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 60px 5% 80px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "🔍";
+            position: absolute;
+            font-size: 180px;
+            top: -40px;
+            right: 5%;
+            opacity: 0.08;
+            transform: rotate(15deg);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           5. MAIN CONTAINER
+           ========================================= */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* =========================================
+           6. CONTENT CARD
+           ========================================= */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--primary-soft);
+            color: var(--primary-dark);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           7. VIDEO CONTAINER
+           ========================================= */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================================
+           8. EXPERIMENT CARDS
+           ========================================= */
+        .experiment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .experiment-card {
+            background: var(--bg-page);
+            border-radius: 20px;
+            padding: 30px;
+            border-left: 6px solid var(--primary);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            border-left-width: 6px;
+        }
+
+        .experiment-card:hover {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .exp-icon {
+            background: var(--primary-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .exp-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .math-box {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 14px;
+            margin: 20px 0;
+            border: 1px dashed var(--primary);
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* =========================================
+           9. SIMULATOR INTERAKTIF
+           ========================================= */
+        .simulator-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 40px;
+            padding: 50px;
+            margin-top: 30px;
+        }
+
+        .simulator-title {
+            color: var(--primary-light);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pythagoras-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .triangle-container {
+            position: relative;
+            width: 280px;
+            height: 200px;
+        }
+
+        .square-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .side-control {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .control-item {
+            text-align: center;
+        }
+
+        .control-item label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--gray-300);
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type=range] {
+            width: 180px;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            -webkit-appearance: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 10px rgba(13,148,136,0.5);
+        }
+
+        .proof-result {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 60px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* =========================================
+           10. HISTORICAL NOTES
+           ========================================= */
+        .history-box {
+            background: var(--primary-soft);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 6px solid var(--primary);
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .history-img {
+            font-size: 5rem;
+            color: var(--primary-dark);
+        }
+
+        /* =========================================
+           11. LATIHAN SOAL
+           ========================================= */
+        .quiz-mini {
+            background: var(--gray-100);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .quiz-btn {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 5px;
+        }
+
+        .quiz-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* =========================================
+           12. PAGINATION FOOTER
+           ========================================= */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .content-card { padding: 30px; }
+            .experiment-grid { grid-template-columns: 1fr; }
+            .simulator-box { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="top-bar">
+        <a href="bab2-teorema-pythagoras.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Bab 2
+        </a>
+        <span class="chapter-badge"><i class="fas fa-search"></i> Sub A: Menemukan Konsep</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>🔍 Menemukan Konsep Pythagoras</h1>
+        <p>Eksplorasi hubungan kuadrat sisi-sisi segitiga siku-siku melalui aktivitas penemuan dan pembuktian visual</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Card: Video Pembelajaran -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-play"></i> VIDEO PEMBELAJARAN</span>
+            <div class="section-title">
+                <i class="fas fa-film"></i>
+                <h2>Sejarah dan Penemuan Pythagoras</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Saksikan bagaimana Pythagoras dan murid-muridnya menemukan hubungan ajaib antara sisi-sisi segitiga siku-siku.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/CAkMUdeB06o" title="Pythagoras Discovery" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Card: Sejarah Singkat -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-history"></i> SEJARAH</span>
+            <div class="section-title">
+                <i class="fas fa-scroll"></i>
+                <h2>Siapa itu Pythagoras?</h2>
+            </div>
+            
+            <div class="history-box">
+                <div class="history-img">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div style="flex: 1;">
+                    <h3 style="color: var(--primary-dark); margin-bottom: 15px;">Pythagoras of Samos (570-495 SM)</h3>
+                    <p style="margin-bottom: 10px;">Filsuf dan matematikawan Yunani yang mendirikan aliran Pythagoras. Ia dan murid-muridnya percaya bahwa alam semesta diatur oleh bilangan dan rasio.</p>
+                    <p><strong>Fakta menarik:</strong> Teorema Pythagoras sebenarnya sudah dikenal oleh bangsa Babilonia 1000 tahun sebelumnya, tetapi Pythagoras-lah yang pertama membuktikannya secara matematis.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Aktivitas Penemuan -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-flask"></i> EKSPERIMEN</span>
+            <div class="section-title">
+                <i class="fas fa-cubes"></i>
+                <h2>Aktivitas: Membuktikan dengan Luas Persegi</h2>
+            </div>
+            
+            <div class="experiment-grid">
+                <div class="experiment-card">
+                    <div class="exp-icon">
+                        <i class="fas fa-square"></i>
+                    </div>
+                    <h3 class="exp-title">Metode Luas Persegi</h3>
+                    <p>Buat persegi besar dengan sisi (a+b). Di dalamnya, susun 4 segitiga siku-siku identik.</p>
+                    <div class="math-box">
+                        \((a+b)^2 = c^2 + 4 \times \frac{ab}{2}\)
+                    </div>
+                    <p style="font-size: 0.95rem;">Sederhanakan: \(a^2 + 2ab + b^2 = c^2 + 2ab\)<br>➡️ \(a^2 + b^2 = c^2\)</p>
+                </div>
+                
+                <div class="experiment-card">
+                    <div class="exp-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3 class="exp-title">Metode Potongan</h3>
+                    <p>Potong persegi c² menjadi 4 segitiga dan 1 persegi kecil (b-a)².</p>
+                    <div class="math-box">
+                        \(c^2 = 4 \times \frac{ab}{2} + (b-a)^2\)
+                    </div>
+                    <p style="font-size: 0.95rem;">Hasil: \(c^2 = 2ab + b^2 - 2ab + a^2 = a^2 + b^2\)</p>
+                </div>
+                
+                <div class="experiment-card">
+                    <div class="exp-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3 class="exp-title">Metode Air (Demonstrasi)</h3>
+                    <p>Isi persegi pada sisi miring dengan air, tuangkan ke dua persegi pada sisi tegak. Ternyata pas!</p>
+                    <p style="margin-top: 15px; font-style: italic;">"Luas persegi pada hipotenusa sama dengan jumlah luas persegi pada kedua sisi siku-siku."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Simulator Interaktif - Buktikan Sendiri! -->
+        <div class="simulator-box">
+            <div class="simulator-title">
+                <i class="fas fa-draw-polygon"></i>
+                <h2 style="color: white; margin: 0;">Simulator: Buktikan Langsung!</h2>
+            </div>
+            <p style="margin-bottom: 25px; opacity: 0.9;">Geser slider untuk mengubah panjang sisi. Amati bahwa \(a^2 + b^2\) selalu sama dengan \(c^2\).</p>
+
+            <div class="pythagoras-visual">
+                <div class="triangle-container">
+                    <svg viewBox="0 0 250 200" style="width: 100%;">
+                        <!-- Segitiga siku-siku -->
+                        <polygon points="30,170 170,170 30,30" fill="none" stroke="white" stroke-width="4" stroke-dasharray="8 4"/>
+                        
+                        <!-- Label sisi -->
+                        <text x="90" y="140" fill="var(--primary-light)" font-size="18" font-weight="bold">a</text>
+                        <text x="120" y="80" fill="var(--primary-light)" font-size="18" font-weight="bold">b</text>
+                        <text x="50" y="90" fill="var(--accent)" font-size="18" font-weight="bold">c</text>
+                        
+                        <!-- Persegi pada sisi a -->
+                        <rect x="30" y="170" width="0" height="0" fill="rgba(13,148,136,0.2)" stroke="var(--primary-light)" stroke-width="2" id="squareA"/>
+                        <text x="15" y="200" fill="var(--primary-light)" font-size="14" id="squareAText">a² = ?</text>
+                        
+                        <!-- Persegi pada sisi b -->
+                        <rect x="170" y="170" width="0" height="0" fill="rgba(13,148,136,0.2)" stroke="var(--primary-light)" stroke-width="2" id="squareB"/>
+                        <text x="190" y="200" fill="var(--primary-light)" font-size="14" id="squareBText">b² = ?</text>
+                        
+                        <!-- Persegi pada sisi c -->
+                        <rect x="30" y="30" width="0" height="0" fill="rgba(245,158,11,0.2)" stroke="var(--accent)" stroke-width="2" id="squareC"/>
+                        <text x="10" y="20" fill="var(--accent)" font-size="14" id="squareCText">c² = ?</text>
+                    </svg>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 30px; min-width: 220px;">
+                    <p style="font-weight: 800; margin-bottom: 15px;">Nilai Sisi:</p>
+                    <p style="display: flex; justify-content: space-between;">
+                        <span>a = </span>
+                        <span id="valA" style="color: var(--primary-light); font-weight: 700;">3.0</span>
+                    </p>
+                    <p style="display: flex; justify-content: space-between;">
+                        <span>b = </span>
+                        <span id="valB" style="color: var(--primary-light); font-weight: 700;">4.0</span>
+                    </p>
+                    <p style="display: flex; justify-content: space-between;">
+                        <span style="color: var(--accent);">c = </span>
+                        <span id="valC" style="color: var(--accent); font-weight: 700;">5.0</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="side-control">
+                <div class="control-item">
+                    <label>Sisi a (tegak)</label>
+                    <input type="range" id="sideA" min="1" max="12" value="3" step="0.1">
+                    <span style="display: block; font-weight: 700; margin-top: 10px; color: var(--primary-light);" id="showA">3.0</span>
+                </div>
+                <div class="control-item">
+                    <label>Sisi b (alas)</label>
+                    <input type="range" id="sideB" min="1" max="12" value="4" step="0.1">
+                    <span style="display: block; font-weight: 700; margin-top: 10px; color: var(--primary-light);" id="showB">4.0</span>
+                </div>
+            </div>
+
+            <div class="proof-result">
+                <span>\(a^2 + b^2 =\) <span id="calcLeft">9 + 16 = 25</span> &nbsp;&nbsp; | &nbsp;&nbsp; \(c^2 =\) <span id="calcRight">25</span></span>
+            </div>
+            
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <span style="background: rgba(34,197,94,0.2); color: #22c55e; padding: 12px 30px; border-radius: 60px; font-weight: 700;">
+                    <i class="fas fa-check-circle"></i> Terbukti: a² + b² = c²
+                </span>
+            </div>
+        </div>
+
+        <!-- Card: Rumus dan Definisi -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-info-circle"></i> DEFINISI</span>
+            <div class="section-title">
+                <i class="fas fa-balance-scale"></i>
+                <h2>Teorema Pythagoras</h2>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-dark); background: var(--primary-soft); padding: 30px; border-radius: 30px; display: inline-block;">
+                    \(c^2 = a^2 + b^2\)
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--primary); margin-bottom: 15px;"><i class="fas fa-check-circle"></i> Jika mencari sisi miring (c):</h4>
+                    <p style="font-size: 1.3rem; font-weight: 700; text-align: center;">\(c = \sqrt{a^2 + b^2}\)</p>
+                </div>
+                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                    <h4 style="color: var(--primary); margin-bottom: 15px;"><i class="fas fa-check-circle"></i> Jika mencari sisi tegak (a):</h4>
+                    <p style="font-size: 1.3rem; font-weight: 700; text-align: center;">\(a = \sqrt{c^2 - b^2}\)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Uji Pemahaman -->
+        <div class="quiz-mini">
+            <h3 style="font-size: 1.6rem; margin-bottom: 20px; color: var(--primary);">⚡ Uji Pemahaman</h3>
+            
+            <p style="margin-bottom: 25px; font-size: 1.2rem;">Sebuah segitiga siku-siku memiliki sisi tegak 6 cm dan 8 cm. Berapakah panjang sisi miringnya?</p>
+            
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 30px;">
+                <button onclick="checkConceptQuiz(1, 1)" class="quiz-btn">A. 9 cm</button>
+                <button onclick="checkConceptQuiz(1, 2)" class="quiz-btn">B. 10 cm</button>
+                <button onclick="checkConceptQuiz(1, 3)" class="quiz-btn">C. 11 cm</button>
+                <button onclick="checkConceptQuiz(1, 4)" class="quiz-btn">D. 12 cm</button>
+            </div>
+            
+            <div id="quizFeedback1" style="margin-top: 20px; padding: 15px; border-radius: 16px; font-weight: 600; display: none;"></div>
+            
+            <p style="margin-top: 40px; margin-bottom: 25px; font-size: 1.2rem;">Jika sisi miring 13 cm dan salah satu sisi tegak 5 cm, berapakah sisi tegak lainnya?</p>
+            
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <button onclick="checkConceptQuiz(2, 1)" class="quiz-btn">A. 10 cm</button>
+                <button onclick="checkConceptQuiz(2, 2)" class="quiz-btn">B. 11 cm</button>
+                <button onclick="checkConceptQuiz(2, 3)" class="quiz-btn">C. 12 cm</button>
+                <button onclick="checkConceptQuiz(2, 4)" class="quiz-btn">D. 14 cm</button>
+            </div>
+            
+            <div id="quizFeedback2" style="margin-top: 20px; padding: 15px; border-radius: 16px; font-weight: 600; display: none;"></div>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="page-footer">
+            <a href="bab2-teorema-pythagoras.html" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Kembali ke Bab
+            </a>
+            <a href="sub2-2-tripel.html" class="nav-btn right">
+                Selanjutnya: Tripel Pythagoras <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MathMaster8 - Menemukan Konsep Pythagoras | Kurikulum Merdeka</p>
+        <p style="margin-top: 8px; opacity: 0.6;">"Penemuan adalah melihat apa yang semua orang lihat dan memikirkan apa yang tidak dipikirkan orang lain." - Pythagoras</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+        };
+
+        // Interactive slider for proof
+        const aSlider = document.getElementById('sideA');
+        const bSlider = document.getElementById('sideB');
+        const showA = document.getElementById('showA');
+        const showB = document.getElementById('showB');
+        const valA = document.getElementById('valA');
+        const valB = document.getElementById('valB');
+        const valC = document.getElementById('valC');
+        const calcLeft = document.getElementById('calcLeft');
+        const calcRight = document.getElementById('calcRight');
+        
+        // Elemen persegi untuk visualisasi
+        const squareA = document.getElementById('squareA');
+        const squareB = document.getElementById('squareB');
+        const squareC = document.getElementById('squareC');
+        const squareAText = document.getElementById('squareAText');
+        const squareBText = document.getElementById('squareBText');
+        const squareCText = document.getElementById('squareCText');
+
+        function updateTriangle() {
+            let a = parseFloat(aSlider.value);
+            let b = parseFloat(bSlider.value);
+            let c = Math.sqrt(a*a + b*b).toFixed(2);
+            
+            showA.innerText = a.toFixed(1);
+            showB.innerText = b.toFixed(1);
+            valA.innerText = a.toFixed(1);
+            valB.innerText = b.toFixed(1);
+            valC.innerText = c;
+
+            let leftVal = (a*a).toFixed(1) + " + " + (b*b).toFixed(1) + " = " + (a*a + b*b).toFixed(1);
+            calcLeft.innerText = leftVal;
+            calcRight.innerText = (c*c).toFixed(2);
+            
+            // Update visualisasi persegi (sederhana)
+            let scale = 5; // Faktor skala untuk visualisasi
+            squareA.setAttribute('width', a * scale);
+            squareA.setAttribute('height', a * scale);
+            squareAText.setAttribute('x', 15);
+            squareAText.setAttribute('y', 200);
+            squareAText.textContent = `a² = ${(a*a).toFixed(1)}`;
+            
+            squareB.setAttribute('width', b * scale);
+            squareB.setAttribute('height', b * scale);
+            squareB.setAttribute('x', 170);
+            squareB.setAttribute('y', 170 - b * scale);
+            squareBText.setAttribute('x', 190);
+            squareBText.setAttribute('y', 200);
+            squareBText.textContent = `b² = ${(b*b).toFixed(1)}`;
+            
+            squareC.setAttribute('width', c * scale);
+            squareC.setAttribute('height', c * scale);
+            squareC.setAttribute('x', 30);
+            squareC.setAttribute('y', 30);
+            squareCText.setAttribute('x', 10);
+            squareCText.setAttribute('y', 20);
+            squareCText.textContent = `c² = ${(c*c).toFixed(1)}`;
+        }
+
+        aSlider.addEventListener('input', updateTriangle);
+        bSlider.addEventListener('input', updateTriangle);
+        
+        // Inisialisasi
+        updateTriangle();
+
+        // Quiz function
+        function checkConceptQuiz(quizNum, answer) {
+            if (quizNum === 1) {
+                let fb = document.getElementById('quizFeedback1');
+                fb.style.display = 'block';
+                if (answer === 2) {
+                    fb.innerHTML = '✅ Benar! c = √(6² + 8²) = √(36 + 64) = √100 = 10 cm.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Coba lagi! Ingat rumus c² = a² + b².';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            } else if (quizNum === 2) {
+                let fb = document.getElementById('quizFeedback2');
+                fb.style.display = 'block';
+                if (answer === 3) {
+                    fb.innerHTML = '✅ Benar! a = √(13² - 5²) = √(169 - 25) = √144 = 12 cm.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Coba lagi! Gunakan rumus a = √(c² - b²).';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            }
+        }
+
+        // MathJax
+        if (window.MathJax) {
+            MathJax.typeset();
+        }
+    </script>
+</body>
+</html>

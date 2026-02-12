@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemusatan Data: Mean, Median, Modus | MathMaster8</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        /* =========================================
+           1. VARIABLES & CORE STYLING (KONSISTEN)
+           ========================================= */
+        :root {
+            --primary: #0d9488;
+            --primary-light: #14b8a6;
+            --primary-soft: #ccfbf1;
+            --primary-dark: #0f766e;
+            --secondary: #6366f1;
+            --secondary-light: #818cf8;
+            --secondary-soft: #e0e7ff;
+            --accent: #f59e0b;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 40px -15px rgba(99,102,241,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius: 24px;
+            --border-radius-lg: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* =========================================
+           2. NAVIGATION (KONSISTEN)
+           ========================================= */
+        .top-bar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            transform: translateX(-6px);
+            color: var(--secondary);
+        }
+
+        .chapter-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--secondary);
+            background: var(--secondary-soft);
+            padding: 6px 18px;
+            border-radius: 60px;
+        }
+
+        /* =========================================
+           3. PROGRESS BAR
+           ========================================= */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        .hero-section {
+            background: linear-gradient(135deg, var(--secondary) 0%, #4f46e5 100%);
+            color: white;
+            padding: 60px 5% 80px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "📊";
+            position: absolute;
+            font-size: 180px;
+            top: -40px;
+            right: 5%;
+            opacity: 0.08;
+            transform: rotate(15deg);
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================================
+           5. MAIN CONTAINER
+           ========================================= */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* =========================================
+           6. CONTENT CARD
+           ========================================= */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .section-title i {
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--secondary-soft);
+            color: var(--secondary);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 6px 20px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================
+           7. VIDEO CONTAINER
+           ========================================= */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            background: #000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================================
+           8. STATISTICS CARDS
+           ========================================= */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-page);
+            border-radius: 20px;
+            padding: 30px;
+            border-top: 6px solid var(--secondary);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            border-top-width: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            background: var(--secondary-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .stat-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .stat-definition {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px 0;
+            border-left: 4px solid var(--secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .math-formula {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 1px dashed var(--secondary);
+            font-size: 1.3rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .example-box {
+            background: var(--gray-100);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .example-title {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* =========================================
+           9. DATA TABLE
+           ========================================= */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .data-table th {
+            background: var(--secondary-soft);
+            color: var(--secondary);
+            font-weight: 700;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover {
+            background: var(--gray-100);
+        }
+
+        /* =========================================
+           10. SIMULATOR INTERAKTIF
+           ========================================= */
+        .simulator-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 40px;
+            padding: 50px;
+            margin-top: 20px;
+        }
+
+        .simulator-title {
+            color: var(--secondary-light);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .data-input-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+            align-items: flex-end;
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--gray-300);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .btn-calc {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-calc:hover {
+            background: #4f46e5;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(99,102,241,0.3);
+        }
+
+        .btn-add {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 15px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-add:hover {
+            background: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .result-panel {
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 30px;
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .result-item {
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--gray-300);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary-light);
+        }
+
+        .data-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 60px;
+        }
+
+        .data-chip {
+            background: var(--secondary);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .data-chip i {
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .data-chip i:hover {
+            opacity: 1;
+        }
+
+        /* =========================================
+           11. FREKUENSI TABLE
+           ========================================= */
+        .freq-table {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+        }
+
+        /* =========================================
+           12. PAGINATION FOOTER
+           ========================================= */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--white);
+            padding: 14px 32px;
+            border-radius: 60px;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-btn:hover {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        .nav-btn.right:hover {
+            transform: translateX(3px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        /* =========================================
+           13. QUIZ MINI
+           ========================================= */
+        .quiz-mini {
+            background: var(--secondary-soft);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 30px;
+        }
+
+        .quiz-option {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .quiz-btn {
+            background: var(--white);
+            border: 2px solid var(--secondary);
+            padding: 12px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: var(--secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quiz-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2rem; }
+            .content-card { padding: 30px; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .simulator-box { padding: 30px; }
+            .data-input-area { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="top-bar">
+        <a href="bab6-statistika.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Kembali ke Bab 6
+        </a>
+        <span class="chapter-badge"><i class="fas fa-chart-pie"></i> Sub 1: Pemusatan Data</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>📊 Ukuran Pemusatan Data</h1>
+        <p>Mean (Rata-rata), Median (Nilai Tengah), dan Modus (Nilai Terbanyak)</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Card: Video Pembelajaran -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-play"></i> VIDEO PEMBELAJARAN</span>
+            <div class="section-title">
+                <i class="fas fa-film"></i>
+                <h2>Konsep Pemusatan Data</h2>
+            </div>
+            <p style="margin-bottom: 20px;">Tonton video berikut untuk memahami perbedaan mean, median, dan modus beserta cara menghitungnya.</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/k3aKKasOmIw" title="Mean, Median, Modus" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top: 25px; padding: 20px; background: var(--secondary-soft); border-radius: 20px;">
+                <p style="font-weight: 700; color: var(--secondary);"><i class="fas fa-lightbulb"></i> Ringkasan Video:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Mean</strong> = jumlah seluruh data ÷ banyak data</li>
+                    <li><strong>Median</strong> = nilai tengah setelah data diurutkan</li>
+                    <li><strong>Modus</strong> = nilai yang paling sering muncul</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Card: 3 Pilar Pemusatan Data -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-cubes"></i> 3 UKURAN UTAMA</span>
+            <div class="section-title">
+                <i class="fas fa-chart-pie"></i>
+                <h2>Mean, Median, Modus</h2>
+            </div>
+            
+            <div class="stats-grid">
+                <!-- 1. MEAN -->
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Mean (Rata-rata)</h3>
+                    <div class="stat-definition">
+                        <strong>Definisi:</strong> Jumlah seluruh nilai data dibagi dengan banyaknya data.
+                    </div>
+                    <div class="math-formula">
+                        $$\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}$$
+                    </div>
+                    <div class="example-box">
+                        <div class="example-title">
+                            <i class="fas fa-example"></i> Contoh:
+                        </div>
+                        <p>Data: 6, 7, 8, 8, 10, 9</p>
+                        <p>Mean = (6+7+8+8+10+9) ÷ 6 = 48 ÷ 6 = 8</p>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 0.95rem; color: var(--text-muted);">
+                        <i class="fas fa-info-circle"></i> Mean dipengaruhi oleh nilai ekstrem (outlier).
+                    </p>
+                </div>
+                
+                <!-- 2. MEDIAN -->
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-sort-amount-up"></i>
+                    </div>
+                    <h3>Median (Nilai Tengah)</h3>
+                    <div class="stat-definition">
+                        <strong>Definisi:</strong> Nilai tengah dari data yang telah diurutkan.
+                    </div>
+                    <div class="math-formula">
+                        $$\text{Median} = \begin{cases} 
+                        x_{\frac{n+1}{2}}, & n \text{ ganjil} \\ 
+                        \frac{x_{\frac{n}{2}} + x_{\frac{n}{2}+1}}{2}, & n \text{ genap}
+                        \end{cases}$$
+                    </div>
+                    <div class="example-box">
+                        <div class="example-title">
+                            <i class="fas fa-example"></i> Contoh:
+                        </div>
+                        <p>Data ganjil (n=5): 4, 6, 7, 9, 10 → Median = 7</p>
+                        <p>Data genap (n=6): 4, 6, 7, 9, 10, 12 → Median = (7+9)/2 = 8</p>
+                    </div>
+                    <p style="margin-top: 15px; font-size: 0.95rem; color: var(--text-muted);">
+                        <i class="fas fa-info-circle"></i> Median tidak dipengaruhi outlier.
+                    </p>
+                </div>
+                
+                <!-- 3. MODUS -->
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>Modus (Nilai Terbanyak)</h3>
+                    <div class="stat-definition">
+                        <strong>Definisi:</strong> Nilai yang paling sering muncul dalam kumpulan data.
+                    </div>
+                    <div class="math-formula">
+                        $$\text{Modus} = \text{nilai dengan frekuensi tertinggi}$$
+                    </div>
+                    <div class="example-box">
+                        <div class="example-title">
+                            <i class="fas fa-example"></i> Contoh:
+                        </div>
+                        <p>Data: 5, 6, 7, 7, 7, 8, 9, 9</p>
+                        <p>Modus = 7 (muncul 3 kali)</p>
+                        <p>Bisa memiliki lebih dari satu modus (bimodal/multimodal).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Contoh Kasus dan Penyelesaian -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-pencil-ruler"></i> STUDI KASUS</span>
+            <div class="section-title">
+                <i class="fas fa-clipboard-list"></i>
+                <h2>Contoh Soal dan Pembahasan</h2>
+            </div>
+            
+            <div style="background: var(--secondary-soft); padding: 30px; border-radius: 20px; margin-bottom: 30px;">
+                <h4 style="font-size: 1.3rem; margin-bottom: 20px; color: var(--secondary);">📝 Soal 1: Nilai Ulangan Matematika</h4>
+                <p style="margin-bottom: 15px;">Berikut adalah nilai ulangan matematika dari 10 siswa kelas VIII: <strong>7, 8, 6, 9, 8, 7, 8, 10, 7, 9</strong></p>
+                <p style="margin-bottom: 10px;"><strong>Tentukan:</strong> a. Mean, b. Median, c. Modus</p>
+                
+                <div style="background: white; padding: 25px; border-radius: 16px; margin-top: 20px;">
+                    <p style="font-weight: 700; color: var(--secondary); margin-bottom: 15px;"><i class="fas fa-check-circle"></i> Pembahasan:</p>
+                    
+                    <p><strong>a. Mean:</strong></p>
+                    <p style="margin-left: 20px; margin-bottom: 15px;">Jumlah data = 7+8+6+9+8+7+8+10+7+9 = 79<br>Banyak data = 10<br>Mean = 79 ÷ 10 = <strong>7,9</strong></p>
+                    
+                    <p><strong>b. Median:</strong></p>
+                    <p style="margin-left: 20px; margin-bottom: 15px;">Urutkan data: 6, 7, 7, 7, 8, 8, 8, 9, 9, 10<br>Karena n=10 (genap), median = (data ke-5 + data ke-6) ÷ 2 = (8+8)÷2 = <strong>8</strong></p>
+                    
+                    <p><strong>c. Modus:</strong></p>
+                    <p style="margin-left: 20px;">Nilai 7 muncul 3 kali, nilai 8 muncul 3 kali, nilai 9 muncul 2 kali.<br>Modus = <strong>7 dan 8 (bimodal)</strong></p>
+                </div>
+            </div>
+            
+            <div style="background: var(--gray-100); padding: 30px; border-radius: 20px;">
+                <h4 style="font-size: 1.3rem; margin-bottom: 20px; color: var(--secondary);">📝 Soal 2: Data Berkelompok</h4>
+                <p style="margin-bottom: 15px;">Tabel distribusi frekuensi nilai ulangan:</p>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Nilai</th>
+                            <th>Frekuensi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>5</td><td>2</td></tr>
+                        <tr><td>6</td><td>4</td></tr>
+                        <tr><td>7</td><td>5</td></tr>
+                        <tr><td>8</td><td>3</td></tr>
+                        <tr><td>9</td><td>1</td></tr>
+                    </tbody>
+                </table>
+                
+                <p style="margin-top: 20px;"><strong>Hitung mean!</strong></p>
+                <div style="background: white; padding: 20px; border-radius: 16px; margin-top: 15px;">
+                    <p>Mean = (5×2 + 6×4 + 7×5 + 8×3 + 9×1) ÷ (2+4+5+3+1)</p>
+                    <p>= (10 + 24 + 35 + 24 + 9) ÷ 15 = 102 ÷ 15 = <strong>6,8</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Kalkulator Mean, Median, Modus Interaktif -->
+        <div class="simulator-box">
+            <div class="simulator-title">
+                <i class="fas fa-calculator"></i>
+                <h2 style="color: white; margin: 0;">Kalkulator Pemusatan Data</h2>
+            </div>
+            <p style="margin-bottom: 25px; opacity: 0.9;">Masukkan data (pisahkan dengan koma) lalu hitung mean, median, dan modus secara otomatis.</p>
+            
+            <div class="data-input-area">
+                <div class="input-group">
+                    <label for="dataset">Data (contoh: 7,8,6,9,8,7,8,10,7,9)</label>
+                    <input type="text" id="dataset" placeholder="7,8,6,9,8,7,8,10,7,9" value="7,8,6,9,8,7,8,10,7,9">
+                </div>
+                <button class="btn-calc" onclick="calculateStatistics()">
+                    <i class="fas fa-chart-line"></i> Hitung
+                </button>
+                <button class="btn-add" onclick="resetDataset()">
+                    <i class="fas fa-redo-alt"></i> Reset
+                </button>
+            </div>
+            
+            <div id="dataList" class="data-list">
+                <!-- Akan diisi JavaScript -->
+            </div>
+            
+            <div id="resultPanel" class="result-panel">
+                <div class="result-item">
+                    <div class="result-label">Mean (Rata-rata)</div>
+                    <div class="result-value" id="meanResult">7.9</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Median (Nilai Tengah)</div>
+                    <div class="result-value" id="medianResult">8.0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Modus (Terbanyak)</div>
+                    <div class="result-value" id="modusResult">7,8</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Jumlah Data</div>
+                    <div class="result-value" id="countResult">10</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Data Berkelompok -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-table"></i> DATA KELOMPOK</span>
+            <div class="section-title">
+                <i class="fas fa-layer-group"></i>
+                <h2>Mean Data Berkelompok</h2>
+            </div>
+            
+            <p style="margin-bottom: 20px;">Untuk data yang dikelompokkan dalam interval kelas, gunakan titik tengah kelas.</p>
+            
+            <div class="math-formula" style="font-size: 1.4rem;">
+                $$\bar{x} = \frac{\sum f_i \cdot x_i}{\sum f_i}$$
+            </div>
+            
+            <p style="margin-top: 15px;">Keterangan:</p>
+            <ul style="margin-left: 30px; margin-bottom: 25px;">
+                <li>\(f_i\) = frekuensi kelas ke-i</li>
+                <li>\(x_i\) = titik tengah kelas ke-i</li>
+            </ul>
+            
+            <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                <h4 style="margin-bottom: 20px; color: var(--secondary);">Contoh: Tinggi Badan Siswa (cm)</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Tinggi (cm)</th>
+                            <th>Frekuensi (f)</th>
+                            <th>Titik Tengah (x)</th>
+                            <th>f × x</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>140 - 144</td><td>2</td><td>142</td><td>284</td></tr>
+                        <tr><td>145 - 149</td><td>4</td><td>147</td><td>588</td></tr>
+                        <tr><td>150 - 154</td><td>8</td><td>152</td><td>1216</td></tr>
+                        <tr><td>155 - 159</td><td>5</td><td>157</td><td>785</td></tr>
+                        <tr><td>160 - 164</td><td>1</td><td>162</td><td>162</td></tr>
+                        <tr style="background: var(--secondary-soft); font-weight: 700;">
+                            <td colspan="2">Jumlah</td>
+                            <td>∑f = 20</td>
+                            <td>∑fx = 3035</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 20px; font-size: 1.1rem;">Mean = 3035 ÷ 20 = <strong>151,75 cm</strong></p>
+            </div>
+        </div>
+
+        <!-- Card: Kuis Mini Interaktif -->
+        <div class="quiz-mini">
+            <h3 style="font-size: 1.6rem; margin-bottom: 20px; color: var(--secondary);">⚡ Uji Pemahaman</h3>
+            <p style="margin-bottom: 25px; font-size: 1.1rem;">Nilai ulangan 5 siswa: 6, 7, 8, 8, 10. Berapakah mediannya?</p>
+            
+            <div class="quiz-option">
+                <button class="quiz-btn" onclick="checkQuiz(1, 1)">A. 7</button>
+                <button class="quiz-btn" onclick="checkQuiz(1, 2)">B. 7,5</button>
+                <button class="quiz-btn" onclick="checkQuiz(1, 3)">C. 8</button>
+                <button class="quiz-btn" onclick="checkQuiz(1, 4)">D. 8,5</button>
+            </div>
+            <div id="quizFeedback1" style="margin-top: 20px; padding: 15px; border-radius: 16px; font-weight: 600; display: none;"></div>
+            
+            <p style="margin-top: 40px; margin-bottom: 25px; font-size: 1.1rem;">Dari data yang sama, berapakah modusnya?</p>
+            <div class="quiz-option">
+                <button class="quiz-btn" onclick="checkQuiz(2, 1)">A. 6</button>
+                <button class="quiz-btn" onclick="checkQuiz(2, 2)">B. 7</button>
+                <button class="quiz-btn" onclick="checkQuiz(2, 3)">C. 8</button>
+                <button class="quiz-btn" onclick="checkQuiz(2, 4)">D. 10</button>
+            </div>
+            <div id="quizFeedback2" style="margin-top: 20px; padding: 15px; border-radius: 16px; font-weight: 600; display: none;"></div>
+        </div>
+
+        <!-- Card: Tips & Trik -->
+        <div class="content-card">
+            <span class="section-badge"><i class="fas fa-lightbulb"></i> TIPS & TRIK</span>
+            <div class="section-title">
+                <i class="fas fa-brain"></i>
+                <h2>Ingat Cepat!</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px;">
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-equals" style="font-size: 2rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Mean</h4>
+                    <p>"Jumlah semua dibagi banyak"</p>
+                </div>
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-sort-amount-down" style="font-size: 2rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Median</h4>
+                    <p>"Urutkan, cari tengah"</p>
+                </div>
+                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
+                    <i class="fas fa-star" style="font-size: 2rem; color: var(--secondary); margin-bottom: 15px;"></i>
+                    <h4 style="margin-bottom: 10px;">Modus</h4>
+                    <p>"Sering muncul juaranya"</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 25px; background: var(--gray-100); border-radius: 20px;">
+                <p style="font-weight: 700; color: var(--secondary);"><i class="fas fa-exclamation-triangle"></i> Perhatikan:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Jika data ganjil, median = data ke-(n+1)/2 setelah diurutkan</li>
+                    <li>Jika data genap, median = rata-rata dua data tengah</li>
+                    <li>Modus bisa lebih dari satu (bimodal/multimodal) atau tidak ada (jika semua frekuensi sama)</li>
+                    <li>Mean bisa tidak berada di tengah jika ada outlier</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="page-footer">
+            <a href="bab6-statistika.html" class="nav-btn">
+                <i class="fas fa-arrow-left"></i> Kembali ke Bab
+            </a>
+            <a href="sub6-2-penyebaran.html" class="nav-btn right">
+                Selanjutnya: Penyebaran Data <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 MathMaster8 - Pemusatan Data (Mean, Median, Modus) | Kurikulum Merdeka</p>
+        <p style="margin-top: 8px; opacity: 0.6;">"Statistika adalah jantung dari data science." - N.A.</p>
+    </footer>
+
+    <script>
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + "%";
+        };
+
+        // Data untuk kalkulator
+        let currentData = [];
+
+        function updateDataList() {
+            let dataList = document.getElementById('dataList');
+            if (currentData.length === 0) {
+                dataList.innerHTML = '<span style="color: var(--gray-300);">Belum ada data. Masukkan data di atas.</span>';
+            } else {
+                let html = '';
+                currentData.forEach((val, idx) => {
+                    html += `<span class="data-chip">${val} <i class="fas fa-times" onclick="removeData(${idx})"></i></span>`;
+                });
+                dataList.innerHTML = html;
+            }
+        }
+
+        function removeData(index) {
+            currentData.splice(index, 1);
+            updateDataList();
+            calculateFromCurrentData();
+        }
+
+        function calculateFromCurrentData() {
+            if (currentData.length === 0) {
+                document.getElementById('meanResult').innerText = '-';
+                document.getElementById('medianResult').innerText = '-';
+                document.getElementById('modusResult').innerText = '-';
+                document.getElementById('countResult').innerText = '0';
+                return;
+            }
+
+            // Hitung mean
+            let sum = currentData.reduce((a, b) => a + b, 0);
+            let mean = sum / currentData.length;
+            document.getElementById('meanResult').innerText = mean.toFixed(2);
+
+            // Hitung median
+            let sorted = [...currentData].sort((a, b) => a - b);
+            let median;
+            if (sorted.length % 2 === 1) {
+                median = sorted[Math.floor(sorted.length / 2)];
+            } else {
+                median = (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
+            }
+            document.getElementById('medianResult').innerText = median.toFixed(1);
+
+            // Hitung modus
+            let freq = {};
+            sorted.forEach(val => {
+                freq[val] = (freq[val] || 0) + 1;
+            });
+            let maxFreq = Math.max(...Object.values(freq));
+            let modes = [];
+            for (let key in freq) {
+                if (freq[key] === maxFreq && maxFreq > 1) {
+                    modes.push(key);
+                }
+            }
+            document.getElementById('modusResult').innerText = modes.length > 0 ? modes.join(', ') : 'Tidak ada';
+            document.getElementById('countResult').innerText = currentData.length;
+        }
+
+        function calculateStatistics() {
+            let input = document.getElementById('dataset').value;
+            let numbers = input.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+            
+            if (numbers.length === 0) {
+                alert('Masukkan data yang valid!');
+                return;
+            }
+            
+            currentData = numbers;
+            updateDataList();
+            calculateFromCurrentData();
+        }
+
+        function resetDataset() {
+            currentData = [];
+            document.getElementById('dataset').value = '';
+            updateDataList();
+            document.getElementById('meanResult').innerText = '-';
+            document.getElementById('medianResult').innerText = '-';
+            document.getElementById('modusResult').innerText = '-';
+            document.getElementById('countResult').innerText = '0';
+        }
+
+        // Fungsi kuis
+        function checkQuiz(quizNum, answer) {
+            if (quizNum === 1) {
+                let fb = document.getElementById('quizFeedback1');
+                fb.style.display = 'block';
+                if (answer === 3) {
+                    fb.innerHTML = '✅ Benar! Median dari data 6,7,8,8,10 adalah 8.';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Salah. Urutkan data: 6,7,8,8,10. Nilai tengah = 8.';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            } else if (quizNum === 2) {
+                let fb = document.getElementById('quizFeedback2');
+                fb.style.display = 'block';
+                if (answer === 3) {
+                    fb.innerHTML = '✅ Benar! Modus adalah 8 (muncul 2 kali).';
+                    fb.style.background = '#dcfce7';
+                    fb.style.color = '#166534';
+                } else {
+                    fb.innerHTML = '❌ Salah. Nilai 8 muncul paling sering (2 kali).';
+                    fb.style.background = '#fee2e2';
+                    fb.style.color = '#b91c1c';
+                }
+            }
+        }
+
+        // Inisialisasi
+        window.onload = function() {
+            calculateStatistics();
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        };
+    </script>
+</body>
+</html>
