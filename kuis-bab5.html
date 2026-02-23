@@ -843,7 +843,8 @@
 
         function updateNextButton() {
             const nextBtn = document.getElementById('next-btn');
-            nextBtn.disabled = (userAnswers[currentQuestionIndex] === null || userAnswers[currentQuestionIndex] === undefined);
+            // ✅ Perbaikan: Cek apakah jawaban TIDAK SAMA DENGAN NULL
+            nextBtn.disabled = (userAnswers[currentQuestionIndex] === null);
         }
 
         function nextQuestion() {

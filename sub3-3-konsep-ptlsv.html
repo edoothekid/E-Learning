@@ -3,63 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konsep Pertidaksamaan Linier Satu Variabel | MathMaster8</title>
+    <title>Konsep Pertidaksamaan Linier Satu Variabel | MathMaster</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            chtml: {
+                scale: 1.2,
+                minScale: 0.8
+            }
+        };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
         /* =========================================
-           1. VARIABLES & CORE STYLING (KONSISTEN)
+           1. VARIABLES & CORE STYLING - BIRU PREMIUM
            ========================================= */
         :root {
-            --primary: #0d9488;
-            --primary-light: #14b8a6;
-            --primary-soft: #ccfbf1;
-            --primary-dark: #0f766e;
-            --tertiary: #8b5cf6;
-            --tertiary-light: #a78bfa;
-            --tertiary-soft: #ede9fe;
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-soft: #dbeafe;
+            --primary-dark: #2563eb;
+            --secondary: #8b5cf6;
+            --secondary-light: #a78bfa;
+            --secondary-soft: #ede9fe;
             --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --accent-soft: #fef3c7;
             --success: #22c55e;
+            --success-soft: #dcfce7;
             --danger: #ef4444;
+            --danger-soft: #fee2e2;
+            --warning: #f59e0b;
+            --warning-soft: #fff3cd;
             --dark: #0f172a;
+            --dark-light: #1e293b;
             --text-main: #334155;
             --text-muted: #64748b;
+            --text-light: #94a3b8;
             --bg-page: #f8fafc;
             --white: #ffffff;
+            --gray-50: #f9fafb;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
             --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
-            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(139,92,246,0.15);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --shadow-md: 0 15px 35px -10px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px -15px rgba(59,130,246,0.2);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
+            --border-radius-xl: 40px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-page);
+            background: linear-gradient(135deg, var(--bg-page) 0%, #ffffff 100%);
             color: var(--text-main);
             line-height: 1.7;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
 
         /* =========================================
-           2. NAVIGATION (KONSISTEN)
+           2. NAVIGATION - PREMIUM
            ========================================= */
         .top-bar {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
             padding: 16px 5%;
             display: flex;
             align-items: center;
@@ -75,16 +113,24 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            color: var(--tertiary);
+            color: var(--primary);
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
             transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 40px;
+            background: var(--primary-soft);
         }
 
         .back-link:hover {
+            background: var(--primary);
+            color: white;
             transform: translateX(-6px);
-            color: var(--tertiary);
+        }
+
+        .back-link i {
+            font-size: 0.9rem;
         }
 
         .chapter-badge {
@@ -92,15 +138,20 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--tertiary);
-            background: var(--tertiary-soft);
-            padding: 6px 18px;
+            color: var(--primary-dark);
+            background: var(--primary-soft);
+            padding: 8px 22px;
             border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* =========================================
-           3. PROGRESS BAR
-           ========================================= */
+        .chapter-badge i {
+            font-size: 0.9rem;
+        }
+
+        /* Progress Bar */
         .progress-container {
             width: 100%;
             height: 4px;
@@ -113,51 +164,71 @@
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(to right, var(--tertiary), var(--accent));
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             width: 0%;
             transition: width 0.1s;
         }
 
         /* =========================================
-           4. HERO SECTION
+           3. HERO SECTION - BIRU
            ========================================= */
         .hero-section {
-            background: linear-gradient(135deg, var(--accent) 0%, #b45309 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 60px 5% 80px;
+            padding: 70px 5% 90px;
             text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-md);
         }
 
         .hero-section::before {
             content: "≪≫";
             position: absolute;
-            font-size: 180px;
+            font-size: 200px;
             top: -40px;
             right: 5%;
-            opacity: 0.08;
+            opacity: 0.1;
             transform: rotate(15deg);
         }
 
+        .hero-section::after {
+            content: "<  >  ≤  ≥";
+            position: absolute;
+            font-size: 80px;
+            bottom: -20px;
+            left: 5%;
+            opacity: 0.08;
+            transform: rotate(-5deg);
+            font-weight: 800;
+            font-family: 'Times New Roman', serif;
+            white-space: nowrap;
+        }
+
         .hero-section h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 15px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
         }
 
         .hero-section p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.95;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
         }
 
         /* =========================================
-           5. MAIN CONTAINER
+           4. MAIN CONTAINER
            ========================================= */
         .container {
             max-width: 1100px;
@@ -166,63 +237,86 @@
         }
 
         /* =========================================
-           6. CONTENT CARD
+           5. CONTENT CARD
            ========================================= */
         .content-card {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            margin-bottom: 35px;
+            border-radius: var(--border-radius-xl);
+            padding: 45px;
+            margin-bottom: 40px;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-200);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
         .content-card:hover {
             box-shadow: var(--shadow-lg);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .content-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, transparent 50%, var(--primary-soft) 100%);
+            opacity: 0.2;
+            border-radius: 0 0 0 150px;
+            pointer-events: none;
         }
 
         .section-title {
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--dark);
             margin-bottom: 25px;
+            position: relative;
         }
 
         .section-title i {
-            color: var(--accent);
-            font-size: 2rem;
+            color: var(--primary);
+            font-size: 2.2rem;
+            background: var(--primary-soft);
+            padding: 15px;
+            border-radius: 20px;
         }
 
         .section-badge {
             display: inline-block;
-            background: var(--accent-soft);
-            color: #b45309;
-            font-size: 0.7rem;
+            background: linear-gradient(135deg, var(--primary-soft) 0%, #fff 100%);
+            color: var(--primary-dark);
+            font-size: 0.75rem;
             font-weight: 800;
-            padding: 6px 20px;
+            padding: 8px 25px;
             border-radius: 60px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-bottom: 20px;
+            border: 1px solid var(--primary-light);
+            box-shadow: var(--shadow-sm);
         }
 
         /* =========================================
-           7. VIDEO CONTAINER
+           6. VIDEO CONTAINER
            ========================================= */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            margin: 30px 0;
+            margin: 30px 0 20px;
             background: #000;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
+            border: 3px solid var(--primary-light);
         }
 
         .video-container iframe {
@@ -235,203 +329,515 @@
         }
 
         /* =========================================
-           8. INEQUALITY SYMBOLS
+           7. SYMBOLS GRID
            ========================================= */
         .symbols-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
             margin: 30px 0;
         }
 
         .symbol-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 30px;
+            background: linear-gradient(135deg, var(--white), var(--gray-50));
+            border-radius: 30px;
+            padding: 35px 25px;
             text-align: center;
             border: 2px solid var(--gray-200);
             transition: var(--transition);
+            box-shadow: var(--shadow-sm);
         }
 
         .symbol-card:hover {
-            border-color: var(--accent);
-            box-shadow: var(--shadow);
-            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
         }
 
         .symbol {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 800;
-            color: var(--accent);
+            color: var(--primary);
             margin-bottom: 15px;
+            text-shadow: 0 5px 10px rgba(59,130,246,0.2);
         }
 
         .symbol-name {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 10px;
+            color: var(--dark);
         }
 
         .symbol-desc {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
-        /* =========================================
-           9. NUMBER LINE
-           ========================================= */
-        .number-line-container {
-            background: var(--gray-100);
-            padding: 40px;
-            border-radius: 30px;
-            margin: 30px 0;
-        }
-
-        .number-line {
-            position: relative;
-            height: 60px;
-            background: linear-gradient(to right, #e2e8f0, #cbd5e1);
-            border-radius: 30px;
-            margin: 50px 0;
-        }
-
-        .point {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 50%;
-            top: 20px;
-            transform: translateX(-50%);
-        }
-
-        .point-label {
-            position: absolute;
-            top: -30px;
-            transform: translateX(-50%);
+        .symbol-example {
+            margin-top: 20px;
+            padding: 10px;
+            background: var(--primary-soft);
+            border-radius: 40px;
+            font-size: 1.1rem;
             font-weight: 700;
-            color: var(--accent);
+            color: var(--primary-dark);
         }
 
-        .interval {
-            position: absolute;
-            height: 60px;
-            background: var(--accent-soft);
-            border: 2px solid var(--accent);
-            top: 0;
-            opacity: 0.6;
-        }
-
-        .arrow {
-            position: absolute;
-            top: 15px;
-            font-size: 1.5rem;
-            color: var(--accent);
-        }
-
-        /* =========================================
-           10. PERBANDINGAN
-           ========================================= */
-        .comparison-table {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .circle-legend {
+            display: flex;
+            justify-content: center;
             gap: 30px;
-            margin: 25px 0;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
 
-        .comparison-col {
-            padding: 25px;
-            border-radius: 20px;
-        }
-
-        .comparison-col h4 {
+        .legend-item {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.3rem;
-            margin-bottom: 20px;
+        }
+
+        .circle-filled {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .circle-empty {
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            background: white;
         }
 
         /* =========================================
-           11. SIMULATOR GARIS BILANGAN
+           8. COMPARISON TABLE
+           ========================================= */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .comparison-card {
+            padding: 35px;
+            border-radius: 30px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .comparison-card.equation {
+            background: linear-gradient(135deg, var(--secondary-soft), white);
+            border-left: 6px solid var(--secondary);
+        }
+
+        .comparison-card.inequality {
+            background: linear-gradient(135deg, var(--primary-soft), white);
+            border-left: 6px solid var(--primary);
+        }
+
+        .comparison-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comparison-card.equation h4 { color: var(--secondary-dark); }
+        .comparison-card.inequality h4 { color: var(--primary-dark); }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .comparison-list li i {
+            font-size: 1.2rem;
+        }
+
+        .warning-box {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--danger-soft), white);
+            border-radius: 24px;
+            border-left: 6px solid var(--danger);
+            box-shadow: var(--shadow);
+        }
+
+        .warning-box h5 {
+            color: var(--danger);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .example-negative {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 15px;
+            border: 1px solid var(--gray-200);
+        }
+
+        /* =========================================
+           9. NUMBER LINE VISUALIZATION - DIPERBAIKI
+           ========================================= */
+        .number-line-section {
+            background: linear-gradient(135deg, var(--gray-100), white);
+            padding: 40px;
+            border-radius: 40px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .number-line-example {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .number-line-example:last-child {
+            margin-bottom: 0;
+        }
+
+        .number-line-label {
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .number-line-container {
+            position: relative;
+            height: 80px;
+            margin: 40px 0 20px;
+        }
+
+        .number-line-axis {
+            position: absolute;
+            top: 35px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gray-400);
+            border-radius: 2px;
+        }
+
+        .number-line-tick {
+            position: absolute;
+            top: 30px;
+            width: 2px;
+            height: 14px;
+            background: var(--gray-500);
+            transform: translateX(-50%);
+        }
+
+        .number-line-number {
+            position: absolute;
+            top: 10px;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .number-line-interval {
+            position: absolute;
+            top: 20px;
+            height: 30px;
+            background: var(--primary-soft);
+            border: 2px solid var(--primary);
+            opacity: 0.6;
+            border-radius: 20px;
+        }
+
+        .number-line-point {
+            position: absolute;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .point-filled {
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .point-empty {
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .number-line-arrow {
+            position: absolute;
+            top: 45px;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* =========================================
+           10. SIMULATOR - DIPERBAIKI
            ========================================= */
         .simulator-box {
             background: linear-gradient(145deg, #1e293b, #0f172a);
             color: white;
-            border-radius: 40px;
+            border-radius: 50px;
             padding: 50px;
-            margin-top: 20px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .simulator-box::before {
+            content: "📊";
+            position: absolute;
+            font-size: 150px;
+            bottom: -30px;
+            right: -20px;
+            opacity: 0.05;
+            transform: rotate(15deg);
         }
 
         .simulator-title {
-            color: var(--accent);
-            font-size: 1.8rem;
+            color: var(--primary-light);
+            font-size: 2rem;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 15px;
+            font-weight: 700;
         }
 
         .inequality-selector {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             margin: 30px 0;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .ineq-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.15);
             color: white;
-            padding: 15px 30px;
+            padding: 14px 25px;
             border-radius: 60px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
+            min-width: 100px;
         }
 
-        .ineq-btn:hover, .ineq-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
+        .ineq-btn:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-3px);
         }
 
-        .number-line-visual {
-            position: relative;
-            height: 80px;
-            background: rgba(255,255,255,0.1);
+        .ineq-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(59,130,246,0.3);
+        }
+
+        .simulator-visual {
+            background: rgba(255,255,255,0.05);
             border-radius: 40px;
-            margin: 60px 0 40px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .point-visual {
-            position: absolute;
+        .simulator-equation {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .simulator-number-line {
+            position: relative;
+            height: 100px;
+            margin: 40px 0 30px;
+        }
+
+        .slider-container {
+            max-width: 500px;
+            margin: 30px auto;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--gray-300);
+            font-size: 1rem;
+        }
+
+        .slider-value {
+            color: var(--primary-light);
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        input[type=range] {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            -webkit-appearance: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
             width: 24px;
             height: 24px;
-            background: var(--accent);
+            background: var(--primary);
             border-radius: 50%;
-            top: 28px;
-            transform: translateX(-50%);
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 10px rgba(59,130,246,0.5);
         }
 
-        .fill-visual {
-            position: absolute;
-            height: 80px;
-            background: rgba(245,158,11,0.3);
-            border: 2px solid var(--accent);
-            top: 0;
+        .solution-description {
+            background: rgba(255,255,255,0.08);
+            padding: 20px 30px;
+            border-radius: 60px;
+            text-align: center;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            margin-top: 30px;
         }
 
         /* =========================================
-           12. PAGINATION FOOTER
+           11. QUIZ SECTION
+           ========================================= */
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .quiz-card {
+            background: var(--gray-100);
+            padding: 30px;
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            min-width: 70px;
+        }
+
+        .quiz-option:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 16px;
+            display: none;
+            font-weight: 600;
+        }
+
+        /* =========================================
+           12. SUMMARY GRID
+           ========================================= */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, var(--primary-soft), white);
+            padding: 25px;
+            border-radius: 24px;
+            border-left: 6px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .summary-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* =========================================
+           13. PAGINATION FOOTER
            ========================================= */
         .page-footer {
             display: flex;
             justify-content: space-between;
-            margin-top: 60px;
+            margin-top: 70px;
             padding-top: 40px;
-            border-top: 2px solid var(--gray-200);
+            border-top: 2px dashed var(--gray-300);
         }
 
         .nav-btn {
@@ -439,34 +845,58 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--white);
-            padding: 14px 32px;
-            border-radius: 60px;
+            background: white;
+            padding: 16px 35px;
+            border-radius: 70px;
             color: var(--dark);
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
             border: 1px solid var(--gray-200);
             box-shadow: var(--shadow-sm);
+            font-size: 1rem;
         }
 
         .nav-btn:hover {
-            background: var(--accent);
+            background: var(--primary);
             color: white;
-            border-color: var(--accent);
+            border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.right:hover {
+            transform: translateX(5px);
         }
 
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 50px 20px;
             color: var(--text-muted);
             border-top: 1px solid var(--gray-200);
+            margin-top: 40px;
+            background: white;
         }
 
+        footer p:last-child {
+            font-style: italic;
+            max-width: 700px;
+            margin: 15px auto 0;
+            opacity: 0.7;
+        }
+
+        /* =========================================
+           14. RESPONSIVE
+           ========================================= */
         @media (max-width: 768px) {
-            .hero-section h1 { font-size: 2rem; }
+            .hero-section h1 { font-size: 2.2rem; }
+            .hero-section p { font-size: 1rem; }
             .content-card { padding: 30px; }
-            .comparison-table { grid-template-columns: 1fr; }
+            .section-title { font-size: 1.6rem; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .quiz-grid { grid-template-columns: 1fr; }
             .simulator-box { padding: 30px; }
+            .page-footer { flex-direction: column; gap: 15px; align-items: center; }
+            .nav-btn { width: 100%; justify-content: center; }
+            .progress-container { top: 60px; }
         }
     </style>
 </head>
@@ -477,7 +907,7 @@
         <a href="bab3-plsv-ptlsv.html" class="back-link">
             <i class="fas fa-arrow-left"></i> Kembali ke Bab 3
         </a>
-        <span class="chapter-badge"><i class="fas fa-not-equal"></i> Sub C: Konsep PtLSV</span>
+        <span class="chapter-badge"></i> Sub 3: Konsep PtLSV</span>
     </div>
 
     <!-- Progress Bar -->
@@ -487,7 +917,7 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <h1>≪≫ Konsep Pertidaksamaan Linier Satu Variabel</h1>
+        <h1>Konsep Pertidaksamaan Linier Satu Variabel</h1>
         <p>Memahami tanda <, >, ≤, ≥, perbedaan dengan persamaan, dan representasi pada garis bilangan</p>
     </section>
 
@@ -501,13 +931,15 @@
                 <i class="fas fa-film"></i>
                 <h2>Apa itu Pertidaksamaan?</h2>
             </div>
-            <p style="margin-bottom: 20px;">Tonton video berikut untuk memahami konsep dasar pertidaksamaan linier satu variabel.</p>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">Tonton video berikut untuk memahami konsep dasar pertidaksamaan linier satu variabel.</p>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/2F5h8V-q-Ws" title="Konsep Pertidaksamaan Linier" allowfullscreen></iframe>
             </div>
-            <div style="margin-top: 25px; padding: 20px; background: var(--accent-soft); border-radius: 20px;">
-                <p style="font-weight: 700; color: #b45309;"><i class="fas fa-lightbulb"></i> Poin Penting:</p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
+            <div style="margin-top: 25px; padding: 20px; background: var(--primary-soft); border-radius: 20px; border-left: 6px solid var(--primary);">
+                <p style="font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-lightbulb"></i> Poin Penting:
+                </p>
+                <ul style="margin-left: 30px; margin-top: 10px;">
                     <li>Pertidaksamaan menggunakan tanda <, >, ≤, ≥ (bukan =)</li>
                     <li>Memiliki tak hingga banyak penyelesaian</li>
                     <li>Dapat digambarkan pada garis bilangan</li>
@@ -529,36 +961,36 @@
                     <div class="symbol">&lt;</div>
                     <div class="symbol-name">Kurang dari</div>
                     <div class="symbol-desc">Nilai di kiri lebih kecil dari kanan</div>
-                    <p style="margin-top: 15px; font-size: 1.1rem;">x < 5</p>
+                    <div class="symbol-example">x < 5</div>
                 </div>
                 <div class="symbol-card">
                     <div class="symbol">&gt;</div>
                     <div class="symbol-name">Lebih dari</div>
                     <div class="symbol-desc">Nilai di kiri lebih besar dari kanan</div>
-                    <p style="margin-top: 15px; font-size: 1.1rem;">x > 3</p>
+                    <div class="symbol-example">x > 3</div>
                 </div>
                 <div class="symbol-card">
                     <div class="symbol">≤</div>
                     <div class="symbol-name">Kurang dari atau sama dengan</div>
                     <div class="symbol-desc">Nilai di kiri ≤ nilai kanan</div>
-                    <p style="margin-top: 15px; font-size: 1.1rem;">x ≤ 4</p>
+                    <div class="symbol-example">x ≤ 4</div>
                 </div>
                 <div class="symbol-card">
                     <div class="symbol">≥</div>
                     <div class="symbol-name">Lebih dari atau sama dengan</div>
                     <div class="symbol-desc">Nilai di kiri ≥ nilai kanan</div>
-                    <p style="margin-top: 15px; font-size: 1.1rem;">x ≥ 2</p>
+                    <div class="symbol-example">x ≥ 2</div>
                 </div>
             </div>
             
-            <div style="margin-top: 30px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="display: inline-block; width: 20px; height: 20px; background: var(--accent); border-radius: 50%;"></span>
-                    <span>Lingkaran penuh: ≤ atau ≥ (nilai termasuk)</span>
+            <div class="circle-legend">
+                <div class="legend-item">
+                    <span class="circle-filled"></span>
+                    <span>≤ atau ≥ (nilai termasuk)</span>
                 </div>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="display: inline-block; width: 20px; height: 20px; border: 3px solid var(--accent); border-radius: 50%; background: white;"></span>
-                    <span>Lingkaran kosong: < atau > (nilai tidak termasuk)</span>
+                <div class="legend-item">
+                    <span class="circle-empty"></span>
+                    <span>< atau > (nilai tidak termasuk)</span>
                 </div>
             </div>
         </div>
@@ -571,41 +1003,41 @@
                 <h2>Persamaan vs Pertidaksamaan</h2>
             </div>
             
-            <div class="comparison-table">
-                <div class="comparison-col" style="background: var(--tertiary-soft);">
-                    <h4 style="color: var(--tertiary);"><i class="fas fa-equals"></i> Persamaan</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 15px;">✓ Menggunakan tanda =</li>
-                        <li style="margin-bottom: 15px;">✓ Satu penyelesaian (biasanya)</li>
-                        <li style="margin-bottom: 15px;">✓ Contoh: 2x + 3 = 7 → x = 2</li>
-                        <li style="margin-bottom: 15px;">✓ Operasi: ±×÷ di kedua ruas</li>
-                        <li style="margin-bottom: 15px;">✓ Tidak ada perubahan tanda</li>
+            <div class="comparison-grid">
+                <div class="comparison-card equation">
+                    <h4><i class="fas fa-equals"></i> Persamaan</h4>
+                    <ul class="comparison-list">
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Menggunakan tanda =</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Satu penyelesaian</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Contoh: 2x + 3 = 7 → x = 2</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Operasi ± × ÷ di kedua ruas</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--secondary);"></i> Tidak ada perubahan tanda</li>
                     </ul>
                 </div>
-                <div class="comparison-col" style="background: var(--accent-soft);">
-                    <h4 style="color: #b45309;"><i class="fas fa-not-equal"></i> Pertidaksamaan</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 15px;">✓ Menggunakan <, >, ≤, ≥</li>
-                        <li style="margin-bottom: 15px;">✓ Tak hingga penyelesaian</li>
-                        <li style="margin-bottom: 15px;">✓ Contoh: 2x + 3 < 7 → x < 2</li>
-                        <li style="margin-bottom: 15px;">✓ Operasi ±×÷ di kedua ruas</li>
-                        <li style="margin-bottom: 15px;">⚠️ <strong>Balik tanda</strong> jika kali/bagi negatif!</li>
+                <div class="comparison-card inequality">
+                    <h4><i class="fas fa-not-equal"></i> Pertidaksamaan</h4>
+                    <ul class="comparison-list">
+                        <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Menggunakan <, >, ≤, ≥</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Tak hingga penyelesaian</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Contoh: 2x + 3 < 7 → x < 2</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Operasi ± × ÷ di kedua ruas</li>
+                        <li><i class="fas fa-exclamation-triangle" style="color: var(--danger);"></i> <strong>Balik tanda</strong>jika kali/bagi negatif!</li>
                     </ul>
                 </div>
             </div>
             
-            <div style="margin-top: 25px; padding: 25px; background: var(--gray-100); border-radius: 20px; border-left: 6px solid var(--danger);">
-                <h4 style="color: var(--danger); margin-bottom: 15px;"><i class="fas fa-exclamation-triangle"></i> ATURAN PENTING!</h4>
-                <p style="font-size: 1.1rem; margin-bottom: 10px;">Jika kedua ruas <strong style="color: var(--danger);">dikalikan atau dibagi dengan bilangan negatif</strong>, tanda pertidaksamaan <strong style="color: var(--danger);">DIBALIK</strong>.</p>
-                <div style="background: white; padding: 20px; border-radius: 16px; margin-top: 15px;">
-                    <p>Contoh: -2x < 6</p>
-                    <p>Kedua ruas dibagi -2 → x <span style="color: var(--danger); font-weight: 800;"> > </span> -3</p>
-                    <p style="margin-top: 10px;">Mengapa? -2x < 6 → x > -3 (cek: x = 0 → 0 < 6 ✓, x = -4 → 8 < 6 ✗)</p>
+            <div class="warning-box">
+                <h5><i class="fas fa-exclamation-triangle"></i> ATURAN PENTING!</h5>
+                <p style="margin-bottom: 15px;">Jika kedua ruas <strong style="color: var(--danger);">dikalikan atau dibagi dengan bilangan negatif</strong>, tanda pertidaksamaan <strong style="color: var(--danger);">DIBALIK</strong>.</p>
+                <div class="example-negative">
+                    <p><strong>Contoh:</strong> -2x < 6</p>
+                    <p>Kedua ruas dibagi -2 → x <span style="color: var(--danger); font-weight: 800; font-size: 1.2rem;"> > </span> -3</p>
+                    <p style="margin-top: 10px; padding: 10px; background: var(--gray-100); border-radius: 12px;">Cek: x = 0 → 0 < 6 ✓, x = -4 → 8 < 6 ✗</p>
                 </div>
             </div>
         </div>
 
-        <!-- Card: Garis Bilangan -->
+        <!-- Card: Garis Bilangan dengan Visual Jelas -->
         <div class="content-card">
             <span class="section-badge"><i class="fas fa-chart-line"></i> VISUALISASI</span>
             <div class="section-title">
@@ -613,82 +1045,141 @@
                 <h2>Garis Bilangan untuk PtLSV</h2>
             </div>
             
-            <div class="number-line-container">
-                <h4 style="margin-bottom: 25px; text-align: center;">Contoh Representasi</h4>
-                
-                <div style="margin-bottom: 60px;">
-                    <p style="font-weight: 700; margin-bottom: 20px;">1. x < 3 (x kurang dari 3)</p>
-                    <div style="position: relative; height: 60px; background: #e2e8f0; border-radius: 30px;">
-                        <div style="position: absolute; left: 30%; width: 70%; height: 60px; background: #fff3cd; border: 2px solid var(--accent); border-left: none; border-radius: 0 30px 30px 0; opacity: 0.6;"></div>
-                        <div style="position: absolute; left: 30%; width: 20px; height: 20px; border: 3px solid var(--accent); border-radius: 50%; background: white; top: 20px; transform: translateX(-50%);"></div>
-                        <div style="position: absolute; left: 30%; top: -30px; transform: translateX(-50%); font-weight: 700; color: var(--accent);">3</div>
-                        <div style="position: absolute; left: 10%; top: 15px; font-size: 1.2rem; color: var(--accent);">←</div>
+            <div class="number-line-section">
+                <!-- Contoh 1: x < 3 -->
+                <div class="number-line-example">
+                    <div class="number-line-label">
+                        <span class="circle-empty"></span> x < 3 (x kurang dari 3)
+                    </div>
+                    <div class="number-line-container">
+                        <!-- Sumbu garis bilangan -->
+                        <div class="number-line-axis"></div>
+                        
+                        <!-- Tick marks dan angka -->
+                        <div class="number-line-tick" style="left: 10%;"></div>
+                        <div class="number-line-number" style="left: 10%;">0</div>
+                        <div class="number-line-tick" style="left: 30%;"></div>
+                        <div class="number-line-number" style="left: 30%;">2</div>
+                        <div class="number-line-tick" style="left: 50%;"></div>
+                        <div class="number-line-number" style="left: 50%;">4</div>
+                        <div class="number-line-tick" style="left: 70%;"></div>
+                        <div class="number-line-number" style="left: 70%;">6</div>
+                        <div class="number-line-tick" style="left: 90%;"></div>
+                        <div class="number-line-number" style="left: 90%;">8</div>
+                        
+                        <!-- Interval yang diarsir -->
+                        <div class="number-line-interval" style="left: 0; width: 38%;"></div>
+                        
+                        <!-- Titik batas (lingkaran kosong) -->
+                        <div class="number-line-point" style="left: 38%;">
+                            <div class="point-empty"></div>
+                        </div>
+                        <div style="position: absolute; left: 38%; top: -20px; transform: translateX(-50%); font-weight: 700; color: var(--primary);">3</div>
+                        
+                        <!-- Panah arah -->
+                        <div class="number-line-arrow" style="left: 10%;">←</div>
                     </div>
                 </div>
                 
-                <div style="margin-bottom: 60px;">
-                    <p style="font-weight: 700; margin-bottom: 20px;">2. x ≥ 2 (x lebih dari atau sama dengan 2)</p>
-                    <div style="position: relative; height: 60px; background: #e2e8f0; border-radius: 30px;">
-                        <div style="position: absolute; left: 20%; width: 80%; height: 60px; background: #fff3cd; border: 2px solid var(--accent); border-left: none; border-radius: 0 30px 30px 0; opacity: 0.6;"></div>
-                        <div style="position: absolute; left: 20%; width: 20px; height: 20px; background: var(--accent); border-radius: 50%; top: 20px; transform: translateX(-50%);"></div>
-                        <div style="position: absolute; left: 20%; top: -30px; transform: translateX(-50%); font-weight: 700; color: var(--accent);">2</div>
-                        <div style="position: absolute; right: 10%; top: 15px; font-size: 1.2rem; color: var(--accent);">→</div>
+                <!-- Contoh 2: x ≥ 2 -->
+                <div class="number-line-example">
+                    <div class="number-line-label">
+                        <span class="circle-filled"></span> x ≥ 2 (x lebih dari atau sama dengan 2)
+                    </div>
+                    <div class="number-line-container">
+                        <div class="number-line-axis"></div>
+                        
+                        <div class="number-line-tick" style="left: 10%;"></div>
+                        <div class="number-line-number" style="left: 10%;">0</div>
+                        <div class="number-line-tick" style="left: 30%;"></div>
+                        <div class="number-line-number" style="left: 30%;">2</div>
+                        <div class="number-line-tick" style="left: 50%;"></div>
+                        <div class="number-line-number" style="left: 50%;">4</div>
+                        <div class="number-line-tick" style="left: 70%;"></div>
+                        <div class="number-line-number" style="left: 70%;">6</div>
+                        <div class="number-line-tick" style="left: 90%;"></div>
+                        <div class="number-line-number" style="left: 90%;">8</div>
+                        
+                        <div class="number-line-interval" style="left: 30%; width: 70%;"></div>
+                        
+                        <div class="number-line-point" style="left: 30%;">
+                            <div class="point-filled"></div>
+                        </div>
+                        <div style="position: absolute; left: 30%; top: -20px; transform: translateX(-50%); font-weight: 700; color: var(--primary);">2</div>
+                        
+                        <div class="number-line-arrow" style="right: 5%; top: 45px;">→</div>
                     </div>
                 </div>
                 
-                <div>
-                    <p style="font-weight: 700; margin-bottom: 20px;">3. -1 < x ≤ 4</p>
-                    <div style="position: relative; height: 60px; background: #e2e8f0; border-radius: 30px;">
-                        <div style="position: absolute; left: 10%; width: 40%; height: 60px; background: #fff3cd; border: 2px solid var(--accent); border-left: none; border-right: none; opacity: 0.6;"></div>
-                        <div style="position: absolute; left: 10%; width: 20px; height: 20px; border: 3px solid var(--accent); border-radius: 50%; background: white; top: 20px; transform: translateX(-50%);"></div>
-                        <div style="position: absolute; left: 50%; width: 20px; height: 20px; background: var(--accent); border-radius: 50%; top: 20px; transform: translateX(-50%);"></div>
-                        <div style="position: absolute; left: 10%; top: -30px; transform: translateX(-50%); font-weight: 700; color: var(--accent);">-1</div>
-                        <div style="position: absolute; left: 50%; top: -30px; transform: translateX(-50%); font-weight: 700; color: var(--accent);">4</div>
+                <!-- Contoh 3: -1 < x ≤ 4 -->
+                <div class="number-line-example">
+                    <div class="number-line-label">
+                        <span class="circle-empty"></span> -1 < x ≤ 4
+                    </div>
+                    <div class="number-line-container">
+                        <div class="number-line-axis"></div>
+                        
+                        <div class="number-line-tick" style="left: 10%;"></div>
+                        <div class="number-line-number" style="left: 10%;">-2</div>
+                        <div class="number-line-tick" style="left: 25%;"></div>
+                        <div class="number-line-number" style="left: 25%;">-1</div>
+                        <div class="number-line-tick" style="left: 40%;"></div>
+                        <div class="number-line-number" style="left: 40%;">0</div>
+                        <div class="number-line-tick" style="left: 55%;"></div>
+                        <div class="number-line-number" style="left: 55%;">2</div>
+                        <div class="number-line-tick" style="left: 70%;"></div>
+                        <div class="number-line-number" style="left: 70%;">4</div>
+                        <div class="number-line-tick" style="left: 85%;"></div>
+                        <div class="number-line-number" style="left: 85%;">6</div>
+                        
+                        <div class="number-line-interval" style="left: 25%; width: 45%;"></div>
+                        
+                        <div class="number-line-point" style="left: 25%;">
+                            <div class="point-empty"></div>
+                        </div>
+                        <div style="position: absolute; left: 25%; top: -20px; transform: translateX(-50%); font-weight: 700; color: var(--primary);">-1</div>
+                        
+                        <div class="number-line-point" style="left: 70%;">
+                            <div class="point-filled"></div>
+                        </div>
+                        <div style="position: absolute; left: 70%; top: -20px; transform: translateX(-50%); font-weight: 700; color: var(--primary);">4</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Card: Simulator Garis Bilangan Interaktif -->
+        <!-- Card: Simulator Garis Bilangan Interaktif - DIPERBAIKI -->
         <div class="simulator-box">
             <div class="simulator-title">
                 <i class="fas fa-arrow-right-arrow-left"></i>
-                <h2 style="color: white; margin: 0;">Simulator Pertidaksamaan</h2>
+                <h2 style="color: white; margin: 0;">Simulator Pertidaksamaan Interaktif</h2>
             </div>
-            <p style="margin-bottom: 25px; opacity: 0.9;">Pilih tanda dan geser titik untuk melihat visualisasi pada garis bilangan.</p>
+            <p style="margin-bottom: 25px; opacity: 0.9; font-size: 1.1rem;">Pilih tanda dan geser titik untuk melihat visualisasi pada garis bilangan secara real-time.</p>
             
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <div style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center;">
-                    <button onclick="setInequality('lt')" id="btnLt" class="ineq-btn active">x < 5</button>
-                    <button onclick="setInequality('le')" id="btnLe" class="ineq-btn">x ≤ 5</button>
-                    <button onclick="setInequality('gt')" id="btnGt" class="ineq-btn">x > 3</button>
-                    <button onclick="setInequality('ge')" id="btnGe" class="ineq-btn">x ≥ 3</button>
-                    <button onclick="setInequality('between')" id="btnBetween" class="ineq-btn">2 < x < 6</button>
-                </div>
+            <div class="inequality-selector">
+                <button onclick="setInequality('lt')" id="btnLt" class="ineq-btn active">x < 5</button>
+                <button onclick="setInequality('le')" id="btnLe" class="ineq-btn">x ≤ 5</button>
+                <button onclick="setInequality('gt')" id="btnGt" class="ineq-btn">x > 3</button>
+                <button onclick="setInequality('ge')" id="btnGe" class="ineq-btn">x ≥ 3</button>
+                <button onclick="setInequality('between')" id="btnBetween" class="ineq-btn">a < x < b</button>
+            </div>
+            
+            <div class="simulator-visual">
+                <div class="simulator-equation" id="inequalityDisplay">x < 5</div>
                 
-                <div style="width: 100%; margin-bottom: 20px;">
-                    <label style="display: block; text-align: center; margin-bottom: 20px; color: var(--gray-300);">Nilai batas: <span id="boundValue" style="font-size: 1.5rem; font-weight: 800; color: var(--accent);">5</span></label>
-                    <input type="range" id="boundSlider" min="0" max="10" step="0.5" value="5" style="width: 100%; height: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; -webkit-appearance: none;">
-                    <style>
-                        input[type=range]::-webkit-slider-thumb {
-                            -webkit-appearance: none;
-                            width: 25px;
-                            height: 25px;
-                            background: var(--accent);
-                            border-radius: 50%;
-                            cursor: pointer;
-                            border: 2px solid white;
-                        }
-                    </style>
-                </div>
-                
-                <div id="inequalityDisplay" style="font-size: 2rem; font-weight: 800; color: var(--accent); margin: 20px 0;">x < 5</div>
-                
-                <div class="number-line-visual" id="numberLineVisual">
+                <div class="simulator-number-line" id="numberLineVisual">
                     <!-- Akan digambar oleh JavaScript -->
                 </div>
                 
-                <div id="solutionDesc" style="margin-top: 25px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 60px; width: 100%; text-align: center;">
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>Nilai batas:</span>
+                        <span class="slider-value" id="boundValue">5.0</span>
+                    </div>
+                    <input type="range" id="boundSlider" min="0" max="10" step="0.5" value="5">
+                </div>
+                
+                <div id="solutionDesc" class="solution-description">
                     Semua bilangan kurang dari 5 (tidak termasuk 5)
                 </div>
             </div>
@@ -702,29 +1193,29 @@
                 <h2>Cek Pemahaman</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+            <div class="quiz-grid">
+                <div class="quiz-card">
                     <p style="font-weight: 700; margin-bottom: 15px;">Soal 1</p>
-                    <p>Manakah pertidaksamaan yang benar?</p>
-                    <div style="margin: 20px 0;">
-                        <button onclick="checkInequalityQuiz(1,1)" class="quiz-btn" style="background: white; border: 2px solid var(--accent); padding: 12px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); margin: 5px;">A. -3 > -1</button>
-                        <button onclick="checkInequalityQuiz(1,2)" class="quiz-btn" style="background: white; border: 2px solid var(--accent); padding: 12px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); margin: 5px;">B. -5 < -2</button>
-                        <button onclick="checkInequalityQuiz(1,3)" class="quiz-btn" style="background: white; border: 2px solid var(--accent); padding: 12px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); margin: 5px;">C. 0 > 2</button>
-                        <button onclick="checkInequalityQuiz(1,4)" class="quiz-btn" style="background: white; border: 2px solid var(--accent); padding: 12px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); margin: 5px;">D. 7 < 5</button>
+                    <p style="margin-bottom: 20px;">Manakah pertidaksamaan yang benar?</p>
+                    <div class="quiz-options">
+                        <button onclick="checkInequalityQuiz(1,1)" class="quiz-option">A. -3 > -1</button>
+                        <button onclick="checkInequalityQuiz(1,2)" class="quiz-option">B. -5 < -2</button>
+                        <button onclick="checkInequalityQuiz(1,3)" class="quiz-option">C. 0 > 2</button>
+                        <button onclick="checkInequalityQuiz(1,4)" class="quiz-option">D. 7 < 5</button>
                     </div>
-                    <div id="ineqQuiz1" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                    <div id="ineqQuiz1" class="quiz-feedback"></div>
                 </div>
                 
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                <div class="quiz-card">
                     <p style="font-weight: 700; margin-bottom: 15px;">Soal 2</p>
-                    <p>Jika -2x < 6, maka ...</p>
-                    <div style="margin: 20px 0;">
-                        <button onclick="checkInequalityQuiz(2,1)" class="quiz-btn" style="background: white; border: 2px solid var(--accent); padding: 12px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); margin: 5px;">A. x < -3</button>
-                        <button onclick="checkInequalityQuiz(2,2)" class="quiz-btn" style="background: white; border: 2px solid var(--accent); padding: 12px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); margin: 5px;">B. x > -3</button>
-                        <button onclick="checkInequalityQuiz(2,3)" class="quiz-btn" style="background: white; border: 2px solid var(--accent); padding: 12px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); margin: 5px;">C. x < 3</button>
-                        <button onclick="checkInequalityQuiz(2,4)" class="quiz-btn" style="background: white; border: 2px solid var(--accent); padding: 12px 20px; border-radius: 60px; font-weight: 600; color: var(--accent); margin: 5px;">D. x > 3</button>
+                    <p style="margin-bottom: 20px;">Jika -2x < 6, maka ...</p>
+                    <div class="quiz-options">
+                        <button onclick="checkInequalityQuiz(2,1)" class="quiz-option">A. x < -3</button>
+                        <button onclick="checkInequalityQuiz(2,2)" class="quiz-option">B. x > -3</button>
+                        <button onclick="checkInequalityQuiz(2,3)" class="quiz-option">C. x < 3</button>
+                        <button onclick="checkInequalityQuiz(2,4)" class="quiz-option">D. x > 3</button>
                     </div>
-                    <div id="ineqQuiz2" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                    <div id="ineqQuiz2" class="quiz-feedback"></div>
                 </div>
             </div>
         </div>
@@ -737,21 +1228,21 @@
                 <h2>Intisari Konsep PtLSV</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                <div style="background: var(--accent-soft); padding: 20px; border-radius: 16px;">
-                    <h4 style="color: #b45309;">Tanda</h4>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h4><i class="fas fa-greater-than"></i> Tanda</h4>
                     <p>&lt; : kurang dari<br>&gt; : lebih dari<br>≤ : kurang dari sama dengan<br>≥ : lebih dari sama dengan</p>
                 </div>
-                <div style="background: var(--accent-soft); padding: 20px; border-radius: 16px;">
-                    <h4 style="color: #b45309;">Penyelesaian</h4>
+                <div class="summary-card">
+                    <h4><i class="fas fa-infinity"></i> Penyelesaian</h4>
                     <p>Umumnya memiliki tak hingga penyelesaian yang dinyatakan dalam interval atau garis bilangan.</p>
                 </div>
-                <div style="background: var(--accent-soft); padding: 20px; border-radius: 16px;">
-                    <h4 style="color: #b45309;">Aturan Negatif</h4>
+                <div class="summary-card">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Aturan Negatif</h4>
                     <p>Mengalikan/membagi dengan bilangan negatif membalik tanda pertidaksamaan.</p>
                 </div>
-                <div style="background: var(--accent-soft); padding: 20px; border-radius: 16px;">
-                    <h4 style="color: #b45309;">Garis Bilangan</h4>
+                <div class="summary-card">
+                    <h4><i class="fas fa-chart-line"></i> Garis Bilangan</h4>
                     <p>Bulatan kosong: <, ><br>Bulatan penuh: ≤, ≥<br>Arsir ke kanan/kiri sesuai arah.</p>
                 </div>
             </div>
@@ -769,8 +1260,8 @@
     </main>
 
     <footer>
-        <p>© 2024 MathMaster8 - Konsep Pertidaksamaan Linier Satu Variabel | Kurikulum Merdeka</p>
-        <p style="margin-top: 8px; opacity: 0.6;">"Pertidaksamaan mengajarkan bahwa tidak semua harus sama." - N.A.</p>
+        <p>© 2026 MathMaster - Konsep Pertidaksamaan Linier Satu Variabel | Kurikulum Merdeka</p>
+        <p>"Pertidaksamaan mengajarkan bahwa tidak semua harus sama." - N.A.</p>
     </footer>
 
     <script>
@@ -782,7 +1273,7 @@
             document.getElementById('progressBar').style.width = scrolled + "%";
         };
 
-        // Simulator Pertidaksamaan
+        // Simulator Pertidaksamaan - DIPERBAIKI
         let currentInequality = 'lt';
         let boundSlider = document.getElementById('boundSlider');
         let boundValue = document.getElementById('boundValue');
@@ -806,69 +1297,185 @@
 
         function updateNumberLine() {
             let bound = parseFloat(boundSlider.value);
-            boundValue.innerText = bound;
+            boundValue.innerText = bound.toFixed(1);
             
             let html = '';
             let desc = '';
             
             if (currentInequality === 'lt') {
-                inequalityDisplay.innerHTML = `x < ${bound}`;
-                desc = `Semua bilangan kurang dari ${bound} (tidak termasuk ${bound})`;
+                inequalityDisplay.innerHTML = `x < ${bound.toFixed(1)}`;
+                desc = `Semua bilangan kurang dari ${bound.toFixed(1)} (tidak termasuk ${bound.toFixed(1)})`;
                 
-                // Gambar garis bilangan
-                html = `<div style="position: relative; width: 100%; height: 80px; background: rgba(255,255,255,0.1); border-radius: 40px;">
-                    <div style="position: absolute; left: ${bound * 10}%; width: ${100 - bound * 10}%; height: 80px; background: rgba(245,158,11,0.3); border: 2px solid var(--accent); border-left: none; border-radius: 0 40px 40px 0;"></div>
-                    <div style="position: absolute; left: ${bound * 10}%; width: 24px; height: 24px; border: 3px solid var(--accent); border-radius: 50%; background: white; top: 28px; transform: translateX(-50%);"></div>
-                    <div style="position: absolute; left: ${bound * 10}%; top: -30px; transform: translateX(-50%); color: var(--accent); font-weight: 700;">${bound}</div>
-                    <div style="position: absolute; left: 5%; top: 25px; font-size: 1.5rem; color: var(--accent);">←</div>
-                </div>`;
+                html = `
+                    <div style="position: relative; width: 100%; height: 100px;">
+                        <div style="position: absolute; top: 45px; left: 0; width: 100%; height: 4px; background: var(--gray-500);"></div>
+                        
+                        <div style="position: absolute; top: 40px; left: 10%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 10%; transform: translateX(-50%); color: var(--gray-300);">0</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 30%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 30%; transform: translateX(-50%); color: var(--gray-300);">2</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 50%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); color: var(--gray-300);">4</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 70%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 70%; transform: translateX(-50%); color: var(--gray-300);">6</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 90%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 90%; transform: translateX(-50%); color: var(--gray-300);">8</div>
+                        
+                        <div style="position: absolute; top: 30px; left: 0; width: ${bound * 10}%; height: 30px; background: var(--primary-soft); border: 2px solid var(--primary); opacity: 0.6; border-radius: 20px 0 0 20px;"></div>
+                        
+                        <div style="position: absolute; top: 35px; left: ${bound * 10}%; transform: translateX(-50%);">
+                            <div style="width: 20px; height: 20px; border: 3px solid var(--primary); border-radius: 50%; background: white;"></div>
+                        </div>
+                        <div style="position: absolute; top: 0px; left: ${bound * 10}%; transform: translateX(-50%); color: var(--primary-light); font-weight: 700;">${bound.toFixed(1)}</div>
+                        
+                        <div style="position: absolute; top: 55px; left: 5%; font-size: 1.5rem; color: var(--primary);">←</div>
+                    </div>
+                `;
             }
             else if (currentInequality === 'le') {
-                inequalityDisplay.innerHTML = `x ≤ ${bound}`;
-                desc = `Semua bilangan kurang dari atau sama dengan ${bound}`;
+                inequalityDisplay.innerHTML = `x ≤ ${bound.toFixed(1)}`;
+                desc = `Semua bilangan kurang dari atau sama dengan ${bound.toFixed(1)}`;
                 
-                html = `<div style="position: relative; width: 100%; height: 80px; background: rgba(255,255,255,0.1); border-radius: 40px;">
-                    <div style="position: absolute; left: ${bound * 10}%; width: ${100 - bound * 10}%; height: 80px; background: rgba(245,158,11,0.3); border: 2px solid var(--accent); border-left: none; border-radius: 0 40px 40px 0;"></div>
-                    <div style="position: absolute; left: ${bound * 10}%; width: 24px; height: 24px; background: var(--accent); border-radius: 50%; top: 28px; transform: translateX(-50%);"></div>
-                    <div style="position: absolute; left: ${bound * 10}%; top: -30px; transform: translateX(-50%); color: var(--accent); font-weight: 700;">${bound}</div>
-                    <div style="position: absolute; left: 5%; top: 25px; font-size: 1.5rem; color: var(--accent);">←</div>
-                </div>`;
+                html = `
+                    <div style="position: relative; width: 100%; height: 100px;">
+                        <div style="position: absolute; top: 45px; left: 0; width: 100%; height: 4px; background: var(--gray-500);"></div>
+                        
+                        <div style="position: absolute; top: 40px; left: 10%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 10%; transform: translateX(-50%); color: var(--gray-300);">0</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 30%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 30%; transform: translateX(-50%); color: var(--gray-300);">2</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 50%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); color: var(--gray-300);">4</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 70%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 70%; transform: translateX(-50%); color: var(--gray-300);">6</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 90%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 90%; transform: translateX(-50%); color: var(--gray-300);">8</div>
+                        
+                        <div style="position: absolute; top: 30px; left: 0; width: ${bound * 10}%; height: 30px; background: var(--primary-soft); border: 2px solid var(--primary); opacity: 0.6; border-radius: 20px 0 0 20px;"></div>
+                        
+                        <div style="position: absolute; top: 35px; left: ${bound * 10}%; transform: translateX(-50%);">
+                            <div style="width: 20px; height: 20px; background: var(--primary); border-radius: 50%; border: 3px solid white;"></div>
+                        </div>
+                        <div style="position: absolute; top: 0px; left: ${bound * 10}%; transform: translateX(-50%); color: var(--primary-light); font-weight: 700;">${bound.toFixed(1)}</div>
+                        
+                        <div style="position: absolute; top: 55px; left: 5%; font-size: 1.5rem; color: var(--primary);">←</div>
+                    </div>
+                `;
             }
             else if (currentInequality === 'gt') {
-                inequalityDisplay.innerHTML = `x > ${bound}`;
-                desc = `Semua bilangan lebih dari ${bound} (tidak termasuk ${bound})`;
+                inequalityDisplay.innerHTML = `x > ${bound.toFixed(1)}`;
+                desc = `Semua bilangan lebih dari ${bound.toFixed(1)} (tidak termasuk ${bound.toFixed(1)})`;
                 
-                html = `<div style="position: relative; width: 100%; height: 80px; background: rgba(255,255,255,0.1); border-radius: 40px;">
-                    <div style="position: absolute; left: 0; width: ${bound * 10}%; height: 80px; background: rgba(245,158,11,0.3); border: 2px solid var(--accent); border-right: none; border-radius: 40px 0 0 40px;"></div>
-                    <div style="position: absolute; left: ${bound * 10}%; width: 24px; height: 24px; border: 3px solid var(--accent); border-radius: 50%; background: white; top: 28px; transform: translateX(-50%);"></div>
-                    <div style="position: absolute; left: ${bound * 10}%; top: -30px; transform: translateX(-50%); color: var(--accent); font-weight: 700;">${bound}</div>
-                    <div style="position: absolute; right: 5%; top: 25px; font-size: 1.5rem; color: var(--accent);">→</div>
-                </div>`;
+                html = `
+                    <div style="position: relative; width: 100%; height: 100px;">
+                        <div style="position: absolute; top: 45px; left: 0; width: 100%; height: 4px; background: var(--gray-500);"></div>
+                        
+                        <div style="position: absolute; top: 40px; left: 10%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 10%; transform: translateX(-50%); color: var(--gray-300);">0</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 30%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 30%; transform: translateX(-50%); color: var(--gray-300);">2</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 50%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); color: var(--gray-300);">4</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 70%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 70%; transform: translateX(-50%); color: var(--gray-300);">6</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 90%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 90%; transform: translateX(-50%); color: var(--gray-300);">8</div>
+                        
+                        <div style="position: absolute; top: 30px; left: ${bound * 10}%; width: ${100 - bound * 10}%; height: 30px; background: var(--primary-soft); border: 2px solid var(--primary); opacity: 0.6; border-radius: 0 20px 20px 0;"></div>
+                        
+                        <div style="position: absolute; top: 35px; left: ${bound * 10}%; transform: translateX(-50%);">
+                            <div style="width: 20px; height: 20px; border: 3px solid var(--primary); border-radius: 50%; background: white;"></div>
+                        </div>
+                        <div style="position: absolute; top: 0px; left: ${bound * 10}%; transform: translateX(-50%); color: var(--primary-light); font-weight: 700;">${bound.toFixed(1)}</div>
+                        
+                        <div style="position: absolute; top: 55px; right: 5%; font-size: 1.5rem; color: var(--primary);">→</div>
+                    </div>
+                `;
             }
             else if (currentInequality === 'ge') {
-                inequalityDisplay.innerHTML = `x ≥ ${bound}`;
-                desc = `Semua bilangan lebih dari atau sama dengan ${bound}`;
+                inequalityDisplay.innerHTML = `x ≥ ${bound.toFixed(1)}`;
+                desc = `Semua bilangan lebih dari atau sama dengan ${bound.toFixed(1)}`;
                 
-                html = `<div style="position: relative; width: 100%; height: 80px; background: rgba(255,255,255,0.1); border-radius: 40px;">
-                    <div style="position: absolute; left: 0; width: ${bound * 10}%; height: 80px; background: rgba(245,158,11,0.3); border: 2px solid var(--accent); border-right: none; border-radius: 40px 0 0 40px;"></div>
-                    <div style="position: absolute; left: ${bound * 10}%; width: 24px; height: 24px; background: var(--accent); border-radius: 50%; top: 28px; transform: translateX(-50%);"></div>
-                    <div style="position: absolute; left: ${bound * 10}%; top: -30px; transform: translateX(-50%); color: var(--accent); font-weight: 700;">${bound}</div>
-                    <div style="position: absolute; right: 5%; top: 25px; font-size: 1.5rem; color: var(--accent);">→</div>
-                </div>`;
+                html = `
+                    <div style="position: relative; width: 100%; height: 100px;">
+                        <div style="position: absolute; top: 45px; left: 0; width: 100%; height: 4px; background: var(--gray-500);"></div>
+                        
+                        <div style="position: absolute; top: 40px; left: 10%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 10%; transform: translateX(-50%); color: var(--gray-300);">0</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 30%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 30%; transform: translateX(-50%); color: var(--gray-300);">2</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 50%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); color: var(--gray-300);">4</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 70%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 70%; transform: translateX(-50%); color: var(--gray-300);">6</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 90%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 90%; transform: translateX(-50%); color: var(--gray-300);">8</div>
+                        
+                        <div style="position: absolute; top: 30px; left: ${bound * 10}%; width: ${100 - bound * 10}%; height: 30px; background: var(--primary-soft); border: 2px solid var(--primary); opacity: 0.6; border-radius: 0 20px 20px 0;"></div>
+                        
+                        <div style="position: absolute; top: 35px; left: ${bound * 10}%; transform: translateX(-50%);">
+                            <div style="width: 20px; height: 20px; background: var(--primary); border-radius: 50%; border: 3px solid white;"></div>
+                        </div>
+                        <div style="position: absolute; top: 0px; left: ${bound * 10}%; transform: translateX(-50%); color: var(--primary-light); font-weight: 700;">${bound.toFixed(1)}</div>
+                        
+                        <div style="position: absolute; top: 55px; right: 5%; font-size: 1.5rem; color: var(--primary);">→</div>
+                    </div>
+                `;
             }
             else if (currentInequality === 'between') {
                 let lower = Math.max(0, bound - 2);
                 let upper = Math.min(10, bound + 2);
-                inequalityDisplay.innerHTML = `${lower} < x < ${upper}`;
-                desc = `Semua bilangan antara ${lower} dan ${upper} (tidak termasuk batas)`;
+                inequalityDisplay.innerHTML = `${lower.toFixed(1)} < x < ${upper.toFixed(1)}`;
+                desc = `Semua bilangan antara ${lower.toFixed(1)} dan ${upper.toFixed(1)} (tidak termasuk batas)`;
                 
-                html = `<div style="position: relative; width: 100%; height: 80px; background: rgba(255,255,255,0.1); border-radius: 40px;">
-                    <div style="position: absolute; left: ${lower * 10}%; width: ${(upper - lower) * 10}%; height: 80px; background: rgba(245,158,11,0.3); border: 2px solid var(--accent); border-left: none; border-right: none;"></div>
-                    <div style="position: absolute; left: ${lower * 10}%; width: 24px; height: 24px; border: 3px solid var(--accent); border-radius: 50%; background: white; top: 28px; transform: translateX(-50%);"></div>
-                    <div style="position: absolute; left: ${upper * 10}%; width: 24px; height: 24px; border: 3px solid var(--accent); border-radius: 50%; background: white; top: 28px; transform: translateX(-50%);"></div>
-                    <div style="position: absolute; left: ${lower * 10}%; top: -30px; transform: translateX(-50%); color: var(--accent); font-weight: 700;">${lower}</div>
-                    <div style="position: absolute; left: ${upper * 10}%; top: -30px; transform: translateX(-50%); color: var(--accent); font-weight: 700;">${upper}</div>
-                </div>`;
+                html = `
+                    <div style="position: relative; width: 100%; height: 100px;">
+                        <div style="position: absolute; top: 45px; left: 0; width: 100%; height: 4px; background: var(--gray-500);"></div>
+                        
+                        <div style="position: absolute; top: 40px; left: 10%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 10%; transform: translateX(-50%); color: var(--gray-300);">0</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 30%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 30%; transform: translateX(-50%); color: var(--gray-300);">2</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 50%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); color: var(--gray-300);">4</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 70%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 70%; transform: translateX(-50%); color: var(--gray-300);">6</div>
+                        
+                        <div style="position: absolute; top: 40px; left: 90%; width: 2px; height: 14px; background: var(--gray-400);"></div>
+                        <div style="position: absolute; top: 20px; left: 90%; transform: translateX(-50%); color: var(--gray-300);">8</div>
+                        
+                        <div style="position: absolute; top: 30px; left: ${lower * 10}%; width: ${(upper - lower) * 10}%; height: 30px; background: var(--primary-soft); border: 2px solid var(--primary); opacity: 0.6;"></div>
+                        
+                        <div style="position: absolute; top: 35px; left: ${lower * 10}%; transform: translateX(-50%);">
+                            <div style="width: 20px; height: 20px; border: 3px solid var(--primary); border-radius: 50%; background: white;"></div>
+                        </div>
+                        <div style="position: absolute; top: 0px; left: ${lower * 10}%; transform: translateX(-50%); color: var(--primary-light); font-weight: 700;">${lower.toFixed(1)}</div>
+                        
+                        <div style="position: absolute; top: 35px; left: ${upper * 10}%; transform: translateX(-50%);">
+                            <div style="width: 20px; height: 20px; border: 3px solid var(--primary); border-radius: 50%; background: white;"></div>
+                        </div>
+                        <div style="position: absolute; top: 0px; left: ${upper * 10}%; transform: translateX(-50%); color: var(--primary-light); font-weight: 700;">${upper.toFixed(1)}</div>
+                    </div>
+                `;
             }
             
             numberLineVisual.innerHTML = html;
@@ -884,11 +1491,11 @@
                 fb.style.display = 'block';
                 if (answer === 2) {
                     fb.innerHTML = '✅ Benar! -5 < -2 (karena -5 lebih kecil dari -2).';
-                    fb.style.background = '#dcfce7';
+                    fb.style.background = 'var(--success-soft)';
                     fb.style.color = '#166534';
                 } else {
                     fb.innerHTML = '❌ Salah. Ingat pada bilangan negatif, semakin besar angkanya semakin kecil nilainya.';
-                    fb.style.background = '#fee2e2';
+                    fb.style.background = 'var(--danger-soft)';
                     fb.style.color = '#b91c1c';
                 }
             } else if (quizNum === 2) {
@@ -896,11 +1503,11 @@
                 fb.style.display = 'block';
                 if (answer === 2) {
                     fb.innerHTML = '✅ Benar! -2x < 6 → x > -3 (tanda dibalik karena dibagi -2).';
-                    fb.style.background = '#dcfce7';
+                    fb.style.background = 'var(--success-soft)';
                     fb.style.color = '#166534';
                 } else {
                     fb.innerHTML = '❌ Salah. Ingat aturan: jika dikali/dibagi negatif, tanda pertidaksamaan DIBALIK.';
-                    fb.style.background = '#fee2e2';
+                    fb.style.background = 'var(--danger-soft)';
                     fb.style.color = '#b91c1c';
                 }
             }

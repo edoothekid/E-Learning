@@ -3,59 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tripel Pythagoras | MathMaster8</title>
+    <title>Tripel Pythagoras | MathMaster</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            chtml: {
+                scale: 1.2,
+                minScale: 0.8
+            }
+        };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
         /* =========================================
-           KONSISTEN DENGAN FILE LAIN
+           1. VARIABLES & CORE STYLING - UNGU PREMIUM
            ========================================= */
         :root {
-            --primary: #0d9488;
-            --primary-light: #14b8a6;
-            --primary-soft: #ccfbf1;
-            --primary-dark: #0f766e;
-            --accent: #f59e0b;
-            --accent-soft: #fff3cd;
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --primary-soft: #ede9fe;
+            --primary-dark: #6d28d9;
+            --secondary: #f59e0b;
+            --secondary-light: #fbbf24;
+            --secondary-soft: #fef3c7;
+            --accent: #ec4899;
+            --accent-light: #f472b6;
+            --accent-soft: #fce7f3;
             --success: #22c55e;
+            --success-soft: #dcfce7;
             --danger: #ef4444;
+            --danger-soft: #fee2e2;
             --dark: #0f172a;
+            --dark-light: #1e293b;
             --text-main: #334155;
             --text-muted: #64748b;
+            --text-light: #94a3b8;
             --bg-page: #f8fafc;
             --white: #ffffff;
+            --gray-50: #f9fafb;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
             --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
-            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --shadow-md: 0 15px 35px -10px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px -15px rgba(139,92,246,0.2);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
+            --border-radius-xl: 40px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-page);
+            background: linear-gradient(135deg, var(--bg-page) 0%, #ffffff 100%);
             color: var(--text-main);
             line-height: 1.7;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
 
-        /* Navigation - SAMA PERSIS */
+        /* =========================================
+           2. NAVIGATION - PREMIUM
+           ========================================= */
         .top-bar {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
             padding: 16px 5%;
             display: flex;
             align-items: center;
@@ -76,11 +116,19 @@
             font-weight: 700;
             font-size: 0.95rem;
             transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 40px;
+            background: var(--primary-soft);
         }
 
         .back-link:hover {
+            background: var(--primary);
+            color: white;
             transform: translateX(-6px);
-            color: var(--primary-dark);
+        }
+
+        .back-link i {
+            font-size: 0.9rem;
         }
 
         .chapter-badge {
@@ -88,10 +136,17 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--primary);
+            color: var(--primary-dark);
             background: var(--primary-soft);
-            padding: 6px 18px;
+            padding: 8px 22px;
             border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chapter-badge i {
+            font-size: 0.9rem;
         }
 
         /* Progress Bar */
@@ -112,102 +167,154 @@
             transition: width 0.1s;
         }
 
-        /* Hero Section */
+        /* =========================================
+           3. HERO SECTION - UNGU
+           ========================================= */
         .hero-section {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 60px 5% 80px;
+            padding: 70px 5% 90px;
             text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-md);
         }
 
         .hero-section::before {
             content: "🔢";
             position: absolute;
-            font-size: 180px;
+            font-size: 200px;
             top: -40px;
             right: 5%;
-            opacity: 0.08;
+            opacity: 0.1;
             transform: rotate(15deg);
         }
 
+        .hero-section::after {
+            content: "a² + b² = c²";
+            position: absolute;
+            font-size: 100px;
+            bottom: -20px;
+            left: 5%;
+            opacity: 0.08;
+            transform: rotate(-10deg);
+            font-weight: 800;
+            font-family: 'Times New Roman', serif;
+            white-space: nowrap;
+        }
+
         .hero-section h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 15px;
             font-weight: 800;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
         }
 
         .hero-section p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.95;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Container */
+        /* =========================================
+           4. MAIN CONTAINER
+           ========================================= */
         .container {
             max-width: 1100px;
             margin: 40px auto 60px;
             padding: 0 25px;
         }
 
-        /* Content Card */
+        /* =========================================
+           5. CONTENT CARD
+           ========================================= */
         .content-card {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            margin-bottom: 35px;
+            border-radius: var(--border-radius-xl);
+            padding: 45px;
+            margin-bottom: 40px;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-200);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
         .content-card:hover {
             box-shadow: var(--shadow-lg);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .content-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, transparent 50%, var(--primary-soft) 100%);
+            opacity: 0.2;
+            border-radius: 0 0 0 150px;
+            pointer-events: none;
         }
 
         .section-title {
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--dark);
             margin-bottom: 25px;
+            position: relative;
         }
 
         .section-title i {
             color: var(--primary);
-            font-size: 2rem;
+            font-size: 2.2rem;
+            background: var(--primary-soft);
+            padding: 15px;
+            border-radius: 20px;
         }
 
         .section-badge {
             display: inline-block;
-            background: var(--primary-soft);
+            background: linear-gradient(135deg, var(--primary-soft) 0%, #fff 100%);
             color: var(--primary-dark);
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 800;
-            padding: 6px 20px;
+            padding: 8px 25px;
             border-radius: 60px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-bottom: 20px;
+            border: 1px solid var(--primary-light);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Video Container */
+        /* =========================================
+           6. VIDEO CONTAINER
+           ========================================= */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            margin: 30px 0;
+            margin: 30px 0 20px;
             background: #000;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
+            border: 3px solid var(--primary-light);
         }
 
         .video-container iframe {
@@ -219,39 +326,43 @@
             border: none;
         }
 
-        /* Grid untuk Tripel */
+        /* =========================================
+           7. GRID UNTUK TRIPEL
+           ========================================= */
         .tripel-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 20px;
         }
 
         .tripel-card {
-            background: var(--bg-page);
-            border-radius: 20px;
+            background: linear-gradient(135deg, var(--gray-50), white);
+            border-radius: 24px;
             padding: 30px;
             border-left: 6px solid var(--primary);
             transition: var(--transition);
             border: 1px solid var(--gray-200);
             border-left-width: 6px;
+            box-shadow: var(--shadow-sm);
         }
 
         .tripel-card:hover {
-            background: var(--white);
-            box-shadow: var(--shadow);
-            transform: translateY(-5px);
+            background: white;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
         }
 
         .tripel-list {
             background: var(--primary-soft);
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 30px;
             border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
         }
 
         .tripel-list h4 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 20px;
             color: var(--primary-dark);
             display: flex;
@@ -265,10 +376,13 @@
 
         .tripel-list li {
             padding: 12px 15px;
-            border-bottom: 1px solid rgba(13,148,136,0.2);
+            border-bottom: 1px solid rgba(139,92,246,0.2);
             font-size: 1.1rem;
             font-weight: 600;
             color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .tripel-list li:last-child {
@@ -277,113 +391,304 @@
 
         .tripel-list li i {
             color: var(--primary);
-            margin-right: 10px;
+            width: 20px;
         }
 
-        /* Formula Box */
-        .formula-box {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 20px;
-            border: 2px dashed var(--accent);
-            margin: 25px 0;
+        .tripel-badge {
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 10px;
+            border-radius: 60px;
+            margin-left: 10px;
         }
 
-        .euclid-formula {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--accent);
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* Checker Box */
+        /* =========================================
+           8. CHECKER BOX - INTERAKTIF
+           ========================================= */
         .checker-box {
             background: linear-gradient(145deg, #1e293b, #0f172a);
             color: white;
-            border-radius: 40px;
+            border-radius: 50px;
             padding: 50px;
-            margin-top: 20px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .checker-box::before {
+            content: "🔍";
+            position: absolute;
+            font-size: 150px;
+            bottom: -30px;
+            right: -20px;
+            opacity: 0.05;
+            transform: rotate(15deg);
+        }
+
+        .checker-box h3 {
+            color: var(--primary-light);
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .input-group {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
             justify-content: center;
-            margin: 30px 0;
+            margin: 40px 0;
         }
 
         .input-field {
             display: flex;
             flex-direction: column;
             align-items: center;
+            background: rgba(255,255,255,0.05);
+            padding: 20px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .input-field label {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--gray-300);
-            margin-bottom: 8px;
+            letter-spacing: 1.5px;
+            color: var(--primary-light);
+            margin-bottom: 12px;
+            font-weight: 600;
         }
 
         .input-field input {
             padding: 15px 20px;
-            border-radius: 60px;
-            border: none;
+            border-radius: 40px;
+            border: 2px solid rgba(255,255,255,0.15);
             width: 120px;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 700;
             background: rgba(255,255,255,0.1);
             color: white;
-            border: 1px solid rgba(255,255,255,0.2);
+            transition: var(--transition);
         }
 
         .input-field input:focus {
             outline: none;
             border-color: var(--primary);
             background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 0 4px rgba(139,92,246,0.2);
         }
 
         .btn-check {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 16px 45px;
             border-radius: 60px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             cursor: pointer;
             transition: var(--transition);
-            margin-top: 15px;
+            margin: 20px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(139,92,246,0.3);
         }
 
         .btn-check:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(13,148,136,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(139,92,246,0.4);
         }
 
         .result-area {
-            background: rgba(255,255,255,0.1);
-            border-radius: 30px;
-            padding: 25px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 60px;
+            padding: 30px 40px;
             margin-top: 30px;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 700;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            line-height: 1.6;
         }
 
-        /* Pagination Footer */
+        .result-area i {
+            margin-right: 10px;
+        }
+
+        /* =========================================
+           9. VISUALISASI SEGITIGA
+           ========================================= */
+        .visual-box {
+            background: linear-gradient(135deg, var(--primary-soft), white);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 1px solid var(--primary-light);
+            box-shadow: var(--shadow);
+        }
+
+        .triangle-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .triangle-svg {
+            width: 250px;
+            height: 200px;
+        }
+
+        .sides-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: white;
+            padding: 25px;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            min-width: 200px;
+        }
+
+        .side-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: var(--gray-100);
+            border-radius: 16px;
+            font-weight: 600;
+        }
+
+        .side-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-dark);
+        }
+
+        .side-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        /* =========================================
+           10. QUIZ SECTION
+           ========================================= */
+        .quiz-section {
+            background: linear-gradient(135deg, var(--gray-100), white);
+            border-radius: 40px;
+            padding: 40px;
+            margin-top: 30px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .quiz-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 60px;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .quiz-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        #quizFeedback {
+            margin-top: 25px;
+            padding: 20px 30px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            background: white;
+            border: 2px solid var(--gray-200);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =========================================
+           11. JENIS SEGITIGA CARDS
+           ========================================= */
+        .triangle-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .type-card {
+            padding: 30px;
+            border-radius: 24px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .type-card.siku { background: #ede9fe; }
+        .type-card.tumpul { background: #fee2e2; }
+        .type-card.lancip { background: #dbeafe; }
+
+        .type-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .type-card.siku h4 { color: #6d28d9; }
+        .type-card.tumpul h4 { color: #b91c1c; }
+        .type-card.lancip h4 { color: #1e40af; }
+
+        .type-formula {
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        /* =========================================
+           12. PAGINATION FOOTER
+           ========================================= */
         .page-footer {
             display: flex;
             justify-content: space-between;
-            margin-top: 60px;
+            margin-top: 70px;
             padding-top: 40px;
-            border-top: 2px solid var(--gray-200);
+            border-top: 2px dashed var(--gray-300);
         }
 
         .nav-btn {
@@ -391,33 +696,60 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--white);
-            padding: 14px 32px;
-            border-radius: 60px;
+            background: white;
+            padding: 16px 35px;
+            border-radius: 70px;
             color: var(--dark);
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
             border: 1px solid var(--gray-200);
             box-shadow: var(--shadow-sm);
+            font-size: 1rem;
         }
 
         .nav-btn:hover {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.right:hover {
+            transform: translateX(5px);
         }
 
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 50px 20px;
             color: var(--text-muted);
             border-top: 1px solid var(--gray-200);
+            margin-top: 40px;
+            background: white;
         }
 
+        footer p:last-child {
+            font-style: italic;
+            max-width: 700px;
+            margin: 15px auto 0;
+            opacity: 0.7;
+        }
+
+        /* =========================================
+           13. RESPONSIVE
+           ========================================= */
         @media (max-width: 768px) {
-            .hero-section h1 { font-size: 2rem; }
+            .hero-section h1 { font-size: 2.2rem; }
+            .hero-section p { font-size: 1rem; }
             .content-card { padding: 30px; }
+            .section-title { font-size: 1.6rem; }
             .checker-box { padding: 30px; }
+            .checker-box h3 { font-size: 1.6rem; }
+            .result-area { font-size: 1.2rem; padding: 20px; }
+            .quiz-options { grid-template-columns: 1fr; }
+            .triangle-type-grid { grid-template-columns: 1fr; }
+            .page-footer { flex-direction: column; gap: 15px; align-items: center; }
+            .nav-btn { width: 100%; justify-content: center; }
+            .progress-container { top: 60px; }
         }
     </style>
 </head>
@@ -428,7 +760,7 @@
         <a href="bab2-teorema-pythagoras.html" class="back-link">
             <i class="fas fa-arrow-left"></i> Kembali ke Bab 2
         </a>
-        <span class="chapter-badge"><i class="fas fa-hashtag"></i> Sub B: Tripel Pythagoras</span>
+        <span class="chapter-badge"></i> Sub 2: Tripel Pythagoras</span>
     </div>
 
     <!-- Progress Bar -->
@@ -438,8 +770,8 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <h1>🔢 Tripel Pythagoras</h1>
-        <p>Tiga bilangan asli yang tepat memenuhi Teorema Pythagoras. Kenali pola, rumus, dan cara mengeceknya.</p>
+        <h1>Tripel Pythagoras</h1>
+        <p>Tiga bilangan asli yang tepat memenuhi Teorema Pythagoras. Kenali pola, daftar populer, dan cara mengeceknya.</p>
     </section>
 
     <!-- Main Content -->
@@ -452,42 +784,72 @@
                 <i class="fas fa-film"></i>
                 <h2>Mengenal Tripel Pythagoras</h2>
             </div>
-            <p style="margin-bottom: 20px;">Tonton video berikut untuk memahami pola dan cara menemukan tripel Pythagoras.</p>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">Tonton video berikut untuk memahami pola dan cara menemukan tripel Pythagoras.</p>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/6h0pjGkmFGo" title="Tripel Pythagoras" allowfullscreen></iframe>
             </div>
         </div>
 
-        <!-- Card: Definisi dan Rumus Euclid -->
+        <!-- Card: Definisi Tripel Pythagoras -->
         <div class="content-card">
-            <span class="section-badge"><i class="fas fa-info-circle"></i> DEFINISI & RUMUS</span>
+            <span class="section-badge"><i class="fas fa-info-circle"></i> DEFINISI</span>
             <div class="section-title">
                 <i class="fas fa-hashtag"></i>
                 <h2>Apa itu Tripel Pythagoras?</h2>
             </div>
             
-            <div style="font-size: 1.8rem; text-align: center; padding: 30px; background: var(--primary-soft); border-radius: 30px; margin: 20px 0; color: var(--primary-dark); font-weight: 800;">
-                \(a^2 + b^2 = c^2\)
-            </div>
-            
-            <p style="font-size: 1.1rem; margin-top: 20px;"><strong>Tripel Pythagoras</strong> adalah tiga bilangan asli \((a, b, c)\) yang memenuhi persamaan di atas. Ketiga bilangan ini dapat dijadikan panjang sisi-sisi segitiga siku-siku.</p>
-            
-            <div class="formula-box">
-                <h4 style="color: var(--accent); margin-bottom: 20px; text-align: center;">📐 Rumus Euclid untuk Tripel Pythagoras</h4>
-                <div class="euclid-formula">
-                    \(a = m^2 - n^2\)<br>
-                    \(b = 2mn\)<br>
-                    \(c = m^2 + n^2\)
+            <div style="text-align: center; margin: 30px 0;">
+                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-dark); background: linear-gradient(135deg, var(--primary-soft), white); padding: 35px; border-radius: 40px; display: inline-block; border: 2px solid var(--primary-light); box-shadow: var(--shadow);">
+                    \(a^2 + b^2 = c^2\)
                 </div>
-                <p style="margin-top: 20px; text-align: center;">dengan \(m > n\) dan \(m, n\) bilangan asli.</p>
             </div>
             
-            <div style="background: var(--gray-100); padding: 25px; border-radius: 20px; margin-top: 20px;">
-                <p><strong>Contoh:</strong> Ambil m = 2, n = 1</p>
-                <p>a = 2² - 1² = 4 - 1 = 3</p>
-                <p>b = 2 × 2 × 1 = 4</p>
-                <p>c = 2² + 1² = 4 + 1 = 5</p>
-                <p>✅ (3, 4, 5) adalah tripel Pythagoras!</p>
+            <p style="font-size: 1.2rem; margin: 25px 0; text-align: center;"><strong>Tripel Pythagoras</strong> adalah tiga bilangan asli \((a, b, c)\) yang memenuhi persamaan di atas. Ketiga bilangan ini dapat dijadikan panjang sisi-sisi segitiga siku-siku.</p>
+            
+            <!-- Visualisasi Segitiga -->
+            <div class="visual-box">
+                <h3 style="font-size: 1.5rem; margin-bottom: 30px; color: var(--primary-dark); text-align: center;">📐 Visualisasi Tripel (3, 4, 5)</h3>
+                <div class="triangle-visual">
+                    <div class="triangle-svg">
+                        <svg viewBox="0 0 250 200" width="100%" height="100%">
+                            <!-- Segitiga siku-siku -->
+                            <polygon points="50,150 170,150 50,30" fill="var(--primary-soft)" stroke="var(--primary)" stroke-width="3"/>
+                            
+                            <!-- Sisi a (tegak) -->
+                            <line x1="50" y1="150" x2="50" y2="30" stroke="var(--primary)" stroke-width="2" stroke-dasharray="5 3"/>
+                            <!-- Sisi b (alas) -->
+                            <line x1="50" y1="150" x2="170" y2="150" stroke="var(--primary)" stroke-width="2" stroke-dasharray="5 3"/>
+                            <!-- Sisi c (miring) -->
+                            <line x1="50" y1="30" x2="170" y2="150" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 3"/>
+                            
+                            <!-- Label sisi -->
+                            <text x="30" y="90" fill="var(--primary-dark)" font-size="16" font-weight="bold">a = 3</text>
+                            <text x="100" y="170" fill="var(--primary-dark)" font-size="16" font-weight="bold">b = 4</text>
+                            <text x="100" y="60" fill="var(--accent)" font-size="16" font-weight="bold">c = 5</text>
+                            
+                            <!-- Sudut siku-siku -->
+                            <line x1="50" y1="150" x2="70" y2="150" stroke="var(--dark)" stroke-width="2"/>
+                            <line x1="50" y1="150" x2="50" y2="130" stroke="var(--dark)" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="sides-info">
+                        <div class="side-item">
+                            <span class="side-label"><i class="fas fa-arrow-up"></i> Sisi a</span>
+                            <span class="side-value">3</span>
+                        </div>
+                        <div class="side-item">
+                            <span class="side-label"><i class="fas fa-arrow-right"></i> Sisi b</span>
+                            <span class="side-value">4</span>
+                        </div>
+                        <div class="side-item">
+                            <span class="side-label"><i class="fas fa-arrow-left"></i> Sisi c</span>
+                            <span class="side-value">5</span>
+                        </div>
+                        <div style="margin-top: 15px; padding: 10px; background: var(--primary-soft); border-radius: 16px; text-align: center;">
+                            <span style="font-weight: 700;">3² + 4² = 9 + 16 = 25 = 5²</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -501,54 +863,54 @@
             
             <div class="tripel-grid">
                 <div class="tripel-list">
-                    <h4><i class="fas fa-star"></i> Tripel Primitif</h4>
+                    <h4><i class="fas fa-star" style="color: #f59e0b;"></i> Tripel Primitif</h4>
                     <ul>
-                        <li><i class="fas fa-check-circle"></i> (3, 4, 5)</li>
-                        <li><i class="fas fa-check-circle"></i> (5, 12, 13)</li>
-                        <li><i class="fas fa-check-circle"></i> (7, 24, 25)</li>
-                        <li><i class="fas fa-check-circle"></i> (8, 15, 17)</li>
-                        <li><i class="fas fa-check-circle"></i> (9, 40, 41)</li>
-                        <li><i class="fas fa-check-circle"></i> (11, 60, 61)</li>
-                        <li><i class="fas fa-check-circle"></i> (12, 35, 37)</li>
-                        <li><i class="fas fa-check-circle"></i> (13, 84, 85)</li>
-                        <li><i class="fas fa-check-circle"></i> (20, 21, 29)</li>
+                        <li><i class="fas fa-check-circle"></i> (3, 4, 5) <span class="tripel-badge">Primitif</span></li>
+                        <li><i class="fas fa-check-circle"></i> (5, 12, 13) <span class="tripel-badge">Primitif</span></li>
+                        <li><i class="fas fa-check-circle"></i> (7, 24, 25) <span class="tripel-badge">Primitif</span></li>
+                        <li><i class="fas fa-check-circle"></i> (8, 15, 17) <span class="tripel-badge">Primitif</span></li>
+                        <li><i class="fas fa-check-circle"></i> (9, 40, 41) <span class="tripel-badge">Primitif</span></li>
+                        <li><i class="fas fa-check-circle"></i> (11, 60, 61) <span class="tripel-badge">Primitif</span></li>
+                        <li><i class="fas fa-check-circle"></i> (12, 35, 37) <span class="tripel-badge">Primitif</span></li>
+                        <li><i class="fas fa-check-circle"></i> (13, 84, 85) <span class="tripel-badge">Primitif</span></li>
+                        <li><i class="fas fa-check-circle"></i> (20, 21, 29) <span class="tripel-badge">Primitif</span></li>
                     </ul>
                 </div>
                 <div class="tripel-list">
-                    <h4><i class="fas fa-star"></i> Tripel Turunan</h4>
+                    <h4><i class="fas fa-copy" style="color: var(--primary);"></i> Tripel Turunan</h4>
                     <ul>
-                        <li><i class="fas fa-check-circle"></i> (6, 8, 10) → 2×(3,4,5)</li>
-                        <li><i class="fas fa-check-circle"></i> (9, 12, 15) → 3×(3,4,5)</li>
-                        <li><i class="fas fa-check-circle"></i> (10, 24, 26) → 2×(5,12,13)</li>
-                        <li><i class="fas fa-check-circle"></i> (12, 16, 20) → 4×(3,4,5)</li>
-                        <li><i class="fas fa-check-circle"></i> (14, 48, 50) → 2×(7,24,25)</li>
-                        <li><i class="fas fa-check-circle"></i> (15, 20, 25) → 5×(3,4,5)</li>
-                        <li><i class="fas fa-check-circle"></i> (16, 30, 34) → 2×(8,15,17)</li>
-                        <li><i class="fas fa-check-circle"></i> (20, 48, 52) → 4×(5,12,13)</li>
-                        <li><i class="fas fa-check-circle"></i> (21, 28, 35) → 7×(3,4,5)</li>
+                        <li><i class="fas fa-check-circle"></i> (6, 8, 10) <span class="tripel-badge">2×(3,4,5)</span></li>
+                        <li><i class="fas fa-check-circle"></i> (9, 12, 15) <span class="tripel-badge">3×(3,4,5)</span></li>
+                        <li><i class="fas fa-check-circle"></i> (10, 24, 26) <span class="tripel-badge">2×(5,12,13)</span></li>
+                        <li><i class="fas fa-check-circle"></i> (12, 16, 20) <span class="tripel-badge">4×(3,4,5)</span></li>
+                        <li><i class="fas fa-check-circle"></i> (14, 48, 50) <span class="tripel-badge">2×(7,24,25)</span></li>
+                        <li><i class="fas fa-check-circle"></i> (15, 20, 25) <span class="tripel-badge">5×(3,4,5)</span></li>
+                        <li><i class="fas fa-check-circle"></i> (16, 30, 34) <span class="tripel-badge">2×(8,15,17)</span></li>
+                        <li><i class="fas fa-check-circle"></i> (20, 48, 52) <span class="tripel-badge">4×(5,12,13)</span></li>
+                        <li><i class="fas fa-check-circle"></i> (21, 28, 35) <span class="tripel-badge">7×(3,4,5)</span></li>
                     </ul>
                 </div>
             </div>
             <p style="margin-top: 25px; font-style: italic; color: var(--text-muted);">✨ Tripel turunan diperoleh dengan mengalikan tripel primitif dengan bilangan bulat positif.</p>
         </div>
 
-        <!-- Card: Cek Tripel Interaktif -->
+        <!-- Card: Cek Tripel Interaktif - DIPERBAIKI -->
         <div class="checker-box">
-            <h3 style="font-size: 1.8rem; margin-bottom: 15px; color: var(--primary-light);">🧮 Cek Tripel Pythagoras</h3>
-            <p style="margin-bottom: 30px; opacity: 0.9;">Masukkan tiga bilangan untuk mengecek apakah membentuk tripel Pythagoras.</p>
+            <h3><i class="fas fa-calculator"></i> Cek Tripel Pythagoras</h3>
+            <p style="margin-bottom: 30px; opacity: 0.9; font-size: 1.1rem;">Masukkan tiga bilangan untuk mengecek apakah membentuk tripel Pythagoras.</p>
             
             <div class="input-group">
                 <div class="input-field">
-                    <label>Sisi a</label>
-                    <input type="number" id="tripelA" placeholder="a" value="3">
+                    <label><i class="fas fa-arrow-up"></i> Sisi a</label>
+                    <input type="number" id="tripelA" placeholder="a" value="3" min="1">
                 </div>
                 <div class="input-field">
-                    <label>Sisi b</label>
-                    <input type="number" id="tripelB" placeholder="b" value="4">
+                    <label><i class="fas fa-arrow-right"></i> Sisi b</label>
+                    <input type="number" id="tripelB" placeholder="b" value="4" min="1">
                 </div>
                 <div class="input-field">
-                    <label>Sisi c</label>
-                    <input type="number" id="tripelC" placeholder="c" value="5">
+                    <label><i class="fas fa-arrow-left"></i> Sisi c</label>
+                    <input type="number" id="tripelC" placeholder="c" value="5" min="1">
                 </div>
             </div>
             
@@ -559,63 +921,11 @@
             </div>
             
             <div id="tripleResult" class="result-area">
-                ✅ (3, 4, 5) adalah Tripel Pythagoras!
+                <i class="fas fa-check-circle" style="color: #4ade80;"></i> (3, 4, 5) adalah Tripel Pythagoras (Primitif)
             </div>
         </div>
 
-        <!-- Card: Generator Tripel -->
-        <div class="content-card">
-            <span class="section-badge"><i class="fas fa-cog"></i> GENERATOR</span>
-            <div class="section-title">
-                <i class="fas fa-calculator"></i>
-                <h2>Hasilkan Tripel Pythagoras</h2>
-            </div>
-            
-            <p style="margin-bottom: 20px;">Gunakan rumus Euclid untuk menghasilkan tripel Pythagoras dengan memasukkan nilai m dan n.</p>
-            
-            <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin: 30px 0;">
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <label style="font-weight: 700; margin-bottom: 10px;">Nilai m</label>
-                    <input type="number" id="mValue" min="2" value="3" style="width: 80px; height: 60px; text-align: center; font-size: 1.5rem; border: 2px solid var(--primary); border-radius: 16px;">
-                </div>
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <label style="font-weight: 700; margin-bottom: 10px;">Nilai n</label>
-                    <input type="number" id="nValue" min="1" max="2" value="1" style="width: 80px; height: 60px; text-align: center; font-size: 1.5rem; border: 2px solid var(--primary); border-radius: 16px;">
-                </div>
-                <button onclick="generateTriple()" class="btn-check" style="margin-top: 0;">
-                    <i class="fas fa-magic"></i> Generate
-                </button>
-            </div>
-            
-            <div id="generateResult" style="background: var(--gray-100); padding: 30px; border-radius: 30px; text-align: center; font-size: 1.5rem; font-weight: 700; color: var(--primary-dark);">
-                (8, 6, 10) atau (6, 8, 10)
-            </div>
-            <p id="generateNote" style="margin-top: 15px; text-align: center; color: var(--text-muted);"></p>
-        </div>
-
-        <!-- Card: Soal Latihan -->
-        <div class="content-card">
-            <span class="section-badge"><i class="fas fa-pencil-alt"></i> LATIHAN</span>
-            <div class="section-title">
-                <i class="fas fa-question-circle"></i>
-                <h2>Ayo Berlatih!</h2>
-            </div>
-            
-            <p style="font-size: 1.2rem; margin-bottom: 25px;">Manakah di bawah ini yang BUKAN merupakan tripel Pythagoras?</p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px;">
-                <button onclick="quizTripel(1)" style="background: var(--primary-soft); border: 2px solid var(--primary); padding: 15px; border-radius: 60px; font-weight: 600; color: var(--dark); cursor: pointer; transition: var(--transition);">(7, 24, 25)</button>
-                <button onclick="quizTripel(2)" style="background: var(--primary-soft); border: 2px solid var(--primary); padding: 15px; border-radius: 60px; font-weight: 600; color: var(--dark); cursor: pointer; transition: var(--transition);">(12, 35, 37)</button>
-                <button onclick="quizTripel(3)" style="background: var(--primary-soft); border: 2px solid var(--primary); padding: 15px; border-radius: 60px; font-weight: 600; color: var(--dark); cursor: pointer; transition: var(--transition);">(9, 16, 25)</button>
-                <button onclick="quizTripel(4)" style="background: var(--primary-soft); border: 2px solid var(--primary); padding: 15px; border-radius: 60px; font-weight: 600; color: var(--dark); cursor: pointer; transition: var(--transition);">(20, 21, 29)</button>
-            </div>
-            
-            <div id="quizFeedback" style="font-size: 1.2rem; font-weight: 700; padding: 20px; background: var(--primary-soft); border-radius: 20px; text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center;">
-                Klik salah satu pilihan di atas!
-            </div>
-        </div>
-
-        <!-- Card: Identifikasi Jenis Segitiga -->
+        <!-- Card: Menentukan Jenis Segitiga -->
         <div class="content-card">
             <span class="section-badge"><i class="fas fa-shapes"></i> APLIKASI</span>
             <div class="section-title">
@@ -623,24 +933,44 @@
                 <h2>Menentukan Jenis Segitiga</h2>
             </div>
             
-            <p style="margin-bottom: 25px;">Dengan Teorema Pythagoras, kita dapat menentukan jenis segitiga berdasarkan panjang sisinya:</p>
+            <p style="margin-bottom: 25px; font-size: 1.1rem;">Dengan Teorema Pythagoras, kita dapat menentukan jenis segitiga berdasarkan panjang sisinya:</p>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
-                <div style="background: #dcfce7; padding: 25px; border-radius: 20px;">
-                    <h4 style="color: #166534; margin-bottom: 15px;"><i class="fas fa-check-circle"></i> Segitiga Siku-siku</h4>
-                    <p style="font-size: 1.3rem; font-weight: 700; text-align: center;">c² = a² + b²</p>
-                    <p style="margin-top: 10px;">Contoh: (3,4,5), (5,12,13)</p>
+            <div class="triangle-type-grid">
+                <div class="type-card siku">
+                    <h4><i class="fas fa-check-circle"></i> Segitiga Siku-siku</h4>
+                    <div class="type-formula">\(c^2 = a^2 + b^2\)</div>
+                    <p style="margin-top: 15px;">Contoh: (3,4,5), (5,12,13)</p>
                 </div>
-                <div style="background: #fee2e2; padding: 25px; border-radius: 20px;">
-                    <h4 style="color: #b91c1c; margin-bottom: 15px;"><i class="fas fa-exclamation-triangle"></i> Segitiga Tumpul</h4>
-                    <p style="font-size: 1.3rem; font-weight: 700; text-align: center;">c² > a² + b²</p>
-                    <p style="margin-top: 10px;">Contoh: (4,5,8) → 64 > 16+25=41</p>
+                <div class="type-card tumpul">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Segitiga Tumpul</h4>
+                    <div class="type-formula">\(c^2 > a^2 + b^2\)</div>
+                    <p style="margin-top: 15px;">Contoh: (4,5,8) → 64 > 16+25=41</p>
                 </div>
-                <div style="background: #dbeafe; padding: 25px; border-radius: 20px;">
-                    <h4 style="color: #1e40af; margin-bottom: 15px;"><i class="fas fa-check-circle"></i> Segitiga Lancip</h4>
-                    <p style="font-size: 1.3rem; font-weight: 700; text-align: center;">c² < a² + b²</p>
-                    <p style="margin-top: 10px;">Contoh: (5,6,7) → 49 < 25+36=61</p>
+                <div class="type-card lancip">
+                    <h4><i class="fas fa-check-circle"></i> Segitiga Lancip</h4>
+                    <div class="type-formula">\(c^2 < a^2 + b^2\)</div>
+                    <p style="margin-top: 15px;">Contoh: (5,6,7) → 49 < 25+36=61</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- Card: Soal Latihan -->
+        <div class="quiz-section">
+            <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--primary); display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-pencil-alt"></i> Ayo Berlatih!
+            </h3>
+            
+            <p style="font-size: 1.2rem; margin-bottom: 25px;">Manakah di bawah ini yang <strong>BUKAN</strong> merupakan tripel Pythagoras?</p>
+            
+            <div class="quiz-options">
+                <button onclick="quizTripel(1)" class="quiz-btn">A. (7, 24, 25)</button>
+                <button onclick="quizTripel(2)" class="quiz-btn">B. (12, 35, 37)</button>
+                <button onclick="quizTripel(3)" class="quiz-btn">C. (9, 16, 25)</button>
+                <button onclick="quizTripel(4)" class="quiz-btn">D. (20, 21, 29)</button>
+            </div>
+            
+            <div id="quizFeedback">
+                Klik salah satu pilihan di atas!
             </div>
         </div>
 
@@ -656,8 +986,8 @@
     </main>
 
     <footer>
-        <p>© 2024 MathMaster8 - Tripel Pythagoras | Kurikulum Merdeka</p>
-        <p style="margin-top: 8px; opacity: 0.6;">"Bilangan adalah inti dari segala sesuatu." - Pythagoras</p>
+        <p>© 2026 MathMaster - Tripel Pythagoras | Kurikulum Merdeka</p>
+        <p>"Bilangan adalah inti dari segala sesuatu." - Pythagoras</p>
     </footer>
 
     <script>
@@ -669,7 +999,7 @@
             document.getElementById('progressBar').style.width = scrolled + "%";
         };
 
-        // Fungsi untuk mengecek tripel Pythagoras
+        // Fungsi untuk mengecek tripel Pythagoras - DIPERBAIKI
         function checkTriple() {
             let a = parseInt(document.getElementById('tripelA').value);
             let b = parseInt(document.getElementById('tripelB').value);
@@ -677,82 +1007,55 @@
             let result = document.getElementById('tripleResult');
             
             if (isNaN(a) || isNaN(b) || isNaN(c) || a <= 0 || b <= 0 || c <= 0) {
-                result.innerHTML = "⚠️ Masukkan bilangan positif yang valid!";
+                result.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i> ⚠️ Masukkan bilangan positif yang valid!';
                 result.style.color = "#f59e0b";
                 return;
             }
             
             // Urutkan agar a, b adalah sisi tegak, c sisi miring
-            let sides = [a, b, c].sort((x,y) => x - y);
-            let isTriple = (sides[0]*sides[0] + sides[1]*sides[1] === sides[2]*sides[2]);
+            let sides = [a, b, c].sort((x, y) => x - y);
+            let isTriple = (sides[0] * sides[0] + sides[1] * sides[1] === sides[2] * sides[2]);
             
             if (isTriple) {
-                result.innerHTML = `✅ (${a}, ${b}, ${c}) adalah Tripel Pythagoras!`;
+                // Cek apakah primitif atau turunan (FPB)
+                let gcd = function(x, y) { return y ? gcd(y, x % y) : x; };
+                let gcd3 = gcd(gcd(sides[0], sides[1]), sides[2]);
+                
+                let tripleType = (gcd3 === 1) ? "Primitif" : `Turunan (faktor ${gcd3})`;
+                result.innerHTML = `<i class="fas fa-check-circle" style="color: #4ade80;"></i> ✅ (${a}, ${b}, ${c}) adalah Tripel Pythagoras (${tripleType})`;
                 result.style.color = "#10b981";
-                
-                // Cek apakah primitif atau turunan
-                let gcd = function(a,b) { return b ? gcd(b, a%b) : a; };
-                let gcd3 = gcd(gcd(a,b), c);
-                if (gcd3 === 1) {
-                    result.innerHTML += " (Tripel Primitif)";
-                } else {
-                    result.innerHTML += ` (Tripel Turunan, faktor ${gcd3})`;
-                }
             } else {
-                result.innerHTML = `❌ (${a}, ${b}, ${c}) BUKAN Tripel Pythagoras.`;
-                result.style.color = "#ef4444";
-                
                 // Beri saran jenis segitiga
-                let c2 = sides[2]*sides[2];
-                let ab2 = sides[0]*sides[0] + sides[1]*sides[1];
+                let c2 = sides[2] * sides[2];
+                let ab2 = sides[0] * sides[0] + sides[1] * sides[1];
+                let jenis = "";
                 if (c2 > ab2) {
-                    result.innerHTML += " (Segitiga Tumpul)";
+                    jenis = "Segitiga Tumpul";
                 } else if (c2 < ab2) {
-                    result.innerHTML += " (Segitiga Lancip)";
+                    jenis = "Segitiga Lancip";
                 }
+                
+                result.innerHTML = `<i class="fas fa-times-circle" style="color: #ef4444;"></i> ❌ (${a}, ${b}, ${c}) BUKAN Tripel Pythagoras. (${jenis})`;
+                result.style.color = "#ef4444";
             }
-        }
-
-        // Fungsi generator tripel
-        function generateTriple() {
-            let m = parseInt(document.getElementById('mValue').value);
-            let n = parseInt(document.getElementById('nValue').value);
-            let result = document.getElementById('generateResult');
-            let note = document.getElementById('generateNote');
-            
-            if (isNaN(m) || isNaN(n) || m <= n || n <= 0) {
-                result.innerHTML = "⚠️ Masukkan m > n ≥ 1!";
-                result.style.color = "#f59e0b";
-                note.innerHTML = "";
-                return;
-            }
-            
-            let a = m*m - n*n;
-            let b = 2*m*n;
-            let c = m*m + n*n;
-            
-            result.innerHTML = `(${a}, ${b}, ${c}) atau (${b}, ${a}, ${c})`;
-            result.style.color = "var(--primary-dark)";
-            note.innerHTML = `Tripel ini ${a}² + ${b}² = ${a*a + b*b}, c² = ${c*c}`;
         }
 
         // Fungsi untuk kuis
         function quizTripel(opt) {
             let fb = document.getElementById('quizFeedback');
             if (opt === 3) {
-                fb.innerHTML = "✅ Benar! (9, 16, 25) bukan tripel karena 9² + 16² = 81 + 256 = 337, sedangkan 25² = 625.";
+                fb.innerHTML = '<i class="fas fa-check-circle" style="color: #166534;"></i> ✅ Benar! (9, 16, 25) bukan tripel karena 9² + 16² = 81 + 256 = 337, sedangkan 25² = 625.';
                 fb.style.background = "#dcfce7";
                 fb.style.color = "#166534";
             } else {
-                fb.innerHTML = "❌ Coba lagi! Periksa apakah a² + b² = c².";
+                fb.innerHTML = '<i class="fas fa-times-circle" style="color: #b91c1c;"></i> ❌ Coba lagi! Periksa apakah a² + b² = c².';
                 fb.style.background = "#fee2e2";
                 fb.style.color = "#b91c1c";
             }
         }
 
-        // Inisialisasi generator
+        // Inisialisasi
         window.onload = function() {
-            generateTriple();
             if (window.MathJax) {
                 MathJax.typeset();
             }

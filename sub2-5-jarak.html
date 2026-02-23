@@ -3,60 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rumus Jarak | Pengayaan | MathMaster8</title>
+    <title>Rumus Jarak | Pengayaan | MathMaster</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            chtml: {
+                scale: 1.2,
+                minScale: 0.8
+            }
+        };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
         /* =========================================
-           CSS KONSISTEN
+           1. VARIABLES & CORE STYLING - UNGU PREMIUM
            ========================================= */
         :root {
-            --primary: #0d9488;
-            --primary-light: #14b8a6;
-            --primary-soft: #ccfbf1;
-            --primary-dark: #0f766e;
-            --accent: #8b5cf6;
-            --accent-light: #a78bfa;
-            --accent-soft: #ede9fe;
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --primary-soft: #ede9fe;
+            --primary-dark: #6d28d9;
+            --secondary: #f59e0b;
+            --secondary-light: #fbbf24;
+            --secondary-soft: #fef3c7;
+            --accent: #ec4899;
+            --accent-light: #f472b6;
+            --accent-soft: #fce7f3;
             --success: #22c55e;
+            --success-soft: #dcfce7;
             --danger: #ef4444;
+            --danger-soft: #fee2e2;
             --dark: #0f172a;
+            --dark-light: #1e293b;
             --text-main: #334155;
             --text-muted: #64748b;
+            --text-light: #94a3b8;
             --bg-page: #f8fafc;
             --white: #ffffff;
+            --gray-50: #f9fafb;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
             --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
-            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(139,92,246,0.15);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --shadow-md: 0 15px 35px -10px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px -15px rgba(139,92,246,0.2);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
+            --border-radius-xl: 40px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-page);
+            background: linear-gradient(135deg, var(--bg-page) 0%, #ffffff 100%);
             color: var(--text-main);
             line-height: 1.7;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
 
-        /* Navigation */
+        /* =========================================
+           2. NAVIGATION - PREMIUM
+           ========================================= */
         .top-bar {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
             padding: 16px 5%;
             display: flex;
             align-items: center;
@@ -77,11 +116,19 @@
             font-weight: 700;
             font-size: 0.95rem;
             transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 40px;
+            background: var(--primary-soft);
         }
 
         .back-link:hover {
+            background: var(--primary);
+            color: white;
             transform: translateX(-6px);
-            color: var(--primary-dark);
+        }
+
+        .back-link i {
+            font-size: 0.9rem;
         }
 
         .chapter-badge {
@@ -89,10 +136,17 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--primary);
+            color: var(--primary-dark);
             background: var(--primary-soft);
-            padding: 6px 18px;
+            padding: 8px 22px;
             border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chapter-badge i {
+            font-size: 0.9rem;
         }
 
         /* Progress Bar */
@@ -113,103 +167,154 @@
             transition: width 0.1s;
         }
 
-        /* Hero Section */
+        /* =========================================
+           3. HERO SECTION - UNGU
+           ========================================= */
         .hero-section {
-            background: linear-gradient(135deg, var(--accent) 0%, #6d28d9 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 60px 5% 80px;
+            padding: 70px 5% 90px;
             text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-md);
         }
 
         .hero-section::before {
             content: "📍";
             position: absolute;
-            font-size: 180px;
-            top: -40px;
+            font-size: 220px;
+            top: -50px;
             right: 5%;
-            opacity: 0.08;
+            opacity: 0.1;
             transform: rotate(15deg);
         }
 
+        .hero-section::after {
+            content: "d = √[(x₂-x₁)² + (y₂-y₁)²]";
+            position: absolute;
+            font-size: 60px;
+            bottom: -10px;
+            left: 5%;
+            opacity: 0.08;
+            transform: rotate(-5deg);
+            font-weight: 800;
+            font-family: 'Times New Roman', serif;
+            white-space: nowrap;
+        }
+
         .hero-section h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 15px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
         }
 
         .hero-section p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.95;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Container */
+        /* =========================================
+           4. MAIN CONTAINER
+           ========================================= */
         .container {
             max-width: 1100px;
             margin: 40px auto 60px;
             padding: 0 25px;
         }
 
-        /* Content Card */
+        /* =========================================
+           5. CONTENT CARD
+           ========================================= */
         .content-card {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            margin-bottom: 35px;
+            border-radius: var(--border-radius-xl);
+            padding: 45px;
+            margin-bottom: 40px;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-200);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
         .content-card:hover {
             box-shadow: var(--shadow-lg);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .content-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, transparent 50%, var(--primary-soft) 100%);
+            opacity: 0.2;
+            border-radius: 0 0 0 150px;
+            pointer-events: none;
         }
 
         .section-title {
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--dark);
             margin-bottom: 25px;
+            position: relative;
         }
 
         .section-title i {
-            color: var(--accent);
-            font-size: 2rem;
+            color: var(--primary);
+            font-size: 2.2rem;
+            background: var(--primary-soft);
+            padding: 15px;
+            border-radius: 20px;
         }
 
         .section-badge {
             display: inline-block;
-            background: var(--accent-soft);
-            color: #6d28d9;
-            font-size: 0.7rem;
+            background: linear-gradient(135deg, var(--primary-soft) 0%, #fff 100%);
+            color: var(--primary-dark);
+            font-size: 0.75rem;
             font-weight: 800;
-            padding: 6px 20px;
+            padding: 8px 25px;
             border-radius: 60px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-bottom: 20px;
+            border: 1px solid var(--primary-light);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Video Container */
+        /* =========================================
+           6. VIDEO CONTAINER
+           ========================================= */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            margin: 30px 0;
+            margin: 30px 0 20px;
             background: #000;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
+            border: 3px solid var(--primary-light);
         }
 
         .video-container iframe {
@@ -221,58 +326,92 @@
             border: none;
         }
 
-        /* Formula Box */
+        /* =========================================
+           7. FORMULA MAIN
+           ========================================= */
         .formula-main {
-            background: var(--white);
+            background: linear-gradient(135deg, var(--primary-soft), white);
             padding: 40px;
-            border-radius: 30px;
-            border: 3px dashed var(--accent);
+            border-radius: 40px;
+            border: 3px dashed var(--primary);
             margin: 30px 0;
             text-align: center;
+            box-shadow: var(--shadow);
         }
 
         .distance-formula {
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             font-weight: 800;
-            color: var(--accent);
+            color: var(--primary-dark);
             line-height: 1.5;
         }
 
-        /* Coordinate Visual */
-        .coordinate-box {
-            background: var(--gray-100);
-            border-radius: 30px;
-            padding: 40px;
+        .visual-container {
+            display: flex;
+            justify-content: center;
             margin: 30px 0;
         }
 
-        .coordinate-grid {
+        .coordinate-svg {
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            max-width: 100%;
+        }
+
+        /* =========================================
+           8. SIMULATOR - DIPERBAIKI DENGAN VISUAL
+           ========================================= */
+        .simulator-box {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 50px;
+            padding: 50px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .simulator-box::before {
+            content: "📏";
+            position: absolute;
+            font-size: 150px;
+            bottom: -30px;
+            right: -20px;
+            opacity: 0.05;
+            transform: rotate(15deg);
+        }
+
+        .simulator-title {
+            color: var(--primary-light);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 700;
+        }
+
+        .simulator-visual {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 50px;
             flex-wrap: wrap;
+            margin: 40px 0;
         }
 
-        /* Simulator */
-        .simulator-box {
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            color: white;
-            border-radius: 40px;
-            padding: 50px;
-            margin-top: 20px;
+        .graph-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 30px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .simulator-title {
-            color: var(--accent-light);
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .point-input {
+        .points-input {
             display: flex;
             gap: 30px;
             flex-wrap: wrap;
@@ -280,90 +419,259 @@
             margin: 30px 0;
         }
 
-        .point {
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
+        .point-card {
+            background: rgba(255,255,255,0.05);
             border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
             flex: 1;
-            min-width: 200px;
+            min-width: 250px;
+            transition: var(--transition);
         }
 
-        .point h4 {
-            color: var(--accent-light);
+        .point-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .point-card h4 {
+            color: var(--primary-light);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.2rem;
         }
 
-        .coord-input {
+        .coord-row {
             display: flex;
             gap: 15px;
             margin-bottom: 15px;
         }
 
-        .coord-input label {
-            font-size: 0.75rem;
+        .coord-field {
+            flex: 1;
+        }
+
+        .coord-field label {
+            display: block;
+            font-size: 0.7rem;
             text-transform: uppercase;
             color: var(--gray-300);
             margin-bottom: 5px;
-            display: block;
+            letter-spacing: 1px;
         }
 
-        .coord-input input {
+        .coord-field input {
             width: 100%;
             padding: 12px 15px;
-            border-radius: 60px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 40px;
+            border: 2px solid rgba(255,255,255,0.15);
             background: rgba(255,255,255,0.1);
             color: white;
             text-align: center;
             font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .coord-field input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 0 4px rgba(139,92,246,0.2);
         }
 
         .btn-distance {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            padding: 16px 45px;
+            padding: 18px 45px;
             border-radius: 60px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             cursor: pointer;
             transition: var(--transition);
-            margin-top: 20px;
-            width: 100%;
+            margin: 20px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(139,92,246,0.3);
         }
 
         .btn-distance:hover {
-            background: #6d28d9;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(139,92,246,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(139,92,246,0.4);
         }
 
         .distance-result {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
+            background: rgba(255,255,255,0.08);
             border-radius: 60px;
+            padding: 35px;
             margin-top: 30px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
         }
 
         .distance-value {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 800;
-            color: var(--accent-light);
+            color: var(--primary-light);
+            line-height: 1.3;
         }
 
-        /* Pagination Footer */
+        .steps-display {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: var(--gray-300);
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 40px;
+        }
+
+        /* =========================================
+           9. EXAMPLE GRID
+           ========================================= */
+        .example-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .example-card {
+            background: var(--primary-soft);
+            padding: 30px;
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .example-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .example-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .solution-box {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        /* =========================================
+           10. QUIZ SECTION
+           ========================================= */
+        .quiz-container {
+            background: var(--primary-soft);
+            padding: 40px;
+            border-radius: 40px;
+            margin-top: 20px;
+        }
+
+        .quiz-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        .quiz-option-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 14px 30px;
+            border-radius: 60px;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .quiz-option-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .btn-solve {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-solve:hover {
+            background: var(--primary-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(139,92,246,0.3);
+        }
+
+        /* =========================================
+           11. SUMMARY GRID
+           ========================================= */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .summary-card {
+            background: var(--primary-soft);
+            padding: 30px;
+            border-radius: 24px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .summary-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .summary-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* =========================================
+           12. PAGINATION FOOTER
+           ========================================= */
         .page-footer {
             display: flex;
             justify-content: space-between;
-            margin-top: 60px;
+            margin-top: 70px;
             padding-top: 40px;
-            border-top: 2px solid var(--gray-200);
+            border-top: 2px dashed var(--gray-300);
         }
 
         .nav-btn {
@@ -371,34 +679,61 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--white);
-            padding: 14px 32px;
-            border-radius: 60px;
+            background: white;
+            padding: 16px 35px;
+            border-radius: 70px;
             color: var(--dark);
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
             border: 1px solid var(--gray-200);
             box-shadow: var(--shadow-sm);
+            font-size: 1rem;
         }
 
         .nav-btn:hover {
-            background: var(--accent);
+            background: var(--primary);
             color: white;
-            border-color: var(--accent);
+            border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.right:hover {
+            transform: translateX(5px);
         }
 
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 50px 20px;
             color: var(--text-muted);
             border-top: 1px solid var(--gray-200);
+            margin-top: 40px;
+            background: white;
         }
 
+        footer p:last-child {
+            font-style: italic;
+            max-width: 700px;
+            margin: 15px auto 0;
+            opacity: 0.7;
+        }
+
+        /* =========================================
+           13. RESPONSIVE
+           ========================================= */
         @media (max-width: 768px) {
-            .hero-section h1 { font-size: 2rem; }
+            .hero-section h1 { font-size: 2.2rem; }
+            .hero-section p { font-size: 1rem; }
             .content-card { padding: 30px; }
-            .simulator-box { padding: 30px; }
+            .section-title { font-size: 1.6rem; }
             .distance-formula { font-size: 1.8rem; }
+            .simulator-box { padding: 30px; }
+            .simulator-title { font-size: 1.6rem; }
+            .example-grid { grid-template-columns: 1fr; }
+            .quiz-options { flex-direction: column; }
+            .quiz-option-btn { width: 100%; }
+            .page-footer { flex-direction: column; gap: 15px; align-items: center; }
+            .nav-btn { width: 100%; justify-content: center; }
+            .progress-container { top: 60px; }
         }
     </style>
 </head>
@@ -409,7 +744,7 @@
         <a href="bab2-teorema-pythagoras.html" class="back-link">
             <i class="fas fa-arrow-left"></i> Kembali ke Bab 2
         </a>
-        <span class="chapter-badge"><i class="fas fa-arrows-alt"></i> Sub E: Rumus Jarak</span>
+        <span class="chapter-badge"></i> Sub 5: Rumus Jarak</span>
     </div>
 
     <!-- Progress Bar -->
@@ -419,7 +754,7 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <h1>📍 Rumus Jarak (Pengayaan)</h1>
+        <h1>Rumus Jarak (Pengayaan)</h1>
         <p>Menentukan jarak antara dua titik pada bidang koordinat menggunakan Teorema Pythagoras</p>
     </section>
 
@@ -433,7 +768,7 @@
                 <i class="fas fa-film"></i>
                 <h2>Jarak pada Bidang Koordinat</h2>
             </div>
-            <p style="margin-bottom: 20px;">Pelajari cara menghitung jarak antara dua titik menggunakan rumus turunan Pythagoras.</p>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">Pelajari cara menghitung jarak antara dua titik menggunakan rumus turunan Pythagoras.</p>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/0oP6h5z0iWI" title="Rumus Jarak" allowfullscreen></iframe>
             </div>
@@ -447,26 +782,39 @@
                 <h2>Dari Pythagoras ke Rumus Jarak</h2>
             </div>
             
-            <div style="display: flex; justify-content: center; margin-bottom: 30px;">
-                <svg width="300" height="200" viewBox="0 0 300 200">
+            <div class="visual-container">
+                <svg width="400" height="250" viewBox="0 0 400 250" class="coordinate-svg">
                     <!-- Sumbu koordinat -->
-                    <line x1="50" y1="150" x2="250" y2="150" stroke="black" stroke-width="2"/>
-                    <line x1="50" y1="150" x2="50" y2="50" stroke="black" stroke-width="2"/>
+                    <line x1="50" y1="200" x2="350" y2="200" stroke="var(--gray-400)" stroke-width="2"/>
+                    <line x1="50" y1="200" x2="50" y2="50" stroke="var(--gray-400)" stroke-width="2"/>
+                    
+                    <!-- Grid lines -->
+                    <line x1="100" y1="50" x2="100" y2="200" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                    <line x1="150" y1="50" x2="150" y2="200" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                    <line x1="200" y1="50" x2="200" y2="200" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                    <line x1="250" y1="50" x2="250" y2="200" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                    <line x1="300" y1="50" x2="300" y2="200" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                    
+                    <line x1="50" y1="150" x2="350" y2="150" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                    <line x1="50" y1="100" x2="350" y2="100" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
                     
                     <!-- Titik A dan B -->
-                    <circle cx="80" cy="120" r="6" fill="var(--accent)"/>
-                    <text x="90" y="110" fill="var(--accent)" font-weight="bold">A(x₁,y₁)</text>
-                    <circle cx="200" cy="70" r="6" fill="var(--accent)"/>
-                    <text x="210" y="60" fill="var(--accent)" font-weight="bold">B(x₂,y₂)</text>
+                    <circle cx="100" cy="150" r="8" fill="var(--primary)" stroke="white" stroke-width="2"/>
+                    <text x="90" y="130" fill="var(--primary)" font-weight="bold">A(2,3)</text>
+                    
+                    <circle cx="250" cy="80" r="8" fill="var(--accent)" stroke="white" stroke-width="2"/>
+                    <text x="260" y="60" fill="var(--accent)" font-weight="bold">B(5,7)</text>
                     
                     <!-- Garis bantu -->
-                    <line x1="80" y1="120" x2="200" y2="70" stroke="var(--accent)" stroke-width="3" stroke-dasharray="5"/>
-                    <line x1="80" y1="120" x2="200" y2="120" stroke="var(--primary)" stroke-width="2" stroke-dasharray="3"/>
-                    <line x1="200" y1="70" x2="200" y2="120" stroke="var(--primary)" stroke-width="2" stroke-dasharray="3"/>
+                    <line x1="100" y1="150" x2="250" y2="80" stroke="var(--primary)" stroke-width="3" stroke-dasharray="6 3"/>
                     
-                    <text x="140" y="140" fill="var(--primary)">|x₂ - x₁|</text>
-                    <text x="220" y="100" fill="var(--primary)">|y₂ - y₁|</text>
-                    <text x="120" y="60" fill="var(--accent)" font-weight="bold">d = √[(x₂-x₁)² + (y₂-y₁)²]</text>
+                    <line x1="100" y1="150" x2="250" y2="150" stroke="var(--secondary)" stroke-width="2" stroke-dasharray="4 2"/>
+                    <line x1="250" y1="150" x2="250" y2="80" stroke="var(--secondary)" stroke-width="2" stroke-dasharray="4 2"/>
+                    
+                    <text x="170" y="170" fill="var(--secondary)" font-weight="bold">|x₂ - x₁| = 3</text>
+                    <text x="260" y="120" fill="var(--secondary)" font-weight="bold">|y₂ - y₁| = 4</text>
+                    
+                    <text x="150" y="90" fill="var(--primary)" font-weight="bold" font-size="16">d = 5</text>
                 </svg>
             </div>
             
@@ -477,59 +825,72 @@
                 </div>
             </div>
             
-            <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px; margin-top: 20px;">
-                <p style="font-weight: 700; color: #6d28d9;">💡 Catatan:</p>
+            <div style="background: linear-gradient(135deg, var(--primary-soft), white); padding: 25px; border-radius: 20px; margin-top: 20px; border-left: 6px solid var(--primary);">
+                <p style="font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-lightbulb"></i> Catatan Penting:
+                </p>
                 <p>Rumus ini adalah aplikasi langsung dari Teorema Pythagoras. Selisih koordinat x dan y membentuk sisi-sisi tegak segitiga siku-siku, dan jarak adalah sisi miringnya.</p>
             </div>
         </div>
 
-        <!-- Card: Simulator Jarak Interaktif -->
+        <!-- Card: Simulator Jarak Interaktif dengan Visual -->
         <div class="simulator-box">
             <div class="simulator-title">
                 <i class="fas fa-map-marked-alt"></i>
-                <h2 style="color: white; margin: 0;">Kalkulator Jarak Dua Titik</h2>
+                <h2 style="color: white; margin: 0;">Kalkulator Jarak dengan Visual</h2>
             </div>
-            <p style="margin-bottom: 25px; opacity: 0.9;">Masukkan koordinat titik A dan B untuk menghitung jaraknya.</p>
+            <p style="margin-bottom: 25px; opacity: 0.9; font-size: 1.1rem;">Masukkan koordinat titik A dan B untuk melihat visualisasi dan menghitung jaraknya.</p>
             
-            <div class="point-input">
-                <div class="point">
-                    <h4><i class="fas fa-map-pin" style="color: var(--accent-light);"></i> Titik A</h4>
-                    <div class="coord-input">
-                        <div style="flex: 1;">
-                            <label>X₁</label>
-                            <input type="number" id="x1" value="2" step="any">
-                        </div>
-                        <div style="flex: 1;">
-                            <label>Y₁</label>
-                            <input type="number" id="y1" value="3" step="any">
-                        </div>
-                    </div>
+            <div class="simulator-visual">
+                <div class="graph-container">
+                    <svg width="300" height="250" viewBox="0 0 300 250" id="distanceSVG">
+                        <!-- Akan diupdate JavaScript -->
+                    </svg>
                 </div>
                 
-                <div class="point">
-                    <h4><i class="fas fa-map-pin" style="color: var(--accent-light);"></i> Titik B</h4>
-                    <div class="coord-input">
-                        <div style="flex: 1;">
-                            <label>X₂</label>
-                            <input type="number" id="x2" value="5" step="any">
+                <div class="points-input">
+                    <div class="point-card">
+                        <h4><i class="fas fa-map-pin" style="color: var(--primary-light);"></i> Titik A</h4>
+                        <div class="coord-row">
+                            <div class="coord-field">
+                                <label>X₁</label>
+                                <input type="number" id="x1" value="2" step="any" oninput="updateDistanceVisual()">
+                            </div>
+                            <div class="coord-field">
+                                <label>Y₁</label>
+                                <input type="number" id="y1" value="3" step="any" oninput="updateDistanceVisual()">
+                            </div>
                         </div>
-                        <div style="flex: 1;">
-                            <label>Y₂</label>
-                            <input type="number" id="y2" value="7" step="any">
+                    </div>
+                    
+                    <div class="point-card">
+                        <h4><i class="fas fa-map-pin" style="color: var(--accent-light);"></i> Titik B</h4>
+                        <div class="coord-row">
+                            <div class="coord-field">
+                                <label>X₂</label>
+                                <input type="number" id="x2" value="5" step="any" oninput="updateDistanceVisual()">
+                            </div>
+                            <div class="coord-field">
+                                <label>Y₂</label>
+                                <input type="number" id="y2" value="7" step="any" oninput="updateDistanceVisual()">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <button onclick="hitungJarak()" class="btn-distance">
-                <i class="fas fa-ruler"></i> Hitung Jarak
-            </button>
+            <div style="text-align: center;">
+                <button onclick="hitungJarak()" class="btn-distance">
+                    <i class="fas fa-ruler"></i> Hitung Jarak
+                </button>
+            </div>
             
             <div id="jarakResult" class="distance-result">
-                <span style="font-size: 1.1rem; opacity: 0.9;">Jarak antara titik A dan B:</span><br>
                 <span class="distance-value" id="jarakValue">5.66</span>
-                <span style="font-size: 1.1rem; margin-left: 10px;">satuan</span>
-                <p id="jarakSteps" style="margin-top: 15px; font-size: 1rem; opacity: 0.8;"></p>
+                <span style="font-size: 1.3rem;">satuan</span>
+                <div id="jarakSteps" class="steps-display">
+                    √[(5-2)² + (7-3)²] = √(3² + 4²) = √(9 + 16) = √25 = 5.66
+                </div>
             </div>
         </div>
 
@@ -541,21 +902,21 @@
                 <h2>Aplikasi Rumus Jarak</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                <div style="background: var(--gray-100); padding: 30px; border-radius: 20px;">
-                    <p style="font-weight: 700; margin-bottom: 20px; color: var(--accent);">📝 Contoh 1</p>
+            <div class="example-grid">
+                <div class="example-card">
+                    <h4><i class="fas fa-circle"></i> Contoh 1</h4>
                     <p style="margin-bottom: 15px;">Tentukan jarak antara titik P(1, 2) dan Q(4, 6)!</p>
-                    <div style="background: white; padding: 20px; border-radius: 16px;">
+                    <div class="solution-box">
                         <p><strong>Penyelesaian:</strong></p>
                         <p>d = √[(4-1)² + (6-2)²]</p>
                         <p>= √(3² + 4²) = √(9 + 16) = √25 = <strong>5 satuan</strong></p>
                     </div>
                 </div>
                 
-                <div style="background: var(--gray-100); padding: 30px; border-radius: 20px;">
-                    <p style="font-weight: 700; margin-bottom: 20px; color: var(--accent);">📝 Contoh 2</p>
+                <div class="example-card">
+                    <h4><i class="fas fa-circle"></i> Contoh 2</h4>
                     <p style="margin-bottom: 15px;">Jarak antara titik A(-2, 3) dan B(3, -1) adalah...</p>
-                    <div style="background: white; padding: 20px; border-radius: 16px;">
+                    <div class="solution-box">
                         <p><strong>Penyelesaian:</strong></p>
                         <p>d = √[(3-(-2))² + (-1-3)²]</p>
                         <p>= √(5² + (-4)²) = √(25 + 16) = √41 ≈ <strong>6,4 satuan</strong></p>
@@ -572,28 +933,30 @@
                 <h2>Uji Pemahaman</h2>
             </div>
             
-            <div style="background: var(--accent-soft); padding: 30px; border-radius: 20px;">
+            <div class="quiz-container">
                 <p style="font-size: 1.2rem; font-weight: 700; margin-bottom: 20px;">📌 Soal:</p>
                 <p style="font-size: 1.1rem; margin-bottom: 25px;">Sebuah kapal selam berada pada koordinat (2, -5) dan kapal induk berada pada koordinat (-3, 7). Berapa jarak antara kedua kapal tersebut? (satuan dalam km)</p>
                 
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
-                    <button onclick="checkDistanceQuiz(1)" style="background: white; border: 2px solid var(--accent); padding: 12px 25px; border-radius: 60px; font-weight: 600; color: var(--accent);">A. 10 km</button>
-                    <button onclick="checkDistanceQuiz(2)" style="background: white; border: 2px solid var(--accent); padding: 12px 25px; border-radius: 60px; font-weight: 600; color: var(--accent);">B. 12 km</button>
-                    <button onclick="checkDistanceQuiz(3)" style="background: white; border: 2px solid var(--accent); padding: 12px 25px; border-radius: 60px; font-weight: 600; color: var(--accent);">C. 13 km</button>
-                    <button onclick="checkDistanceQuiz(4)" style="background: white; border: 2px solid var(--accent); padding: 12px 25px; border-radius: 60px; font-weight: 600; color: var(--accent);">D. 15 km</button>
+                <div class="quiz-options">
+                    <button onclick="checkDistanceQuiz(1)" class="quiz-option-btn">A. 10 km</button>
+                    <button onclick="checkDistanceQuiz(2)" class="quiz-option-btn">B. 12 km</button>
+                    <button onclick="checkDistanceQuiz(3)" class="quiz-option-btn">C. 13 km</button>
+                    <button onclick="checkDistanceQuiz(4)" class="quiz-option-btn">D. 15 km</button>
                 </div>
                 
-                <div id="distanceQuizFeedback" style="margin-top: 20px; padding: 20px; border-radius: 16px; font-weight: 600; display: none;"></div>
+                <div id="distanceQuizFeedback" class="quiz-feedback"></div>
                 
-                <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 16px; display: none;" id="distancePembahasan">
-                    <p style="font-weight: 700; color: var(--accent);">📝 Pembahasan:</p>
-                    <p>d = √[(-3-2)² + (7-(-5))²] = √[(-5)² + (12)²] = √(25 + 144) = √169 = 13 km</p>
+                <div style="margin-top: 30px; padding: 25px; background: white; border-radius: 24px; display: none; border-left: 6px solid var(--primary);" id="distancePembahasan">
+                    <p style="font-weight: 700; color: var(--primary-dark); margin-bottom: 15px;">📝 Pembahasan:</p>
+                    <p>d = √[(-3-2)² + (7-(-5))²] = √[(-5)² + (12)²] = √(25 + 144) = √169 = <strong>13 km</strong></p>
                     <p style="margin-top: 10px;">Jadi jawaban yang benar adalah <strong>C. 13 km</strong></p>
                 </div>
                 
-                <button onclick="tampilPembahasanJarak()" style="background: var(--accent); color: white; border: none; padding: 12px 30px; border-radius: 60px; font-weight: 700; margin-top: 20px; cursor: pointer;">
-                    <i class="fas fa-lightbulb"></i> Lihat Pembahasan
-                </button>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="tampilPembahasanJarak()" class="btn-solve">
+                        <i class="fas fa-lightbulb"></i> Lihat Pembahasan
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -605,21 +968,27 @@
                 <h2>Intisari Rumus Jarak</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px;">
-                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
-                    <i class="fas fa-arrows-alt-h" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
-                    <h4 style="margin-bottom: 10px;">Selisih Koordinat</h4>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-arrows-alt-h"></i>
+                    </div>
+                    <h4>Selisih Koordinat</h4>
                     <p>Δx = x₂ - x₁<br>Δy = y₂ - y₁</p>
                 </div>
-                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
-                    <i class="fas fa-square-root-alt" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
-                    <h4 style="margin-bottom: 10px;">Rumus Jarak</h4>
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-square-root-alt"></i>
+                    </div>
+                    <h4>Rumus Jarak</h4>
                     <p>d = √[(Δx)² + (Δy)²]</p>
                 </div>
-                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
-                    <i class="fas fa-link" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
-                    <h4 style="margin-bottom: 10px;">Hubungan</h4>
-                    <p>Merupakan aplikasi langsung dari Teorema Pythagoras</p>
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h4>Hubungan</h4>
+                    <p>Aplikasi langsung dari Teorema Pythagoras</p>
                 </div>
             </div>
         </div>
@@ -636,8 +1005,8 @@
     </main>
 
     <footer>
-        <p>© 2024 MathMaster8 - Rumus Jarak (Pengayaan) | Kurikulum Merdeka</p>
-        <p style="margin-top: 8px; opacity: 0.6;">"Matematika adalah seni memberi nama yang berbeda untuk ide yang sama." - Henri Poincaré</p>
+        <p>© 2026 MathMaster - Rumus Jarak (Pengayaan) | Kurikulum Merdeka</p>
+        <p>"Matematika adalah seni memberi nama yang berbeda untuk ide yang sama." - Henri Poincaré</p>
     </footer>
 
     <script>
@@ -649,26 +1018,82 @@
             document.getElementById('progressBar').style.width = scrolled + "%";
         };
 
-        // Fungsi hitung jarak
-        function hitungJarak() {
-            let x1 = parseFloat(document.getElementById('x1').value);
-            let y1 = parseFloat(document.getElementById('y1').value);
-            let x2 = parseFloat(document.getElementById('x2').value);
-            let y2 = parseFloat(document.getElementById('y2').value);
+        // Fungsi untuk update visual grafik
+        function updateDistanceVisual() {
+            let x1 = parseFloat(document.getElementById('x1').value) || 0;
+            let y1 = parseFloat(document.getElementById('y1').value) || 0;
+            let x2 = parseFloat(document.getElementById('x2').value) || 0;
+            let y2 = parseFloat(document.getElementById('y2').value) || 0;
             
-            if (isNaN(x1) || isNaN(y1) || isNaN(x2) || isNaN(y2)) {
-                document.getElementById('jarakValue').innerText = '???';
-                document.getElementById('jarakSteps').innerText = 'Masukkan koordinat yang valid!';
-                return;
-            }
+            // Batasi nilai agar tidak terlalu ekstrem untuk visualisasi
+            x1 = Math.max(-5, Math.min(10, x1));
+            y1 = Math.max(-5, Math.min(10, y1));
+            x2 = Math.max(-5, Math.min(10, x2));
+            y2 = Math.max(-5, Math.min(10, y2));
+            
+            // Konversi ke koordinat SVG (150,200) sebagai pusat, skala 15 per unit
+            let scale = 15;
+            let centerX = 150;
+            let centerY = 120;
+            
+            let svgX1 = centerX + x1 * scale;
+            let svgY1 = centerY - y1 * scale;
+            let svgX2 = centerX + x2 * scale;
+            let svgY2 = centerY - y2 * scale;
             
             let dx = x2 - x1;
             let dy = y2 - y1;
             let distance = Math.sqrt(dx*dx + dy*dy);
             
+            // Update SVG
+            let svg = document.getElementById('distanceSVG');
+            svg.innerHTML = `
+                <!-- Sumbu koordinat -->
+                <line x1="50" y1="${centerY}" x2="250" y2="${centerY}" stroke="var(--gray-400)" stroke-width="2"/>
+                <line x1="${centerX}" y1="20" x2="${centerX}" y2="200" stroke="var(--gray-400)" stroke-width="2"/>
+                
+                <!-- Grid -->
+                <line x1="${centerX - scale}" y1="20" x2="${centerX - scale}" y2="200" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                <line x1="${centerX + scale}" y1="20" x2="${centerX + scale}" y2="200" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                <line x1="${centerX - 2*scale}" y1="20" x2="${centerX - 2*scale}" y2="200" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                <line x1="${centerX + 2*scale}" y1="20" x2="${centerX + 2*scale}" y2="200" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                
+                <line x1="50" y1="${centerY - scale}" x2="250" y2="${centerY - scale}" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                <line x1="50" y1="${centerY + scale}" x2="250" y2="${centerY + scale}" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                <line x1="50" y1="${centerY - 2*scale}" x2="250" y2="${centerY - 2*scale}" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                <line x1="50" y1="${centerY + 2*scale}" x2="250" y2="${centerY + 2*scale}" stroke="var(--gray-200)" stroke-width="1" stroke-dasharray="3"/>
+                
+                <!-- Titik A dan B -->
+                <circle cx="${svgX1}" cy="${svgY1}" r="8" fill="var(--primary)" stroke="white" stroke-width="2"/>
+                <text x="${svgX1 + 10}" y="${svgY1 - 10}" fill="var(--primary)" font-weight="bold" font-size="12">A(${x1},${y1})</text>
+                
+                <circle cx="${svgX2}" cy="${svgY2}" r="8" fill="var(--accent)" stroke="white" stroke-width="2"/>
+                <text x="${svgX2 + 10}" y="${svgY2 - 10}" fill="var(--accent)" font-weight="bold" font-size="12">B(${x2},${y2})</text>
+                
+                <!-- Garis jarak -->
+                <line x1="${svgX1}" y1="${svgY1}" x2="${svgX2}" y2="${svgY2}" stroke="var(--primary)" stroke-width="3" stroke-dasharray="6 3"/>
+                
+                <!-- Garis bantu horizontal/vertikal -->
+                <line x1="${svgX1}" y1="${svgY1}" x2="${svgX2}" y2="${svgY1}" stroke="var(--secondary)" stroke-width="2" stroke-dasharray="4 2"/>
+                <line x1="${svgX2}" y1="${svgY1}" x2="${svgX2}" y2="${svgY2}" stroke="var(--secondary)" stroke-width="2" stroke-dasharray="4 2"/>
+                
+                <!-- Label selisih -->
+                <text x="${(svgX1 + svgX2)/2}" y="${svgY1 - 10}" fill="var(--secondary)" font-weight="bold" font-size="11">|${dx}|</text>
+                <text x="${svgX2 + 10}" y="${(svgY1 + svgY2)/2}" fill="var(--secondary)" font-weight="bold" font-size="11">|${dy}|</text>
+                
+                <!-- Label jarak -->
+                <text x="${(svgX1 + svgX2)/2 - 20}" y="${(svgY1 + svgY2)/2 - 15}" fill="var(--primary)" font-weight="bold" font-size="14">d = ${distance.toFixed(2)}</text>
+            `;
+            
+            // Update nilai jarak
             document.getElementById('jarakValue').innerText = distance.toFixed(2);
             document.getElementById('jarakSteps').innerHTML = 
                 `√[(${x2} - ${x1})² + (${y2} - ${y1})²] = √(${dx}² + ${dy}²) = √(${dx*dx} + ${dy*dy}) = √${(dx*dx + dy*dy)} = ${distance.toFixed(2)}`;
+        }
+
+        // Fungsi hitung jarak
+        function hitungJarak() {
+            updateDistanceVisual();
         }
 
         // Fungsi kuis jarak
@@ -678,11 +1103,11 @@
             
             if (answer === 3) {
                 fb.innerHTML = '✅ Benar! Jarak = 13 km.';
-                fb.style.background = '#dcfce7';
+                fb.style.background = 'var(--success-soft)';
                 fb.style.color = '#166534';
             } else {
                 fb.innerHTML = '❌ Salah. Coba hitung lagi dengan rumus jarak.';
-                fb.style.background = '#fee2e2';
+                fb.style.background = 'var(--danger-soft)';
                 fb.style.color = '#b91c1c';
             }
         }
@@ -695,11 +1120,17 @@
 
         // Inisialisasi
         window.onload = function() {
-            hitungJarak();
+            updateDistanceVisual();
             if (window.MathJax) {
                 MathJax.typeset();
             }
         };
+
+        // Update saat input berubah
+        document.getElementById('x1').addEventListener('input', updateDistanceVisual);
+        document.getElementById('y1').addEventListener('input', updateDistanceVisual);
+        document.getElementById('x2').addEventListener('input', updateDistanceVisual);
+        document.getElementById('y2').addEventListener('input', updateDistanceVisual);
     </script>
 </body>
 </html>

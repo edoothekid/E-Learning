@@ -2,83 +2,158 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis Bab 2: Teorema Pythagoras | MathMaster8</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Kuis Bab 2: Teorema Pythagoras | MathMaster</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            chtml: {
+                scale: 1.2,
+                minScale: 0.8
+            }
+        };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
         /* =========================================
-           CSS SAMA PERSIS DENGAN KUIS BAB 1
-           (WARNA PRIMARY UNTUK BAB 2)
+           1. VARIABLES & CORE STYLING - UNGU PREMIUM
            ========================================= */
         :root {
-            --primary: #0d9488;
-            --primary-light: #14b8a6;
-            --primary-soft: #ccfbf1;
-            --primary-dark: #0f766e;
-            --accent: #f59e0b;
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --primary-soft: #ede9fe;
+            --primary-dark: #6d28d9;
+            --accent: #ec4899;
+            --accent-light: #f472b6;
+            --accent-soft: #fce7f3;
             --success: #22c55e;
+            --success-soft: #dcfce7;
             --danger: #ef4444;
+            --danger-soft: #fee2e2;
+            --warning: #f59e0b;
+            --warning-soft: #fff3cd;
             --dark: #0f172a;
             --text-main: #334155;
             --text-muted: #64748b;
+            --text-light: #94a3b8;
             --bg-page: #f8fafc;
             --white: #ffffff;
+            --gray-50: #f8fafc;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
             --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
-            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --shadow-md: 0 15px 35px -10px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px -15px rgba(139,92,246,0.2);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
+            --border-radius-xl: 40px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background: linear-gradient(145deg, var(--primary-dark) 0%, #1e293b 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body::before {
+            content: "📐 △ □";
+            position: absolute;
+            font-size: 150px;
+            top: 5%;
+            left: 5%;
+            color: rgba(255,255,255,0.02);
+            transform: rotate(-15deg);
+            white-space: nowrap;
+            font-family: 'Times New Roman', serif;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "a² + b² = c²";
+            position: absolute;
+            font-size: 120px;
+            bottom: 5%;
+            right: 5%;
+            color: rgba(255,255,255,0.02);
+            transform: rotate(10deg);
+            font-family: 'Times New Roman', serif;
+            pointer-events: none;
         }
 
         .quiz-container {
             background: var(--white);
             width: 100%;
-            max-width: 900px;
-            border-radius: var(--border-radius-lg);
-            padding: 45px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            max-width: 1000px;
+            border-radius: var(--border-radius-xl);
+            padding: 50px;
+            box-shadow: var(--shadow-xl);
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            z-index: 10;
         }
 
         .quiz-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 100% 0%, rgba(139,92,246,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .quiz-container::after {
             content: "📐";
             position: absolute;
-            font-size: 180px;
-            bottom: -40px;
+            font-size: 200px;
+            bottom: -50px;
             right: -30px;
             opacity: 0.03;
             transform: rotate(15deg);
+            font-family: 'Times New Roman', serif;
+            pointer-events: none;
         }
 
-        /* START SCREEN */
-        #start-screen {
-            text-align: center;
+        #start-screen, #quiz-screen, #result-screen {
             position: relative;
             z-index: 10;
         }
@@ -87,54 +162,75 @@
             font-size: 4.5rem;
             color: var(--primary);
             margin-bottom: 25px;
-            background: var(--primary-soft);
-            width: 120px;
-            height: 120px;
+            background: linear-gradient(135deg, var(--primary-soft), white);
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 25px;
             box-shadow: var(--shadow-lg);
+            border: 4px solid white;
+            transition: var(--transition);
+        }
+
+        .quiz-icon:hover {
+            transform: rotate(5deg) scale(1.05);
         }
 
         #start-screen h1 {
-            font-size: 2.5rem;
-            color: var(--dark);
+            font-size: 2.8rem;
             margin-bottom: 15px;
             font-weight: 800;
             letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.3;
         }
 
         .quiz-info {
-            background: var(--gray-100);
-            padding: 25px;
+            background: linear-gradient(135deg, var(--gray-100), white);
+            padding: 30px;
             border-radius: var(--border-radius);
-            margin: 30px 0;
+            margin: 35px 0;
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 25px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow);
         }
 
         .info-item {
             display: flex;
             align-items: center;
             gap: 12px;
+            font-weight: 600;
+            color: var(--text-main);
+            background: white;
+            padding: 10px 25px;
+            border-radius: 60px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .info-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
         }
 
         .info-item i {
-            font-size: 1.5rem;
             color: var(--primary);
-        }
-
-        .info-item span {
-            font-weight: 700;
-            color: var(--dark);
+            font-size: 1.2rem;
         }
 
         .btn {
-            padding: 16px 40px;
+            padding: 16px 45px;
             border-radius: 60px;
             border: none;
             font-weight: 700;
@@ -142,30 +238,33 @@
             cursor: pointer;
             transition: var(--transition);
             box-shadow: var(--shadow);
+            -webkit-tap-highlight-color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
         }
 
         .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(13,148,136,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px rgba(139,92,246,0.3);
         }
 
         .btn-secondary {
-            background: var(--gray-200);
+            background: linear-gradient(135deg, var(--gray-200), var(--gray-300));
             color: var(--dark);
         }
 
         .btn-secondary:hover {
-            background: var(--gray-300);
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
         }
 
-        /* QUIZ SCREEN */
         #quiz-screen {
             display: none;
         }
@@ -176,64 +275,84 @@
             align-items: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 2px solid var(--gray-100);
+            border-bottom: 2px dashed var(--gray-200);
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .timer-box {
-            background: var(--gray-100);
-            padding: 10px 20px;
+        .timer-box, .question-counter {
+            padding: 12px 25px;
             border-radius: 60px;
             font-weight: 700;
-            color: var(--primary-dark);
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timer-box {
+            background: linear-gradient(135deg, var(--gray-100), white);
+            color: var(--primary-dark);
+            border: 1px solid var(--primary-soft);
         }
 
         .timer-box i {
-            color: var(--accent);
+            color: var(--primary);
+            animation: pulse 2s infinite;
         }
 
         .question-counter {
-            background: var(--primary-soft);
-            padding: 10px 20px;
-            border-radius: 60px;
-            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-soft), white);
             color: var(--primary-dark);
+            border: 1px solid var(--primary-light);
         }
 
         .progress-bar-wrap {
             width: 100%;
-            height: 10px;
+            height: 12px;
             background: var(--gray-100);
-            border-radius: 10px;
-            margin-bottom: 30px;
+            border-radius: 20px;
+            margin-bottom: 35px;
             overflow: hidden;
+            border: 1px solid var(--gray-200);
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--accent));
             width: 0%;
-            transition: var(--transition);
-            border-radius: 10px;
+            transition: width 0.4s ease;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .question-area {
-            margin-bottom: 30px;
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 1.5s infinite;
         }
 
         .question-text {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--dark);
-            margin-bottom: 35px;
+            margin-bottom: 40px;
             font-weight: 700;
             line-height: 1.5;
-            padding: 20px;
-            background: var(--primary-soft);
-            border-radius: 20px;
+            padding: 25px 30px;
+            background: linear-gradient(135deg, var(--primary-soft), white);
+            border-radius: 24px;
             border-left: 8px solid var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .question-text mjx-container {
+            font-size: 1.6rem !important;
         }
 
         .options-grid {
@@ -242,17 +361,29 @@
             gap: 20px;
         }
 
+        @media (max-width: 768px) {
+            .quiz-container { padding: 35px 25px; }
+            #start-screen h1 { font-size: 2.2rem; }
+            .question-text { font-size: 1.3rem; padding: 20px; }
+            .options-grid { grid-template-columns: 1fr; }
+            .quiz-footer { flex-direction: column; gap: 20px; }
+            .btn-next { width: 100%; justify-content: center; }
+            .btn-group { flex-direction: column; }
+            .btn-group .btn { width: 100%; }
+        }
+
         @media (max-width: 600px) {
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
+            .quiz-container { padding: 25px 20px; }
+            #start-screen h1 { font-size: 1.9rem; }
+            .quiz-info { padding: 20px; }
+            .info-item { width: 100%; justify-content: center; }
         }
 
         .option {
-            background: var(--white);
+            background: white;
             border: 2px solid var(--gray-200);
-            padding: 20px 25px;
-            border-radius: 16px;
+            padding: 22px 25px;
+            border-radius: 20px;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
@@ -260,118 +391,149 @@
             gap: 20px;
             font-weight: 600;
             font-size: 1.1rem;
+            -webkit-tap-highlight-color: transparent;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0;
+            transition: var(--transition);
         }
 
         .option:hover {
             border-color: var(--primary);
-            background: var(--primary-soft);
+            background: linear-gradient(135deg, white, var(--primary-soft));
             transform: translateY(-3px);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-md);
+        }
+
+        .option:hover::before {
+            opacity: 1;
         }
 
         .option.selected {
             border-color: var(--primary);
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .option.selected::before {
+            opacity: 1;
+            background: white;
+        }
+
+        .option.selected .option-letter {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
         }
 
         .option-letter {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: var(--gray-100);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: var(--dark);
             flex-shrink: 0;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
         }
 
-        .selected .option-letter {
-            background: rgba(255,255,255,0.2);
+        .option:hover .option-letter {
+            background: var(--primary);
             color: white;
+            transform: scale(1.05);
         }
 
         .quiz-footer {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
-            margin-top: 40px;
-        }
-
-        #feedback {
-            font-weight: 700;
-            font-size: 1.1rem;
-            padding: 12px 25px;
-            border-radius: 60px;
-            background: var(--gray-100);
+            margin-top: 45px;
+            padding-top: 25px;
+            border-top: 2px dashed var(--gray-200);
         }
 
         .btn-next {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 14px 40px;
+            padding: 16px 45px;
             border-radius: 60px;
             border: none;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            box-shadow: var(--shadow);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-next:hover:not(:disabled) {
-            background: var(--primary-dark);
-            transform: translateX(5px);
-            box-shadow: var(--shadow);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px rgba(139,92,246,0.3);
         }
 
         .btn-next:disabled {
-            background: var(--gray-300);
+            background: linear-gradient(135deg, var(--gray-300), var(--gray-400));
             cursor: not-allowed;
+            opacity: 0.5;
             transform: none;
-            opacity: 0.6;
+            box-shadow: none;
+            pointer-events: none;
         }
 
-        /* RESULT SCREEN */
         #result-screen {
             display: none;
             text-align: center;
         }
 
         .result-icon {
-            font-size: 4rem;
-            color: var(--accent);
+            font-size: 5rem;
+            color: var(--primary);
             margin-bottom: 20px;
-        }
-
-        #result-screen h2 {
-            font-size: 2.2rem;
-            color: var(--dark);
-            margin-bottom: 15px;
-            font-weight: 800;
+            animation: bounce 2s infinite;
         }
 
         .score-circle {
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            background: linear-gradient(145deg, var(--primary-soft), white);
+            background: linear-gradient(135deg, var(--primary-soft), white);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin: 30px auto;
-            box-shadow: var(--shadow-lg);
+            margin: 35px auto;
+            box-shadow: var(--shadow-xl);
             border: 6px solid white;
+            transition: var(--transition);
+        }
+
+        .score-circle:hover {
+            transform: scale(1.05);
         }
 
         .score-number {
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             font-weight: 800;
             color: var(--primary-dark);
             line-height: 1;
@@ -379,54 +541,82 @@
 
         .score-label {
             font-size: 0.9rem;
-            font-weight: 700;
             color: var(--text-muted);
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .stats-box {
-            background: var(--gray-100);
-            padding: 25px;
+            background: linear-gradient(135deg, var(--gray-100), white);
+            padding: 30px;
             border-radius: var(--border-radius);
-            margin: 30px 0;
+            margin: 35px 0;
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             gap: 20px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow);
         }
 
         .stat-item {
             text-align: center;
+            min-width: 100px;
         }
 
         .stat-value {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--primary-dark);
+            line-height: 1.2;
         }
 
         .stat-label {
-            font-size: 0.8rem;
             color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .review-section {
             text-align: left;
-            max-height: 400px;
+            max-height: 450px;
             overflow-y: auto;
-            padding-right: 10px;
+            padding-right: 15px;
             margin: 30px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--gray-200);
+        }
+
+        .review-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .review-section::-webkit-scrollbar-track {
+            background: var(--gray-200);
+            border-radius: 10px;
+        }
+
+        .review-section::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
         }
 
         .review-card {
-            background: var(--gray-100);
+            background: linear-gradient(135deg, var(--gray-100), white);
             padding: 25px;
-            border-radius: 20px;
-            margin-bottom: 20px;
+            border-radius: 24px;
+            margin-bottom: 25px;
             border-left: 6px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .review-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
         }
 
         .review-card.correct {
@@ -439,66 +629,84 @@
 
         .review-question {
             font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--dark);
+            margin-bottom: 15px;
             font-size: 1.1rem;
+            color: var(--dark);
         }
 
         .review-answer {
             display: flex;
             gap: 20px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--gray-200);
+        }
+
+        .review-answer > div {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 15px;
+            border-radius: 16px;
+            border: 1px solid var(--gray-200);
         }
 
         .badge-correct {
             background: var(--success);
             color: white;
-            padding: 4px 14px;
+            padding: 4px 16px;
             border-radius: 60px;
             font-size: 0.75rem;
             font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: inline-block;
         }
 
         .badge-wrong {
             background: var(--danger);
             color: white;
-            padding: 4px 14px;
+            padding: 4px 16px;
             border-radius: 60px;
             font-size: 0.75rem;
             font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: inline-block;
         }
 
         .explanation {
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
+            background: linear-gradient(135deg, white, var(--gray-50));
+            padding: 18px;
+            border-radius: 18px;
             margin-top: 15px;
-            font-size: 0.95rem;
             border: 1px solid var(--gray-200);
+            font-size: 0.95rem;
+        }
+
+        .explanation i {
+            color: var(--primary);
+            margin-right: 8px;
         }
 
         .btn-group {
             display: flex;
             gap: 15px;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 35px;
             flex-wrap: wrap;
         }
 
-        .review-section::-webkit-scrollbar {
-            width: 6px;
+        .info-note {
+            background: linear-gradient(135deg, var(--primary-soft), white);
+            padding: 15px 25px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0 10px;
+            border: 1px solid var(--primary);
+            color: var(--primary-dark);
+            font-weight: 600;
         }
 
-        .review-section::-webkit-scrollbar-thumb {
-            background: var(--gray-300);
-            border-radius: 10px;
+        .info-note i {
+            font-size: 1.2rem;
         }
 
         @keyframes fadeIn {
@@ -506,28 +714,36 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .animate {
-            animation: fadeIn 0.6s ease forwards;
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
-        @media (max-width: 600px) {
-            .quiz-container { padding: 30px 20px; }
-            #start-screen h1 { font-size: 2rem; }
-            .question-text { font-size: 1.2rem; }
-            .option { padding: 15px; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .animate {
+            animation: fadeIn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
         }
     </style>
 </head>
 <body>
-
     <div class="quiz-container">
         <!-- START SCREEN -->
-        <div id="start-screen">
+        <div id="start-screen" style="display: block;">
             <div class="quiz-icon animate">
                 <i class="fas fa-draw-polygon"></i>
             </div>
             <h1 class="animate">Kuis Teorema Pythagoras</h1>
-            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 25px;" class="animate">
+            <p style="color: var(--text-muted); font-size: 1.15rem; margin-bottom: 25px;" class="animate">
                 Uji pemahamanmu tentang Teorema Pythagoras, Tripel, dan Penerapannya!
             </p>
             
@@ -550,19 +766,24 @@
                 </div>
             </div>
             
+            <div class="info-note animate" style="animation-delay: 0.15s;">
+                <i class="fas fa-lightbulb"></i>
+                <span>Pembahasan akan ditampilkan di akhir kuis. Selamat mengerjakan!</span>
+            </div>
+            
             <button class="btn btn-primary animate" style="animation-delay: 0.2s;" id="startQuizBtn">
                 <i class="fas fa-play-circle"></i> Mulai Kuis
             </button>
         </div>
         
         <!-- QUIZ SCREEN -->
-        <div id="quiz-screen">
+        <div id="quiz-screen" style="display: none;">
             <div class="quiz-header">
                 <div class="timer-box">
                     <i class="fas fa-hourglass-half"></i> <span id="time-left">15:00</span>
                 </div>
                 <div class="question-counter">
-                    <span id="current-q-num">1</span>/10
+                    <i class="fas fa-clipboard-list"></i> <span id="current-q-num">1</span>/10
                 </div>
             </div>
             
@@ -576,7 +797,6 @@
             </div>
             
             <div class="quiz-footer">
-                <div id="feedback"></div>
                 <button class="btn-next" id="next-btn" disabled>
                     Selanjutnya <i class="fas fa-arrow-right"></i>
                 </button>
@@ -584,7 +804,7 @@
         </div>
         
         <!-- RESULT SCREEN -->
-        <div id="result-screen">
+        <div id="result-screen" style="display: none;">
             <div class="result-icon animate">
                 <i class="fas fa-trophy"></i>
             </div>
@@ -613,8 +833,8 @@
                 </div>
             </div>
             
-            <h3 style="text-align: left; margin-bottom: 15px; font-size: 1.3rem;" class="animate" style="animation-delay: 0.4s;">
-                <i class="fas fa-clipboard-list"></i> Tinjauan Jawaban
+            <h3 style="text-align: left; margin-bottom: 20px; font-size: 1.4rem; display: flex; align-items: center; gap: 10px;" class="animate" style="animation-delay: 0.4s;">
+                <i class="fas fa-clipboard-list" style="color: var(--primary);"></i> Tinjauan Jawaban & Pembahasan
             </h3>
             
             <div class="review-section animate" style="animation-delay: 0.5s;" id="review-container"></div>
@@ -702,44 +922,108 @@
         // =========================================
         let currentQuestionIndex = 0;
         let userAnswers = [];
-        let timer;
-        let timeLeft = 900;
+        let timer = null;
+        let timeLeft = 900; // 15 menit = 900 detik
+        let timerInterval = null;
 
         // =========================================
-        // INISIALISASI EVENT LISTENER
+        // FUNGSI-FUNGSI UTAMA
         // =========================================
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('startQuizBtn').addEventListener('click', startQuiz);
-            document.getElementById('next-btn').addEventListener('click', nextQuestion);
-            document.getElementById('restartBtn').addEventListener('click', restartQuiz);
-            document.getElementById('backToBabBtn').addEventListener('click', goToBab);
+        
+        // Fungsi inisialisasi - dipanggil setelah halaman siap
+        function initializeQuiz() {
+            console.log("Initialize Quiz Bab 2");
             
+            // Setup array jawaban
             userAnswers = new Array(questionsBank.length).fill(null);
+            
+            // Setup event listeners
+            const startBtn = document.getElementById('startQuizBtn');
+            if (startBtn) {
+                startBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    startQuiz();
+                });
+            }
+            
+            const nextBtn = document.getElementById('next-btn');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    nextQuestion();
+                });
+            }
+            
+            const restartBtn = document.getElementById('restartBtn');
+            if (restartBtn) {
+                restartBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    restartQuiz();
+                });
+            }
+            
+            const backBtn = document.getElementById('backToBabBtn');
+            if (backBtn) {
+                backBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = 'bab2-teorema-pythagoras.html';
+                });
+            }
+            
+            // Tampilkan start screen
+            showStartScreen();
+            
+            // Trigger MathJax untuk merender soal
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        }
+
+        function showStartScreen() {
             document.getElementById('start-screen').style.display = 'block';
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'none';
-        });
+        }
 
         function startQuiz() {
+            console.log("Start Quiz");
+            
+            // Reset semua variabel
             currentQuestionIndex = 0;
             userAnswers = new Array(questionsBank.length).fill(null);
             timeLeft = 900;
             
+            // Stop timer jika ada
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            // Update timer display
             updateTimerDisplay();
             
+            // Tampilkan layar quiz
             document.getElementById('start-screen').style.display = 'none';
             document.getElementById('quiz-screen').style.display = 'block';
             document.getElementById('result-screen').style.display = 'none';
             
+            // Tampilkan soal pertama
             showQuestion();
+            
+            // Mulai timer
             startTimer();
         }
 
         function showQuestion() {
+            console.log("Show Question:", currentQuestionIndex + 1);
+            
             const q = questionsBank[currentQuestionIndex];
+            
+            // Tampilkan teks soal
             document.getElementById('question-text').innerHTML = 
                 (currentQuestionIndex + 1) + ". " + q.question;
             
+            // Render opsi jawaban
             const optionsContainer = document.getElementById('options-container');
             optionsContainer.innerHTML = '';
             
@@ -747,6 +1031,7 @@
                 const optionDiv = document.createElement('div');
                 optionDiv.className = 'option';
                 
+                // Jika sudah pernah menjawab, tampilkan jawaban yang dipilih
                 if (userAnswers[currentQuestionIndex] === index) {
                     optionDiv.classList.add('selected');
                 }
@@ -756,8 +1041,10 @@
                     <span>${opt}</span>
                 `;
                 
+                // Gunakan closure untuk menyimpan index
                 optionDiv.addEventListener('click', (function(idx) {
-                    return function() {
+                    return function(e) {
+                        e.preventDefault();
                         selectOption(idx);
                     };
                 })(index));
@@ -765,38 +1052,53 @@
                 optionsContainer.appendChild(optionDiv);
             });
             
+            // Update nomor soal
             document.getElementById('current-q-num').innerText = currentQuestionIndex + 1;
-            const progress = (currentQuestionIndex / questionsBank.length) * 100;
+            
+            // Update progress bar
+            const progress = ((currentQuestionIndex + 1) / questionsBank.length) * 100;
             document.getElementById('progress-fill').style.width = progress + '%';
             
+            // Update tombol next
             updateNextButton();
-            document.getElementById('feedback').innerHTML = '';
+            
+            // Trigger MathJax untuk merender soal baru
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
         }
 
         function selectOption(index) {
+            console.log("Select Option:", index);
+            
+            // Hapus class selected dari semua opsi
             const options = document.querySelectorAll('.option');
             options.forEach(opt => opt.classList.remove('selected'));
-            options[index].classList.add('selected');
             
-            userAnswers[currentQuestionIndex] = index;
-            updateNextButton();
-            
-            const q = questionsBank[currentQuestionIndex];
-            if (index === q.answer) {
-                document.getElementById('feedback').innerHTML = '✅ Jawaban benar!';
-                document.getElementById('feedback').style.color = 'var(--success)';
-            } else {
-                document.getElementById('feedback').innerHTML = '❌ Jawaban salah!';
-                document.getElementById('feedback').style.color = 'var(--danger)';
+            // Tambah class selected ke opsi yang dipilih
+            if (options[index]) {
+                options[index].classList.add('selected');
             }
+            
+            // Simpan jawaban user
+            userAnswers[currentQuestionIndex] = index;
+            
+            // Update tombol next
+            updateNextButton();
         }
 
         function updateNextButton() {
             const nextBtn = document.getElementById('next-btn');
-            nextBtn.disabled = (userAnswers[currentQuestionIndex] === null || userAnswers[currentQuestionIndex] === undefined);
+            // Cek apakah user sudah menjawab soal ini
+            const hasAnswered = userAnswers[currentQuestionIndex] !== null && 
+                              userAnswers[currentQuestionIndex] !== undefined;
+            nextBtn.disabled = !hasAnswered;
+            console.log("Next button enabled:", hasAnswered);
         }
 
         function nextQuestion() {
+            console.log("Next Question - Current:", currentQuestionIndex);
+            
             if (currentQuestionIndex < questionsBank.length - 1) {
                 currentQuestionIndex++;
                 showQuestion();
@@ -806,13 +1108,14 @@
         }
 
         function startTimer() {
-            clearInterval(timer);
-            timer = setInterval(() => {
+            timerInterval = setInterval(() => {
                 if (timeLeft > 0) {
                     timeLeft--;
                     updateTimerDisplay();
                 } else {
-                    clearInterval(timer);
+                    // Waktu habis
+                    clearInterval(timerInterval);
+                    timerInterval = null;
                     finishQuiz();
                 }
             }, 1000);
@@ -823,27 +1126,53 @@
             let seconds = timeLeft % 60;
             document.getElementById('time-left').innerHTML = 
                 `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            
+            // Peringatan jika waktu tinggal 5 menit
+            if (timeLeft === 300) {
+                const timerBox = document.querySelector('.timer-box');
+                timerBox.style.background = 'linear-gradient(135deg, var(--warning-soft), white)';
+                timerBox.style.color = 'var(--warning)';
+                timerBox.style.borderColor = 'var(--warning)';
+            } else if (timeLeft === 60) {
+                const timerBox = document.querySelector('.timer-box');
+                timerBox.style.background = 'linear-gradient(135deg, var(--danger-soft), white)';
+                timerBox.style.color = 'var(--danger)';
+                timerBox.style.borderColor = 'var(--danger)';
+            }
         }
 
         function finishQuiz() {
-            clearInterval(timer);
+            console.log("Finish Quiz");
+            
+            // Hentikan timer
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            // Sembunyikan quiz screen, tampilkan result screen
             document.getElementById('quiz-screen').style.display = 'none';
             document.getElementById('result-screen').style.display = 'block';
             
+            // Hitung jumlah jawaban benar
             let correct = 0;
             for (let i = 0; i < questionsBank.length; i++) {
-                if (userAnswers[i] === questionsBank[i].answer) correct++;
+                if (userAnswers[i] === questionsBank[i].answer) {
+                    correct++;
+                }
             }
             
             let wrong = questionsBank.length - correct;
             let accuracy = Math.round((correct / questionsBank.length) * 100);
             let score = correct * 10;
             
+            // Tampilkan skor
             document.getElementById('final-score').innerText = score;
             document.getElementById('correct-count').innerText = correct;
             document.getElementById('wrong-count').innerText = wrong;
             document.getElementById('accuracy').innerText = accuracy + '%';
             
+            // Tampilkan pesan berdasarkan skor
             let message, submessage;
             if (score >= 80) {
                 message = "🎉 Luar Biasa!";
@@ -859,7 +1188,13 @@
             document.getElementById('congrats-message').innerText = message;
             document.getElementById('result-submessage').innerText = submessage;
             
+            // Tampilkan review jawaban
             displayReview();
+            
+            // Trigger MathJax
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
         }
 
         function displayReview() {
@@ -869,58 +1204,78 @@
             questionsBank.forEach((q, i) => {
                 const userAnswer = userAnswers[i];
                 const isCorrect = userAnswer === q.answer;
-                const userAnswerText = userAnswer !== null ? q.options[userAnswer] : 'Tidak dijawab';
+                const userAnswerText = userAnswer !== null && userAnswer !== undefined 
+                    ? q.options[userAnswer] 
+                    : '<span style="color: var(--danger);">Tidak dijawab</span>';
                 const correctAnswerText = q.options[q.answer];
                 
                 const reviewCard = document.createElement('div');
                 reviewCard.className = `review-card ${isCorrect ? 'correct' : 'incorrect'}`;
+                
                 reviewCard.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <span style="font-weight: 800; background: var(--gray-200); padding: 5px 15px; border-radius: 60px; font-size: 0.8rem;">
-                            Soal ${i + 1}
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <span style="font-weight: 800; background: var(--gray-200); padding: 6px 18px; border-radius: 60px; font-size: 0.8rem;">
+                            <i class="fas fa-question"></i> Soal ${i + 1}
                         </span>
                         <span class="${isCorrect ? 'badge-correct' : 'badge-wrong'}">
-                            ${isCorrect ? '✓ Benar' : '✗ Salah'}
+                            ${isCorrect ? '<i class="fas fa-check"></i> Benar' : '<i class="fas fa-times"></i> Salah'}
                         </span>
                     </div>
                     <div class="review-question">${q.question}</div>
                     <div class="review-answer">
-                        <div style="flex: 1;">
-                            <span style="font-weight: 600; color: var(--text-muted);">Jawabanmu:</span><br>
-                            <span style="font-weight: 700; ${isCorrect ? 'color: var(--success);' : 'color: var(--danger);'}">
+                        <div>
+                            <span style="font-weight: 600; color: var(--text-muted);"><i class="fas fa-pencil-alt"></i> Jawabanmu:</span><br>
+                            <span style="font-weight: 700; ${isCorrect ? 'color: var(--success);' : 'color: var(--danger);'} font-size: 1.1rem;">
                                 ${userAnswerText}
                             </span>
                         </div>
-                        <div style="flex: 1;">
-                            <span style="font-weight: 600; color: var(--text-muted);">Jawaban Benar:</span><br>
-                            <span style="font-weight: 700; color: var(--primary-dark);">
+                        <div>
+                            <span style="font-weight: 600; color: var(--text-muted);"><i class="fas fa-check-circle"></i> Jawaban Benar:</span><br>
+                            <span style="font-weight: 700; color: var(--primary-dark); font-size: 1.1rem;">
                                 ${correctAnswerText}
                             </span>
                         </div>
                     </div>
                     <div class="explanation">
-                        <span style="font-weight: 700; color: var(--primary-dark);"><i class="fas fa-lightbulb"></i> Pembahasan:</span>
-                        <p style="margin-top: 8px;">${q.explanation}</p>
+                        <span style="font-weight: 700; color: var(--primary-dark);"><i class="fas fa-lightbulb" style="color: var(--primary);"></i> Pembahasan:</span>
+                        <p style="margin-top: 10px; line-height: 1.6;">${q.explanation}</p>
                     </div>
                 `;
+                
                 reviewContainer.appendChild(reviewCard);
             });
         }
 
         function restartQuiz() {
+            console.log("Restart Quiz");
+            
+            // Reset semua variabel
             currentQuestionIndex = 0;
             userAnswers = new Array(questionsBank.length).fill(null);
             timeLeft = 900;
             
-            document.getElementById('start-screen').style.display = 'block';
-            document.getElementById('quiz-screen').style.display = 'none';
-            document.getElementById('result-screen').style.display = 'none';
+            // Hentikan timer
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
             
-            clearInterval(timer);
+            // Reset timer box style
+            const timerBox = document.querySelector('.timer-box');
+            timerBox.style.background = '';
+            timerBox.style.color = '';
+            timerBox.style.borderColor = '';
+            
+            // Tampilkan start screen
+            showStartScreen();
         }
 
-        function goToBab() {
-            window.location.href = 'bab2-teorema-pythagoras.html';
+        // Jalankan inisialisasi setelah halaman siap
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeQuiz);
+        } else {
+            // Halaman sudah siap
+            initializeQuiz();
         }
     </script>
 </body>

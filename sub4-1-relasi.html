@@ -5,62 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memahami Relasi | MathMaster8</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            chtml: {
+                scale: 1.2,
+                minScale: 0.8
+            }
+        };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
         /* =========================================
-           1. VARIABLES & CORE STYLING (KONSISTEN)
+           1. VARIABLES & CORE STYLING - TEAL PREMIUM
            ========================================= */
         :root {
             --primary: #0d9488;
             --primary-light: #14b8a6;
             --primary-soft: #ccfbf1;
             --primary-dark: #0f766e;
-            --secondary: #6366f1;
-            --secondary-light: #818cf8;
-            --secondary-soft: #e0e7ff;
-            --secondary-dark: #4f46e5;
+            --secondary: #0891b2;
+            --secondary-light: #06b6d4;
+            --secondary-soft: #cffafe;
+            --secondary-dark: #0e7490;
             --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --accent-soft: #fef3c7;
             --success: #22c55e;
+            --success-soft: #dcfce7;
             --danger: #ef4444;
+            --danger-soft: #fee2e2;
             --dark: #0f172a;
+            --dark-light: #1e293b;
             --text-main: #334155;
             --text-muted: #64748b;
+            --text-light: #94a3b8;
             --bg-page: #f8fafc;
             --white: #ffffff;
+            --gray-50: #f9fafb;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
             --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
-            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(99,102,241,0.15);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --shadow-md: 0 15px 35px -10px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.2);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
+            --border-radius-xl: 40px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-page);
+            background: linear-gradient(135deg, var(--bg-page) 0%, #ffffff 100%);
             color: var(--text-main);
             line-height: 1.7;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
 
         /* =========================================
-           2. NAVIGATION (KONSISTEN)
+           2. NAVIGATION - PREMIUM
            ========================================= */
         .top-bar {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
             padding: 16px 5%;
             display: flex;
             align-items: center;
@@ -76,16 +112,24 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            color: var(--secondary);
+            color: var(--primary);
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
             transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 40px;
+            background: var(--primary-soft);
         }
 
         .back-link:hover {
+            background: var(--primary);
+            color: white;
             transform: translateX(-6px);
-            color: var(--secondary-dark);
+        }
+
+        .back-link i {
+            font-size: 0.9rem;
         }
 
         .chapter-badge {
@@ -93,15 +137,20 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--secondary);
-            background: var(--secondary-soft);
-            padding: 6px 18px;
+            color: var(--primary-dark);
+            background: var(--primary-soft);
+            padding: 8px 22px;
             border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* =========================================
-           3. PROGRESS BAR
-           ========================================= */
+        .chapter-badge i {
+            font-size: 0.9rem;
+        }
+
+        /* Progress Bar */
         .progress-container {
             width: 100%;
             height: 4px;
@@ -114,51 +163,71 @@
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(to right, var(--secondary), var(--accent));
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             width: 0%;
             transition: width 0.1s;
         }
 
         /* =========================================
-           4. HERO SECTION
+           3. HERO SECTION - TEAL
            ========================================= */
         .hero-section {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 60px 5% 80px;
+            padding: 70px 5% 90px;
             text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-md);
         }
 
         .hero-section::before {
             content: "🔄";
             position: absolute;
-            font-size: 180px;
-            top: -40px;
+            font-size: 220px;
+            top: -50px;
             right: 5%;
-            opacity: 0.08;
+            opacity: 0.1;
             transform: rotate(15deg);
         }
 
+        .hero-section::after {
+            content: "A → B";
+            position: absolute;
+            font-size: 100px;
+            bottom: -20px;
+            left: 5%;
+            opacity: 0.08;
+            transform: rotate(-5deg);
+            font-weight: 800;
+            font-family: 'Times New Roman', serif;
+            white-space: nowrap;
+        }
+
         .hero-section h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 15px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
         }
 
         .hero-section p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.95;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
         }
 
         /* =========================================
-           5. MAIN CONTAINER
+           4. MAIN CONTAINER
            ========================================= */
         .container {
             max-width: 1100px;
@@ -167,63 +236,86 @@
         }
 
         /* =========================================
-           6. CONTENT CARD
+           5. CONTENT CARD
            ========================================= */
         .content-card {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            margin-bottom: 35px;
+            border-radius: var(--border-radius-xl);
+            padding: 45px;
+            margin-bottom: 40px;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-200);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
         .content-card:hover {
             box-shadow: var(--shadow-lg);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .content-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, transparent 50%, var(--primary-soft) 100%);
+            opacity: 0.2;
+            border-radius: 0 0 0 150px;
+            pointer-events: none;
         }
 
         .section-title {
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--dark);
             margin-bottom: 25px;
+            position: relative;
         }
 
         .section-title i {
-            color: var(--secondary);
-            font-size: 2rem;
+            color: var(--primary);
+            font-size: 2.2rem;
+            background: var(--primary-soft);
+            padding: 15px;
+            border-radius: 20px;
         }
 
         .section-badge {
             display: inline-block;
-            background: var(--secondary-soft);
-            color: var(--secondary-dark);
-            font-size: 0.7rem;
+            background: linear-gradient(135deg, var(--primary-soft) 0%, #fff 100%);
+            color: var(--primary-dark);
+            font-size: 0.75rem;
             font-weight: 800;
-            padding: 6px 20px;
+            padding: 8px 25px;
             border-radius: 60px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-bottom: 20px;
+            border: 1px solid var(--primary-light);
+            box-shadow: var(--shadow-sm);
         }
 
         /* =========================================
-           7. VIDEO CONTAINER
+           6. VIDEO CONTAINER
            ========================================= */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            margin: 30px 0;
+            margin: 30px 0 20px;
             background: #000;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
+            border: 3px solid var(--primary-light);
         }
 
         .video-container iframe {
@@ -236,129 +328,199 @@
         }
 
         /* =========================================
-           8. KARTU KONSEP
+           7. CONCEPT CARD
            ========================================= */
         .concept-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .concept-card {
-            background: var(--bg-page);
-            border-radius: 20px;
-            padding: 30px;
-            border-left: 6px solid var(--secondary);
-            transition: var(--transition);
-            border: 1px solid var(--gray-200);
-            border-left-width: 6px;
-        }
-
-        .concept-card:hover {
-            background: var(--white);
-            box-shadow: var(--shadow);
-            transform: translateY(-5px);
-        }
-
-        .concept-icon {
-            background: var(--secondary-soft);
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--secondary-dark);
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .math-definition {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 16px;
-            margin: 20px 0;
-            border: 2px dashed var(--secondary);
-            font-size: 1.2rem;
-            text-align: center;
-            font-weight: 700;
-            color: var(--secondary-dark);
-        }
-
-        /* =========================================
-           9. REPRESENTASI RELASI
-           ========================================= */
-        .representation-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 30px;
         }
 
-        .rep-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-200);
-            border-top: 6px solid var(--secondary);
+        .concept-card {
+            background: linear-gradient(135deg, var(--gray-50), white);
+            border-radius: 24px;
+            padding: 35px;
+            border-left: 6px solid var(--primary);
             transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            border-left-width: 6px;
+            box-shadow: var(--shadow-sm);
         }
 
-        .rep-card:hover {
-            transform: translateY(-5px);
+        .concept-card:hover {
+            transform: translateY(-8px);
             box-shadow: var(--shadow-lg);
         }
 
-        .rep-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--secondary-dark);
+        .concept-icon {
+            background: var(--primary-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            color: var(--primary-dark);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .concept-card:hover .concept-icon {
+            background: var(--primary);
+            color: white;
+            transform: rotate(5deg);
+        }
+
+        .math-definition {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 2px dashed var(--primary);
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-dark);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* =========================================
+           8. REPRESENTATION GRID - DIPERBAIKI
+           ========================================= */
+        .representation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .rep-card {
+            background: linear-gradient(135deg, var(--white), var(--gray-50));
+            border-radius: 30px;
+            padding: 35px;
+            border-top: 6px solid var(--primary);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .rep-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .rep-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rep-title i {
+            color: var(--primary);
+            font-size: 1.8rem;
         }
 
         .diagram-container {
             background: var(--gray-100);
+            border-radius: 24px;
             padding: 25px;
-            border-radius: 16px;
             margin: 20px 0;
             display: flex;
             justify-content: center;
+            border: 1px solid var(--gray-200);
         }
 
         .example-box {
-            background: var(--gray-100);
+            background: var(--primary-soft);
             padding: 20px;
             border-radius: 16px;
-            margin-top: 15px;
-            border-left: 4px solid var(--accent);
+            margin-top: 20px;
+            border-left: 4px solid var(--primary);
         }
 
         /* =========================================
-           10. SIMULATOR RELASI INTERAKTIF
+           9. ISTILAH BOX
+           ========================================= */
+        .istilah-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .istilah-card {
+            background: var(--primary-soft);
+            padding: 25px;
+            border-radius: 24px;
+            transition: var(--transition);
+            border-left: 6px solid var(--primary);
+        }
+
+        .istilah-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .istilah-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .contoh-box {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+
+        /* =========================================
+           10. SIMULATOR RELASI - DIPERBAIKI
            ========================================= */
         .simulator-box {
             background: linear-gradient(145deg, #1e293b, #0f172a);
             color: white;
-            border-radius: 40px;
+            border-radius: 50px;
             padding: 50px;
-            margin-top: 20px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .simulator-box::before {
+            content: "🔄";
+            position: absolute;
+            font-size: 200px;
+            bottom: -30px;
+            right: -20px;
+            opacity: 0.05;
+            transform: rotate(15deg);
         }
 
         .simulator-title {
-            color: var(--secondary-light);
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            color: var(--primary-light);
+            font-size: 2rem;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
             gap: 15px;
+            font-weight: 700;
         }
 
-        .relation-builder {
+        .relation-visual {
             display: flex;
             flex-wrap: wrap;
             gap: 40px;
@@ -366,127 +528,334 @@
             margin: 40px 0;
         }
 
-        .set-box {
-            background: rgba(255,255,255,0.1);
+        .set-container {
+            flex: 1;
+            min-width: 250px;
+            background: rgba(255,255,255,0.05);
             border-radius: 30px;
             padding: 25px;
-            min-width: 200px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
         }
 
-        .set-title {
-            color: var(--secondary-light);
+        .set-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            color: var(--primary-light);
             font-weight: 700;
-            margin-bottom: 20px;
-            text-align: center;
             font-size: 1.2rem;
         }
 
-        .set-elements {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
+        .set-header i {
+            font-size: 1.5rem;
         }
 
-        .element {
-            background: rgba(255,255,255,0.15);
-            padding: 12px 20px;
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .element-btn {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.15);
+            color: white;
+            padding: 15px 10px;
             border-radius: 60px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            border: 1px solid transparent;
+            text-align: center;
+            font-size: 1rem;
         }
 
-        .element:hover {
-            background: var(--secondary);
-            transform: scale(1.05);
+        .element-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+            border-color: var(--primary-light);
         }
 
-        .element.selected {
-            background: var(--secondary);
-            border: 2px solid white;
+        .element-btn.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(13,148,136,0.3);
         }
 
-        .arrow-zone {
+        .arrow-connector {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 0 20px;
         }
 
-        .btn-add-relation {
-            background: var(--secondary);
+        .arrow-connector i {
+            font-size: 3rem;
+            color: var(--primary-light);
+            animation: pulse 2s infinite;
+        }
+
+        .arrow-connector span {
+            color: var(--gray-300);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 16px 35px;
             border-radius: 60px;
             font-weight: 700;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: var(--transition);
-            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(13,148,136,0.3);
         }
 
-        .btn-add-relation:hover {
-            background: var(--secondary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(99,102,241,0.3);
+        .btn-add:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(13,148,136,0.4);
         }
 
-        .relation-list {
-            background: rgba(255,255,255,0.1);
-            border-radius: 30px;
-            padding: 30px;
-            margin-top: 30px;
+        .btn-clear {
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.15);
+            color: white;
+            padding: 16px 35px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .pair-chip {
-            display: inline-block;
+        .btn-clear:hover {
             background: rgba(255,255,255,0.15);
+            transform: translateY(-4px);
+        }
+
+        .relation-panel {
+            background: rgba(255,255,255,0.05);
+            border-radius: 40px;
+            padding: 35px;
+            margin-top: 30px;
+            border: 2px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+        }
+
+        .panel-title {
+            color: var(--primary-light);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pairs-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+            min-height: 80px;
+            padding: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 30px;
+        }
+
+        .pair-badge {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--primary-light);
             padding: 10px 20px;
             border-radius: 60px;
-            margin: 8px;
             font-weight: 600;
-            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--primary-light);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pair-badge i {
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        .info-box {
+            background: rgba(255,255,255,0.03);
+            border-radius: 30px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-around;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-label {
+            color: var(--gray-300);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-light);
         }
 
         /* =========================================
-           11. LATIHAN SOAL
+           11. APLIKASI GRID
            ========================================= */
-        .quiz-mini {
-            background: var(--secondary-soft);
-            border-radius: 30px;
-            padding: 40px;
+        .aplikasi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
             margin-top: 30px;
         }
 
-        .quiz-btn {
-            background: var(--white);
-            border: 2px solid var(--secondary);
-            padding: 12px 25px;
-            border-radius: 60px;
-            font-weight: 600;
-            color: var(--secondary);
-            cursor: pointer;
+        .aplikasi-card {
+            background: linear-gradient(135deg, var(--gray-100), white);
+            padding: 30px;
+            border-radius: 24px;
             transition: var(--transition);
-            margin: 5px;
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
         }
 
-        .quiz-btn:hover {
-            background: var(--secondary);
-            color: white;
+        .aplikasi-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .aplikasi-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .aplikasi-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
         }
 
         /* =========================================
-           12. PAGINATION FOOTER
+           12. QUIZ SECTION
+           ========================================= */
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .quiz-card {
+            background: var(--gray-100);
+            padding: 30px;
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .quiz-option:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 16px;
+            display: none;
+            font-weight: 600;
+        }
+
+        /* =========================================
+           13. SUMMARY GRID
+           ========================================= */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, var(--primary-soft), white);
+            padding: 30px;
+            border-radius: 24px;
+            border-left: 6px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .summary-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* =========================================
+           14. PAGINATION FOOTER
            ========================================= */
         .page-footer {
             display: flex;
             justify-content: space-between;
-            margin-top: 60px;
+            margin-top: 70px;
             padding-top: 40px;
-            border-top: 2px solid var(--gray-200);
+            border-top: 2px dashed var(--gray-300);
         }
 
         .nav-btn {
@@ -494,34 +863,86 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--white);
-            padding: 14px 32px;
-            border-radius: 60px;
+            background: white;
+            padding: 16px 35px;
+            border-radius: 70px;
             color: var(--dark);
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
             border: 1px solid var(--gray-200);
             box-shadow: var(--shadow-sm);
+            font-size: 1rem;
         }
 
         .nav-btn:hover {
-            background: var(--secondary);
+            background: var(--primary);
             color: white;
-            border-color: var(--secondary);
+            border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.right:hover {
+            transform: translateX(5px);
         }
 
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 50px 20px;
             color: var(--text-muted);
             border-top: 1px solid var(--gray-200);
+            margin-top: 40px;
+            background: white;
         }
 
+        footer p:last-child {
+            font-style: italic;
+            max-width: 700px;
+            margin: 15px auto 0;
+            opacity: 0.7;
+        }
+
+        /* =========================================
+           15. ANIMATIONS
+           ========================================= */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate {
+            animation: fadeIn 0.7s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+        }
+
+        .float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* =========================================
+           16. RESPONSIVE
+           ========================================= */
         @media (max-width: 768px) {
-            .hero-section h1 { font-size: 2rem; }
+            .hero-section h1 { font-size: 2.2rem; }
+            .hero-section p { font-size: 1rem; }
             .content-card { padding: 30px; }
-            .concept-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 1.6rem; }
+            .quiz-grid { grid-template-columns: 1fr; }
+            .relation-visual { flex-direction: column; }
             .simulator-box { padding: 30px; }
+            .page-footer { flex-direction: column; gap: 15px; align-items: center; }
+            .nav-btn { width: 100%; justify-content: center; }
+            .progress-container { top: 60px; }
         }
     </style>
 </head>
@@ -556,13 +977,15 @@
                 <i class="fas fa-film"></i>
                 <h2>Apa Itu Relasi?</h2>
             </div>
-            <p style="margin-bottom: 20px;">Tonton video berikut untuk memahami konsep relasi antar himpunan dan berbagai cara menyatakannya.</p>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">Tonton video berikut untuk memahami konsep relasi antar himpunan dan berbagai cara menyatakannya.</p>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/7lLN65Lp2DQ" title="Konsep Relasi" allowfullscreen></iframe>
             </div>
-            <div style="margin-top: 25px; padding: 20px; background: var(--secondary-soft); border-radius: 20px;">
-                <p style="font-weight: 700; color: var(--secondary-dark);"><i class="fas fa-lightbulb"></i> Poin Penting:</p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
+            <div style="margin-top: 25px; padding: 20px; background: var(--primary-soft); border-radius: 20px; border-left: 6px solid var(--primary);">
+                <p style="font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-lightbulb"></i> Poin Penting:
+                </p>
+                <ul style="margin-left: 30px; margin-top: 10px;">
                     <li><strong>Relasi</strong> adalah hubungan antara anggota himpunan satu dengan himpunan lainnya.</li>
                     <li>Relasi dapat dinyatakan dengan <strong>3 cara</strong>: diagram panah, himpunan pasangan berurutan, dan diagram Cartesius.</li>
                     <li>Relasi memiliki <strong>aturan tertentu</strong> yang menghubungkan anggota domain ke kodomain.</li>
@@ -579,42 +1002,42 @@
             </div>
             
             <div class="math-definition">
-                <p style="font-size: 1.3rem; margin-bottom: 15px;">Relasi dari himpunan A ke himpunan B</p>
-                <p>adalah aturan yang memasangkan anggota-anggota himpunan A dengan anggota-anggota himpunan B.</p>
+                <p style="font-size: 1.4rem; margin-bottom: 15px; font-weight: 700;">Relasi dari himpunan A ke himpunan B</p>
+                <p style="font-size: 1.1rem;">adalah aturan yang memasangkan anggota-anggota himpunan A dengan anggota-anggota himpunan B.</p>
             </div>
             
-            <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 30px;">
-                <div style="flex: 1; min-width: 250px;">
-                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Istilah Penting:</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
-                            <span style="background: var(--secondary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">1</span>
-                            <span><strong>Domain</strong> = Himpunan asal (A)</span>
-                        </li>
-                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
-                            <span style="background: var(--secondary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">2</span>
-                            <span><strong>Kodomain</strong> = Himpunan lawan (B)</span>
-                        </li>
-                        <li style="display: flex; align-items: center; gap: 15px;">
-                            <span style="background: var(--secondary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">3</span>
-                            <span><strong>Range</strong> = Himpunan hasil (anggota kodomain yang memiliki pasangan)</span>
-                        </li>
-                    </ul>
+            <div class="istilah-grid">
+                <div class="istilah-card">
+                    <div class="istilah-number">1</div>
+                    <h4 style="color: var(--primary-dark); margin-bottom: 10px;">Domain</h4>
+                    <p>Himpunan asal (A) yang anggotanya memiliki pasangan.</p>
                 </div>
-                <div style="flex: 1; min-width: 250px; background: var(--gray-100); padding: 25px; border-radius: 20px;">
-                    <p style="font-weight: 700; color: var(--secondary-dark); margin-bottom: 10px;">Contoh Relasi:</p>
-                    <p style="margin-bottom: 5px;">A = {1, 2, 3, 4}</p>
-                    <p style="margin-bottom: 5px;">B = {1, 2, 4, 9, 16}</p>
-                    <p style="margin-bottom: 15px;">Relasi: "kuadrat dari"</p>
-                    <p>1 berelasi dengan 1 (1² = 1)</p>
-                    <p>2 berelasi dengan 4 (2² = 4)</p>
-                    <p>3 berelasi dengan 9 (3² = 9)</p>
-                    <p>4 berelasi dengan 16 (4² = 16)</p>
+                <div class="istilah-card">
+                    <div class="istilah-number">2</div>
+                    <h4 style="color: var(--primary-dark); margin-bottom: 10px;">Kodomain</h4>
+                    <p>Himpunan lawan (B) yang mungkin menjadi pasangan.</p>
                 </div>
+                <div class="istilah-card">
+                    <div class="istilah-number">3</div>
+                    <h4 style="color: var(--primary-dark); margin-bottom: 10px;">Range</h4>
+                    <p>Himpunan hasil (anggota kodomain yang memiliki pasangan).</p>
+                </div>
+            </div>
+            
+            <div class="contoh-box">
+                <p style="font-weight: 700; color: var(--primary-dark); margin-bottom: 15px;">📌 Contoh Relasi:</p>
+                <p>A = {1, 2, 3, 4}</p>
+                <p>B = {1, 2, 4, 9, 16}</p>
+                <p>Relasi: "kuadrat dari"</p>
+                <p style="margin-top: 15px;">1 berelasi dengan 1 (1² = 1)</p>
+                <p>2 berelasi dengan 4 (2² = 4)</p>
+                <p>3 berelasi dengan 9 (3² = 9)</p>
+                <p>4 berelasi dengan 16 (4² = 16)</p>
+                <p style="margin-top: 15px; background: var(--primary-soft); padding: 10px; border-radius: 12px;"><strong>Domain:</strong> {1,2,3,4} | <strong>Kodomain:</strong> {1,2,4,9,16} | <strong>Range:</strong> {1,4,9,16}</p>
             </div>
         </div>
 
-        <!-- Card: 3 Cara Menyatakan Relasi -->
+        <!-- Card: 3 Cara Menyatakan Relasi - DIPERBAIKI -->
         <div class="content-card">
             <span class="section-badge"><i class="fas fa-paint-brush"></i> REPRESENTASI</span>
             <div class="section-title">
@@ -629,34 +1052,34 @@
                         <i class="fas fa-arrows-alt-h"></i> Diagram Panah
                     </div>
                     <div class="diagram-container">
-                        <svg width="250" height="180" viewBox="0 0 250 180">
+                        <svg width="260" height="200" viewBox="0 0 260 200">
                             <!-- Himpunan A -->
-                            <rect x="20" y="20" width="70" height="140" rx="10" fill="var(--secondary-soft)" stroke="var(--secondary)" stroke-width="2"/>
-                            <text x="55" y="15" fill="var(--secondary-dark)" font-weight="bold">A</text>
-                            <text x="40" y="50" fill="var(--dark)">1</text>
-                            <text x="40" y="80" fill="var(--dark)">2</text>
-                            <text x="40" y="110" fill="var(--dark)">3</text>
-                            <text x="40" y="140" fill="var(--dark)">4</text>
+                            <rect x="20" y="20" width="80" height="160" rx="15" fill="var(--primary-soft)" stroke="var(--primary)" stroke-width="2"/>
+                            <text x="55" y="15" fill="var(--primary-dark)" font-weight="bold">A</text>
+                            <text x="40" y="55" fill="var(--dark)" font-weight="600">1</text>
+                            <text x="40" y="85" fill="var(--dark)" font-weight="600">2</text>
+                            <text x="40" y="115" fill="var(--dark)" font-weight="600">3</text>
+                            <text x="40" y="145" fill="var(--dark)" font-weight="600">4</text>
                             
                             <!-- Himpunan B -->
-                            <rect x="160" y="20" width="70" height="140" rx="10" fill="var(--secondary-soft)" stroke="var(--secondary)" stroke-width="2"/>
-                            <text x="195" y="15" fill="var(--secondary-dark)" font-weight="bold">B</text>
-                            <text x="180" y="40" fill="var(--dark)">1</text>
-                            <text x="180" y="60" fill="var(--dark)">4</text>
-                            <text x="180" y="80" fill="var(--dark)">9</text>
-                            <text x="180" y="100" fill="var(--dark)">16</text>
-                            <text x="180" y="120" fill="var(--dark)">25</text>
+                            <rect x="160" y="20" width="80" height="160" rx="15" fill="var(--primary-soft)" stroke="var(--primary)" stroke-width="2"/>
+                            <text x="195" y="15" fill="var(--primary-dark)" font-weight="bold">B</text>
+                            <text x="180" y="45" fill="var(--dark)" font-weight="600">1</text>
+                            <text x="180" y="70" fill="var(--dark)" font-weight="600">4</text>
+                            <text x="180" y="95" fill="var(--dark)" font-weight="600">9</text>
+                            <text x="180" y="120" fill="var(--dark)" font-weight="600">16</text>
+                            <text x="180" y="145" fill="var(--dark)" font-weight="600">25</text>
                             
-                            <!-- Panah -->
-                            <line x1="90" y1="45" x2="160" y2="35" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrowhead)"/>
-                            <line x1="90" y1="75" x2="160" y2="55" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrowhead)"/>
-                            <line x1="90" y1="105" x2="160" y2="75" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrowhead)"/>
-                            <line x1="90" y1="135" x2="160" y2="95" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrowhead)"/>
+                            <!-- Panah dengan kurva -->
+                            <path d="M100 45 Q130 35, 160 45" stroke="var(--primary)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                            <path d="M100 75 Q130 60, 160 70" stroke="var(--primary)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                            <path d="M100 105 Q130 85, 160 95" stroke="var(--primary)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                            <path d="M100 135 Q130 110, 160 120" stroke="var(--primary)" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
                             
                             <!-- Marker panah -->
                             <defs>
                                 <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-                                    <polygon points="0 0, 10 5, 0 10" fill="var(--accent)"/>
+                                    <polygon points="0 0, 10 5, 0 10" fill="var(--primary)"/>
                                 </marker>
                             </defs>
                         </svg>
@@ -664,6 +1087,7 @@
                     <div class="example-box">
                         <p><strong>Contoh:</strong> Relasi "kuadrat dari"</p>
                         <p>1 → 1, 2 → 4, 3 → 9, 4 → 16</p>
+                        <p style="margin-top: 10px; font-style: italic;">Panah menunjukkan hubungan dari A ke B</p>
                     </div>
                 </div>
                 
@@ -672,13 +1096,16 @@
                     <div class="rep-title">
                         <i class="fas fa-list-ul"></i> Himpunan Pasangan Berurutan
                     </div>
-                    <div style="background: var(--gray-100); padding: 25px; border-radius: 16px; margin-bottom: 20px;">
-                        <p style="font-family: monospace; font-size: 1.2rem;">{(1,1), (2,4), (3,9), (4,16)}</p>
+                    <div class="diagram-container">
+                        <div style="background: white; padding: 20px; border-radius: 16px; font-size: 1.2rem; font-family: 'Courier New', monospace;">
+                            {(1,1), (2,4), (3,9), (4,16)}
+                        </div>
                     </div>
                     <div class="example-box">
                         <p><strong>Penulisan:</strong> (x,y) dengan x ∈ A, y ∈ B</p>
                         <p>Pasangan berurutan (x,y) dibaca:</p>
                         <p>"x berelasi dengan y"</p>
+                        <p style="margin-top: 10px;"><strong>Contoh:</strong> (2,4) berarti 2 berelasi dengan 4</p>
                     </div>
                 </div>
                 
@@ -688,90 +1115,122 @@
                         <i class="fas fa-chart-scatter"></i> Diagram Cartesius
                     </div>
                     <div class="diagram-container">
-                        <svg width="200" height="180" viewBox="0 0 200 180">
+                        <svg width="220" height="200" viewBox="0 0 220 200">
                             <!-- Sumbu X dan Y -->
-                            <line x1="30" y1="150" x2="180" y2="150" stroke="black" stroke-width="2"/>
-                            <line x1="30" y1="150" x2="30" y2="30" stroke="black" stroke-width="2"/>
+                            <line x1="40" y1="160" x2="200" y2="160" stroke="black" stroke-width="2"/>
+                            <line x1="40" y1="160" x2="40" y2="30" stroke="black" stroke-width="2"/>
                             
-                            <!-- Titik-titik -->
-                            <circle cx="40" cy="140" r="5" fill="var(--secondary)"/>
-                            <circle cx="60" cy="110" r="5" fill="var(--secondary)"/>
-                            <circle cx="80" cy="70" r="5" fill="var(--secondary)"/>
-                            <circle cx="100" cy="30" r="5" fill="var(--secondary)"/>
+                            <!-- Grid dots -->
+                            <circle cx="60" cy="140" r="6" fill="var(--primary)"/>
+                            <circle cx="100" cy="100" r="6" fill="var(--primary)"/>
+                            <circle cx="140" cy="60" r="6" fill="var(--primary)"/>
+                            <circle cx="180" cy="20" r="6" fill="var(--primary)"/>
                             
-                            <!-- Label -->
-                            <text x="15" y="40" fill="var(--dark)">16</text>
-                            <text x="15" y="70" fill="var(--dark)">9</text>
-                            <text x="15" y="110" fill="var(--dark)">4</text>
-                            <text x="15" y="140" fill="var(--dark)">1</text>
-                            <text x="40" y="170" fill="var(--dark)">1</text>
-                            <text x="60" y="170" fill="var(--dark)">2</text>
-                            <text x="80" y="170" fill="var(--dark)">3</text>
-                            <text x="100" y="170" fill="var(--dark)">4</text>
+                            <!-- Label sumbu X -->
+                            <text x="50" y="180" fill="var(--dark)">1</text>
+                            <text x="90" y="180" fill="var(--dark)">2</text>
+                            <text x="130" y="180" fill="var(--dark)">3</text>
+                            <text x="170" y="180" fill="var(--dark)">4</text>
+                            <text x="190" y="180" fill="var(--dark)">5</text>
+                            
+                            <!-- Label sumbu Y -->
+                            <text x="20" y="145" fill="var(--dark)">1</text>
+                            <text x="20" y="105" fill="var(--dark)">4</text>
+                            <text x="20" y="65" fill="var(--dark)">9</text>
+                            <text x="20" y="25" fill="var(--dark)">16</text>
+                            
+                            <!-- Label sumbu -->
+                            <text x="110" y="195" fill="var(--primary-dark)" font-weight="bold">A</text>
+                            <text x="10" y="40" fill="var(--primary-dark)" font-weight="bold" transform="rotate(90,10,40)">B</text>
                         </svg>
                     </div>
                     <div class="example-box">
-                        <p><strong>Sumbu horizontal:</strong> Domain (A)</p>
-                        <p><strong>Sumbu vertikal:</strong> Kodomain (B)</p>
+                        <p><strong>Sumbu horizontal (x):</strong> Domain (A)</p>
+                        <p><strong>Sumbu vertikal (y):</strong> Kodomain (B)</p>
                         <p>Titik (x,y) menunjukkan relasi</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Card: Simulator Relasi Interaktif -->
+        <!-- Card: Simulator Relasi Interaktif - DIPERBAIKI -->
         <div class="simulator-box">
             <div class="simulator-title">
                 <i class="fas fa-puzzle-piece"></i>
-                <h2 style="color: white; margin: 0;">Simulator Relasi</h2>
+                <h2 style="color: white; margin: 0;">Simulator Relasi Interaktif</h2>
             </div>
-            <p style="margin-bottom: 25px; opacity: 0.9;">Buat relasi antara himpunan A dan B dengan mengklik elemen.</p>
+            <p style="margin-bottom: 25px; opacity: 0.9; font-size: 1.1rem;">Klik elemen di himpunan A dan B untuk membuat relasi!</p>
             
-            <div class="relation-builder">
-                <div class="set-box">
-                    <div class="set-title">Himpunan A (Domain)</div>
-                    <div class="set-elements">
-                        <span id="a1" class="element" onclick="selectElement('a', 1)">Ayu</span>
-                        <span id="a2" class="element" onclick="selectElement('a', 2)">Budi</span>
-                        <span id="a3" class="element" onclick="selectElement('a', 3)">Citra</span>
-                        <span id="a4" class="element" onclick="selectElement('a', 4)">Dodi</span>
+            <div class="relation-visual">
+                <!-- Himpunan A -->
+                <div class="set-container">
+                    <div class="set-header">
+                        <i class="fas fa-circle"></i>
+                        <span>Himpunan A (Domain)</span>
+                    </div>
+                    <div class="elements-grid">
+                        <button id="a1" class="element-btn" onclick="selectElement('a', 1)">Ayu</button>
+                        <button id="a2" class="element-btn" onclick="selectElement('a', 2)">Budi</button>
+                        <button id="a3" class="element-btn" onclick="selectElement('a', 3)">Citra</button>
+                        <button id="a4" class="element-btn" onclick="selectElement('a', 4)">Dodi</button>
                     </div>
                 </div>
                 
-                <div class="arrow-zone">
-                    <i class="fas fa-arrow-right" style="font-size: 3rem; color: var(--secondary-light);"></i>
-                    <div style="margin-top: 15px; color: var(--gray-300);">Klik elemen kiri, lalu kanan</div>
+                <div class="arrow-connector float">
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                    <span>Pilih elemen kiri, lalu kanan</span>
                 </div>
                 
-                <div class="set-box">
-                    <div class="set-title">Himpunan B (Kodomain)</div>
-                    <div class="set-elements">
-                        <span id="b1" class="element" onclick="selectElement('b', 1)">Basket</span>
-                        <span id="b2" class="element" onclick="selectElement('b', 2)">Voli</span>
-                        <span id="b3" class="element" onclick="selectElement('b', 3)">Renang</span>
-                        <span id="b4" class="element" onclick="selectElement('b', 4)">Sepak bola</span>
+                <!-- Himpunan B -->
+                <div class="set-container">
+                    <div class="set-header">
+                        <i class="fas fa-circle"></i>
+                        <span>Himpunan B (Kodomain)</span>
+                    </div>
+                    <div class="elements-grid">
+                        <button id="b1" class="element-btn" onclick="selectElement('b', 1)">Basket</button>
+                        <button id="b2" class="element-btn" onclick="selectElement('b', 2)">Voli</button>
+                        <button id="b3" class="element-btn" onclick="selectElement('b', 3)">Renang</button>
+                        <button id="b4" class="element-btn" onclick="selectElement('b', 4)">Sepak bola</button>
                     </div>
                 </div>
             </div>
             
-            <div style="text-align: center;">
-                <button onclick="addRelation()" class="btn-add-relation">
+            <div class="action-buttons">
+                <button onclick="addRelation()" class="btn-add">
                     <i class="fas fa-plus-circle"></i> Tambah Relasi
                 </button>
-                <button onclick="clearRelations()" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 15px 30px; border-radius: 60px; font-weight: 700; margin-left: 15px; cursor: pointer;" onclick="clearRelations()">
-                    <i class="fas fa-trash"></i> Hapus Semua
+                <button onclick="clearRelations()" class="btn-clear">
+                    <i class="fas fa-trash-alt"></i> Hapus Semua
                 </button>
             </div>
             
-            <div id="relationList" class="relation-list">
-                <p style="font-weight: 700; margin-bottom: 15px; color: var(--secondary-light);">Relasi yang terbentuk:</p>
-                <div id="relationPairs">
-                    <span class="pair-chip">Ayu → Basket</span>
-                    <span class="pair-chip">Budi → Voli</span>
-                    <span class="pair-chip">Citra → Renang</span>
-                    <span class="pair-chip">Dodi → Sepak bola</span>
+            <div class="relation-panel">
+                <div class="panel-title">
+                    <i class="fas fa-link"></i>
+                    <span>Relasi yang terbentuk</span>
                 </div>
-                <p id="relationInfo" style="margin-top: 20px; color: var(--gray-300); font-style: italic;">Domain = {Ayu, Budi, Citra, Dodi} | Range = {Basket, Voli, Renang, Sepak bola}</p>
+                <div id="relationPairs" class="pairs-container">
+                    <span class="pair-badge"><i class="fas fa-user"></i> Ayu <i class="fas fa-arrow-right"></i> <i class="fas fa-basketball-ball"></i> Basket</span>
+                    <span class="pair-badge"><i class="fas fa-user"></i> Budi <i class="fas fa-arrow-right"></i> <i class="fas fa-volleyball-ball"></i> Voli</span>
+                    <span class="pair-badge"><i class="fas fa-user"></i> Citra <i class="fas fa-arrow-right"></i> <i class="fas fa-swimmer"></i> Renang</span>
+                    <span class="pair-badge"><i class="fas fa-user"></i> Dodi <i class="fas fa-arrow-right"></i> <i class="fas fa-futbol"></i> Sepak bola</span>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-item">
+                        <div class="info-label">Domain</div>
+                        <div class="info-value" id="domainInfo">{Ayu, Budi, Citra, Dodi}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Kodomain</div>
+                        <div class="info-value" id="kodomainInfo">{Basket, Voli, Renang, Sepak bola}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Range</div>
+                        <div class="info-value" id="rangeInfo">{Basket, Voli, Renang, Sepak bola}</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -783,25 +1242,25 @@
                 <h2>Relasi dalam Kehidupan Sehari-hari</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
-                    <i class="fas fa-utensils" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
-                    <h4 style="margin-bottom: 10px;">Menu Makanan</h4>
+            <div class="aplikasi-grid">
+                <div class="aplikasi-card">
+                    <i class="fas fa-utensils"></i>
+                    <h4>Menu Makanan</h4>
                     <p>Relasi "harga dari" antara menu makanan dengan harganya.</p>
                 </div>
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
-                    <i class="fas fa-book" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
-                    <h4 style="margin-bottom: 10px;">Perpustakaan</h4>
+                <div class="aplikasi-card">
+                    <i class="fas fa-book"></i>
+                    <h4>Perpustakaan</h4>
                     <p>Relasi "dipinjam oleh" antara buku dengan anggota.</p>
                 </div>
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
-                    <i class="fas fa-bus" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
-                    <h4 style="margin-bottom: 10px;">Transportasi</h4>
+                <div class="aplikasi-card">
+                    <i class="fas fa-bus"></i>
+                    <h4>Transportasi</h4>
                     <p>Relasi "rute" antara kota asal dan kota tujuan.</p>
                 </div>
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
-                    <i class="fas fa-chalkboard-teacher" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px;"></i>
-                    <h4 style="margin-bottom: 10px;">Sekolah</h4>
+                <div class="aplikasi-card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h4>Sekolah</h4>
                     <p>Relasi "wali kelas" antara guru dan kelas.</p>
                 </div>
             </div>
@@ -815,29 +1274,29 @@
                 <h2>Uji Pemahaman Relasi</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+            <div class="quiz-grid">
+                <div class="quiz-card">
                     <p style="font-weight: 700; margin-bottom: 15px;">Soal 1</p>
                     <p style="margin-bottom: 20px;">Diketahui A = {1, 2, 3, 4} dan B = {2, 4, 6, 8}. Relasi dari A ke B adalah "faktor dari". Himpunan pasangan berurutan yang tepat adalah...</p>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
-                        <button onclick="checkRelasiQuiz(1,1)" class="quiz-btn">A. {(1,2), (2,4), (4,8)}</button>
-                        <button onclick="checkRelasiQuiz(1,2)" class="quiz-btn">B. {(2,1), (4,2), (8,4)}</button>
-                        <button onclick="checkRelasiQuiz(1,3)" class="quiz-btn">C. {(1,2), (2,4), (3,6), (4,8)}</button>
-                        <button onclick="checkRelasiQuiz(1,4)" class="quiz-btn">D. {(1,1), (2,2), (3,3), (4,4)}</button>
+                    <div class="quiz-options">
+                        <button onclick="checkRelasiQuiz(1,1)" class="quiz-option">A. {(1,2), (2,4), (4,8)}</button>
+                        <button onclick="checkRelasiQuiz(1,2)" class="quiz-option">B. {(2,1), (4,2), (8,4)}</button>
+                        <button onclick="checkRelasiQuiz(1,3)" class="quiz-option">C. {(1,2), (2,4), (3,6), (4,8)}</button>
+                        <button onclick="checkRelasiQuiz(1,4)" class="quiz-option">D. {(1,1), (2,2), (3,3), (4,4)}</button>
                     </div>
-                    <div id="relasiQuiz1" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                    <div id="relasiQuiz1" class="quiz-feedback"></div>
                 </div>
                 
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                <div class="quiz-card">
                     <p style="font-weight: 700; margin-bottom: 15px;">Soal 2</p>
                     <p style="margin-bottom: 20px;">Dari relasi {(1,a), (2,b), (3,c), (4,d)}, manakah pernyataan yang BENAR?</p>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
-                        <button onclick="checkRelasiQuiz(2,1)" class="quiz-btn">A. Domain = {a,b,c,d}</button>
-                        <button onclick="checkRelasiQuiz(2,2)" class="quiz-btn">B. Kodomain = {1,2,3,4}</button>
-                        <button onclick="checkRelasiQuiz(2,3)" class="quiz-btn">C. Range = {a,b,c,d}</button>
-                        <button onclick="checkRelasiQuiz(2,4)" class="quiz-btn">D. Domain = {1,2,3,4}</button>
+                    <div class="quiz-options">
+                        <button onclick="checkRelasiQuiz(2,1)" class="quiz-option">A. Domain = {a,b,c,d}</button>
+                        <button onclick="checkRelasiQuiz(2,2)" class="quiz-option">B. Kodomain = {1,2,3,4}</button>
+                        <button onclick="checkRelasiQuiz(2,3)" class="quiz-option">C. Range = {a,b,c,d}</button>
+                        <button onclick="checkRelasiQuiz(2,4)" class="quiz-option">D. Domain = {1,2,3,4}</button>
                     </div>
-                    <div id="relasiQuiz2" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                    <div id="relasiQuiz2" class="quiz-feedback"></div>
                 </div>
             </div>
         </div>
@@ -850,18 +1309,18 @@
                 <h2>Intisari Relasi</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Definisi</h4>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h4><i class="fas fa-link"></i> Definisi</h4>
                     <p>Relasi adalah aturan yang memasangkan anggota himpunan A ke himpunan B.</p>
                 </div>
-                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 3 Cara Representasi</h4>
+                <div class="summary-card">
+                    <h4><i class="fas fa-vector-square"></i> 3 Cara Representasi</h4>
                     <p>• Diagram Panah<br>• Himpunan Pasangan Berurutan<br>• Diagram Cartesius</p>
                 </div>
-                <div style="background: var(--secondary-soft); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: var(--secondary-dark); margin-bottom: 15px;">📌 Istilah</h4>
-                    <p>Domain: himpunan asal<br>Kodomain: himpunan lawan<br>Range: himpunan hasil</p>
+                <div class="summary-card">
+                    <h4><i class="fas fa-tag"></i> Istilah Penting</h4>
+                    <p><strong>Domain:</strong> himpunan asal<br><strong>Kodomain:</strong> himpunan lawan<br><strong>Range:</strong> himpunan hasil</p>
                 </div>
             </div>
         </div>
@@ -879,7 +1338,7 @@
 
     <footer>
         <p>© 2024 MathMaster8 - Memahami Relasi | Kurikulum Merdeka</p>
-        <p style="margin-top: 8px; opacity: 0.6;">"Relasi adalah jembatan yang menghubungkan dua dunia." - N.A.</p>
+        <p>"Relasi adalah jembatan yang menghubungkan dua dunia." - N.A.</p>
     </footer>
 
     <script>
@@ -891,7 +1350,7 @@
             document.getElementById('progressBar').style.width = scrolled + "%";
         };
 
-        // Simulator Relasi
+        // Simulator Relasi - DIPERBAIKI
         let selectedA = null;
         let selectedB = null;
         let relations = [
@@ -906,14 +1365,25 @@
             b1: 'Basket', b2: 'Voli', b3: 'Renang', b4: 'Sepak bola'
         };
 
+        const iconMap = {
+            'Basket': 'fa-basketball-ball',
+            'Voli': 'fa-volleyball-ball',
+            'Renang': 'fa-swimmer',
+            'Sepak bola': 'fa-futbol',
+            'Ayu': 'fa-user',
+            'Budi': 'fa-user',
+            'Citra': 'fa-user',
+            'Dodi': 'fa-user'
+        };
+
         function selectElement(type, id) {
             // Hapus seleksi sebelumnya
             if (type === 'a') {
-                document.querySelectorAll('#a1, #a2, #a3, #a4').forEach(el => el.classList.remove('selected'));
+                document.querySelectorAll('.element-btn[id^="a"]').forEach(el => el.classList.remove('selected'));
                 document.getElementById(`a${id}`).classList.add('selected');
                 selectedA = elementMap[`a${id}`];
             } else {
-                document.querySelectorAll('#b1, #b2, #b3, #b4').forEach(el => el.classList.remove('selected'));
+                document.querySelectorAll('.element-btn[id^="b"]').forEach(el => el.classList.remove('selected'));
                 document.getElementById(`b${id}`).classList.add('selected');
                 selectedB = elementMap[`b${id}`];
             }
@@ -928,7 +1398,7 @@
                     updateRelationList();
                 }
                 // Hapus seleksi
-                document.querySelectorAll('.element').forEach(el => el.classList.remove('selected'));
+                document.querySelectorAll('.element-btn').forEach(el => el.classList.remove('selected'));
                 selectedA = null;
                 selectedB = null;
             } else {
@@ -939,18 +1409,22 @@
         function clearRelations() {
             relations = [];
             updateRelationList();
-            document.querySelectorAll('.element').forEach(el => el.classList.remove('selected'));
+            document.querySelectorAll('.element-btn').forEach(el => el.classList.remove('selected'));
             selectedA = null;
             selectedB = null;
         }
 
         function updateRelationList() {
             let pairsDiv = document.getElementById('relationPairs');
-            let infoDiv = document.getElementById('relationInfo');
+            let domainInfo = document.getElementById('domainInfo');
+            let rangeInfo = document.getElementById('rangeInfo');
+            let kodomainInfo = document.getElementById('kodomainInfo');
             
             if (relations.length === 0) {
-                pairsDiv.innerHTML = '<p style="color: var(--gray-400);">Belum ada relasi.</p>';
-                infoDiv.innerHTML = 'Domain = { } | Range = { }';
+                pairsDiv.innerHTML = '<p style="color: var(--gray-400); text-align: center;">Belum ada relasi. Buat relasi dengan mengklik elemen!</p>';
+                domainInfo.innerText = '{ }';
+                rangeInfo.innerText = '{ }';
+                kodomainInfo.innerText = '{Basket, Voli, Renang, Sepak bola}';
                 return;
             }
             
@@ -959,13 +1433,16 @@
             let rangeSet = new Set();
             
             relations.forEach(r => {
-                html += `<span class="pair-chip">${r.a} → ${r.b}</span>`;
+                let aIcon = iconMap[r.a] || 'fa-user';
+                let bIcon = iconMap[r.b] || 'fa-circle';
+                html += `<span class="pair-badge"><i class="fas ${aIcon}"></i> ${r.a} <i class="fas fa-arrow-right"></i> <i class="fas ${bIcon}"></i> ${r.b}</span>`;
                 domainSet.add(r.a);
                 rangeSet.add(r.b);
             });
             
             pairsDiv.innerHTML = html;
-            infoDiv.innerHTML = `Domain = {${Array.from(domainSet).join(', ')}} | Range = {${Array.from(rangeSet).join(', ')}}`;
+            domainInfo.innerText = '{' + Array.from(domainSet).join(', ') + '}';
+            rangeInfo.innerText = '{' + Array.from(rangeSet).join(', ') + '}';
         }
 
         // Fungsi kuis
@@ -975,11 +1452,11 @@
                 fb.style.display = 'block';
                 if (answer === 3) {
                     fb.innerHTML = '✅ Benar! 1 faktor dari 2, 2 faktor dari 4, 3 faktor dari 6, 4 faktor dari 8.';
-                    fb.style.background = '#dcfce7';
+                    fb.style.background = 'var(--success-soft)';
                     fb.style.color = '#166534';
                 } else {
                     fb.innerHTML = '❌ Coba lagi! Perhatikan relasi "faktor dari".';
-                    fb.style.background = '#fee2e2';
+                    fb.style.background = 'var(--danger-soft)';
                     fb.style.color = '#b91c1c';
                 }
             } else if (quizNum === 2) {
@@ -987,11 +1464,15 @@
                 fb.style.display = 'block';
                 if (answer === 4) {
                     fb.innerHTML = '✅ Benar! Domain = {1,2,3,4} (anggota pertama pasangan berurutan).';
-                    fb.style.background = '#dcfce7';
+                    fb.style.background = 'var(--success-soft)';
+                    fb.style.color = '#166534';
+                } else if (answer === 3) {
+                    fb.innerHTML = '✅ Benar! Range = {a,b,c,d} (anggota kedua yang memiliki pasangan).';
+                    fb.style.background = 'var(--success-soft)';
                     fb.style.color = '#166534';
                 } else {
                     fb.innerHTML = '❌ Salah. Domain adalah himpunan elemen pertama dari pasangan berurutan.';
-                    fb.style.background = '#fee2e2';
+                    fb.style.background = 'var(--danger-soft)';
                     fb.style.color = '#b91c1c';
                 }
             }

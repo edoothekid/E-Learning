@@ -3,60 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menemukan Konsep Pythagoras | MathMaster8</title>
+    <title>Menemukan Konsep Pythagoras | MathMaster</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            chtml: {
+                scale: 1.2,
+                minScale: 0.8
+            }
+        };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
         /* =========================================
-           1. VARIABLES & CORE STYLING (KONSISTEN)
+           1. VARIABLES & CORE STYLING - UNGU PREMIUM
            ========================================= */
         :root {
-            --primary: #0d9488;
-            --primary-light: #14b8a6;
-            --primary-soft: #ccfbf1;
-            --primary-dark: #0f766e;
-            --accent: #f59e0b;
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --primary-soft: #ede9fe;
+            --primary-dark: #6d28d9;
+            --secondary: #f59e0b;
+            --secondary-light: #fbbf24;
+            --secondary-soft: #fef3c7;
+            --accent: #ec4899;
+            --accent-light: #f472b6;
+            --accent-soft: #fce7f3;
             --success: #22c55e;
+            --success-soft: #dcfce7;
             --danger: #ef4444;
+            --danger-soft: #fee2e2;
             --dark: #0f172a;
+            --dark-light: #1e293b;
             --text-main: #334155;
             --text-muted: #64748b;
+            --text-light: #94a3b8;
             --bg-page: #f8fafc;
             --white: #ffffff;
+            --gray-50: #f9fafb;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
             --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
-            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --shadow-md: 0 15px 35px -10px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px -15px rgba(139,92,246,0.2);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
+            --border-radius-xl: 40px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-page);
+            background: linear-gradient(135deg, var(--bg-page) 0%, #ffffff 100%);
             color: var(--text-main);
             line-height: 1.7;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
 
         /* =========================================
-           2. NAVIGATION (KONSISTEN)
+           2. NAVIGATION - PREMIUM
            ========================================= */
         .top-bar {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
             padding: 16px 5%;
             display: flex;
             align-items: center;
@@ -77,11 +116,19 @@
             font-weight: 700;
             font-size: 0.95rem;
             transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 40px;
+            background: var(--primary-soft);
         }
 
         .back-link:hover {
+            background: var(--primary);
+            color: white;
             transform: translateX(-6px);
-            color: var(--primary-dark);
+        }
+
+        .back-link i {
+            font-size: 0.9rem;
         }
 
         .chapter-badge {
@@ -89,15 +136,20 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--primary);
+            color: var(--primary-dark);
             background: var(--primary-soft);
-            padding: 6px 18px;
+            padding: 8px 22px;
             border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* =========================================
-           3. PROGRESS BAR
-           ========================================= */
+        .chapter-badge i {
+            font-size: 0.9rem;
+        }
+
+        /* Progress Bar */
         .progress-container {
             width: 100%;
             height: 4px;
@@ -116,45 +168,65 @@
         }
 
         /* =========================================
-           4. HERO SECTION
+           3. HERO SECTION - UNGU
            ========================================= */
         .hero-section {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 60px 5% 80px;
+            padding: 70px 5% 90px;
             text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-md);
         }
 
         .hero-section::before {
             content: "🔍";
             position: absolute;
-            font-size: 180px;
+            font-size: 200px;
             top: -40px;
             right: 5%;
-            opacity: 0.08;
+            opacity: 0.1;
             transform: rotate(15deg);
         }
 
+        .hero-section::after {
+            content: "a² + b² = c²";
+            position: absolute;
+            font-size: 100px;
+            bottom: -20px;
+            left: 5%;
+            opacity: 0.08;
+            transform: rotate(-10deg);
+            font-weight: 800;
+            font-family: 'Times New Roman', serif;
+            white-space: nowrap;
+        }
+
         .hero-section h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 15px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
         }
 
         .hero-section p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.95;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
         }
 
         /* =========================================
-           5. MAIN CONTAINER
+           4. MAIN CONTAINER
            ========================================= */
         .container {
             max-width: 1100px;
@@ -163,63 +235,86 @@
         }
 
         /* =========================================
-           6. CONTENT CARD
+           5. CONTENT CARD
            ========================================= */
         .content-card {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            margin-bottom: 35px;
+            border-radius: var(--border-radius-xl);
+            padding: 45px;
+            margin-bottom: 40px;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-200);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
         .content-card:hover {
             box-shadow: var(--shadow-lg);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .content-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, transparent 50%, var(--primary-soft) 100%);
+            opacity: 0.2;
+            border-radius: 0 0 0 150px;
+            pointer-events: none;
         }
 
         .section-title {
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--dark);
             margin-bottom: 25px;
+            position: relative;
         }
 
         .section-title i {
             color: var(--primary);
-            font-size: 2rem;
+            font-size: 2.2rem;
+            background: var(--primary-soft);
+            padding: 15px;
+            border-radius: 20px;
         }
 
         .section-badge {
             display: inline-block;
-            background: var(--primary-soft);
+            background: linear-gradient(135deg, var(--primary-soft) 0%, #fff 100%);
             color: var(--primary-dark);
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 800;
-            padding: 6px 20px;
+            padding: 8px 25px;
             border-radius: 60px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-bottom: 20px;
+            border: 1px solid var(--primary-light);
+            box-shadow: var(--shadow-sm);
         }
 
         /* =========================================
-           7. VIDEO CONTAINER
+           6. VIDEO CONTAINER
            ========================================= */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            margin: 30px 0;
+            margin: 30px 0 20px;
             background: #000;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
+            border: 3px solid var(--primary-light);
         }
 
         .video-container iframe {
@@ -232,81 +327,142 @@
         }
 
         /* =========================================
+           7. HISTORY BOX
+           ========================================= */
+        .history-box {
+            background: linear-gradient(135deg, var(--primary-soft), white);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 30px 0;
+            border-left: 6px solid var(--primary);
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: var(--shadow);
+        }
+
+        .history-img {
+            font-size: 6rem;
+            color: var(--primary);
+            background: white;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            border: 4px solid white;
+        }
+
+        .history-content h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        /* =========================================
            8. EXPERIMENT CARDS
            ========================================= */
         .experiment-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 30px;
         }
 
         .experiment-card {
-            background: var(--bg-page);
-            border-radius: 20px;
-            padding: 30px;
+            background: linear-gradient(135deg, var(--gray-50), white);
+            border-radius: 24px;
+            padding: 35px;
             border-left: 6px solid var(--primary);
             transition: var(--transition);
             border: 1px solid var(--gray-200);
             border-left-width: 6px;
+            box-shadow: var(--shadow-sm);
         }
 
         .experiment-card:hover {
-            background: var(--white);
-            box-shadow: var(--shadow);
-            transform: translateY(-5px);
+            background: white;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
         }
 
         .exp-icon {
             background: var(--primary-soft);
-            width: 70px;
-            height: 70px;
-            border-radius: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary-dark);
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+
+        .experiment-card:hover .exp-icon {
+            background: var(--primary);
+            color: white;
+            transform: rotate(5deg);
         }
 
         .exp-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
             margin-bottom: 15px;
             color: var(--dark);
         }
 
         .math-box {
-            background: var(--white);
+            background: white;
             padding: 20px;
-            border-radius: 14px;
+            border-radius: 18px;
             margin: 20px 0;
-            border: 1px dashed var(--primary);
+            border: 2px dashed var(--primary);
             font-size: 1.2rem;
             text-align: center;
             font-weight: 600;
             color: var(--primary-dark);
+            box-shadow: var(--shadow-sm);
         }
 
         /* =========================================
-           9. SIMULATOR INTERAKTIF
+           9. SIMULATOR INTERAKTIF - DIPERBAIKI
            ========================================= */
         .simulator-box {
             background: linear-gradient(145deg, #1e293b, #0f172a);
             color: white;
-            border-radius: 40px;
+            border-radius: 50px;
             padding: 50px;
-            margin-top: 30px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .simulator-box::before {
+            content: "📐";
+            position: absolute;
+            font-size: 180px;
+            bottom: -30px;
+            right: -20px;
+            opacity: 0.05;
+            transform: rotate(15deg);
         }
 
         .simulator-title {
             color: var(--primary-light);
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 15px;
+            font-weight: 700;
         }
 
         .pythagoras-visual {
@@ -320,42 +476,83 @@
 
         .triangle-container {
             position: relative;
-            width: 280px;
-            height: 200px;
+            width: 320px;
+            height: 240px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 30px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .square-svg {
-            width: 100%;
-            height: 100%;
+        .squares-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 30px;
+            min-width: 250px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .square-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .square-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+
+        .square-color.a { background: var(--primary-light); }
+        .square-color.b { background: var(--primary); }
+        .square-color.c { background: var(--accent); }
+
+        .square-text {
+            font-size: 1rem;
+        }
+
+        .square-text strong {
+            font-size: 1.3rem;
+            margin-left: 10px;
         }
 
         .side-control {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             flex-wrap: wrap;
             justify-content: center;
-            margin: 30px 0;
+            margin: 40px 0;
         }
 
         .control-item {
             text-align: center;
+            background: rgba(255,255,255,0.05);
+            padding: 20px 30px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .control-item label {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            color: var(--gray-300);
-            letter-spacing: 1px;
+            color: var(--primary-light);
+            letter-spacing: 1.5px;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
         input[type=range] {
-            width: 180px;
+            width: 200px;
             height: 8px;
             background: rgba(255,255,255,0.2);
             border-radius: 10px;
             -webkit-appearance: none;
+            margin: 10px 0;
         }
 
         input[type=range]::-webkit-slider-thumb {
@@ -366,65 +563,160 @@
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid white;
-            box-shadow: 0 2px 10px rgba(13,148,136,0.5);
+            box-shadow: 0 2px 10px rgba(139,92,246,0.5);
         }
 
-        .proof-result {
+        .value-badge {
+            display: inline-block;
             background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 60px;
-            font-size: 1.5rem;
+            padding: 8px 20px;
+            border-radius: 40px;
             font-weight: 700;
-            text-align: center;
-            margin-top: 30px;
+            color: var(--primary-light);
+            margin-top: 10px;
+            font-size: 1.2rem;
             border: 1px solid rgba(255,255,255,0.2);
         }
 
-        /* =========================================
-           10. HISTORICAL NOTES
-           ========================================= */
-        .history-box {
-            background: var(--primary-soft);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-            border-left: 6px solid var(--primary);
+        .proof-result {
+            background: rgba(255,255,255,0.05);
+            padding: 35px;
+            border-radius: 60px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 30px;
+            border: 2px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .proof-result span {
+            color: var(--primary-light);
+        }
+
+        .verification-badge {
             display: flex;
-            gap: 30px;
-            align-items: center;
-            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 25px;
         }
 
-        .history-img {
-            font-size: 5rem;
-            color: var(--primary-dark);
+        .verified {
+            background: rgba(34,197,94,0.15);
+            color: #4ade80;
+            padding: 15px 40px;
+            border-radius: 60px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(34,197,94,0.3);
+            backdrop-filter: blur(5px);
+            font-size: 1.1rem;
         }
 
         /* =========================================
-           11. LATIHAN SOAL
+           10. FORMULA DISPLAY
            ========================================= */
-        .quiz-mini {
-            background: var(--gray-100);
-            border-radius: 30px;
-            padding: 40px;
+        .formula-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
             margin-top: 30px;
         }
 
+        .formula-card {
+            background: var(--gray-100);
+            padding: 30px;
+            border-radius: 24px;
+            border-left: 6px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .formula-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .formula-card h4 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .formula-display {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--primary-dark);
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        /* =========================================
+           11. QUIZ MINI
+           ========================================= */
+        .quiz-mini {
+            background: linear-gradient(135deg, var(--gray-100), white);
+            border-radius: 40px;
+            padding: 45px;
+            margin-top: 40px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-mini h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+
+        .quiz-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
         .quiz-btn {
-            background: var(--white);
+            background: white;
             border: 2px solid var(--primary);
-            padding: 12px 25px;
+            padding: 14px 30px;
             border-radius: 60px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary);
             cursor: pointer;
             transition: var(--transition);
-            margin: 5px;
+            font-size: 1rem;
+            box-shadow: var(--shadow-sm);
         }
 
         .quiz-btn:hover {
             background: var(--primary);
             color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 18px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: none;
         }
 
         /* =========================================
@@ -433,9 +725,9 @@
         .page-footer {
             display: flex;
             justify-content: space-between;
-            margin-top: 60px;
+            margin-top: 70px;
             padding-top: 40px;
-            border-top: 2px solid var(--gray-200);
+            border-top: 2px dashed var(--gray-300);
         }
 
         .nav-btn {
@@ -443,34 +735,62 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--white);
-            padding: 14px 32px;
-            border-radius: 60px;
+            background: white;
+            padding: 16px 35px;
+            border-radius: 70px;
             color: var(--dark);
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
             border: 1px solid var(--gray-200);
             box-shadow: var(--shadow-sm);
+            font-size: 1rem;
         }
 
         .nav-btn:hover {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.right:hover {
+            transform: translateX(5px);
         }
 
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 50px 20px;
             color: var(--text-muted);
             border-top: 1px solid var(--gray-200);
+            margin-top: 40px;
+            background: white;
         }
 
+        footer p:last-child {
+            font-style: italic;
+            max-width: 700px;
+            margin: 15px auto 0;
+            opacity: 0.7;
+        }
+
+        /* =========================================
+           13. RESPONSIVE
+           ========================================= */
         @media (max-width: 768px) {
-            .hero-section h1 { font-size: 2rem; }
+            .hero-section h1 { font-size: 2.2rem; }
+            .hero-section p { font-size: 1rem; }
             .content-card { padding: 30px; }
+            .section-title { font-size: 1.6rem; }
             .experiment-grid { grid-template-columns: 1fr; }
             .simulator-box { padding: 30px; }
+            .simulator-title { font-size: 1.6rem; }
+            .proof-result { font-size: 1.4rem; }
+            .formula-grid { grid-template-columns: 1fr; }
+            .quiz-options { flex-direction: column; }
+            .quiz-btn { width: 100%; }
+            .page-footer { flex-direction: column; gap: 15px; align-items: center; }
+            .nav-btn { width: 100%; justify-content: center; }
+            .progress-container { top: 60px; }
         }
     </style>
 </head>
@@ -481,7 +801,7 @@
         <a href="bab2-teorema-pythagoras.html" class="back-link">
             <i class="fas fa-arrow-left"></i> Kembali ke Bab 2
         </a>
-        <span class="chapter-badge"><i class="fas fa-search"></i> Sub A: Menemukan Konsep</span>
+        <span class="chapter-badge"></i>Sub 1: Menemukan Konsep</span>
     </div>
 
     <!-- Progress Bar -->
@@ -505,7 +825,7 @@
                 <i class="fas fa-film"></i>
                 <h2>Sejarah dan Penemuan Pythagoras</h2>
             </div>
-            <p style="margin-bottom: 20px;">Saksikan bagaimana Pythagoras dan murid-muridnya menemukan hubungan ajaib antara sisi-sisi segitiga siku-siku.</p>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">Saksikan bagaimana Pythagoras dan murid-muridnya menemukan hubungan ajaib antara sisi-sisi segitiga siku-siku.</p>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/CAkMUdeB06o" title="Pythagoras Discovery" allowfullscreen></iframe>
             </div>
@@ -523,10 +843,10 @@
                 <div class="history-img">
                     <i class="fas fa-user-graduate"></i>
                 </div>
-                <div style="flex: 1;">
-                    <h3 style="color: var(--primary-dark); margin-bottom: 15px;">Pythagoras of Samos (570-495 SM)</h3>
-                    <p style="margin-bottom: 10px;">Filsuf dan matematikawan Yunani yang mendirikan aliran Pythagoras. Ia dan murid-muridnya percaya bahwa alam semesta diatur oleh bilangan dan rasio.</p>
-                    <p><strong>Fakta menarik:</strong> Teorema Pythagoras sebenarnya sudah dikenal oleh bangsa Babilonia 1000 tahun sebelumnya, tetapi Pythagoras-lah yang pertama membuktikannya secara matematis.</p>
+                <div class="history-content">
+                    <h3>Pythagoras of Samos (570-495 SM)</h3>
+                    <p style="margin-bottom: 15px; font-size: 1.05rem;">Filsuf dan matematikawan Yunani yang mendirikan aliran Pythagoras. Ia dan murid-muridnya percaya bahwa alam semesta diatur oleh bilangan dan rasio.</p>
+                    <p style="font-size: 1.05rem;"><strong>Fakta menarik:</strong> Teorema Pythagoras sebenarnya sudah dikenal oleh bangsa Babilonia 1000 tahun sebelumnya, tetapi Pythagoras-lah yang pertama membuktikannya secara matematis.</p>
                 </div>
             </div>
         </div>
@@ -549,7 +869,7 @@
                     <div class="math-box">
                         \((a+b)^2 = c^2 + 4 \times \frac{ab}{2}\)
                     </div>
-                    <p style="font-size: 0.95rem;">Sederhanakan: \(a^2 + 2ab + b^2 = c^2 + 2ab\)<br>➡️ \(a^2 + b^2 = c^2\)</p>
+                    <p style="font-size: 0.95rem;">Sederhanakan: \(a^2 + 2ab + b^2 = c^2 + 2ab\) ➡️ \(a^2 + b^2 = c^2\)</p>
                 </div>
                 
                 <div class="experiment-card">
@@ -575,77 +895,85 @@
             </div>
         </div>
 
-        <!-- Card: Simulator Interaktif - Buktikan Sendiri! -->
+        <!-- Card: Simulator Interaktif - DIPERBAIKI -->
         <div class="simulator-box">
             <div class="simulator-title">
                 <i class="fas fa-draw-polygon"></i>
-                <h2 style="color: white; margin: 0;">Simulator: Buktikan Langsung!</h2>
+                <h2 style="color: white; margin: 0;">Simulator Interaktif Pythagoras</h2>
             </div>
-            <p style="margin-bottom: 25px; opacity: 0.9;">Geser slider untuk mengubah panjang sisi. Amati bahwa \(a^2 + b^2\) selalu sama dengan \(c^2\).</p>
+            <p style="margin-bottom: 25px; opacity: 0.9; font-size: 1.1rem;">Geser slider untuk mengubah panjang sisi. Amati bahwa \(a^2 + b^2\) selalu sama dengan \(c^2\).</p>
 
             <div class="pythagoras-visual">
                 <div class="triangle-container">
-                    <svg viewBox="0 0 250 200" style="width: 100%;">
+                    <svg viewBox="0 0 300 220" style="width: 100%; height: 100%;">
                         <!-- Segitiga siku-siku -->
-                        <polygon points="30,170 170,170 30,30" fill="none" stroke="white" stroke-width="4" stroke-dasharray="8 4"/>
+                        <polygon points="50,170 210,170 50,30" fill="none" stroke="white" stroke-width="3"/>
+                        
+                        <!-- Sisi a (tegak) -->
+                        <line x1="50" y1="170" x2="50" y2="30" stroke="var(--primary-light)" stroke-width="3" stroke-dasharray="6 3"/>
+                        <!-- Sisi b (alas) -->
+                        <line x1="50" y1="170" x2="210" y2="170" stroke="var(--primary-light)" stroke-width="3" stroke-dasharray="6 3"/>
+                        <!-- Sisi c (miring) -->
+                        <line x1="50" y1="30" x2="210" y2="170" stroke="var(--accent)" stroke-width="3" stroke-dasharray="6 3"/>
                         
                         <!-- Label sisi -->
-                        <text x="90" y="140" fill="var(--primary-light)" font-size="18" font-weight="bold">a</text>
-                        <text x="120" y="80" fill="var(--primary-light)" font-size="18" font-weight="bold">b</text>
-                        <text x="50" y="90" fill="var(--accent)" font-size="18" font-weight="bold">c</text>
+                        <text x="30" y="100" fill="var(--primary-light)" font-size="16" font-weight="bold">a</text>
+                        <text x="130" y="190" fill="var(--primary-light)" font-size="16" font-weight="bold">b</text>
+                        <text x="130" y="70" fill="var(--accent)" font-size="16" font-weight="bold">c</text>
                         
-                        <!-- Persegi pada sisi a -->
-                        <rect x="30" y="170" width="0" height="0" fill="rgba(13,148,136,0.2)" stroke="var(--primary-light)" stroke-width="2" id="squareA"/>
-                        <text x="15" y="200" fill="var(--primary-light)" font-size="14" id="squareAText">a² = ?</text>
-                        
-                        <!-- Persegi pada sisi b -->
-                        <rect x="170" y="170" width="0" height="0" fill="rgba(13,148,136,0.2)" stroke="var(--primary-light)" stroke-width="2" id="squareB"/>
-                        <text x="190" y="200" fill="var(--primary-light)" font-size="14" id="squareBText">b² = ?</text>
-                        
-                        <!-- Persegi pada sisi c -->
-                        <rect x="30" y="30" width="0" height="0" fill="rgba(245,158,11,0.2)" stroke="var(--accent)" stroke-width="2" id="squareC"/>
-                        <text x="10" y="20" fill="var(--accent)" font-size="14" id="squareCText">c² = ?</text>
+                        <!-- Sudut siku-siku -->
+                        <line x1="50" y1="170" x2="70" y2="170" stroke="white" stroke-width="2"/>
+                        <line x1="50" y1="170" x2="50" y2="150" stroke="white" stroke-width="2"/>
                     </svg>
                 </div>
                 
-                <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 30px; min-width: 220px;">
-                    <p style="font-weight: 800; margin-bottom: 15px;">Nilai Sisi:</p>
-                    <p style="display: flex; justify-content: space-between;">
-                        <span>a = </span>
-                        <span id="valA" style="color: var(--primary-light); font-weight: 700;">3.0</span>
-                    </p>
-                    <p style="display: flex; justify-content: space-between;">
-                        <span>b = </span>
-                        <span id="valB" style="color: var(--primary-light); font-weight: 700;">4.0</span>
-                    </p>
-                    <p style="display: flex; justify-content: space-between;">
-                        <span style="color: var(--accent);">c = </span>
-                        <span id="valC" style="color: var(--accent); font-weight: 700;">5.0</span>
-                    </p>
+                <div class="squares-visual">
+                    <div class="square-item">
+                        <div class="square-color a"></div>
+                        <div class="square-text">
+                            <span>Luas a² = </span>
+                            <strong id="squareAValue">9.0</strong>
+                        </div>
+                    </div>
+                    <div class="square-item">
+                        <div class="square-color b"></div>
+                        <div class="square-text">
+                            <span>Luas b² = </span>
+                            <strong id="squareBValue">16.0</strong>
+                        </div>
+                    </div>
+                    <div class="square-item">
+                        <div class="square-color c"></div>
+                        <div class="square-text">
+                            <span>Luas c² = </span>
+                            <strong id="squareCValue">25.0</strong>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="side-control">
                 <div class="control-item">
-                    <label>Sisi a (tegak)</label>
+                    <label><i class="fas fa-arrow-up"></i> Sisi a (tegak)</label>
                     <input type="range" id="sideA" min="1" max="12" value="3" step="0.1">
-                    <span style="display: block; font-weight: 700; margin-top: 10px; color: var(--primary-light);" id="showA">3.0</span>
+                    <div class="value-badge" id="showA">3.0</div>
                 </div>
                 <div class="control-item">
-                    <label>Sisi b (alas)</label>
+                    <label><i class="fas fa-arrow-right"></i> Sisi b (alas)</label>
                     <input type="range" id="sideB" min="1" max="12" value="4" step="0.1">
-                    <span style="display: block; font-weight: 700; margin-top: 10px; color: var(--primary-light);" id="showB">4.0</span>
+                    <div class="value-badge" id="showB">4.0</div>
                 </div>
             </div>
 
             <div class="proof-result">
-                <span>\(a^2 + b^2 =\) <span id="calcLeft">9 + 16 = 25</span> &nbsp;&nbsp; | &nbsp;&nbsp; \(c^2 =\) <span id="calcRight">25</span></span>
+                <span>\(a^2 + b^2 =\) </span><span id="calcLeft">9 + 16 = 25</span><br>
+                <span>\(c^2 =\) </span><span id="calcRight">25</span>
             </div>
             
-            <div style="display: flex; justify-content: center; margin-top: 20px;">
-                <span style="background: rgba(34,197,94,0.2); color: #22c55e; padding: 12px 30px; border-radius: 60px; font-weight: 700;">
+            <div class="verification-badge">
+                <div class="verified" id="verificationBadge">
                     <i class="fas fa-check-circle"></i> Terbukti: a² + b² = c²
-                </span>
+                </div>
             </div>
         </div>
 
@@ -658,48 +986,56 @@
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-                <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-dark); background: var(--primary-soft); padding: 30px; border-radius: 30px; display: inline-block;">
+                <div style="font-size: 2.8rem; font-weight: 800; color: var(--primary-dark); background: linear-gradient(135deg, var(--primary-soft), white); padding: 35px; border-radius: 40px; display: inline-block; border: 2px solid var(--primary-light); box-shadow: var(--shadow);">
                     \(c^2 = a^2 + b^2\)
                 </div>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: var(--primary); margin-bottom: 15px;"><i class="fas fa-check-circle"></i> Jika mencari sisi miring (c):</h4>
-                    <p style="font-size: 1.3rem; font-weight: 700; text-align: center;">\(c = \sqrt{a^2 + b^2}\)</p>
+            <div class="formula-grid">
+                <div class="formula-card">
+                    <h4><i class="fas fa-arrow-up"></i> Mencari sisi miring (c)</h4>
+                    <div class="formula-display">
+                        \(c = \sqrt{a^2 + b^2}\)
+                    </div>
                 </div>
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: var(--primary); margin-bottom: 15px;"><i class="fas fa-check-circle"></i> Jika mencari sisi tegak (a):</h4>
-                    <p style="font-size: 1.3rem; font-weight: 700; text-align: center;">\(a = \sqrt{c^2 - b^2}\)</p>
+                <div class="formula-card">
+                    <h4><i class="fas fa-arrow-left"></i> Mencari sisi tegak (a)</h4>
+                    <div class="formula-display">
+                        \(a = \sqrt{c^2 - b^2}\)
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Card: Uji Pemahaman -->
         <div class="quiz-mini">
-            <h3 style="font-size: 1.6rem; margin-bottom: 20px; color: var(--primary);">⚡ Uji Pemahaman</h3>
+            <h3></i> Uji Pemahaman</h3>
             
-            <p style="margin-bottom: 25px; font-size: 1.2rem;">Sebuah segitiga siku-siku memiliki sisi tegak 6 cm dan 8 cm. Berapakah panjang sisi miringnya?</p>
+            <div class="quiz-question">
+                <strong>Soal 1:</strong> Sebuah segitiga siku-siku memiliki sisi tegak 6 cm dan 8 cm. Berapakah panjang sisi miringnya?
+            </div>
             
-            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 30px;">
+            <div class="quiz-options">
                 <button onclick="checkConceptQuiz(1, 1)" class="quiz-btn">A. 9 cm</button>
                 <button onclick="checkConceptQuiz(1, 2)" class="quiz-btn">B. 10 cm</button>
                 <button onclick="checkConceptQuiz(1, 3)" class="quiz-btn">C. 11 cm</button>
                 <button onclick="checkConceptQuiz(1, 4)" class="quiz-btn">D. 12 cm</button>
             </div>
             
-            <div id="quizFeedback1" style="margin-top: 20px; padding: 15px; border-radius: 16px; font-weight: 600; display: none;"></div>
+            <div id="quizFeedback1" class="quiz-feedback"></div>
             
-            <p style="margin-top: 40px; margin-bottom: 25px; font-size: 1.2rem;">Jika sisi miring 13 cm dan salah satu sisi tegak 5 cm, berapakah sisi tegak lainnya?</p>
+            <div class="quiz-question" style="margin-top: 40px;">
+                <strong>Soal 2:</strong> Jika sisi miring 13 cm dan salah satu sisi tegak 5 cm, berapakah sisi tegak lainnya?
+            </div>
             
-            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <div class="quiz-options">
                 <button onclick="checkConceptQuiz(2, 1)" class="quiz-btn">A. 10 cm</button>
                 <button onclick="checkConceptQuiz(2, 2)" class="quiz-btn">B. 11 cm</button>
                 <button onclick="checkConceptQuiz(2, 3)" class="quiz-btn">C. 12 cm</button>
                 <button onclick="checkConceptQuiz(2, 4)" class="quiz-btn">D. 14 cm</button>
             </div>
             
-            <div id="quizFeedback2" style="margin-top: 20px; padding: 15px; border-radius: 16px; font-weight: 600; display: none;"></div>
+            <div id="quizFeedback2" class="quiz-feedback"></div>
         </div>
 
         <!-- Pagination Footer -->
@@ -714,8 +1050,8 @@
     </main>
 
     <footer>
-        <p>© 2024 MathMaster8 - Menemukan Konsep Pythagoras | Kurikulum Merdeka</p>
-        <p style="margin-top: 8px; opacity: 0.6;">"Penemuan adalah melihat apa yang semua orang lihat dan memikirkan apa yang tidak dipikirkan orang lain." - Pythagoras</p>
+        <p>© 2026 MathMaster - Menemukan Konsep Pythagoras | Kurikulum Merdeka</p>
+        <p>"Penemuan adalah melihat apa yang semua orang lihat dan memikirkan apa yang tidak dipikirkan orang lain." - Pythagoras</p>
     </footer>
 
     <script>
@@ -727,63 +1063,41 @@
             document.getElementById('progressBar').style.width = scrolled + "%";
         };
 
-        // Interactive slider for proof
+        // Interactive slider for proof - DIPERBAIKI
         const aSlider = document.getElementById('sideA');
         const bSlider = document.getElementById('sideB');
         const showA = document.getElementById('showA');
         const showB = document.getElementById('showB');
-        const valA = document.getElementById('valA');
-        const valB = document.getElementById('valB');
-        const valC = document.getElementById('valC');
+        const squareAValue = document.getElementById('squareAValue');
+        const squareBValue = document.getElementById('squareBValue');
+        const squareCValue = document.getElementById('squareCValue');
         const calcLeft = document.getElementById('calcLeft');
         const calcRight = document.getElementById('calcRight');
-        
-        // Elemen persegi untuk visualisasi
-        const squareA = document.getElementById('squareA');
-        const squareB = document.getElementById('squareB');
-        const squareC = document.getElementById('squareC');
-        const squareAText = document.getElementById('squareAText');
-        const squareBText = document.getElementById('squareBText');
-        const squareCText = document.getElementById('squareCText');
+        const verificationBadge = document.getElementById('verificationBadge');
 
         function updateTriangle() {
             let a = parseFloat(aSlider.value);
             let b = parseFloat(bSlider.value);
-            let c = Math.sqrt(a*a + b*b).toFixed(2);
+            let c = Math.sqrt(a*a + b*b);
             
+            // Update nilai yang ditampilkan
             showA.innerText = a.toFixed(1);
             showB.innerText = b.toFixed(1);
-            valA.innerText = a.toFixed(1);
-            valB.innerText = b.toFixed(1);
-            valC.innerText = c;
-
-            let leftVal = (a*a).toFixed(1) + " + " + (b*b).toFixed(1) + " = " + (a*a + b*b).toFixed(1);
-            calcLeft.innerText = leftVal;
-            calcRight.innerText = (c*c).toFixed(2);
             
-            // Update visualisasi persegi (sederhana)
-            let scale = 5; // Faktor skala untuk visualisasi
-            squareA.setAttribute('width', a * scale);
-            squareA.setAttribute('height', a * scale);
-            squareAText.setAttribute('x', 15);
-            squareAText.setAttribute('y', 200);
-            squareAText.textContent = `a² = ${(a*a).toFixed(1)}`;
+            // Update luas persegi
+            squareAValue.innerText = (a*a).toFixed(1);
+            squareBValue.innerText = (b*b).toFixed(1);
+            squareCValue.innerText = (c*c).toFixed(1);
             
-            squareB.setAttribute('width', b * scale);
-            squareB.setAttribute('height', b * scale);
-            squareB.setAttribute('x', 170);
-            squareB.setAttribute('y', 170 - b * scale);
-            squareBText.setAttribute('x', 190);
-            squareBText.setAttribute('y', 200);
-            squareBText.textContent = `b² = ${(b*b).toFixed(1)}`;
+            // Update perhitungan
+            let leftCalc = `${(a*a).toFixed(1)} + ${(b*b).toFixed(1)} = ${(a*a + b*b).toFixed(1)}`;
+            calcLeft.innerText = leftCalc;
+            calcRight.innerText = (c*c).toFixed(1);
             
-            squareC.setAttribute('width', c * scale);
-            squareC.setAttribute('height', c * scale);
-            squareC.setAttribute('x', 30);
-            squareC.setAttribute('y', 30);
-            squareCText.setAttribute('x', 10);
-            squareCText.setAttribute('y', 20);
-            squareCText.textContent = `c² = ${(c*c).toFixed(1)}`;
+            // Verifikasi selalu true karena c dihitung dari a dan b
+            verificationBadge.innerHTML = '<i class="fas fa-check-circle"></i> Terbukti: a² + b² = c²';
+            verificationBadge.style.background = 'rgba(34,197,94,0.15)';
+            verificationBadge.style.color = '#4ade80';
         }
 
         aSlider.addEventListener('input', updateTriangle);
@@ -792,18 +1106,18 @@
         // Inisialisasi
         updateTriangle();
 
-        // Quiz function
+        // Quiz function - DIPERBAIKI
         function checkConceptQuiz(quizNum, answer) {
             if (quizNum === 1) {
                 let fb = document.getElementById('quizFeedback1');
                 fb.style.display = 'block';
                 if (answer === 2) {
                     fb.innerHTML = '✅ Benar! c = √(6² + 8²) = √(36 + 64) = √100 = 10 cm.';
-                    fb.style.background = '#dcfce7';
+                    fb.style.background = 'var(--success-soft)';
                     fb.style.color = '#166534';
                 } else {
                     fb.innerHTML = '❌ Coba lagi! Ingat rumus c² = a² + b².';
-                    fb.style.background = '#fee2e2';
+                    fb.style.background = 'var(--danger-soft)';
                     fb.style.color = '#b91c1c';
                 }
             } else if (quizNum === 2) {
@@ -811,11 +1125,11 @@
                 fb.style.display = 'block';
                 if (answer === 3) {
                     fb.innerHTML = '✅ Benar! a = √(13² - 5²) = √(169 - 25) = √144 = 12 cm.';
-                    fb.style.background = '#dcfce7';
+                    fb.style.background = 'var(--success-soft)';
                     fb.style.color = '#166534';
                 } else {
                     fb.innerHTML = '❌ Coba lagi! Gunakan rumus a = √(c² - b²).';
-                    fb.style.background = '#fee2e2';
+                    fb.style.background = 'var(--danger-soft)';
                     fb.style.color = '#b91c1c';
                 }
             }

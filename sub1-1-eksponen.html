@@ -3,60 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sifat-Sifat Eksponen | MathMaster8</title>
+    <title>Sifat-Sifat Eksponen | MathMaster</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            chtml: {
+                scale: 1.2,
+                minScale: 0.8
+            }
+        };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
         /* =========================================
-           1. VARIABLES & CORE STYLING (KONSISTEN)
+           1. VARIABLES & CORE STYLING - HIJAU SERAGAM
            ========================================= */
         :root {
             --primary: #0d9488;
             --primary-light: #14b8a6;
             --primary-soft: #ccfbf1;
             --primary-dark: #0f766e;
-            --accent: #f59e0b;
+            --accent: #0d9488;
+            --accent-light: #14b8a6;
+            --accent-soft: #ccfbf1;
+            --accent-dark: #0f766e;
             --success: #22c55e;
+            --success-soft: #dcfce7;
             --danger: #ef4444;
+            --danger-soft: #fee2e2;
             --dark: #0f172a;
             --text-main: #334155;
             --text-muted: #64748b;
+            --text-light: #94a3b8;
             --bg-page: #f8fafc;
             --white: #ffffff;
+            --gray-50: #f8fafc;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
             --gray-300: #cbd5e1;
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
-            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --shadow-md: 0 15px 35px -10px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.2);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --border-radius: 24px;
-            --border-radius-lg: 32px;
+            --border-radius: 28px;
+            --border-radius-lg: 40px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-page);
+            background: linear-gradient(135deg, var(--bg-page) 0%, #ffffff 100%);
             color: var(--text-main);
             line-height: 1.7;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
         }
 
         /* =========================================
-           2. NAVIGATION (KONSISTEN)
+           2. TYPOGRAPHY
+           ========================================= */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+        }
+
+        /* =========================================
+           3. NAVIGATION
            ========================================= */
         .top-bar {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(12px);
             padding: 16px 5%;
             display: flex;
             align-items: center;
@@ -77,11 +114,19 @@
             font-weight: 700;
             font-size: 0.95rem;
             transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 40px;
+            background: var(--primary-soft);
         }
 
         .back-link:hover {
+            background: var(--primary);
+            color: white;
             transform: translateX(-6px);
-            color: var(--primary-dark);
+        }
+
+        .back-link i {
+            font-size: 0.9rem;
         }
 
         .chapter-badge {
@@ -89,277 +134,20 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--primary);
+            color: var(--primary-dark);
             background: var(--primary-soft);
-            padding: 6px 18px;
+            padding: 8px 22px;
             border-radius: 60px;
-        }
-
-        /* =========================================
-           3. HERO SECTION (KONSISTEN)
-           ========================================= */
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 60px 5% 80px;
-            text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .hero-section p {
-            font-size: 1.1rem;
-            opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* =========================================
-           4. MAIN CONTAINER
-           ========================================= */
-        .container {
-            max-width: 1000px;
-            margin: 40px auto 60px;
-            padding: 0 25px;
-        }
-
-        /* =========================================
-           5. CONTENT CARD (KONSISTEN)
-           ========================================= */
-        .content-card {
-            background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            margin-bottom: 35px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-200);
-            transition: var(--transition);
-        }
-
-        .content-card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-3px);
-        }
-
-        .section-title {
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 25px;
+            gap: 8px;
         }
 
-        .section-title i {
-            color: var(--primary);
-            font-size: 2rem;
-        }
-
-        .section-badge {
-            display: inline-block;
-            background: var(--primary-soft);
-            color: var(--primary-dark);
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 6px 20px;
-            border-radius: 60px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        /* =========================================
-           6. VIDEO CONTAINER
-           ========================================= */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            border-radius: 20px;
-            overflow: hidden;
-            margin: 30px 0;
-            background: #000;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* =========================================
-           7. FORMULA GRID
-           ========================================= */
-        .formula-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .formula-card {
-            background: var(--bg-page);
-            border-radius: 20px;
-            padding: 30px;
-            border-left: 6px solid var(--primary);
-            transition: var(--transition);
-            border: 1px solid var(--gray-200);
-            border-left-width: 6px;
-        }
-
-        .formula-card:hover {
-            background: var(--white);
-            box-shadow: var(--shadow);
-            transform: translateY(-5px);
-        }
-
-        .formula-card h4 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .formula-card h4 i {
-            color: var(--primary);
-        }
-
-        .formula-card p {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .math-display {
-            background: var(--white);
-            padding: 20px;
-            border-radius: 12px;
-            margin: 15px 0;
-            border: 1px dashed var(--primary);
-            font-size: 1.3rem;
-            text-align: center;
-            font-weight: 600;
-            color: var(--primary-dark);
-        }
-
-        .example-box {
-            background: var(--primary-soft);
-            border-left: 4px solid var(--primary);
-            padding: 15px;
-            border-radius: 10px;
+        .chapter-badge i {
             font-size: 0.9rem;
-            margin-top: 15px;
         }
 
-        /* =========================================
-           8. QUIZ PREVIEW
-           ========================================= */
-        .quiz-preview {
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            color: white;
-            border-radius: 40px;
-            padding: 50px;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .quiz-preview h2 {
-            color: var(--primary-light);
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        .quiz-options {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 30px 0;
-        }
-
-        .btn-check {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 14px 32px;
-            border-radius: 60px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 1rem;
-        }
-
-        .btn-check:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-            border-color: var(--primary);
-        }
-
-        #quiz-result {
-            margin-top: 25px;
-            padding: 20px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        /* =========================================
-           9. PAGINATION FOOTER
-           ========================================= */
-        .page-footer {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 60px;
-            padding-top: 40px;
-            border-top: 2px solid var(--gray-200);
-        }
-
-        .nav-btn {
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: var(--white);
-            padding: 14px 32px;
-            border-radius: 60px;
-            color: var(--dark);
-            font-weight: 600;
-            transition: var(--transition);
-            border: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .nav-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: translateX(-3px);
-        }
-
-        .nav-btn.right:hover {
-            transform: translateX(3px);
-        }
-
-        /* =========================================
-           10. PROGRESS BAR
-           ========================================= */
+        /* Progress Bar */
         .progress-container {
             width: 100%;
             height: 4px;
@@ -372,9 +160,349 @@
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(to right, var(--primary), var(--accent));
+            background: linear-gradient(to right, var(--primary), var(--accent-light));
             width: 0%;
             transition: width 0.1s;
+        }
+
+        /* =========================================
+           4. HERO SECTION - HIJAU
+           ========================================= */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 70px 5% 90px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .hero-section::before {
+            content: "xⁿ";
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 15rem;
+            font-weight: 800;
+            color: rgba(255,255,255,0.1);
+            transform: rotate(15deg);
+            pointer-events: none;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           5. MAIN CONTAINER
+           ========================================= */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto 60px;
+            padding: 0 25px;
+        }
+
+        /* =========================================
+           6. CONTENT CARD
+           ========================================= */
+        .content-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 45px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .content-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, transparent 50%, var(--primary-soft) 100%);
+            opacity: 0.3;
+            border-radius: 0 0 0 150px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .section-title i {
+            color: var(--primary);
+            font-size: 2.2rem;
+            background: var(--primary-soft);
+            padding: 15px;
+            border-radius: 20px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-soft) 0%, #fff 100%);
+            color: var(--primary-dark);
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 8px 25px;
+            border-radius: 60px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border: 1px solid var(--primary-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* =========================================
+           7. VIDEO CONTAINER
+           ========================================= */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 24px;
+            overflow: hidden;
+            margin: 30px 0 20px;
+            background: #000;
+            box-shadow: var(--shadow-md);
+            border: 3px solid var(--primary-light);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* =========================================
+           8. FORMULA GRID
+           ========================================= */
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .formula-card {
+            background: var(--gray-50);
+            border-radius: 24px;
+            padding: 30px;
+            border-left: 6px solid var(--primary);
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            border-left-width: 6px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .formula-card:hover {
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .formula-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .formula-card h4 i {
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+
+        .formula-card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .math-display {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 16px;
+            margin: 15px 0;
+            border: 2px dashed var(--primary);
+            font-size: 1.4rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .math-display mjx-container {
+            font-size: 1.4rem !important;
+        }
+
+        .example-box {
+            background: var(--primary-soft);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            margin-top: 15px;
+        }
+
+        .example-box mjx-container {
+            font-size: 1rem !important;
+        }
+
+        /* =========================================
+           9. QUIZ PREVIEW - HIJAU
+           ========================================= */
+        .quiz-preview {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            color: white;
+            border-radius: 50px;
+            padding: 60px;
+            text-align: center;
+            margin: 40px 0;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-preview::before {
+            content: "?";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 8rem;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .quiz-preview h2 {
+            color: var(--primary-light);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .quiz-preview p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .quiz-options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-check {
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.15);
+            color: white;
+            padding: 16px 35px;
+            border-radius: 70px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+            min-width: 120px;
+        }
+
+        .btn-check:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(13,148,136,0.3);
+        }
+
+        .btn-check mjx-container {
+            color: white !important;
+            font-size: 1.2rem !important;
+        }
+
+        #quiz-result {
+            margin-top: 30px;
+            padding: 20px 30px;
+            border-radius: 70px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        /* =========================================
+           10. PAGINATION FOOTER - HIJAU
+           ========================================= */
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 70px;
+            padding-top: 40px;
+            border-top: 2px dashed var(--gray-300);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            padding: 16px 35px;
+            border-radius: 70px;
+            color: var(--dark);
+            font-weight: 700;
+            transition: var(--transition);
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            font-size: 1rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.right:hover {
+            transform: translateX(5px);
         }
 
         footer {
@@ -382,13 +510,31 @@
             padding: 40px;
             color: var(--text-muted);
             border-top: 1px solid var(--gray-200);
+            background: white;
         }
 
+        /* =========================================
+           13. RESPONSIVE DESIGN
+           ========================================= */
         @media (max-width: 768px) {
-            .hero-section h1 { font-size: 2rem; }
+            .hero-section h1 { font-size: 2.2rem; }
+            .hero-section p { font-size: 1rem; }
             .content-card { padding: 30px; }
+            .section-title { font-size: 1.6rem; }
             .formula-grid { grid-template-columns: 1fr; }
-            .quiz-preview { padding: 30px; }
+            .quiz-preview { padding: 35px; }
+            .quiz-preview h2 { font-size: 1.8rem; }
+            .quiz-options { flex-direction: column; align-items: center; }
+            .btn-check { width: 100%; }
+            .page-footer { flex-direction: column; gap: 15px; align-items: center; }
+            .nav-btn { width: 100%; justify-content: center; }
+            .progress-container { top: 60px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 { font-size: 1.8rem; }
+            .content-card { padding: 20px; }
+            .math-display { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -399,7 +545,7 @@
         <a href="bab1-bilangan-berpangkat.html" class="back-link">
             <i class="fas fa-arrow-left"></i> Kembali ke Bab 1
         </a>
-        <span class="chapter-badge"><i class="fas fa-superscript"></i> Sub 1: Sifat Eksponen</span>
+        <span class="chapter-badge"></i> Sub 1: Sifat Eksponen</span>
     </div>
 
     <!-- Progress Bar -->
@@ -409,8 +555,8 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <h1>🔢 Sifat-Sifat Eksponen</h1>
-        <p>Pelajari aturan perkalian, pembagian, dan perpangkatan pada bilangan berpangkat</p>
+        <h1>Sifat-Sifat Eksponen</h1>
+        <p>Gimana sih aturan mainnya kalau bilangan berpangkat dikali, dibagi, atau dipangkatkan lagi? Cari tahu jawabannya di sini!</p>
     </section>
 
     <!-- Main Content -->
@@ -423,7 +569,7 @@
                 <i class="fas fa-film"></i>
                 <h2>Konsep Dasar Eksponen</h2>
             </div>
-            <p style="margin-bottom: 20px;">Tonton video berikut untuk memahami bagaimana sifat-sifat eksponen bekerja.</p>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">Yuk, kenalan sama eksponen lewat video seru ini! Dijamin langsung ngerti sama sifat-sifatnya yang unik.</p>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/94pc0dh92dA" title="Sifat Eksponen" allowfullscreen></iframe>
             </div>
@@ -482,7 +628,7 @@
                         \(a^0 = 1, \quad a \neq 0\)
                     </div>
                     <div class="example-box">
-                        <strong>Contoh:</strong> \(100^0 = 1\), \((-5)^0 = 1\)
+                        <strong>Contoh:</strong> \(7^0 = 1\), \((-15)^0 = 1\)
                     </div>
                 </div>
             </div>
@@ -490,14 +636,14 @@
 
         <!-- Card: Quiz Interaktif -->
         <div class="quiz-preview">
-            <h2>⚡ Cek Pemahamanmu</h2>
-            <p style="margin-bottom: 25px;">Berapakah hasil dari \((2^2 \times 2^3) \div 2^4\)?</p>
+            <h2>Cek Pemahamanmu</h2>
+            <p>Berapakah hasil dari \((7^2 \times 7^3) \div 7^4\) ?</p>
             
             <div class="quiz-options">
-                <button class="btn-check" onclick="checkAnswer(1)">A. \(2^1\)</button>
-                <button class="btn-check" onclick="checkAnswer(2)">B. \(2^2\)</button>
-                <button class="btn-check" onclick="checkAnswer(3)">C. \(2^4\)</button>
-                <button class="btn-check" onclick="checkAnswer(4)">D. \(2^5\)</button>
+                <button class="btn-check" onclick="checkAnswer(1)">A. \(7^1\)</button>
+                <button class="btn-check" onclick="checkAnswer(2)">B. \(7^2\)</button>
+                <button class="btn-check" onclick="checkAnswer(3)">C. \(7^4\)</button>
+                <button class="btn-check" onclick="checkAnswer(4)">D. \(7^5\)</button>
             </div>
             <div id="quiz-result"></div>
         </div>
@@ -514,7 +660,7 @@
     </main>
 
     <footer>
-        <p>© 2024 MathMaster8 - Sifat Eksponen | Kurikulum Merdeka</p>
+        <p>© 2026 MathMaster - Sifat Eksponen | Kurikulum Merdeka</p>
     </footer>
 
     <script>
@@ -530,12 +676,12 @@
         function checkAnswer(val) {
             const result = document.getElementById('quiz-result');
             if(val === 1) {
-                result.innerHTML = "✅ Benar! (2⁵ ÷ 2⁴ = 2¹)";
-                result.style.backgroundColor = "rgba(34,197,94,0.2)";
+                result.innerHTML = "✅ Benar! (7⁵ ÷ 7⁴ = 7¹)";
+                result.style.background = "rgba(34,197,94,0.2)";
                 result.style.color = "#22c55e";
             } else {
-                result.innerHTML = "❌ Salah. Ingat: perkalian = pangkat ditambah, pembagian = pangkat dikurang.";
-                result.style.backgroundColor = "rgba(239,68,68,0.2)";
+                result.innerHTML = "❌ Salah. Ingat : perkalian = pangkat ditambah, pembagian = pangkat dikurang.";
+                result.style.background = "rgba(239,68,68,0.2)";
                 result.style.color = "#ef4444";
             }
         }

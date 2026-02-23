@@ -3,63 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menyelesaikan Persamaan Linier Satu Variabel | MathMaster8</title>
+    <title>Menyelesaikan Persamaan Linier Satu Variabel | MathMaster</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            chtml: {
+                scale: 1.2,
+                minScale: 0.8
+            }
+        };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
         /* =========================================
-           1. VARIABLES & CORE STYLING (KONSISTEN)
+           1. VARIABLES & CORE STYLING - BIRU PREMIUM
            ========================================= */
         :root {
-            --primary: #0d9488;
-            --primary-light: #14b8a6;
-            --primary-soft: #ccfbf1;
-            --primary-dark: #0f766e;
-            --tertiary: #8b5cf6;
-            --tertiary-light: #a78bfa;
-            --tertiary-soft: #ede9fe;
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-soft: #dbeafe;
+            --primary-dark: #2563eb;
+            --secondary: #8b5cf6;
+            --secondary-light: #a78bfa;
+            --secondary-soft: #ede9fe;
             --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --accent-soft: #fef3c7;
             --success: #22c55e;
+            --success-soft: #dcfce7;
             --danger: #ef4444;
+            --danger-soft: #fee2e2;
+            --warning: #f59e0b;
+            --warning-soft: #fff3cd;
             --dark: #0f172a;
+            --dark-light: #1e293b;
             --text-main: #334155;
             --text-muted: #64748b;
+            --text-light: #94a3b8;
             --bg-page: #f8fafc;
             --white: #ffffff;
+            --gray-50: #f9fafb;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
             --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
-            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(139,92,246,0.15);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --shadow-md: 0 15px 35px -10px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px -15px rgba(59,130,246,0.2);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
+            --border-radius-xl: 40px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-page);
+            background: linear-gradient(135deg, var(--bg-page) 0%, #ffffff 100%);
             color: var(--text-main);
             line-height: 1.7;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
 
         /* =========================================
-           2. NAVIGATION (KONSISTEN)
+           2. NAVIGATION - PREMIUM
            ========================================= */
         .top-bar {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
             padding: 16px 5%;
             display: flex;
             align-items: center;
@@ -75,16 +113,24 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            color: var(--tertiary);
+            color: var(--primary);
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
             transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 40px;
+            background: var(--primary-soft);
         }
 
         .back-link:hover {
+            background: var(--primary);
+            color: white;
             transform: translateX(-6px);
-            color: var(--tertiary);
+        }
+
+        .back-link i {
+            font-size: 0.9rem;
         }
 
         .chapter-badge {
@@ -92,15 +138,20 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--tertiary);
-            background: var(--tertiary-soft);
-            padding: 6px 18px;
+            color: var(--primary-dark);
+            background: var(--primary-soft);
+            padding: 8px 22px;
             border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* =========================================
-           3. PROGRESS BAR
-           ========================================= */
+        .chapter-badge i {
+            font-size: 0.9rem;
+        }
+
+        /* Progress Bar */
         .progress-container {
             width: 100%;
             height: 4px;
@@ -113,51 +164,71 @@
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(to right, var(--tertiary), var(--accent));
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             width: 0%;
             transition: width 0.1s;
         }
 
         /* =========================================
-           4. HERO SECTION
+           3. HERO SECTION - BIRU
            ========================================= */
         .hero-section {
-            background: linear-gradient(135deg, var(--tertiary) 0%, #6d28d9 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 60px 5% 80px;
+            padding: 70px 5% 90px;
             text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-md);
         }
 
         .hero-section::before {
             content: "=";
             position: absolute;
-            font-size: 180px;
+            font-size: 200px;
             top: -40px;
             right: 5%;
-            opacity: 0.08;
+            opacity: 0.1;
             transform: rotate(15deg);
         }
 
+        .hero-section::after {
+            content: "ax + b = c";
+            position: absolute;
+            font-size: 80px;
+            bottom: -20px;
+            left: 5%;
+            opacity: 0.08;
+            transform: rotate(-5deg);
+            font-weight: 800;
+            font-family: 'Times New Roman', serif;
+            white-space: nowrap;
+        }
+
         .hero-section h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 15px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
         }
 
         .hero-section p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.95;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
         }
 
         /* =========================================
-           5. MAIN CONTAINER
+           4. MAIN CONTAINER
            ========================================= */
         .container {
             max-width: 1100px;
@@ -166,63 +237,86 @@
         }
 
         /* =========================================
-           6. CONTENT CARD
+           5. CONTENT CARD
            ========================================= */
         .content-card {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            margin-bottom: 35px;
+            border-radius: var(--border-radius-xl);
+            padding: 45px;
+            margin-bottom: 40px;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-200);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
         .content-card:hover {
             box-shadow: var(--shadow-lg);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .content-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, transparent 50%, var(--primary-soft) 100%);
+            opacity: 0.2;
+            border-radius: 0 0 0 150px;
+            pointer-events: none;
         }
 
         .section-title {
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--dark);
             margin-bottom: 25px;
+            position: relative;
         }
 
         .section-title i {
-            color: var(--tertiary);
-            font-size: 2rem;
+            color: var(--primary);
+            font-size: 2.2rem;
+            background: var(--primary-soft);
+            padding: 15px;
+            border-radius: 20px;
         }
 
         .section-badge {
             display: inline-block;
-            background: var(--tertiary-soft);
-            color: var(--tertiary);
-            font-size: 0.7rem;
+            background: linear-gradient(135deg, var(--primary-soft) 0%, #fff 100%);
+            color: var(--primary-dark);
+            font-size: 0.75rem;
             font-weight: 800;
-            padding: 6px 20px;
+            padding: 8px 25px;
             border-radius: 60px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-bottom: 20px;
+            border: 1px solid var(--primary-light);
+            box-shadow: var(--shadow-sm);
         }
 
         /* =========================================
-           7. VIDEO CONTAINER
+           6. VIDEO CONTAINER
            ========================================= */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            margin: 30px 0;
+            margin: 30px 0 20px;
             background: #000;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
+            border: 3px solid var(--primary-light);
         }
 
         .video-container iframe {
@@ -235,12 +329,12 @@
         }
 
         /* =========================================
-           8. STEP CARDS
+           7. STEP CARDS - DIPERBAIKI
            ========================================= */
         .steps-container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
             margin: 30px 0;
         }
 
@@ -248,31 +342,34 @@
             display: flex;
             gap: 25px;
             align-items: flex-start;
-            background: var(--gray-100);
-            padding: 25px;
-            border-radius: 20px;
-            border-left: 6px solid var(--tertiary);
+            background: linear-gradient(135deg, var(--gray-100), white);
+            padding: 30px;
+            border-radius: 24px;
+            border-left: 6px solid var(--primary);
             transition: var(--transition);
+            box-shadow: var(--shadow-sm);
         }
 
         .step-card:hover {
-            background: var(--white);
-            box-shadow: var(--shadow);
-            transform: translateX(5px);
+            background: white;
+            box-shadow: var(--shadow-lg);
+            transform: translateX(8px) translateY(-3px);
         }
 
         .step-number {
-            background: var(--tertiary);
+            background: var(--primary);
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 800;
             flex-shrink: 0;
+            box-shadow: 0 10px 15px rgba(59,130,246,0.3);
+            border: 3px solid white;
         }
 
         .step-content {
@@ -280,136 +377,259 @@
         }
 
         .step-content h4 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 10px;
-            color: var(--dark);
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .example-box {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 15px;
+            border-left: 4px solid var(--primary);
+            box-shadow: var(--shadow-sm);
+            font-size: 1.1rem;
         }
 
         /* =========================================
-           9. METHOD CARDS
+           8. METHOD CARDS
            ========================================= */
         .method-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
 
         .method-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 25px;
-            border: 1px solid var(--gray-200);
-            border-top: 6px solid var(--tertiary);
+            background: linear-gradient(135deg, var(--white), var(--gray-50));
+            border-radius: 24px;
+            padding: 30px;
+            border-top: 6px solid var(--primary);
             transition: var(--transition);
+            box-shadow: var(--shadow);
         }
 
         .method-card:hover {
-            box-shadow: var(--shadow);
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
         }
 
         .method-icon {
-            background: var(--tertiary-soft);
-            width: 60px;
-            height: 60px;
-            border-radius: 18px;
+            background: var(--primary-soft);
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--tertiary);
-            font-size: 1.8rem;
+            color: var(--primary-dark);
+            font-size: 2rem;
             margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .method-card:hover .method-icon {
+            background: var(--primary);
+            color: white;
+            transform: rotate(5deg);
+        }
+
+        .method-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
         }
 
         .math-example {
             background: var(--gray-100);
             padding: 20px;
             border-radius: 16px;
-            margin-top: 15px;
-            font-family: monospace;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
             font-size: 1.1rem;
+            border-left: 4px solid var(--primary);
         }
 
         /* =========================================
-           10. CALCULATOR SOLVER
+           9. SOLVER INTERAKTIF - DIPERBAIKI
            ========================================= */
         .solver-box {
             background: linear-gradient(145deg, #1e293b, #0f172a);
             color: white;
-            border-radius: 40px;
+            border-radius: 50px;
             padding: 50px;
-            margin-top: 20px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .solver-box::before {
+            content: "⚖️";
+            position: absolute;
+            font-size: 200px;
+            bottom: -30px;
+            right: -20px;
+            opacity: 0.05;
+            transform: rotate(15deg);
         }
 
         .solver-title {
-            color: var(--tertiary-light);
-            font-size: 1.8rem;
+            color: var(--primary-light);
+            font-size: 2rem;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 15px;
+            font-weight: 700;
         }
 
-        .equation-input-area {
+        .solver-visual {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: flex-end;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
             margin: 30px 0;
         }
 
-        .input-field {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .input-field label {
-            display: block;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: var(--gray-300);
-            margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .input-field input {
-            width: 100%;
-            padding: 15px 20px;
+        .equation-builder {
+            background: rgba(255,255,255,0.05);
             border-radius: 60px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.1);
-            color: white;
-            font-size: 1rem;
+            padding: 30px;
+            width: 100%;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .input-field input:focus {
-            outline: none;
-            border-color: var(--tertiary);
+        .equation-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
         }
 
-        .solution-steps {
+        .term-box {
             background: rgba(255,255,255,0.1);
             border-radius: 30px;
-            padding: 30px;
-            margin-top: 30px;
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 15px 25px;
+            min-width: 120px;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.15);
         }
 
-        .solution-step {
+        .term-box input {
+            width: 80px;
+            padding: 8px;
+            border-radius: 30px;
+            border: none;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .operator-box {
+            font-size: 2rem;
+            color: var(--primary-light);
+        }
+
+        .equal-sign {
+            font-size: 2.5rem;
+            color: var(--primary-light);
+            font-weight: 800;
+        }
+
+        .balance-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .balance-scale {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .scale-beam {
+            width: 200px;
+            height: 6px;
+            background: var(--primary-light);
+            border-radius: 3px;
+            position: relative;
+            margin: 10px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .scale-pan-left, .scale-pan-right {
+            width: 60px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid var(--primary-light);
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .scale-value {
+            font-size: 1.3rem;
+            margin-top: 10px;
+            color: var(--primary-light);
+        }
+
+        .step-display {
+            background: rgba(255,255,255,0.08);
+            border-radius: 40px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 2px solid rgba(255,255,255,0.15);
+        }
+
+        .step-header {
             display: flex;
             align-items: center;
             gap: 15px;
-            padding: 10px 0;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+            padding: 15px 25px;
+            border-radius: 60px;
+        }
+
+        .step-header span {
+            background: var(--primary);
+            padding: 5px 15px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .solution-step:last-child {
+        .step-item:last-child {
             border-bottom: none;
         }
 
         .step-badge {
-            background: var(--tertiary);
+            background: var(--primary);
             color: white;
             width: 35px;
             height: 35px;
@@ -421,54 +641,185 @@
             flex-shrink: 0;
         }
 
+        .solution-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 60px;
+        }
+
+        /* =========================================
+           10. VARIASI SOAL
+           ========================================= */
+        .variasi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .variasi-card {
+            background: var(--gray-100);
+            padding: 25px;
+            border-radius: 20px;
+            transition: var(--transition);
+            border-left: 6px solid var(--primary);
+        }
+
+        .variasi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            background: white;
+        }
+
+        .variasi-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .variasi-card p {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 15px 0;
+        }
+
         /* =========================================
            11. LATIHAN SOAL
            ========================================= */
         .practice-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
 
         .practice-card {
-            background: var(--gray-100);
-            border-radius: 20px;
-            padding: 25px;
+            background: linear-gradient(135deg, var(--gray-100), white);
+            border-radius: 24px;
+            padding: 30px;
             transition: var(--transition);
+            border: 1px solid var(--gray-200);
         }
 
         .practice-card:hover {
-            background: var(--white);
-            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .btn-solve {
-            background: var(--tertiary);
-            color: white;
-            border: none;
+        .practice-question {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .options-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .btn-option {
+            background: white;
+            border: 2px solid var(--primary);
             padding: 12px 25px;
             border-radius: 60px;
-            font-weight: 600;
+            font-weight: 700;
+            color: var(--primary);
             cursor: pointer;
             transition: var(--transition);
-            margin-top: 15px;
+            font-size: 1rem;
+            min-width: 70px;
         }
 
-        .btn-solve:hover {
-            background: #6d28d9;
+        .btn-option:hover {
+            background: var(--primary);
+            color: white;
             transform: translateY(-3px);
         }
 
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 16px;
+            display: none;
+            font-weight: 600;
+            text-align: center;
+        }
+
         /* =========================================
-           12. PAGINATION FOOTER
+           12. KESALAHAN UMUM
+           ========================================= */
+        .error-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .error-card {
+            padding: 30px;
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .error-card.wrong {
+            background: linear-gradient(135deg, #fee2e2, #fff5f5);
+            border-left: 6px solid var(--danger);
+        }
+
+        .error-card.correct {
+            background: linear-gradient(135deg, #dcfce7, #f0fdf4);
+            border-left: 6px solid var(--success);
+        }
+
+        .error-card h4 {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .error-list {
+            list-style: none;
+        }
+
+        .error-list li {
+            margin-bottom: 12px;
+            padding: 10px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tips-box {
+            background: linear-gradient(135deg, var(--primary-soft), white);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 30px;
+            border-left: 6px solid var(--primary);
+        }
+
+        /* =========================================
+           13. PAGINATION FOOTER
            ========================================= */
         .page-footer {
             display: flex;
             justify-content: space-between;
-            margin-top: 60px;
+            margin-top: 70px;
             padding-top: 40px;
-            border-top: 2px solid var(--gray-200);
+            border-top: 2px dashed var(--gray-300);
         }
 
         .nav-btn {
@@ -476,34 +827,59 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--white);
-            padding: 14px 32px;
-            border-radius: 60px;
+            background: white;
+            padding: 16px 35px;
+            border-radius: 70px;
             color: var(--dark);
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
             border: 1px solid var(--gray-200);
             box-shadow: var(--shadow-sm);
+            font-size: 1rem;
         }
 
         .nav-btn:hover {
-            background: var(--tertiary);
+            background: var(--primary);
             color: white;
-            border-color: var(--tertiary);
+            border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.right:hover {
+            transform: translateX(5px);
         }
 
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 50px 20px;
             color: var(--text-muted);
             border-top: 1px solid var(--gray-200);
+            margin-top: 40px;
+            background: white;
         }
 
+        footer p:last-child {
+            font-style: italic;
+            max-width: 700px;
+            margin: 15px auto 0;
+            opacity: 0.7;
+        }
+
+        /* =========================================
+           14. RESPONSIVE
+           ========================================= */
         @media (max-width: 768px) {
-            .hero-section h1 { font-size: 2rem; }
+            .hero-section h1 { font-size: 2.2rem; }
+            .hero-section p { font-size: 1rem; }
             .content-card { padding: 30px; }
+            .section-title { font-size: 1.6rem; }
             .step-card { flex-direction: column; }
             .solver-box { padding: 30px; }
+            .error-grid { grid-template-columns: 1fr; }
+            .practice-grid { grid-template-columns: 1fr; }
+            .page-footer { flex-direction: column; gap: 15px; align-items: center; }
+            .nav-btn { width: 100%; justify-content: center; }
+            .progress-container { top: 60px; }
         }
     </style>
 </head>
@@ -514,7 +890,7 @@
         <a href="bab3-plsv-ptlsv.html" class="back-link">
             <i class="fas fa-arrow-left"></i> Kembali ke Bab 3
         </a>
-        <span class="chapter-badge"><i class="fas fa-calculator"></i> Sub B: Menyelesaikan PLSV</span>
+        <span class="chapter-badge"></i> Sub 2: Menyelesaikan PLSV</span>
     </div>
 
     <!-- Progress Bar -->
@@ -524,7 +900,7 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <h1>🧮 Menyelesaikan Persamaan Linier Satu Variabel</h1>
+        <h1>Menyelesaikan Persamaan Linier Satu Variabel</h1>
         <p>Tahapan sistematis: penjumlahan, pengurangan, perkalian, pembagian, dan kasus khusus</p>
     </section>
 
@@ -538,12 +914,14 @@
                 <i class="fas fa-film"></i>
                 <h2>Cara Menyelesaikan PLSV</h2>
             </div>
-            <p style="margin-bottom: 20px;">Pelajari langkah-langkah sistematis dalam menyelesaikan berbagai bentuk PLSV.</p>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">Pelajari langkah-langkah sistematis dalam menyelesaikan berbagai bentuk PLSV.</p>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/wlNman8dmZQ" title="Menyelesaikan PLSV" allowfullscreen></iframe>
             </div>
-            <div style="margin-top: 25px; padding: 20px; background: var(--tertiary-soft); border-radius: 20px;">
-                <p style="font-weight: 700; color: var(--tertiary);"><i class="fas fa-lightbulb"></i> Prinsip Utama:</p>
+            <div style="margin-top: 25px; padding: 20px; background: var(--primary-soft); border-radius: 20px; border-left: 6px solid var(--primary);">
+                <p style="font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-lightbulb"></i> Prinsip Utama:
+                </p>
                 <p style="margin-top: 5px;">"Apa pun yang dilakukan di ruas kiri, harus dilakukan juga di ruas kanan."</p>
             </div>
         </div>
@@ -560,12 +938,13 @@
                 <div class="step-card">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <h4>Penjumlahan/Pengurangan</h4>
+                        <h4><i class="fas fa-plus-circle" style="color: var(--primary);"></i> Penjumlahan/Pengurangan</h4>
                         <p>Tambahkan atau kurangkan kedua ruas dengan bilangan yang sama untuk mengeliminasi konstanta.</p>
-                        <div style="background: var(--white); padding: 15px; border-radius: 12px; margin-top: 10px;">
-                            <p><strong>Contoh:</strong> x + 5 = 12</p>
-                            <p>x + 5 - 5 = 12 - 5</p>
-                            <p>x = 7</p>
+                        <div class="example-box">
+                            <p><strong>Contoh:</p>
+                            <p></strong> \(x + 5 = 12\)</p>
+                            <p>\(x + 5 - 5 = 12 - 5\)</p>
+                            <p>\(x = 7\)</p>
                         </div>
                     </div>
                 </div>
@@ -573,12 +952,13 @@
                 <div class="step-card">
                     <div class="step-number">2</div>
                     <div class="step-content">
-                        <h4>Perkalian/Pembagian</h4>
+                        <h4><i class="fas fa-times-circle" style="color: var(--primary);"></i> Perkalian/Pembagian</h4>
                         <p>Kalikan atau bagi kedua ruas dengan bilangan yang sama (bukan nol) untuk mendapatkan koefisien 1.</p>
-                        <div style="background: var(--white); padding: 15px; border-radius: 12px; margin-top: 10px;">
-                            <p><strong>Contoh:</strong> 3x = 15</p>
-                            <p>3x ÷ 3 = 15 ÷ 3</p>
-                            <p>x = 5</p>
+                        <div class="example-box">
+                            <p><strong>Contoh:</p>
+                            <p></strong> \(3x = 15\)</p>
+                            <p>\(3x \div 3 = 15 \div 3\)</p>
+                            <p>\(x = 5\)</p>
                         </div>
                     </div>
                 </div>
@@ -586,12 +966,13 @@
                 <div class="step-card">
                     <div class="step-number">3</div>
                     <div class="step-content">
-                        <h4>Variabel di Kedua Ruas</h4>
+                        <h4><i class="fas fa-code-branch" style="color: var(--primary);"></i> Variabel di Kedua Ruas</h4>
                         <p>Kumpulkan semua suku yang mengandung variabel di satu ruas, konstanta di ruas lain.</p>
-                        <div style="background: var(--white); padding: 15px; border-radius: 12px; margin-top: 10px;">
-                            <p><strong>Contoh:</strong> 2x + 3 = x + 7</p>
-                            <p>2x - x + 3 = x - x + 7</p>
-                            <p>x + 3 = 7 → x = 4</p>
+                        <div class="example-box">
+                            <p><strong>Contoh:</p>
+                            <p></strong> \(2x + 3 = x + 7\)</p>
+                            <p>\(2x - x + 3 = x - x + 7\)</p>
+                            <p>\(x + 3 = 7 \rightarrow x = 4\)</p>
                         </div>
                     </div>
                 </div>
@@ -599,12 +980,13 @@
                 <div class="step-card">
                     <div class="step-number">4</div>
                     <div class="step-content">
-                        <h4>Bentuk Pecahan</h4>
+                        <h4><i class="fas fa-fraction" style="color: var(--primary);"></i> Bentuk Pecahan</h4>
                         <p>Kalikan kedua ruas dengan KPK penyebut untuk menghilangkan pecahan.</p>
-                        <div style="background: var(--white); padding: 15px; border-radius: 12px; margin-top: 10px;">
-                            <p><strong>Contoh:</strong> (1/2)x = 4</p>
-                            <p>(1/2)x × 2 = 4 × 2</p>
-                            <p>x = 8</p>
+                        <div class="example-box">
+                            <p><strong>Contoh:</p>
+                            <p></strong> \(\frac{1}{2}x = 4\)</p>
+                            <p>\(\frac{1}{2}x \times 2 = 4 \times 2\)</p>
+                            <p>\(x = 8\)</p>
                         </div>
                     </div>
                 </div>
@@ -624,14 +1006,14 @@
                     <div class="method-icon">
                         <i class="fas fa-balance-scale"></i>
                     </div>
-                    <h3 style="margin-bottom: 10px;">Metode Timbangan</h3>
-                    <p>Visualisasi dengan keseimbangan kedua ruas.</p>
+                    <h3>Metode Timbangan</h3>
+                    <p>Visualisasi dengan keseimbangan kedua ruas. Operasi yang sama di kedua sisi.</p>
                     <div class="math-example">
-                        2x + 1 = 7<br>
-                        2x + 1 - 1 = 7 - 1<br>
-                        2x = 6<br>
-                        2x ÷ 2 = 6 ÷ 2<br>
-                        x = 3
+                        \(2x + 1 = 7\)<br>
+                        \(2x + 1 - 1 = 7 - 1\)<br>
+                        \(2x = 6\)<br>
+                        \(2x \div 2 = 6 \div 2\)<br>
+                        \(x = 3\)
                     </div>
                 </div>
                 
@@ -639,80 +1021,65 @@
                     <div class="method-icon">
                         <i class="fas fa-exchange-alt"></i>
                     </div>
-                    <h3 style="margin-bottom: 10px;">Metode Pindah Ruas</h3>
-                    <p>Memindahkan suku dengan mengubah tanda.</p>
+                    <h3>Metode Pindah Ruas</h3>
+                    <p>Memindahkan suku dengan mengubah tanda (+ jadi -, × jadi ÷).</p>
                     <div class="math-example">
-                        2x + 1 = 7<br>
-                        2x = 7 - 1<br>
-                        2x = 6<br>
-                        x = 6 ÷ 2<br>
-                        x = 3
-                    </div>
-                </div>
-                
-                <div class="method-card">
-                    <div class="method-icon">
-                        <i class="fas fa-fraction"></i>
-                    </div>
-                    <h3 style="margin-bottom: 10px;">Bentuk Pecahan</h3>
-                    <p>Mengalikan dengan penyebut.</p>
-                    <div class="math-example">
-                        x/3 = 4<br>
-                        x/3 × 3 = 4 × 3<br>
-                        x = 12
+                        \(2x + 1 = 7\)<br>
+                        \(2x = 7 - 1\)<br>
+                        \(2x = 6\)<br>
+                        \(x = 6 \div 2\)<br>
+                        \(x = 3\)
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Card: Kalkulator PLSV Interaktif -->
+        <!-- Card: Kalkulator PLSV Interaktif - DIPERBAIKI -->
         <div class="solver-box">
             <div class="solver-title">
                 <i class="fas fa-calculator"></i>
-                <h2 style="color: white; margin: 0;">Kalkulator PLSV</h2>
+                <h2 style="color: white; margin: 0;">Kalkulator PLSV Interaktif</h2>
             </div>
-            <p style="margin-bottom: 25px; opacity: 0.9;">Masukkan persamaan dalam bentuk ax + b = c atau ax + b = cx + d</p>
+            <p style="margin-bottom: 25px; opacity: 0.9; font-size: 1.1rem;">Geser nilai a, b, dan c untuk melihat perubahan secara real-time pada persamaan \(ax + b = c\)</p>
             
-            <div class="equation-input-area">
-                <div class="input-field">
-                    <label>Persamaan</label>
-                    <input type="text" id="equationInput" placeholder="Contoh: 2x + 3 = 7" value="2x + 3 = 7">
+            <div class="equation-builder">
+                <div class="equation-row">
+                    <div class="term-box">
+                        <input type="number" id="coeffA" value="2" step="any" oninput="solveEquation()"> x
+                    </div>
+                    <div class="operator-box">+</div>
+                    <div class="term-box">
+                        <input type="number" id="constB" value="3" step="any" oninput="solveEquation()">
+                    </div>
+                    <div class="equal-sign">=</div>
+                    <div class="term-box">
+                        <input type="number" id="constC" value="7" step="any" oninput="solveEquation()">
+                    </div>
                 </div>
-                <button onclick="solveEquation()" style="background: var(--tertiary); color: white; border: none; padding: 15px 35px; border-radius: 60px; font-weight: 700; font-size: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-play"></i> Selesaikan
-                </button>
             </div>
             
-            <div id="solutionSteps" class="solution-steps">
-                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                    <span style="background: var(--tertiary); padding: 8px 20px; border-radius: 60px; font-size: 0.9rem;">Solusi</span>
-                    <span style="color: var(--tertiary-light); font-size: 1.3rem; font-weight: 800;" id="solutionX">x = 2</span>
+            <div class="balance-indicator">
+                <div class="balance-scale">
+                    <div class="scale-pan-left">
+                        <span id="leftValueDisplay">2x + 3</span>
+                    </div>
+                    <div class="scale-beam" id="scaleBeam"></div>
+                    <div class="scale-pan-right">
+                        <span id="rightValueDisplay">7</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-display" id="stepDisplay">
+                <div class="step-header">
+                    <span>Langkah Penyelesaian</span>
+                    <span id="solutionValue" style="background: var(--primary-light); color: var(--dark);">x = 2</span>
                 </div>
                 <div id="stepsList">
-                    <div class="solution-step">
-                        <span class="step-badge">1</span>
-                        <span>2x + 3 = 7</span>
-                    </div>
-                    <div class="solution-step">
-                        <span class="step-badge">2</span>
-                        <span>2x + 3 - 3 = 7 - 3</span>
-                    </div>
-                    <div class="solution-step">
-                        <span class="step-badge">3</span>
-                        <span>2x = 4</span>
-                    </div>
-                    <div class="solution-step">
-                        <span class="step-badge">4</span>
-                        <span>2x ÷ 2 = 4 ÷ 2</span>
-                    </div>
-                    <div class="solution-step">
-                        <span class="step-badge">5</span>
-                        <span style="font-weight: 700; color: var(--tertiary-light);">x = 2</span>
-                    </div>
+                    <!-- Akan diisi oleh JavaScript -->
                 </div>
             </div>
         </div>
-
         <!-- Card: Contoh Soal Beragam -->
         <div class="content-card">
             <span class="section-badge"><i class="fas fa-layer-group"></i> VARIASI SOAL</span>
@@ -721,26 +1088,26 @@
                 <h2>Contoh Kasus Berbeda</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px;">
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: var(--tertiary); margin-bottom: 15px;">Tipe 1: Ax + B = C</h4>
-                    <p style="font-size: 1.2rem; font-weight: 600;">3x + 4 = 13</p>
-                    <p style="margin-top: 10px;">3x = 9 → x = 3</p>
+            <div class="variasi-grid">
+                <div class="variasi-card">
+                    <h4><i class="fas fa-plus-circle" style="color: var(--primary);"></i> Tipe 1: Ax + B = C</h4>
+                    <p>\(3x + 4 = 13\)</p>
+                    <p style="color: var(--primary-dark); font-size: 1rem;">\(3x = 9 \rightarrow x = 3\)</p>
                 </div>
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: var(--tertiary); margin-bottom: 15px;">Tipe 2: Ax - B = C</h4>
-                    <p style="font-size: 1.2rem; font-weight: 600;">5x - 2 = 18</p>
-                    <p style="margin-top: 10px;">5x = 20 → x = 4</p>
+                <div class="variasi-card">
+                    <h4><i class="fas fa-minus-circle" style="color: var(--primary);"></i> Tipe 2: Ax - B = C</h4>
+                    <p>\(5x - 2 = 18\)</p>
+                    <p style="color: var(--primary-dark); font-size: 1rem;">\(5x = 20 \rightarrow x = 4\)</p>
                 </div>
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: var(--tertiary); margin-bottom: 15px;">Tipe 3: Ax + B = Cx + D</h4>
-                    <p style="font-size: 1.2rem; font-weight: 600;">2x + 5 = 3x + 2</p>
-                    <p style="margin-top: 10px;">2x - 3x = 2 - 5 → -x = -3 → x = 3</p>
+                <div class="variasi-card">
+                    <h4><i class="fas fa-code-branch" style="color: var(--primary);"></i> Tipe 3: Ax + B = Cx + D</h4>
+                    <p>\(2x + 5 = 3x + 2\)</p>
+                    <p style="color: var(--primary-dark); font-size: 1rem;">\(2x - 3x = 2 - 5 \rightarrow -x = -3 \rightarrow x = 3\)</p>
                 </div>
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: var(--tertiary); margin-bottom: 15px;">Tipe 4: Bentuk Pecahan</h4>
-                    <p style="font-size: 1.2rem; font-weight: 600;">(x/2) + 3 = 7</p>
-                    <p style="margin-top: 10px;">x/2 = 4 → x = 8</p>
+                <div class="variasi-card">
+                    <h4><i class="fas fa-fraction" style="color: var(--primary);"></i> Tipe 4: Bentuk Pecahan</h4>
+                    <p>\(\frac{x}{2} + 3 = 7\)</p>
+                    <p style="color: var(--primary-dark); font-size: 1rem;">\(\frac{x}{2} = 4 \rightarrow x = 8\)</p>
                 </div>
             </div>
         </div>
@@ -755,29 +1122,31 @@
             
             <div class="practice-grid">
                 <div class="practice-card">
-                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 1</p>
-                    <p style="font-size: 1.3rem; font-weight: 600; margin-bottom: 20px;">4x - 5 = 11</p>
-                    <p>Nilai x = ...</p>
-                    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-                        <button onclick="checkPLSVQuiz(1,1)" class="btn-solve" style="background: var(--tertiary);">A. 3</button>
-                        <button onclick="checkPLSVQuiz(1,2)" class="btn-solve" style="background: var(--tertiary);">B. 4</button>
-                        <button onclick="checkPLSVQuiz(1,3)" class="btn-solve" style="background: var(--tertiary);">C. 5</button>
-                        <button onclick="checkPLSVQuiz(1,4)" class="btn-solve" style="background: var(--tertiary);">D. 6</button>
+                    <p style="font-weight: 700; text-align: center; color: var(--primary-dark);">Soal 1</p>
+                    <div class="practice-question">
+                        \(4x - 5 = 11\)
                     </div>
-                    <div id="plsvQuiz1" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                    <div class="options-container">
+                        <button onclick="checkPLSVQuiz(1,1)" class="btn-option">A. 3</button>
+                        <button onclick="checkPLSVQuiz(1,2)" class="btn-option">B. 4</button>
+                        <button onclick="checkPLSVQuiz(1,3)" class="btn-option">C. 5</button>
+                        <button onclick="checkPLSVQuiz(1,4)" class="btn-option">D. 6</button>
+                    </div>
+                    <div id="plsvQuiz1" class="quiz-feedback"></div>
                 </div>
                 
                 <div class="practice-card">
-                    <p style="font-weight: 700; margin-bottom: 15px;">Soal 2</p>
-                    <p style="font-size: 1.3rem; font-weight: 600; margin-bottom: 20px;">2x + 7 = 3x - 2</p>
-                    <p>Nilai x = ...</p>
-                    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-                        <button onclick="checkPLSVQuiz(2,1)" class="btn-solve" style="background: var(--tertiary);">A. 5</button>
-                        <button onclick="checkPLSVQuiz(2,2)" class="btn-solve" style="background: var(--tertiary);">B. 7</button>
-                        <button onclick="checkPLSVQuiz(2,3)" class="btn-solve" style="background: var(--tertiary);">C. 9</button>
-                        <button onclick="checkPLSVQuiz(2,4)" class="btn-solve" style="background: var(--tertiary);">D. 11</button>
+                    <p style="font-weight: 700; text-align: center; color: var(--primary-dark);">Soal 2</p>
+                    <div class="practice-question">
+                        \(2x + 7 = 3x - 2\)
                     </div>
-                    <div id="plsvQuiz2" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                    <div class="options-container">
+                        <button onclick="checkPLSVQuiz(2,1)" class="btn-option">A. 5</button>
+                        <button onclick="checkPLSVQuiz(2,2)" class="btn-option">B. 7</button>
+                        <button onclick="checkPLSVQuiz(2,3)" class="btn-option">C. 9</button>
+                        <button onclick="checkPLSVQuiz(2,4)" class="btn-option">D. 11</button>
+                    </div>
+                    <div id="plsvQuiz2" class="quiz-feedback"></div>
                 </div>
             </div>
         </div>
@@ -790,30 +1159,32 @@
                 <h2>Kesalahan yang Sering Terjadi</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
-                <div style="background: #fee2e2; padding: 25px; border-radius: 20px;">
-                    <h4 style="color: #b91c1c; margin-bottom: 15px;">❌ Salah</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 10px;">• 2x + 3 = 7 → 2x = 7 - 3? ✓</li>
-                        <li style="margin-bottom: 10px;">• Tapi lupa: 2x + 3 = 7 → 2x = 7 - 3 (benar)</li>
-                        <li style="margin-bottom: 10px;">• Kesalahan: 2x + 3 = 7 → 2x = 7 + 3 ✗</li>
-                        <li style="margin-bottom: 10px;">• Lupa mengubah tanda saat pindah ruas</li>
+            <div class="error-grid">
+                <div class="error-card wrong">
+                    <h4 style="color: #b91c1c;"><i class="fas fa-times-circle"></i> Kesalahan Umum</h4>
+                    <ul class="error-list">
+                        <li><i class="fas fa-times" style="color: var(--danger);"></i> Lupa mengubah tanda saat pindah ruas</li>
+                        <li><i class="fas fa-times" style="color: var(--danger);"></i> \(2x + 3 = 7 \rightarrow 2x = 7 + 3\) ✗</li>
+                        <li><i class="fas fa-times" style="color: var(--danger);"></i> Tidak mengoperasikan kedua ruas</li>
+                        <li><i class="fas fa-times" style="color: var(--danger);"></i> Salah dalam operasi pecahan</li>
                     </ul>
                 </div>
-                <div style="background: #dcfce7; padding: 25px; border-radius: 20px;">
-                    <h4 style="color: #166534; margin-bottom: 15px;">✅ Benar</h4>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 10px;">• 2x + 3 = 7 → 2x = 7 - 3 = 4</li>
-                        <li style="margin-bottom: 10px;">• 2x = 4 → x = 4 ÷ 2 = 2</li>
-                        <li style="margin-bottom: 10px;">• Selalu cek kembali: 2(2)+3=4+3=7 ✓</li>
-                        <li style="margin-bottom: 10px;">• Operasi sama di kedua ruas</li>
+                <div class="error-card correct">
+                    <h4 style="color: #166534;"><i class="fas fa-check-circle"></i> Cara Benar</h4>
+                    <ul class="error-list">
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> \(2x + 3 = 7 \rightarrow 2x = 7 - 3\) ✓</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> \(2x = 4 \rightarrow x = 4 \div 2\) ✓</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Selalu cek kembali: \(2(2)+3=7\) ✓</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Operasi sama di kedua ruas</li>
                     </ul>
                 </div>
             </div>
             
-            <div style="margin-top: 25px; padding: 20px; background: var(--tertiary-soft); border-radius: 20px;">
-                <p style="font-weight: 700; color: var(--tertiary);">💡 Tips:</p>
-                <p>Selalu periksa jawabanmu dengan mensubstitusi nilai x ke persamaan awal!</p>
+            <div class="tips-box">
+                <p style="font-weight: 700; color: var(--primary-dark); display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-lightbulb"></i> Tips Penting:
+                </p>
+                <p>Selalu periksa jawabanmu dengan mensubstitusi nilai x ke persamaan awal! Jika hasilnya sesuai, maka jawabanmu benar.</p>
             </div>
         </div>
 
@@ -829,8 +1200,8 @@
     </main>
 
     <footer>
-        <p>© 2024 MathMaster8 - Menyelesaikan Persamaan Linier Satu Variabel | Kurikulum Merdeka</p>
-        <p style="margin-top: 8px; opacity: 0.6;">"Setiap persamaan memiliki keseimbangan, temukan nilai yang tepat." - N.A.</p>
+        <p>© 2026 MathMaster - Menyelesaikan Persamaan Linier Satu Variabel | Kurikulum Merdeka</p>
+        <p>"Setiap persamaan memiliki keseimbangan, temukan nilai yang tepat." - N.A.</p>
     </footer>
 
     <script>
@@ -842,111 +1213,128 @@
             document.getElementById('progressBar').style.width = scrolled + "%";
         };
 
-        // Fungsi menyelesaikan persamaan
+        // Fungsi menyelesaikan persamaan - OTOMATIS
         function solveEquation() {
-            let eq = document.getElementById('equationInput').value;
-            eq = eq.replace(/\s/g, '');
+            let a = parseFloat(document.getElementById('coeffA').value);
+            let b = parseFloat(document.getElementById('constB').value);
+            let c = parseFloat(document.getElementById('constC').value);
             
-            // Parse persamaan sederhana ax+b=c
-            try {
-                if (eq.includes('=')) {
-                    let parts = eq.split('=');
-                    let left = parts[0];
-                    let right = parts[1];
-                    
-                    // Sederhanakan: asumsikan bentuk ax + b = c
-                    let xIndex = left.indexOf('x');
-                    if (xIndex !== -1) {
-                        let a = 1;
-                        let b = 0;
-                        
-                        // Parse koefisien a
-                        if (xIndex > 0) {
-                            let coeffStr = left.substring(0, xIndex);
-                            if (coeffStr === '+') a = 1;
-                            else if (coeffStr === '-') a = -1;
-                            else a = parseFloat(coeffStr);
-                        }
-                        
-                        // Parse konstanta b
-                        let remaining = left.substring(xIndex + 1);
-                        if (remaining.startsWith('+')) {
-                            b = parseFloat(remaining.substring(1));
-                        } else if (remaining.startsWith('-')) {
-                            b = -parseFloat(remaining.substring(1));
-                        }
-                        
-                        // Parse konstanta c
-                        let c = parseFloat(right);
-                        
-                        if (!isNaN(a) && !isNaN(b) && !isNaN(c)) {
-                            // Langkah-langkah penyelesaian
-                            let stepsList = document.getElementById('stepsList');
-                            stepsList.innerHTML = '';
-                            
-                            let step1 = document.createElement('div');
-                            step1.className = 'solution-step';
-                            step1.innerHTML = '<span class="step-badge">1</span><span>' + a + 'x + ' + b + ' = ' + c + '</span>';
-                            stepsList.appendChild(step1);
-                            
-                            let step2 = document.createElement('div');
-                            step2.className = 'solution-step';
-                            step2.innerHTML = '<span class="step-badge">2</span><span>' + a + 'x + ' + b + ' - ' + b + ' = ' + c + ' - ' + b + '</span>';
-                            stepsList.appendChild(step2);
-                            
-                            let step3 = document.createElement('div');
-                            step3.className = 'solution-step';
-                            step3.innerHTML = '<span class="step-badge">3</span><span>' + a + 'x = ' + (c - b) + '</span>';
-                            stepsList.appendChild(step3);
-                            
-                            let step4 = document.createElement('div');
-                            step4.className = 'solution-step';
-                            step4.innerHTML = '<span class="step-badge">4</span><span>' + a + 'x ÷ ' + a + ' = ' + (c - b) + ' ÷ ' + a + '</span>';
-                            stepsList.appendChild(step4);
-                            
-                            let xVal = (c - b) / a;
-                            let step5 = document.createElement('div');
-                            step5.className = 'solution-step';
-                            step5.innerHTML = '<span class="step-badge">5</span><span style="font-weight: 700; color: var(--tertiary-light);">x = ' + xVal + '</span>';
-                            stepsList.appendChild(step5);
-                            
-                            document.getElementById('solutionX').innerText = 'x = ' + xVal;
-                        }
-                    }
+            if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
+                // Tampilkan pesan error jika a = 0 (bukan PLSV)
+                document.getElementById('stepsList').innerHTML = `
+                    <div class="step-item">
+                        <span class="step-badge">!</span>
+                        <span style="color: var(--danger);">Nilai a tidak boleh 0 (bukan PLSV)</span>
+                    </div>
+                `;
+                document.getElementById('solutionValue').innerHTML = 'x = ?';
+                return;
+            }
+            
+            // Hitung nilai x
+            let x = (c - b) / a;
+            
+            // Update nilai kiri dan kanan
+            document.getElementById('leftValueDisplay').innerHTML = `${a}x + ${b}`;
+            document.getElementById('rightValueDisplay').innerHTML = c;
+            
+            // Update langkah-langkah
+            let stepsList = document.getElementById('stepsList');
+            stepsList.innerHTML = '';
+            
+            let steps = [
+                { desc: `${a}x + ${b} = ${c}` },
+                { desc: `${a}x + ${b} - ${b} = ${c} - ${b}` },
+                { desc: `${a}x = ${(c - b).toFixed(2)}` },
+                { desc: `${a}x ÷ ${a} = ${(c - b).toFixed(2)} ÷ ${a}` },
+                { desc: `x = ${x.toFixed(2)}` }
+            ];
+            
+            steps.forEach((step, index) => {
+                let stepItem = document.createElement('div');
+                stepItem.className = 'step-item';
+                
+                let isLast = index === steps.length - 1;
+                let desc = step.desc;
+                
+                // Format khusus untuk langkah terakhir
+                if (isLast) {
+                    stepItem.innerHTML = `
+                        <span class="step-badge">${index + 1}</span>
+                        <span style="color: var(--primary-light); font-weight: 700;">\\( ${desc} \\)</span>
+                    `;
+                } else {
+                    stepItem.innerHTML = `
+                        <span class="step-badge">${index + 1}</span>
+                        <span>\\( ${desc} \\)</span>
+                    `;
                 }
-            } catch (e) {
-                alert('Format persamaan tidak dikenali. Gunakan format seperti: 2x+3=7');
+                
+                stepsList.appendChild(stepItem);
+            });
+            
+            // Update solusi
+            document.getElementById('solutionValue').innerHTML = 'x = ' + x.toFixed(2);
+            
+            // Update visual timbangan
+            let scaleBeam = document.getElementById('scaleBeam');
+            let leftVal = a * x + b;
+            let rightVal = c;
+            
+            if (Math.abs(leftVal - rightVal) < 0.01) {
+                scaleBeam.style.transform = 'rotate(0deg)';
+            } else if (leftVal < rightVal) {
+                scaleBeam.style.transform = 'rotate(5deg)';
+            } else {
+                scaleBeam.style.transform = 'rotate(-5deg)';
+            }
+            
+            // Trigger MathJax
+            if (window.MathJax) {
+                MathJax.typeset();
             }
         }
 
+        // Panggil sekali saat halaman dimuat
+        window.onload = function() {
+            solveEquation();
+            if (window.MathJax) {
+                MathJax.typeset();
+            }
+        };
         // Fungsi kuis
         function checkPLSVQuiz(quizNum, answer) {
             if (quizNum === 1) {
                 let fb = document.getElementById('plsvQuiz1');
                 fb.style.display = 'block';
                 if (answer === 2) {
-                    fb.innerHTML = '✅ Benar! 4x - 5 = 11 → 4x = 16 → x = 4.';
-                    fb.style.background = '#dcfce7';
+                    fb.innerHTML = '✅ Benar! \(4x - 5 = 11 \rightarrow 4x = 16 \rightarrow x = 4\).';
+                    fb.style.background = 'var(--success-soft)';
                     fb.style.color = '#166534';
                 } else {
-                    fb.innerHTML = '❌ Salah. Coba lagi: 4x - 5 = 11 → 4x = 16 → x = 4.';
-                    fb.style.background = '#fee2e2';
+                    fb.innerHTML = '❌ Salah. Coba lagi: \(4x - 5 = 11 \rightarrow 4x = 16 \rightarrow x = 4\).';
+                    fb.style.background = 'var(--danger-soft)';
                     fb.style.color = '#b91c1c';
                 }
             } else if (quizNum === 2) {
                 let fb = document.getElementById('plsvQuiz2');
                 fb.style.display = 'block';
                 if (answer === 3) {
-                    fb.innerHTML = '✅ Benar! 2x + 7 = 3x - 2 → 2x - 3x = -2 - 7 → -x = -9 → x = 9.';
-                    fb.style.background = '#dcfce7';
+                    fb.innerHTML = '✅ Benar! \(2x + 7 = 3x - 2 \rightarrow 2x - 3x = -2 - 7 \rightarrow -x = -9 \rightarrow x = 9\).';
+                    fb.style.background = 'var(--success-soft)';
                     fb.style.color = '#166534';
                 } else {
-                    fb.innerHTML = '❌ Salah. Pindahkan variabel ke satu ruas: 2x + 7 = 3x - 2 → 2x - 3x = -2 - 7 → -x = -9 → x = 9.';
-                    fb.style.background = '#fee2e2';
+                    fb.innerHTML = '❌ Salah. Pindahkan variabel ke satu ruas: \(2x + 7 = 3x - 2 \rightarrow 2x - 3x = -2 - 7 \rightarrow -x = -9 \rightarrow x = 9\).';
+                    fb.style.background = 'var(--danger-soft)';
                     fb.style.color = '#b91c1c';
                 }
             }
         }
+
+        // Event listener untuk input
+        document.getElementById('coeffA').addEventListener('input', solveEquation);
+        document.getElementById('constB').addEventListener('input', solveEquation);
+        document.getElementById('constC').addEventListener('input', solveEquation);
 
         // Inisialisasi
         window.onload = function() {

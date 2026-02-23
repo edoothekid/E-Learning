@@ -3,59 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Segitiga Istimewa | MathMaster8</title>
+    <title>Segitiga Istimewa | MathMaster</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            chtml: {
+                scale: 1.2,
+                minScale: 0.8
+            }
+        };
+    </script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
         /* =========================================
-           CSS KONSISTEN
+           1. VARIABLES & CORE STYLING - UNGU PREMIUM
            ========================================= */
         :root {
-            --primary: #0d9488;
-            --primary-light: #14b8a6;
-            --primary-soft: #ccfbf1;
-            --primary-dark: #0f766e;
-            --accent: #f59e0b;
-            --accent-soft: #fff3cd;
+            --primary: #8b5cf6;
+            --primary-light: #a78bfa;
+            --primary-soft: #ede9fe;
+            --primary-dark: #6d28d9;
+            --secondary: #f59e0b;
+            --secondary-light: #fbbf24;
+            --secondary-soft: #fef3c7;
+            --accent: #ec4899;
+            --accent-light: #f472b6;
+            --accent-soft: #fce7f3;
             --success: #22c55e;
+            --success-soft: #dcfce7;
             --danger: #ef4444;
+            --danger-soft: #fee2e2;
             --dark: #0f172a;
+            --dark-light: #1e293b;
             --text-main: #334155;
             --text-muted: #64748b;
+            --text-light: #94a3b8;
             --bg-page: #f8fafc;
             --white: #ffffff;
+            --gray-50: #f9fafb;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
             --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            
             --shadow-sm: 0 1px 3px 0 rgba(0,0,0,0.05);
-            --shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            --shadow-lg: 0 20px 40px -15px rgba(13,148,136,0.15);
+            --shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --shadow-md: 0 15px 35px -10px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 40px -15px rgba(139,92,246,0.2);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+            
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --border-radius: 24px;
             --border-radius-lg: 32px;
+            --border-radius-xl: 40px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-page);
+            background: linear-gradient(135deg, var(--bg-page) 0%, #ffffff 100%);
             color: var(--text-main);
             line-height: 1.7;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
 
-        /* Navigation */
+        /* =========================================
+           2. NAVIGATION - PREMIUM
+           ========================================= */
         .top-bar {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
             padding: 16px 5%;
             display: flex;
             align-items: center;
@@ -76,11 +116,19 @@
             font-weight: 700;
             font-size: 0.95rem;
             transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 40px;
+            background: var(--primary-soft);
         }
 
         .back-link:hover {
+            background: var(--primary);
+            color: white;
             transform: translateX(-6px);
-            color: var(--primary-dark);
+        }
+
+        .back-link i {
+            font-size: 0.9rem;
         }
 
         .chapter-badge {
@@ -88,10 +136,17 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--primary);
+            color: var(--primary-dark);
             background: var(--primary-soft);
-            padding: 6px 18px;
+            padding: 8px 22px;
             border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chapter-badge i {
+            font-size: 0.9rem;
         }
 
         /* Progress Bar */
@@ -112,103 +167,154 @@
             transition: width 0.1s;
         }
 
-        /* Hero Section */
+        /* =========================================
+           3. HERO SECTION - UNGU
+           ========================================= */
         .hero-section {
-            background: linear-gradient(135deg, var(--accent) 0%, #b45309 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 60px 5% 80px;
+            padding: 70px 5% 90px;
             text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-md);
         }
 
         .hero-section::before {
             content: "△";
             position: absolute;
-            font-size: 180px;
-            top: -40px;
+            font-size: 250px;
+            top: -60px;
             right: 5%;
-            opacity: 0.08;
+            opacity: 0.1;
             transform: rotate(15deg);
         }
 
+        .hero-section::after {
+            content: "30° 45° 60°";
+            position: absolute;
+            font-size: 80px;
+            bottom: -20px;
+            left: 5%;
+            opacity: 0.08;
+            transform: rotate(-5deg);
+            font-weight: 800;
+            font-family: 'Times New Roman', serif;
+            white-space: nowrap;
+        }
+
         .hero-section h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 15px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
         }
 
         .hero-section p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.95;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Container */
+        /* =========================================
+           4. MAIN CONTAINER
+           ========================================= */
         .container {
             max-width: 1100px;
             margin: 40px auto 60px;
             padding: 0 25px;
         }
 
-        /* Content Card */
+        /* =========================================
+           5. CONTENT CARD
+           ========================================= */
         .content-card {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            margin-bottom: 35px;
+            border-radius: var(--border-radius-xl);
+            padding: 45px;
+            margin-bottom: 40px;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-200);
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
         .content-card:hover {
             box-shadow: var(--shadow-lg);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+        }
+
+        .content-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, transparent 50%, var(--primary-soft) 100%);
+            opacity: 0.2;
+            border-radius: 0 0 0 150px;
+            pointer-events: none;
         }
 
         .section-title {
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--dark);
             margin-bottom: 25px;
+            position: relative;
         }
 
         .section-title i {
-            color: var(--accent);
-            font-size: 2rem;
+            color: var(--primary);
+            font-size: 2.2rem;
+            background: var(--primary-soft);
+            padding: 15px;
+            border-radius: 20px;
         }
 
         .section-badge {
             display: inline-block;
-            background: var(--accent-soft);
-            color: #b45309;
-            font-size: 0.7rem;
+            background: linear-gradient(135deg, var(--primary-soft) 0%, #fff 100%);
+            color: var(--primary-dark);
+            font-size: 0.75rem;
             font-weight: 800;
-            padding: 6px 20px;
+            padding: 8px 25px;
             border-radius: 60px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             margin-bottom: 20px;
+            border: 1px solid var(--primary-light);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Video Container */
+        /* =========================================
+           6. VIDEO CONTAINER
+           ========================================= */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            margin: 30px 0;
+            margin: 30px 0 20px;
             background: #000;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
+            border: 3px solid var(--primary-light);
         }
 
         .video-container iframe {
@@ -220,18 +326,20 @@
             border: none;
         }
 
-        /* Triangle Cards */
+        /* =========================================
+           7. TRIANGLE CARDS - PREMIUM
+           ========================================= */
         .triangle-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 35px;
             margin-top: 30px;
         }
 
         .triangle-card {
-            background: var(--white);
+            background: linear-gradient(135deg, var(--gray-50), white);
             border-radius: 30px;
-            padding: 35px;
+            padding: 40px;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-200);
             transition: var(--transition);
@@ -242,7 +350,23 @@
         .triangle-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-lg);
-            border-color: var(--accent);
+            border-color: var(--primary-light);
+        }
+
+        .triangle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .triangle-card:hover::before {
+            opacity: 1;
         }
 
         .triangle-header {
@@ -255,53 +379,88 @@
         .triangle-icon {
             width: 70px;
             height: 70px;
-            background: var(--accent-soft);
+            background: var(--primary-soft);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent);
+            color: var(--primary-dark);
             font-size: 2rem;
+            transition: var(--transition);
+        }
+
+        .triangle-card:hover .triangle-icon {
+            background: var(--primary);
+            color: white;
+            transform: rotate(5deg);
         }
 
         .triangle-header h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--dark);
         }
 
         .ratio-box {
-            background: var(--gray-100);
+            background: var(--primary-soft);
             padding: 25px;
             border-radius: 20px;
             margin: 25px 0;
-            border-left: 6px solid var(--accent);
+            border-left: 6px solid var(--primary);
         }
 
         .ratio {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
-            color: var(--accent);
+            color: var(--primary-dark);
             text-align: center;
             padding: 15px;
+            background: white;
+            border-radius: 16px;
+            margin-top: 10px;
         }
 
-        /* Simulator */
+        .example-box {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 20px;
+            border: 1px solid var(--gray-200);
+        }
+
+        /* =========================================
+           8. SIMULATOR - DIPERBAIKI
+           ========================================= */
         .simulator-box {
             background: linear-gradient(145deg, #1e293b, #0f172a);
             color: white;
-            border-radius: 40px;
+            border-radius: 50px;
             padding: 50px;
-            margin-top: 20px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .simulator-box::before {
+            content: "📐";
+            position: absolute;
+            font-size: 150px;
+            bottom: -30px;
+            right: -20px;
+            opacity: 0.05;
+            transform: rotate(15deg);
         }
 
         .simulator-title {
-            color: var(--accent);
-            font-size: 1.8rem;
+            color: var(--primary-light);
+            font-size: 2rem;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 15px;
+            font-weight: 700;
         }
 
         .triangle-selector {
@@ -313,20 +472,27 @@
         }
 
         .select-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.15);
             color: white;
-            padding: 15px 30px;
+            padding: 16px 35px;
             border-radius: 60px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
+            min-width: 180px;
         }
 
-        .select-btn:hover, .select-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
+        .select-btn:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-3px);
+        }
+
+        .select-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(139,92,246,0.3);
         }
 
         .simulator-visual {
@@ -338,21 +504,245 @@
             margin: 40px 0;
         }
 
-        .simulator-result {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
+        .triangle-svg-container {
+            background: rgba(255,255,255,0.05);
             border-radius: 30px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* Pagination Footer */
+        .sides-info {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 30px;
+            min-width: 250px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sides-info h4 {
+            color: var(--primary-light);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .side-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+
+        .side-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray-300);
+        }
+
+        .side-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-light);
+        }
+
+        .slider-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .slider-label {
+            display: block;
+            margin-bottom: 20px;
+            color: var(--gray-300);
+            font-size: 1.1rem;
+        }
+
+        .slider-label span {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-light);
+            margin-left: 10px;
+        }
+
+        input[type=range] {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            -webkit-appearance: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 10px rgba(139,92,246,0.5);
+        }
+
+        .ratio-display {
+            background: rgba(255,255,255,0.08);
+            padding: 25px;
+            border-radius: 60px;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            margin-top: 30px;
+        }
+
+        .ratio-display strong {
+            color: var(--primary-light);
+            font-size: 2rem;
+        }
+
+        /* =========================================
+           9. STUDY CASE CARDS
+           ========================================= */
+        .study-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .study-card {
+            background: var(--primary-soft);
+            padding: 30px;
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .study-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .study-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .solution-box {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 15px;
+            border: 1px solid var(--gray-200);
+        }
+
+        /* =========================================
+           10. TABLE STYLING
+           ========================================= */
+        .table-container {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--primary-soft);
+            padding: 18px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            text-align: left;
+        }
+
+        td {
+            padding: 15px 18px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .tips-box {
+            background: var(--gray-100);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 30px;
+            border-left: 6px solid var(--primary);
+        }
+
+        /* =========================================
+           11. QUIZ SECTION
+           ========================================= */
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .quiz-card {
+            background: var(--gray-100);
+            padding: 30px;
+            border-radius: 24px;
+            transition: var(--transition);
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .quiz-option {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .quiz-option:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 16px;
+            display: none;
+            font-weight: 600;
+        }
+
+        /* =========================================
+           12. PAGINATION FOOTER
+           ========================================= */
         .page-footer {
             display: flex;
             justify-content: space-between;
-            margin-top: 60px;
+            margin-top: 70px;
             padding-top: 40px;
-            border-top: 2px solid var(--gray-200);
+            border-top: 2px dashed var(--gray-300);
         }
 
         .nav-btn {
@@ -360,34 +750,59 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--white);
-            padding: 14px 32px;
-            border-radius: 60px;
+            background: white;
+            padding: 16px 35px;
+            border-radius: 70px;
             color: var(--dark);
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
             border: 1px solid var(--gray-200);
             box-shadow: var(--shadow-sm);
+            font-size: 1rem;
         }
 
         .nav-btn:hover {
-            background: var(--accent);
+            background: var(--primary);
             color: white;
-            border-color: var(--accent);
+            border-color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.right:hover {
+            transform: translateX(5px);
         }
 
         footer {
             text-align: center;
-            padding: 40px;
+            padding: 50px 20px;
             color: var(--text-muted);
             border-top: 1px solid var(--gray-200);
+            margin-top: 40px;
+            background: white;
         }
 
+        footer p:last-child {
+            font-style: italic;
+            max-width: 700px;
+            margin: 15px auto 0;
+            opacity: 0.7;
+        }
+
+        /* =========================================
+           13. RESPONSIVE
+           ========================================= */
         @media (max-width: 768px) {
-            .hero-section h1 { font-size: 2rem; }
+            .hero-section h1 { font-size: 2.2rem; }
+            .hero-section p { font-size: 1rem; }
             .content-card { padding: 30px; }
+            .section-title { font-size: 1.6rem; }
             .triangle-grid { grid-template-columns: 1fr; }
             .simulator-box { padding: 30px; }
+            .simulator-title { font-size: 1.6rem; }
+            .quiz-grid { grid-template-columns: 1fr; }
+            .page-footer { flex-direction: column; gap: 15px; align-items: center; }
+            .nav-btn { width: 100%; justify-content: center; }
+            .progress-container { top: 60px; }
         }
     </style>
 </head>
@@ -398,7 +813,7 @@
         <a href="bab2-teorema-pythagoras.html" class="back-link">
             <i class="fas fa-arrow-left"></i> Kembali ke Bab 2
         </a>
-        <span class="chapter-badge"><i class="fas fa-triangle"></i> Sub C: Segitiga Istimewa</span>
+        <span class="chapter-badge"></i> Sub 3: Segitiga Istimewa</span>
     </div>
 
     <!-- Progress Bar -->
@@ -408,8 +823,8 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <h1>△ Segitiga Istimewa</h1>
-        <p>Segitiga siku-siku dengan sudut 30°-60°-90° dan 45°-45°-90° memiliki perbandingan sisi yang tetap</p>
+        <h1>Segitiga Istimewa</h1>
+        <p>Segitiga siku-siku dengan sudut 30°-60°-90° dan 45°-45°-90° memiliki perbandingan sisi yang tetap dan mudah diingat</p>
     </section>
 
     <!-- Main Content -->
@@ -422,7 +837,7 @@
                 <i class="fas fa-film"></i>
                 <h2>Rahasia Segitiga Istimewa</h2>
             </div>
-            <p style="margin-bottom: 20px;">Pelajari perbandingan sisi pada segitiga siku-siku istimewa dan trik cepat menghitungnya.</p>
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">Pelajari perbandingan sisi pada segitiga siku-siku istimewa dan trik cepat menghitungnya.</p>
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/eIqyG1oF6a0?start=300" title="Segitiga Istimewa" allowfullscreen></iframe>
             </div>
@@ -446,15 +861,30 @@
                         <h3>45° - 45° - 90°</h3>
                     </div>
                     
-                    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-                        <svg width="150" height="150" viewBox="0 0 150 150">
-                            <polygon points="20,130 130,130 20,20" fill="none" stroke="#f59e0b" stroke-width="3"/>
-                            <text x="60" y="110" fill="#0d9488" font-size="16">a</text>
-                            <text x="90" y="70" fill="#0d9488" font-size="16">a</text>
-                            <text x="30" y="70" fill="#f59e0b" font-size="16">a√2</text>
-                            <circle cx="20" cy="130" r="3" fill="#f59e0b"/>
-                            <text x="30" y="20" fill="white" font-size="14">45°</text>
-                            <text x="120" y="140" fill="white" font-size="14">45°</text>
+                    <div style="display: flex; justify-content: center; margin: 20px 0;">
+                        <svg width="180" height="150" viewBox="0 0 180 150">
+                            <!-- Segitiga -->
+                            <polygon points="30,120 150,120 30,20" fill="none" stroke="var(--primary)" stroke-width="3"/>
+                            
+                            <!-- Sisi a (tegak) -->
+                            <line x1="30" y1="120" x2="30" y2="20" stroke="var(--primary-light)" stroke-width="2" stroke-dasharray="5 3"/>
+                            <!-- Sisi b (alas) -->
+                            <line x1="30" y1="120" x2="150" y2="120" stroke="var(--primary-light)" stroke-width="2" stroke-dasharray="5 3"/>
+                            <!-- Sisi c (miring) -->
+                            <line x1="30" y1="20" x2="150" y2="120" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 3"/>
+                            
+                            <!-- Label sisi -->
+                            <text x="15" y="70" fill="var(--primary-light)" font-size="16" font-weight="bold">a</text>
+                            <text x="90" y="140" fill="var(--primary-light)" font-size="16" font-weight="bold">a</text>
+                            <text x="80" y="50" fill="var(--accent)" font-size="16" font-weight="bold">a√2</text>
+                            
+                            <!-- Sudut siku-siku -->
+                            <line x1="30" y1="120" x2="45" y2="120" stroke="var(--dark)" stroke-width="2"/>
+                            <line x1="30" y1="120" x2="30" y2="105" stroke="var(--dark)" stroke-width="2"/>
+                            
+                            <!-- Label sudut -->
+                            <text x="40" y="40" fill="var(--dark)" font-size="14">45°</text>
+                            <text x="130" y="110" fill="var(--dark)" font-size="14">45°</text>
                         </svg>
                     </div>
                     
@@ -466,10 +896,10 @@
                         <p style="margin-top: 15px; text-align: center;">atau 1 : 1 : √2</p>
                     </div>
                     
-                    <div style="background: var(--gray-100); padding: 20px; border-radius: 16px;">
-                        <p><strong>Rumus Cepat:</strong></p>
-                        <p>Hipotenusa = sisi × √2</p>
-                        <p>Sisi = hipotenusa ÷ √2</p>
+                    <div class="example-box">
+                        <p><strong>✏️ Rumus Cepat:</strong></p>
+                        <p>• Hipotenusa = sisi × √2</p>
+                        <p>• Sisi = hipotenusa ÷ √2</p>
                         <p style="margin-top: 10px;"><strong>Contoh:</strong> Jika sisi = 5 cm, maka hipotenusa = 5√2 ≈ 7,07 cm</p>
                     </div>
                 </div>
@@ -483,15 +913,30 @@
                         <h3>30° - 60° - 90°</h3>
                     </div>
                     
-                    <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-                        <svg width="150" height="150" viewBox="0 0 150 150">
-                            <polygon points="20,130 130,130 20,40" fill="none" stroke="#f59e0b" stroke-width="3"/>
-                            <text x="60" y="110" fill="#0d9488" font-size="16">a</text>
-                            <text x="90" y="80" fill="#0d9488" font-size="16">a√3</text>
-                            <text x="30" y="80" fill="#f59e0b" font-size="16">2a</text>
-                            <circle cx="20" cy="130" r="3" fill="#f59e0b"/>
-                            <text x="30" y="60" fill="white" font-size="14">30°</text>
-                            <text x="110" y="140" fill="white" font-size="14">60°</text>
+                    <div style="display: flex; justify-content: center; margin: 20px 0;">
+                        <svg width="180" height="160" viewBox="0 0 180 160">
+                            <!-- Segitiga -->
+                            <polygon points="30,130 150,130 30,20" fill="none" stroke="var(--primary)" stroke-width="3"/>
+                            
+                            <!-- Sisi a (pendek) -->
+                            <line x1="30" y1="130" x2="30" y2="20" stroke="var(--primary-light)" stroke-width="2" stroke-dasharray="5 3"/>
+                            <!-- Sisi b (panjang) -->
+                            <line x1="30" y1="130" x2="150" y2="130" stroke="var(--primary-light)" stroke-width="2" stroke-dasharray="5 3"/>
+                            <!-- Sisi c (miring) -->
+                            <line x1="30" y1="20" x2="150" y2="130" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 3"/>
+                            
+                            <!-- Label sisi -->
+                            <text x="15" y="80" fill="var(--primary-light)" font-size="16" font-weight="bold">a</text>
+                            <text x="80" y="150" fill="var(--primary-light)" font-size="16" font-weight="bold">a√3</text>
+                            <text x="80" y="50" fill="var(--accent)" font-size="16" font-weight="bold">2a</text>
+                            
+                            <!-- Sudut siku-siku -->
+                            <line x1="30" y1="130" x2="45" y2="130" stroke="var(--dark)" stroke-width="2"/>
+                            <line x1="30" y1="130" x2="30" y2="115" stroke="var(--dark)" stroke-width="2"/>
+                            
+                            <!-- Label sudut -->
+                            <text x="40" y="40" fill="var(--dark)" font-size="14">30°</text>
+                            <text x="120" y="110" fill="var(--dark)" font-size="14">60°</text>
                         </svg>
                     </div>
                     
@@ -503,53 +948,63 @@
                         <p style="margin-top: 15px; text-align: center;">atau 1 : √3 : 2</p>
                     </div>
                     
-                    <div style="background: var(--gray-100); padding: 20px; border-radius: 16px;">
-                        <p><strong>Rumus Cepat:</strong></p>
-                        <p>Sisi di depan 30° = ½ × hipotenusa</p>
-                        <p>Sisi di depan 60° = (½√3) × hipotenusa</p>
+                    <div class="example-box">
+                        <p><strong>✏️ Rumus Cepat:</strong></p>
+                        <p>• Sisi di depan 30° = ½ × hipotenusa</p>
+                        <p>• Sisi di depan 60° = (½√3) × hipotenusa</p>
                         <p style="margin-top: 10px;"><strong>Contoh:</strong> Jika hipotenusa = 10 cm, maka sisi pendek = 5 cm, sisi panjang = 5√3 ≈ 8,66 cm</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Card: Simulator Interaktif -->
+        <!-- Card: Simulator Interaktif - DIPERBAIKI -->
         <div class="simulator-box">
             <div class="simulator-title">
                 <i class="fas fa-sliders-h"></i>
                 <h2 style="color: white; margin: 0;">Simulator Segitiga Istimewa</h2>
             </div>
-            <p style="margin-bottom: 25px; opacity: 0.9;">Pilih jenis segitiga dan geser slider untuk melihat perbandingan sisi.</p>
+            <p style="margin-bottom: 25px; opacity: 0.9; font-size: 1.1rem;">Pilih jenis segitiga dan geser slider untuk melihat perbandingan sisi secara visual.</p>
             
             <div class="triangle-selector">
-                <button onclick="setTriangleType('45')" id="btn45" class="select-btn active">45-45-90</button>
-                <button onclick="setTriangleType('30')" id="btn30" class="select-btn">30-60-90</button>
+                <button onclick="setTriangleType('45')" id="btn45" class="select-btn active">45° - 45° - 90°</button>
+                <button onclick="setTriangleType('30')" id="btn30" class="select-btn">30° - 60° - 90°</button>
             </div>
             
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <div style="width: 100%; margin-bottom: 30px;">
-                    <label style="display: block; text-align: center; margin-bottom: 20px; color: var(--gray-300);">
-                        Panjang sisi <span id="sideName">a</span> = <span id="sideValue" style="font-size: 1.8rem; font-weight: 800; color: var(--accent);">5.0</span>
-                    </label>
-                    <input type="range" id="sideSlider" min="1" max="20" step="0.5" value="5" style="width: 100%; height: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; -webkit-appearance: none;">
-                </div>
-                
-                <div class="simulator-visual">
-                    <svg width="200" height="200" viewBox="0 0 200 200" id="triangleSVG">
+            <div class="simulator-visual">
+                <div class="triangle-svg-container">
+                    <svg width="220" height="200" viewBox="0 0 220 200" id="triangleSVG">
                         <!-- Akan diupdate JavaScript -->
                     </svg>
-                    
-                    <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 30px; min-width: 200px;">
-                        <p style="font-weight: 800; margin-bottom: 15px;">Panjang Sisi:</p>
-                        <p id="side1Label">Sisi 1 = <span id="side1Val" style="color: var(--accent); font-weight: 700;">5.0</span></p>
-                        <p id="side2Label">Sisi 2 = <span id="side2Val" style="color: var(--accent); font-weight: 700;">5.0</span></p>
-                        <p id="side3Label">Hipotenusa = <span id="side3Val" style="color: var(--accent-light, #fbbf24); font-weight: 700;">7.07</span></p>
-                    </div>
                 </div>
                 
-                <div class="simulator-result" style="width: 100%; margin-top: 20px;">
-                    <p style="font-size: 1.3rem;">Perbandingan sisi = <span id="ratioDisplay">1 : 1 : √2</span></p>
+                <div class="sides-info">
+                    <h4 id="sidesTitle">Panjang Sisi</h4>
+                    <div class="side-item">
+                        <span class="side-label"><i class="fas fa-arrow-up"></i> <span id="side1Name">Sisi a</span></span>
+                        <span class="side-value" id="side1Val">5.0</span>
+                    </div>
+                    <div class="side-item">
+                        <span class="side-label"><i class="fas fa-arrow-right"></i> <span id="side2Name">Sisi b</span></span>
+                        <span class="side-value" id="side2Val">5.0</span>
+                    </div>
+                    <div class="side-item">
+                        <span class="side-label"><i class="fas fa-arrow-left"></i> Hipotenusa</span>
+                        <span class="side-value" id="side3Val">7.07</span>
+                    </div>
                 </div>
+            </div>
+            
+            <div class="slider-container">
+                <span class="slider-label">
+                    Panjang <span id="baseSideName">sisi a</span> = <span id="sideValue">5.0</span>
+                </span>
+                <input type="range" id="sideSlider" min="1" max="20" step="0.5" value="5">
+            </div>
+            
+            <div class="ratio-display">
+                <span>Perbandingan sisi = </span>
+                <strong id="ratioDisplay">1 : 1 : √2</strong>
             </div>
         </div>
 
@@ -561,32 +1016,32 @@
                 <h2>Contoh Soal Segitiga Istimewa</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
-                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: #b45309; margin-bottom: 15px;">📐 Soal 1 (45-45-90)</h4>
+            <div class="study-grid">
+                <div class="study-card">
+                    <h4><i class="fas fa-square"></i> Soal 1 (45-45-90)</h4>
                     <p style="margin-bottom: 15px;">Sebuah segitiga siku-siku sama kaki memiliki panjang sisi siku-siku 8 cm. Berapakah panjang hipotenusanya?</p>
-                    <div style="background: white; padding: 20px; border-radius: 16px; margin-top: 10px;">
+                    <div class="solution-box">
                         <p><strong>Penyelesaian:</strong></p>
                         <p>Hipotenusa = sisi × √2 = 8√2 cm</p>
                         <p>≈ 8 × 1,414 = <strong>11,31 cm</strong></p>
                     </div>
                 </div>
                 
-                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: #b45309; margin-bottom: 15px;">📐 Soal 2 (30-60-90)</h4>
+                <div class="study-card">
+                    <h4><i class="fas fa-equals"></i> Soal 2 (30-60-90)</h4>
                     <p style="margin-bottom: 15px;">Pada segitiga siku-siku dengan sudut 30°-60°-90°, sisi terpendek adalah 6 cm. Tentukan panjang sisi lainnya!</p>
-                    <div style="background: white; padding: 20px; border-radius: 16px; margin-top: 10px;">
+                    <div class="solution-box">
                         <p><strong>Penyelesaian:</strong></p>
-                        <p>Sisi di depan 30° = 6 cm</p>
+                        <p>Sisi di depan 30° = 6 cm (sisi terpendek)</p>
                         <p>Sisi di depan 60° = 6√3 ≈ 10,39 cm</p>
                         <p>Hipotenusa = 12 cm</p>
                     </div>
                 </div>
                 
-                <div style="background: var(--accent-soft); padding: 25px; border-radius: 20px;">
-                    <h4 style="color: #b45309; margin-bottom: 15px;">📐 Soal 3 (Kombinasi)</h4>
+                <div class="study-card">
+                    <h4><i class="fas fa-calculator"></i> Soal 3 (Kombinasi)</h4>
                     <p style="margin-bottom: 15px;">Hipotenusa segitiga 30-60-90 adalah 18 cm. Hitung keliling segitiga tersebut!</p>
-                    <div style="background: white; padding: 20px; border-radius: 16px; margin-top: 10px;">
+                    <div class="solution-box">
                         <p><strong>Penyelesaian:</strong></p>
                         <p>Sisi pendek = ½ × 18 = 9 cm</p>
                         <p>Sisi panjang = 9√3 ≈ 15,59 cm</p>
@@ -604,34 +1059,36 @@
                 <h2>Perbandingan Sisi Segitiga Istimewa</h2>
             </div>
             
-            <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
-                <thead>
-                    <tr style="background: var(--accent-soft);">
-                        <th style="padding: 15px; text-align: left; border-radius: 16px 0 0 0;">Jenis Segitiga</th>
-                        <th style="padding: 15px; text-align: center;">Sudut</th>
-                        <th style="padding: 15px; text-align: center;">Perbandingan Sisi</th>
-                        <th style="padding: 15px; text-align: center; border-radius: 0 16px 0 0;">Rumus Cepat</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="border-bottom: 1px solid var(--gray-200);">
-                        <td style="padding: 15px; font-weight: 700;">Siku-siku Sama Kaki</td>
-                        <td style="padding: 15px; text-align: center;">45° - 45° - 90°</td>
-                        <td style="padding: 15px; text-align: center;">1 : 1 : √2</td>
-                        <td style="padding: 15px; text-align: center;">c = s√2</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 15px; font-weight: 700;">Setengah Sama Sisi</td>
-                        <td style="padding: 15px; text-align: center;">30° - 60° - 90°</td>
-                        <td style="padding: 15px; text-align: center;">1 : √3 : 2</td>
-                        <td style="padding: 15px; text-align: center;">sisi pendek = ½c</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Jenis Segitiga</th>
+                            <th>Sudut</th>
+                            <th>Perbandingan Sisi</th>
+                            <th>Rumus Cepat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Siku-siku Sama Kaki</strong></td>
+                            <td>45° - 45° - 90°</td>
+                            <td>1 : 1 : √2</td>
+                            <td>c = s√2</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Setengah Sama Sisi</strong></td>
+                            <td>30° - 60° - 90°</td>
+                            <td>1 : √3 : 2</td>
+                            <td>sisi pendek = ½c</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
-            <div style="margin-top: 30px; padding: 20px; background: var(--gray-100); border-radius: 20px;">
-                <p style="font-weight: 700; color: var(--accent);">💡 Tips Menghafal:</p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
+            <div class="tips-box">
+                <p style="font-weight: 700; color: var(--primary-dark); margin-bottom: 15px;">💡 Tips Menghafal:</p>
+                <ul style="margin-left: 20px;">
                     <li><strong>45-45-90:</strong> "Satu, satu, akar dua" (Ingat diagonal persegi)</li>
                     <li><strong>30-60-90:</strong> "Satu, akar tiga, dua" (Ingat tinggi segitiga sama sisi)</li>
                 </ul>
@@ -646,29 +1103,29 @@
                 <h2>Uji Pemahaman</h2>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+            <div class="quiz-grid">
+                <div class="quiz-card">
                     <p style="font-weight: 700; margin-bottom: 15px;">Soal 1</p>
                     <p style="margin-bottom: 20px;">Segitiga siku-siku sama kaki memiliki hipotenusa 10√2 cm. Panjang sisi siku-sikunya adalah...</p>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button onclick="checkSpecialQuiz(1,1)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent);">A. 5 cm</button>
-                        <button onclick="checkSpecialQuiz(1,2)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent);">B. 8 cm</button>
-                        <button onclick="checkSpecialQuiz(1,3)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent);">C. 10 cm</button>
-                        <button onclick="checkSpecialQuiz(1,4)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent);">D. 12 cm</button>
+                    <div class="quiz-options">
+                        <button onclick="checkSpecialQuiz(1,1)" class="quiz-option">A. 5 cm</button>
+                        <button onclick="checkSpecialQuiz(1,2)" class="quiz-option">B. 8 cm</button>
+                        <button onclick="checkSpecialQuiz(1,3)" class="quiz-option">C. 10 cm</button>
+                        <button onclick="checkSpecialQuiz(1,4)" class="quiz-option">D. 12 cm</button>
                     </div>
-                    <div id="specialQuiz1" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                    <div id="specialQuiz1" class="quiz-feedback"></div>
                 </div>
                 
-                <div style="background: var(--gray-100); padding: 25px; border-radius: 20px;">
+                <div class="quiz-card">
                     <p style="font-weight: 700; margin-bottom: 15px;">Soal 2</p>
                     <p style="margin-bottom: 20px;">Pada segitiga 30-60-90, sisi terpanjang adalah 20 cm. Sisi terpendeknya adalah...</p>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button onclick="checkSpecialQuiz(2,1)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent);">A. 5 cm</button>
-                        <button onclick="checkSpecialQuiz(2,2)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent);">B. 8 cm</button>
-                        <button onclick="checkSpecialQuiz(2,3)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent);">C. 10 cm</button>
-                        <button onclick="checkSpecialQuiz(2,4)" style="background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 60px; font-weight: 600; color: var(--accent);">D. 12 cm</button>
+                    <div class="quiz-options">
+                        <button onclick="checkSpecialQuiz(2,1)" class="quiz-option">A. 5 cm</button>
+                        <button onclick="checkSpecialQuiz(2,2)" class="quiz-option">B. 8 cm</button>
+                        <button onclick="checkSpecialQuiz(2,3)" class="quiz-option">C. 10 cm</button>
+                        <button onclick="checkSpecialQuiz(2,4)" class="quiz-option">D. 12 cm</button>
                     </div>
-                    <div id="specialQuiz2" style="margin-top: 15px; padding: 12px; border-radius: 12px; display: none;"></div>
+                    <div id="specialQuiz2" class="quiz-feedback"></div>
                 </div>
             </div>
         </div>
@@ -685,8 +1142,8 @@
     </main>
 
     <footer>
-        <p>© 2024 MathMaster8 - Segitiga Istimewa | Kurikulum Merdeka</p>
-        <p style="margin-top: 8px; opacity: 0.6;">"Kesederhanaan adalah kecanggihan tertinggi." - Leonardo da Vinci</p>
+        <p>© 2026 MathMaster - Segitiga Istimewa | Kurikulum Merdeka</p>
+        <p>"Kesederhanaan adalah kecanggihan tertinggi." - Leonardo da Vinci</p>
     </footer>
 
     <script>
@@ -698,18 +1155,19 @@
             document.getElementById('progressBar').style.width = scrolled + "%";
         };
 
-        // Simulator Segitiga Istimewa
+        // Simulator Segitiga Istimewa - DIPERBAIKI
         let currentType = '45';
         let sideSlider = document.getElementById('sideSlider');
         let sideValue = document.getElementById('sideValue');
-        let sideName = document.getElementById('sideName');
+        let baseSideName = document.getElementById('baseSideName');
         let triangleSVG = document.getElementById('triangleSVG');
         let side1Val = document.getElementById('side1Val');
         let side2Val = document.getElementById('side2Val');
         let side3Val = document.getElementById('side3Val');
-        let side1Label = document.getElementById('side1Label');
-        let side2Label = document.getElementById('side2Label');
+        let side1Name = document.getElementById('side1Name');
+        let side2Name = document.getElementById('side2Name');
         let ratioDisplay = document.getElementById('ratioDisplay');
+        let sidesTitle = document.getElementById('sidesTitle');
 
         function setTriangleType(type) {
             currentType = type;
@@ -717,11 +1175,17 @@
             document.querySelectorAll('.select-btn').forEach(btn => btn.classList.remove('active'));
             if (type === '45') {
                 document.getElementById('btn45').classList.add('active');
-                sideName.innerHTML = 'a (sisi siku)';
+                baseSideName.innerHTML = 'sisi a (kaki)';
+                side1Name.innerHTML = 'Sisi a';
+                side2Name.innerHTML = 'Sisi b';
+                sidesTitle.innerHTML = 'Panjang Sisi (45-45-90)';
                 ratioDisplay.innerHTML = '1 : 1 : √2';
             } else {
                 document.getElementById('btn30').classList.add('active');
-                sideName.innerHTML = 'a (sisi pendek)';
+                baseSideName.innerHTML = 'sisi pendek (a)';
+                side1Name.innerHTML = 'Sisi pendek (30°)';
+                side2Name.innerHTML = 'Sisi panjang (60°)';
+                sidesTitle.innerHTML = 'Panjang Sisi (30-60-90)';
                 ratioDisplay.innerHTML = '1 : √3 : 2';
             }
             
@@ -740,42 +1204,54 @@
                 s2 = side;
                 s3 = (side * Math.sqrt(2)).toFixed(2);
                 
-                side1Label.innerHTML = 'Sisi a = ';
-                side2Label.innerHTML = 'Sisi b = ';
                 side1Val.innerText = s1.toFixed(1);
                 side2Val.innerText = s2.toFixed(1);
                 side3Val.innerText = s3;
                 
                 // SVG untuk 45-45-90
                 svgContent = `
-                    <polygon points="30,170 170,170 30,30" fill="none" stroke="#f59e0b" stroke-width="3"/>
-                    <text x="90" y="150" fill="#14b8a6" font-size="16">${s1.toFixed(1)}</text>
-                    <text x="110" y="80" fill="#14b8a6" font-size="16">${s2.toFixed(1)}</text>
-                    <text x="40" y="90" fill="#f59e0b" font-size="16">${s3}</text>
-                    <circle cx="30" cy="170" r="3" fill="#f59e0b"/>
-                    <text x="40" y="40" fill="white" font-size="14">45°</text>
-                    <text x="160" y="180" fill="white" font-size="14">45°</text>
+                    <polygon points="60,160 190,160 60,30" fill="none" stroke="var(--primary)" stroke-width="3"/>
+                    
+                    <line x1="60" y1="160" x2="60" y2="30" stroke="var(--primary-light)" stroke-width="2" stroke-dasharray="5 3"/>
+                    <line x1="60" y1="160" x2="190" y2="160" stroke="var(--primary-light)" stroke-width="2" stroke-dasharray="5 3"/>
+                    <line x1="60" y1="30" x2="190" y2="160" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 3"/>
+                    
+                    <text x="35" y="100" fill="var(--primary-light)" font-size="16" font-weight="bold">${s1.toFixed(1)}</text>
+                    <text x="120" y="180" fill="var(--primary-light)" font-size="16" font-weight="bold">${s2.toFixed(1)}</text>
+                    <text x="110" y="80" fill="var(--accent)" font-size="16" font-weight="bold">${s3}</text>
+                    
+                    <line x1="60" y1="160" x2="80" y2="160" stroke="white" stroke-width="2"/>
+                    <line x1="60" y1="160" x2="60" y2="140" stroke="white" stroke-width="2"/>
+                    
+                    <text x="80" y="50" fill="white" font-size="14">45°</text>
+                    <text x="170" y="140" fill="white" font-size="14">45°</text>
                 `;
             } else {
                 s1 = side;
                 s2 = (side * Math.sqrt(3)).toFixed(2);
                 s3 = (side * 2).toFixed(1);
                 
-                side1Label.innerHTML = 'Sisi pendek (30°) = ';
-                side2Label.innerHTML = 'Sisi panjang (60°) = ';
                 side1Val.innerText = s1.toFixed(1);
                 side2Val.innerText = s2;
                 side3Val.innerText = s3;
                 
                 // SVG untuk 30-60-90
                 svgContent = `
-                    <polygon points="30,170 170,170 30,40" fill="none" stroke="#f59e0b" stroke-width="3"/>
-                    <text x="90" y="150" fill="#14b8a6" font-size="16">${s1.toFixed(1)}</text>
-                    <text x="110" y="90" fill="#14b8a6" font-size="16">${s2}</text>
-                    <text x="40" y="90" fill="#f59e0b" font-size="16">${s3}</text>
-                    <circle cx="30" cy="170" r="3" fill="#f59e0b"/>
-                    <text x="40" y="60" fill="white" font-size="14">30°</text>
-                    <text x="150" y="160" fill="white" font-size="14">60°</text>
+                    <polygon points="60,160 190,160 60,40" fill="none" stroke="var(--primary)" stroke-width="3"/>
+                    
+                    <line x1="60" y1="160" x2="60" y2="40" stroke="var(--primary-light)" stroke-width="2" stroke-dasharray="5 3"/>
+                    <line x1="60" y1="160" x2="190" y2="160" stroke="var(--primary-light)" stroke-width="2" stroke-dasharray="5 3"/>
+                    <line x1="60" y1="40" x2="190" y2="160" stroke="var(--accent)" stroke-width="2" stroke-dasharray="5 3"/>
+                    
+                    <text x="35" y="100" fill="var(--primary-light)" font-size="16" font-weight="bold">${s1.toFixed(1)}</text>
+                    <text x="120" y="180" fill="var(--primary-light)" font-size="16" font-weight="bold">${s2}</text>
+                    <text x="110" y="70" fill="var(--accent)" font-size="16" font-weight="bold">${s3}</text>
+                    
+                    <line x1="60" y1="160" x2="80" y2="160" stroke="white" stroke-width="2"/>
+                    <line x1="60" y1="160" x2="60" y2="140" stroke="white" stroke-width="2"/>
+                    
+                    <text x="80" y="60" fill="white" font-size="14">30°</text>
+                    <text x="160" y="140" fill="white" font-size="14">60°</text>
                 `;
             }
             
@@ -791,11 +1267,11 @@
                 fb.style.display = 'block';
                 if (answer === 3) {
                     fb.innerHTML = '✅ Benar! s = c/√2 = 10√2/√2 = 10 cm.';
-                    fb.style.background = '#dcfce7';
+                    fb.style.background = 'var(--success-soft)';
                     fb.style.color = '#166534';
                 } else {
                     fb.innerHTML = '❌ Coba lagi! Hipotenusa = s√2 → s = c/√2.';
-                    fb.style.background = '#fee2e2';
+                    fb.style.background = 'var(--danger-soft)';
                     fb.style.color = '#b91c1c';
                 }
             } else if (quizNum === 2) {
@@ -803,11 +1279,11 @@
                 fb.style.display = 'block';
                 if (answer === 3) {
                     fb.innerHTML = '✅ Benar! Sisi terpendek = ½ × hipotenusa = 10 cm.';
-                    fb.style.background = '#dcfce7';
+                    fb.style.background = 'var(--success-soft)';
                     fb.style.color = '#166534';
                 } else {
                     fb.innerHTML = '❌ Coba lagi! Sisi di depan 30° = ½ × sisi miring.';
-                    fb.style.background = '#fee2e2';
+                    fb.style.background = 'var(--danger-soft)';
                     fb.style.color = '#b91c1c';
                 }
             }
